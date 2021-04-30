@@ -984,35 +984,19 @@ function capitalizeWithSpaces_function(beta) {
 
 
 if (webPrefix_list.selection.text === "B2B") {
-  var webShortName =
-    "B2B" +
-    webNumber_edit.text +
-    "_" +
-    capitalize_function(descriptionBox_edit.text) +
-    "_A";
+  var webShortName = "B2B" + webNumber_edit.text +  "_" + capitalize_function(descriptionBox_edit.text) +  "_A";
   if (poNumber_edit.length === 0) {
     poNumber_edit.text = "B2B " + webNumber_edit.text;
   }
 } else {
-  var webShortName =
-    "D2CWeb" +
-    webNumber_edit.text +
-    "_" +
-    capitalize_function(descriptionBox_edit.text) +
-    "_A";
+  var webShortName = "D2CWeb" + webNumber_edit.text + "_" + capitalize_function(descriptionBox_edit.text) + "_A";
   if (poNumber_edit.length === 0) {
     poNumber_edit.text = "D2CWeb " + webNumber_edit.text;
   }
 }
 
 if (webPrefix_list.selection.text === "B2B") {
-  var webLongName =
-    "B2B" +
-    webNumber_edit.text +
-    "_" +
-    capitalize_function(descriptionBox_edit.text) +
-    capitalize_function(bodyColor_list.selection.text) +
-    "_A";
+  var webLongName = "B2B" + webNumber_edit.text + "_" + capitalize_function(descriptionBox_edit.text) + capitalize_function(bodyColor_list.selection.text) + "_A";
 }
 if (poNumber_edit.length === 0) {
   poNumber_edit.contents = "B2B " + webNumber_edit.text;
@@ -1136,28 +1120,32 @@ function originalArt() {
 
 
 
-//#region         This section tells Illustrator to execute a menu command, which in this case is to open a new file from a template (.ait) file.
-
-//#endregion
-
-//#region                   This might be able to open an illustrator file
-//var bravo = app.open("C:\Users\JBavitz\OneDrive BIC\Desktop\Proof_Template_Layout.ai");
-//#endregion
-
-//#region        this section executes menu commands from within illustrator.
-//app.executeMenuCommand(newFromtemplate)
-//#endregion
-
 //#region    This section is going to save the currently open, but unsaved, file to the '3 - Art Proof sent' folder as a PDF with no dialog boxes.
-/* var originalInteractionLevel = userInteractionLevel;
-userInteractionLevel = UserInteractionLevel.DONTDISPLAYALERTS;
-userInteractionLevel = originalInteractionLevel;
-var path = app;
-var saveOpts = new PDFSaveOptions();
-saveOpts.PDFXStandard = 2;
-var destination = new File (C:\Users\JBavitz\BIC\BIC logo lighter Customer Service - General\Graphic Design\3 - Art Proof sent);
-app.activeDocument.saveAs (pdfFile, saveOpts); */
+function saveFileToPDF(webShortName, webLongName, shortName, longName) {
+  var doc = app.activeDocument;
+  var nameArray = [webShortName, webLongName, shortName, longName];
+  for (i = 0; i < 4; i++) {
+    if (nameArray[i].length > 0) {
+      var saveName = new File(nameArray[i]);
+      saveOpts = new PDFSaveOptions();
+      saveOpts.compatibility = PDFCompatibility.ACROBAT5;
+      saveOpts.generateThumbnails = true;
+      saveOpts.preserveEditability = true;
+      doc.saveAs(saveName, saveOpts);
+    }
+  }
+}
+
 //#endregion
+
+
+
+
+
+
+
+
+
 
 //#region              Function calls
 
@@ -1234,5 +1222,7 @@ inkColor(
   ink_C4_Checkbox,
   "C4_Chip"
 );
+
+saveFileToPDF();
 
 //#endregion
