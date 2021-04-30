@@ -162,6 +162,7 @@ var itemTab = itemLeft.add("tabbedpanel");
 itemTab.alignChildren = ["fill", "fill"];
 
 
+
 var item_01 = itemTab.add("tab", undefined, "Item 1");
 item_01.alignChildren = "fill";
 var item01_panel = item_01.add("panel", undefined);
@@ -488,6 +489,27 @@ master.show();
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*         These are the names of the edittext boxes used in the interface
         repName_edit;
         repEmail_edit;
@@ -536,6 +558,20 @@ master.show();
         ink_C4_edit;
         ink_C4_Checkbox; 
         */
+
+
+
+
+function newTemplate() {
+  var myAitFile = new File("C:/Users/JBavitz/OneDrive - BIC/Desktop/Proof_Template_Multi.ai");
+  app.open(myAitFile);
+}
+        
+
+
+
+
+
 
 /*          This section deals with selecting objects on specific artboards. Artboards are referred to by the name of the layers in the layers palette in Illustrator     */
 
@@ -621,6 +657,10 @@ function bodyColor_function() {
   }
 }
 
+
+
+
+
 function A1Ink() {
   /*   This takes the text entered by the user in the edittext box, converts it to lower case, change the first letter of each word to upper case,
   then removes the spaces between the words.   */
@@ -649,6 +689,10 @@ function A1Ink() {
     A1_Name.contents = number1 + " " + kilo.join(" ");
   }
 
+
+
+
+
   // This part sets the width of the color box if the ink color is a custom color or not.
   var A1_frame = app.activeDocument.pathItems.getByName("A1_Frame");
   if (ink_A1_Checkbox.value === true) {
@@ -657,10 +701,10 @@ function A1Ink() {
     A1_frame.strokeWidth = 0.5;
   }
 
-  // The goal here is to have a small rectangle filled with the color of the ink to make identifying easier.
-  var A1_Screen = app.activeDocument.textFrames.getByName(
-    "A1 Screen Ink Color"
-  ); // This part sets the text of the ink color in the color separation box that gets put on the gabarit.
+
+
+  // This part sets the text of the ink color in the color separation box that gets put on the gabarit.
+  var A1_Screen = app.activeDocument.textFrames.getByName("A1 Screen Ink Color");
   A1_Screen.characters.removeAll();
   A1_Screen.contents = number1 + " " + kilo.join(" ");
 
@@ -675,6 +719,10 @@ function A1Ink() {
   ).color;
 }
 
+
+
+
+
 function inkColor(
   inkColor_edit,
   inkLayerName,
@@ -682,10 +730,15 @@ function inkColor(
   inkCheckbox,
   inkColorChip
 ) {
+
+
+
+
+
+
   /* This section tries to use the A1Ink section as a function to do the inks for the other screens.
       inkColor_edit.text = ink_A1_edit.text
-            This takes the text entered by the user in the edittext box, converts it to lower case, change the first letter of each word to upper case,
-            then removes the spaces between the words.   */
+            This takes the text entered by the user in the edittext box, converts it to lower case, change the first letter of each word to upper case, then removes the spaces between the words.   */
   var india = inkColor_edit.text;
   india = india.split(" ");
   var number1 = india[0];
@@ -695,11 +748,14 @@ function inkColor(
     kilo[t] = kilo[t].charAt(0).toUpperCase() + kilo[t].slice(1);
   }
 
-  // The RegEx below checks each element of the array india to see if it contains any numbers.
 
+
+
+
+  // The RegEx below checks each element of the array india to see if it contains any numbers.
   if (!/^\d+$/.test(india[0])) {
     /*  inkLayerName = A1_Name
-    The code below capitalizes the first letter of every word.     */
+    The code below adds the word Pantone to the ink color number.     */
 
     var screenName = app.activeDocument.textFrames.getByName(inkLayerName);
     for (p = 0; p < india.length; p++) {
@@ -716,6 +772,10 @@ function inkColor(
     screenName.contents = number1 + " " + kilo.join(" ");
   }
 
+
+
+
+
   /*    inkColor_frame = A1_frame.
           This part sets the width of the color box to be thicker than normal if the ink color is a custom color.     */
   var frame = app.activeDocument.pathItems.getByName(inkColor_frame);
@@ -725,7 +785,13 @@ function inkColor(
     frame.strokeWidth = 0.5;
   }
 
-  /*     This part picks the swatch color in the pantone color palette 
+
+
+
+
+  /*     Big and small color swatch fill color.
+  
+  This part picks the swatch color in the pantone color palette 
           to make the big fill color box at the top and the small color chips in the screens. 
           This works as long as the swatch to be used exists in the swatches palette.     */
   var colorSwatch = app.activeDocument.pathItems.getByName(inkColor_frame);
@@ -738,6 +804,11 @@ function inkColor(
     number1
   ).color;
 } // This is the end of the inkColor function.
+
+
+
+
+
 
 function customerInfo_function() {
   var rep_Name = app.activeDocument.textFrames.getByName("RepName");
@@ -772,6 +843,9 @@ function customerInfo_function() {
   companyName.contents = capitalizeWithSpaces_function(companyName.contents);
 }
 
+
+
+
 function vip_function() {
   var vipBox = app.activeDocument.layers
     .getByName("Masque")
@@ -804,6 +878,9 @@ function vip_function() {
   }
 }
 
+
+
+
 function rush_function() {
   var rushBox = app.activeDocument.layers
     .getByName("Masque")
@@ -818,6 +895,9 @@ function rush_function() {
   }
 }
 
+
+
+
 function po_function() {
   var purchaseOrder = app.activeDocument.textFrames.getByName("PO");
   purchaseOrder.contents = poNumber_edit.text;
@@ -827,6 +907,9 @@ function po_function() {
       webPrefix_list.selection.text + webNumber_edit.text;
   }
 }
+
+
+
 
 function deleteArtboards_function() {
   var n = app.activeDocument.artboards.length;
@@ -849,7 +932,9 @@ alert()
 }
 
 
-// #region  [ rgba(0, 20, 50, .5)]   Instruction boxes */
+
+
+// #region     Instruction boxes
 
 function production_instructions_function() {
   var production_instructions = app.activeDocument.textFrames.getByName(
@@ -872,6 +957,8 @@ function customer_instructions_function() {
 }
 // #endregion
 
+
+
 function capitalize_function(alpha) {
   alpha = alpha.toLowerCase();
   alpha = alpha.split(" ");
@@ -880,6 +967,10 @@ function capitalize_function(alpha) {
   }
   return alpha.join("");
 }
+
+
+
+
 function capitalizeWithSpaces_function(beta) {
   var beta = beta.toLowerCase();
   beta = beta.split(" ");
@@ -888,6 +979,9 @@ function capitalizeWithSpaces_function(beta) {
   }
   return (beta = beta.join(" "));
 }
+
+
+
 
 if (webPrefix_list.selection.text === "B2B") {
   var webShortName =
@@ -936,19 +1030,9 @@ if (poNumber_edit.length === 0) {
   }
 }
 
-var shortName =
-  jdeNumber_edit.text +
-  "_" +
-  capitalize_function(descriptionBox_edit.text) +
-  "_A";
+var shortName = jdeNumber_edit.text + "_" + capitalize_function(descriptionBox_edit.text) + "_A";
 
-var longName =
-  jdeNumber_edit.text +
-  "_" +
-  capitalize_function(descriptionBox_edit.text) +
-  "_" +
-  capitalize_function(bodyColor_list.selection.text) +
-  "_A";
+var longName = jdeNumber_edit.text + "_" + capitalize_function(descriptionBox_edit.text) + "_" + capitalize_function(bodyColor_list.selection.text) +  "_A";
 
 var illustratorFrame = [
   "FileName",
@@ -982,6 +1066,7 @@ for (i = 0; i < illustratorFrame.length; i++) {
   }
 }
 
+
 var filenameDescription = descriptionBox_edit.text;
 capitalize_function(filenameDescription);
 
@@ -991,28 +1076,50 @@ if (filenameDescription.length > 35) {
   fnd.textRange.characterAttributes.baselineShift = -02;
 }
 
+
+
+
 function currentDate_function() {
   var currentDate = new Date();
   var date = currentDate.toDateString();
   var a = app.activeDocument.textFrames.getByName("DateBox");
   a.contents = date;
 }
+
+
+
+
 function ship_function() {
   var ship = app.activeDocument.textFrames.getByName("Ship Date");
   ship.contents = shipDate_edit.text;
 }
+
+
+
+
 function InHands_function() {
   var inHands = app.activeDocument.textFrames.getByName("In Hands Date");
   inHands.contents = inHandsDate_edit.text;
 }
+
+
+
+
 function web_function() {
   var web = app.activeDocument.textFrames.getByName("Web");
   web.contents = webPrefix_list.selection.text + webNumber_edit.text;
 }
+
+
+
+
 function JDE_function() {
   var jde = app.activeDocument.textFrames.getByName("jde number");
   jde.contents = jdeNumber_edit.text;
 }
+
+
+
 
 function originalArt() {
   var originalA = app.activeDocument.textFrames.getByName(
@@ -1025,6 +1132,9 @@ function originalArt() {
   );
   originalC.contents = originalArt_C_edit.text;
 }
+
+
+
 
 //#region         This section tells Illustrator to execute a menu command, which in this case is to open a new file from a template (.ait) file.
 
@@ -1051,6 +1161,7 @@ app.activeDocument.saveAs (pdfFile, saveOpts); */
 
 //#region              Function calls
 
+newTemplate()
 deleteArtboards_function([1, 2, 3]);
 customerInfo_function();
 vip_function();
