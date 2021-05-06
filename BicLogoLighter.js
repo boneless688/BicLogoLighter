@@ -557,7 +557,167 @@ master.show();
         ink_C3_Checkbox;
         ink_C4_edit;
         ink_C4_Checkbox; 
-        */
+
+
+
+
+
+
+
+
+
+
+These are the names of the layers in Illustrator. The names of all the illustrator objects should be the same for all items except for the layer names, which are the names of the item number.
+
+The list of layers in Illustrator
+Item 01
+Item 02
+Item 03
+Item 04
+Item 05
+Item 06
+Item 07
+Item 08
+Item 09
+Item 10
+
+Assortment - The assortment layer contains groups for each of the 10 items.
+Item_10_Assort
+Item_09_Assort
+Item_08_Assort
+Item_07_Assort
+Item_06_Assort
+Item_05_Assort
+Item_04_Assort
+Item_03_Assort
+Item_02_Assort
+Item_01_Assort
+
+Sleeve - The sleeve layer contains groups for each of the 10 items.
+Item_10_Sleeve
+Item_09_Sleeve
+Item_08_Sleeve
+Item_07_Sleeve
+Item_06_Sleeve
+Item_05_Sleeve
+Item_04_Sleeve
+Item_03_Sleeve
+Item_02_Sleeve
+Item_01_Sleeve
+
+
+TODO
+In Illustrator, change the text item names of the assorted lighter groups and sleeve groups to match the names of the item layers to make it easier to use the same code, just changing the layer names.
+
+
+PO number:  Item 01.group(Info).group(PO).textItem(PO)
+
+JDE number: Item 01.group(Info).group(JDE).textItem(jde number)
+
+Web number: Item 01.group(Info).group(Web).textItem(web number)
+
+Proof date: Item 01.group(Info).group(Date).textItem(DateBox)
+
+File name:  Item 01.group(Info).group(FileName).textItem(FileName)
+
+Original Art Side A:  Item 01.group(<group>).group(<group>).textItem(Original Art - Side A)
+
+Original Art Side C:  Item 01.group(<group>).group(<group>).textItem(Original Art - Side C)
+
+Company name: Item 01.group(<group>).group(<group>).textItem(Company)
+
+Rep name: Item 01.group(<group>).textItem(RepName)
+
+Rep Email:  Item 01.group(<group>).textItem(RepEmail)
+
+Rep name approved: Item 01.group(<group>).textItem(RepName_2)
+
+Rep Email approved:  Item 01.group(<group>).textItem(RepEmail_2)
+
+Rep Approval signature: Item 01.group(<group>).textItem(RepName_Signature)
+
+
+
+
+
+
+
+Body colors:  Item 01.group(Body Colors).group(Orange)
+Item 01.group(Body Colors).group(White)
+Item 01.group(Body Colors).group(Green)
+Item 01.group(Body Colors).group(Light Blue)
+Item 01.group(Body Colors).group(Yellow)
+Item 01.group(Body Colors).group(Black)
+Item 01.group(Body Colors).group(Blue)
+Item 01.group(Body Colors).group(Red)
+Item 01.group(Body Colors).group(Pink)
+Item 01.group(Body Colors).group(Forest Green)
+
+
+
+
+
+A1 imprint color box
+Item 01.group(Swatch_A1).textItem(A1_Name)
+Item 01.group(Swatch_A1).pathItem(A1_Frame)
+Item 01.group(Swatch_A1).pathItem(A1_Color)
+
+Item 01.group(Swatch_A2).textItem(A2_Name)
+Item 01.group(Swatch_A2).pathItem(A2_Frame)
+Item 01.group(Swatch_A2).pathItem(A2_Color)
+
+Item 01.group(Swatch_A3).textItem(A3_Name)
+Item 01.group(Swatch_A3).pathItem(A3_Frame)
+Item 01.group(Swatch_A3).pathItem(A3_Color)
+
+Item 01.group(Swatch_A4).textItem(A4_Name)
+Item 01.group(Swatch_A4).pathItem(A4_Frame)
+Item 01.group(Swatch_A4).pathItem(A4_Color)
+
+
+
+Item 01.group(Swatch_C1).textItem(C1_Name)
+Item 01.group(Swatch_C1).pathItem(C1_Frame)
+Item 01.group(Swatch_C1).pathItem(C1_Color)
+
+Item 01.group(Swatch_C2).textItem(C2_Name)
+Item 01.group(Swatch_C2).pathItem(C2_Frame)
+Item 01.group(Swatch_C2).pathItem(C2_Color)
+
+Item 01.group(Swatch_C3).textItem(C3_Name)
+Item 01.group(Swatch_C3).pathItem(C3_Frame)
+Item 01.group(Swatch_C3).pathItem(C3_Color)
+
+Item 01.group(Swatch_C4).textItem(C4_Name)
+Item 01.group(Swatch_C4).pathItem(C4_Frame)
+Item 01.group(Swatch_C4).pathItem(C4_Color)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
 
 
 
@@ -582,23 +742,32 @@ var bravo = app.activeDocument.layers
   .textFrames.getByName("jde number");
 bravo.contents = "Item 10";
 
-function bodyColor_function() {
-  //     The code below takes the number of items that the user input and uses it to set the number of artboards/items.
 
-  for (i = itemNumber_edit; i >= 1; i--) {
-    var bodyColorArray = [
-      "Item 00",
-      "Item 01",
-      "Item 02",
-      "Item 03",
-      "Item 04",
-      "Item 05",
-      "Item 06",
-      "Item 07",
-      "Item 08",
-      "Item 09",
-      "Item 10",
-    ];
+
+
+
+
+
+var itemNumber = function(userInput) {
+
+
+  var bravoArray = ["Item 00", "Item 01", "Item 02", "Item 03", "Item 04", "Item 05", "Item 06", "Item 07", "Item 08", "Item 09", "Item 10"];
+
+  var charlie = [];
+  return charlie = bravoArray.slice(1, userInput + 1);
+}
+
+
+
+itemNumber(itemNumber_edit.text);
+
+
+
+
+
+
+
+
 
     var orangeBody = app.activeDocument.layers
       .getByName(bodyColorArray[i])
@@ -661,9 +830,15 @@ function bodyColor_function() {
 
 
 
+
+
+
+
+
+
+
 function A1Ink() {
-  /*   This takes the text entered by the user in the edittext box, converts it to lower case, change the first letter of each word to upper case,
-  then removes the spaces between the words.   */
+  /*   This takes the text entered by the user in the edittext box, converts it to lower case, change the first letter of each word to upper case, then removes the spaces between the words.   */
 
   var india = ink_A1_edit.text;
   india = india.split(" ");
@@ -730,25 +905,6 @@ function inkColor(
   inkCheckbox,
   inkColorChip
 ) {
-
-
-
-
-
-
-  /* This section tries to use the A1Ink section as a function to do the inks for the other screens.
-      inkColor_edit.text = ink_A1_edit.text
-            This takes the text entered by the user in the edittext box, converts it to lower case, change the first letter of each word to upper case, then removes the spaces between the words.   */
-  var india = inkColor_edit.text;
-  india = india.split(" ");
-  var number1 = india[0];
-  var kilo = india.slice(1);
-  for (t = 0; t < kilo.length; t++) {
-    kilo[t] = kilo[t].toLowerCase();
-    kilo[t] = kilo[t].charAt(0).toUpperCase() + kilo[t].slice(1);
-  }
-
-
 
 
 
