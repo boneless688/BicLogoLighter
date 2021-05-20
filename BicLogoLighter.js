@@ -492,16 +492,24 @@ Use the same function for a single screen box group.
 
 
 var item = ["Item 01", "Item 02", "Item 03", "Item 04", "Item 05", "Item 06", "Item 07", "Item 08", "Item 09", "Item 10", "Assortment", "Sleeve"];
+for (f = itemNumber_edit.text - 1; f >= 0; f--) {
+  var itemList = item.slice(item[f])
+}
 
 for (n = 0; n < item.length; n++) { // This loops through the item numbers.
 
-  var screen = ['A1', 'A2', 'A3', 'A4', 'C1', 'C2', 'C3', 'C4']  // This loops through the screens
+  var screen = ['A1', 'A2', 'A3', 'A4', 'C1', 'C2', 'C3', 'C4']  // This loops through the 8 sets of screen elements.
   for (i = 0; i < screen.length; i++) {
     var screen_name = `${screen[i]}_Name`;
     var screen_frame = `${screen[i]}_Frame`;
     var screen_color = `${screen[i]}_Color`;
 
-    var item_path_A = `app.activeDocument.layers.getByName(${item[n]}).pathItems.getByName(${screen_name})`;
+    var screenBoxes = ["screen_name", "screen_frame", "screen_color"];
+    for (k = 0; k < screenBoxes.length; k++) {
+      var itemPath = `app.activeDocument.layers.getByName(${item[n]})`
+    })
+
+    var item_path_A = `app.activeDocument.layers.getByName(${item[n]}).textFrames.getByName(${screen_name})`;
     var item_path_B = `app.activeDocument.layers.getByName(${item[n]}).pathItems.getByName(${screen_frame})`;
     var item_path_C = `app.activeDocument.layers.getByName(${item[n]}).pathItems.getByName(${screen_color})`;
     console.log(item_path_A);
