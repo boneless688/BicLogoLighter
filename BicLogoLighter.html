@@ -3,188 +3,378 @@
 
 <head>
           <title> Bic Logo Lighter </title>
-          <link rel="stylesheet" href="BicLogoLighter_files/BicLogoLighter.css">
-          <script src="BicLogoLighter_files/BicLogoLighter.js">
-          </script>
+          <link rel="stylesheet" href="BicLogoLighter.css">
+          <script src="BicLogoLighter.js"></script>
 </head>
 
 
 <body>
-          <section id=" Master">
-          <form action="/formDestination.html" method="POST">
 
+          <section id="Master">
+                    <form action="/formDestination.html" method="POST">
 
 
-<div id="Header">
-          <div id="CustomerInfo">
-                    <h1>Customer Info</h1>
-                    <div id="RepName">
-          <label for="RepName">Rep Name</label>
-          <input type="text" name="RepName" value="">
-</div>
 
+                              <div id="top">
+                                        <section id="CustomerInfo">
 
+                                                  <h1>Customer Info</h1>
+                                                  <div class="unit1">
+                                                            <label for="RepName">Rep Name</label>
+                                                            <input type="text" name="RepName" value="">
+                                                  </div>
 
-<div id="RepEmail">
-          <label for="RepEmail">Rep Email</label>
-          <input type="text" name="RepEmail" value="">
-</div>
 
+                                                  <div class="unit1">
+                                                            <label for="RepEmail">Rep Email</label>
+                                                            <input type="text" name="RepEmail" value="">
+                                                  </div>
 
 
-<div id="RepPhone">
-          <label for="RepPhone">Rep Phone </label>
-          <input type="text" name="RepPhone" value="">
-</div>
+                                                  <div class="unit2">
+                                                            <label for="RepPhone">Rep Phone</label>
+                                                            <input type="text" name="RepPhone" value="">
+                                                  </div>
 
 
+                                                  <div class="unit2">
+                                                            <label for="CompanyName">Company Name</label>
+                                                            <input type="text" name="CompanyName" value="">
+                                                  </div>
 
-<div id="CompanyName">
-          <label for="CompanyName">Company Name</label>
-          <input type="text" name="CompanyName" value="">
-</div>
 
+                                                  <div class="unit3">
+                                                            <label for="CompanyAddress">Company Address</label>
+                                                            <input type="text" name="CompanyAddress" value="">
+                                                  </div>
 
 
-<div id="CompanyAddress">
-          <label for="CompanyAddress">Company Address</label>
-          <input type="text" name="CompanyAddress" value="">
-</div>
 
+                                                  <div class="unit3">
+                                                            <label for="vip">VIP</label>
+                                                            <input type="checkbox" id="vipBox">
+                                                  </div>
 
 
-<div id="vip">
-          <label for="vip">VIP</label>
-          <input type="checkbox" id="vipBox">
-</div>
 
+                                                  <div id="nation">
+                                                            <label for="nation">US</label>
+                                                            <input name="nation" type="radio" value="US" />
 
+                                                            <label for="nation">Canada</label>
+                                                            <input name="nation" type="radio" value="Canada" />
+                                                  </div>
+                                        </section>
 
-<div id="CountryRadioButtons">
-          <label for="Country">US</label>
-          <input name="Country" type="radio" value="US" />
 
-          <label for="Country">Canada</label>
-          <input name="Country" type="radio" value="Canada" />
-</div>
 
 
 
 
 
 
+                                        <section id="OrderInfo">
+                                                  <h1>Order Info</h1>
+                                                  <div id="OrderInfoTop">
+                                                            <div id="Order_1">
+                                                                      <div id="jde">
+                                                                                <label for="jdeNumber">JDE
+                                                                                          Number</label>
+                                                                                <input type="text" name="jdeNumber"
+                                                                                          value="">
+                                                                      </div>
+                                                            </div>
 
-<div id="OrderInfo">
-<h1>Order Info</h1>
-<div id="OrderInfoTop">
-          <div id="Order_1">
-                    <div id="jde">
-                              <label for="jdeNumber">JDE Number</label>
-                              <input type="text" name="jdeNumber" value="">
-                    </div>
-          </div>
 
+                                                            <div id="poNumber">
+                                                                      <label for="po">Purchase Order Number</label>
+                                                                      <input type="text" name="po" value="">
+                                                            </div>
 
 
 
 
-<div id="poNumber">
-          <label for="po">Purchase Order Number</label>
-          <input type="text" name="po" value="">
-</div>
+                                                            <div id="Order_2">
+                                                                      <div id="ShipDate">
+                                                                                <label for="ship">Ship Date</label>
+                                                                                <input type="text" name="ship" value="">
+                                                                      </div>
 
 
 
+                                                                      <div id="InHandsDate">
+                                                                                <label for="InHands">In-Hands
+                                                                                          Date</label>
+                                                                                <input type="text" name="InHands"
+                                                                                          value="">
+                                                                      </div>
 
-<div id="Order_2">
-          <div id="ShipDate">
-                    <label for="ship">Ship Date</label>
-                    <input type="text" name="ship" value="">
-          </div>
 
-
-
-
-<div id="InHandsDate">
-          <label for="InHands">In-Hands Date</label>
-          <input type="text" name="InHands" value="">
-</div>
-
-
-
-<div id="Order_3">
-          <div id="webNumber">
-
-                    <div id="webRadioButtons">
-                              <label for="web">B2B</label>
-                              <input name="web" type="radio" value="" />
-
-                              <label for="web">D2Cweb</label>
-                              <input name="web" type="radio" value="" />
-                    </div>
-
-
-                    <div id="shipDate">
-                              <label for="ship">Ship Date</label>
-                              <input type="text" name="ship" value="">
-                    </div>
-
-
-
-<div id="InHandsDate">
-          <label for="InHands">In-Hands Date</label>
-          <input type="text" name="InHands" value="">
-</div>
-
-
-
-<div id="rush">
-          <label for="rush">RUSH order</label>
-          <input type="checkbox" id="rushBox">
-</div>
-
-
-<div id="Order_4">
-           <div id="itemNumber">
-                    <label for="items">Number of Items</label>
-                    <input type="number" name="itemQuantity" value="1">
-          </div>
-</div>
-
-
-
-<div id="OrderInfoBottom">
-          <div id="areaLeft">
-                    <label for ="customerInstructions">Customer Instructions</label>
-                    <textarea id="customerInstructions" name="customerInstructions" rows="7" cols="25"></textarea>
-          </div>
-
-          <div id="areaCenter">
-                    <label for ="customerServiceInstructions">Customer Service Instructions</label>
-                    <textarea id="customerServiceInstructions" name="customerServiceInstructions" rows="7" cols="25"></textarea>
-          </div>
-          
-          <div id="areaRight">
-                    <label for ="productionInstructions">Production Instructions</label>
-                    <textarea id="productionInstructions" name="productionInstructions" rows="7" cols="25"></textarea>
-          </div>
-</div>
-
-
-
-
-
-<div id="Item">
-          <section id="ItemSection">
-
+                                                                      <br>
+                                                                      <br>
+
+
+
+                                                                      <div id="Order_3">
+                                                                                <div id="webNumber">
+                                                                                          <div id="webRadioButtons">
+                                                                                                    <label
+                                                                                                              for="web">B2B</label>
+                                                                                                    <input name="web"
+                                                                                                              type="radio"
+                                                                                                              value="" />
+
+
+                                                                                                    <label
+                                                                                                              for="web">D2Cweb</label>
+                                                                                                    <input name="web"
+                                                                                                              type="radio"
+                                                                                                              value="" />
+                                                                                          </div>
+
+
+                                                                                          <div id="shipDate">
+                                                                                                    <label for="ship">Ship
+                                                                                                              Date</label>
+                                                                                                    <input type="text"
+                                                                                                              name="ship"
+                                                                                                              value="">
+                                                                                          </div>
+
+
+                                                                                          <div id="InHandsDate">
+                                                                                                    <label
+                                                                                                              for="InHands">In-Hands
+                                                                                                              Date</label>
+                                                                                                    <input type="text"
+                                                                                                              name="InHands"
+                                                                                                              value="">
+                                                                                          </div>
+
+
+                                                                                          <div id="rush">
+                                                                                                    <label for="rush">RUSH
+                                                                                                              order</label>
+                                                                                                    <input type="checkbox"
+                                                                                                              id="rushBox">
+                                                                                          </div>
+
+
+                                                                                          <div id="Order_4">
+                                                                                                    <div
+                                                                                                              id="itemNumber">
+                                                                                                              <label
+                                                                                                                        for="items">Number
+                                                                                                                        of
+                                                                                                                        Items</label>
+                                                                                                              <input type="number"
+                                                                                                                        name="itemQuantity"
+                                                                                                                        value="1">
+                                                                                                    </div>
+                                                                                          </div>
+
+
+
+                                                                                          <div id="OrderInfoBottom">
+                                                                                                    <div id="areaLeft">
+                                                                                                              <label for="customerInstructions"
+                                                                                                                        class="label">Customer
+                                                                                                                        Instructions</label>
+                                                                                                              <textarea id="customerInstructions"
+                                                                                                                        name="customerInstructions"
+                                                                                                                        rows="7"
+                                                                                                                        cols="25"></textarea>
+                                                                                                    </div>
+
+
+                                                                                                    <div
+                                                                                                              id="areaCenter">
+                                                                                                              <label for="customerServiceInstructions"
+                                                                                                                        class="label">Customer
+                                                                                                                        Service
+                                                                                                                        Instructions</label>
+                                                                                                              <textarea id="customerServiceInstructions"
+                                                                                                                        name="customerServiceInstructions"
+                                                                                                                        rows="7"
+                                                                                                                        cols="25"></textarea>
+                                                                                                    </div>
+
+
+                                                                                                    <div id="areaRight">
+                                                                                                              <label for="productionInstructions"
+                                                                                                                        class="label">Production
+                                                                                                                        Instructions</label>
+                                                                                                              <textarea id="productionInstructions"
+                                                                                                                        name="productionInstructions"
+                                                                                                                        rows="7"
+                                                                                                                        cols="25"></textarea>
+                                                                                                    </div>
+                                                                                          </div>
+                                                                                </div>
+                                                                      </div>
+                                                            </div>
+                                                  </div>
+                              </div>
           </section>
-</div>
 
 
 
 
 
-</form>
-</section>
+          <section id="Item">
+                    <h1>Item Info</h1>
+
+                    <div id="ItemInfo">
+                              <div id="Item_01">
+                                        <div class="bravo">
+                                                  <div id="description">
+                                                            <label for="description">Art Description</label>
+                                                            <input type="text" name="description" value="">
+                                                  </div>
+
+                                                  <label for="bodyColor">Body Color</label>
+                                                  <select required name="Body Color" id="bodyColor">
+                                                            <option value="white">White</option>
+                                                            <option value="black">Black</option>
+                                                            <option value="blue">Blue</option>
+                                                            <option value="green">Green</option>
+                                                            <option value="red">Red</option>
+                                                            <option value="orange">Orange</option>
+                                                            <option value="lightBlue">Light Blue</option>
+                                                            <option value="yellow">Yellow</option>
+                                                            <option value="forestGreen">Forest Green</option>
+                                                            <option value="darkAssortment">Dark Assortment</option>
+                                                            <option value="lightAssortment">Light Assortment</option>
+                                                            <option value="sleeve">Sleeve</option>
+                                                  </select>
+                                        </div>
+
+
+
+
+
+                                        <div class="bravo">
+                                                  <label for="originalArt_A">Art for side A</label>
+                                                  <input type="text" name="originalArt_A" value="">
+                                        </div>
+
+
+
+
+                                        <div class="bravo">
+                                                  <label for="originalArt_C">Art for side C</label>
+                                                  <input type="text" name="originalArt_C" value="">
+                                        </div>
+
+
+
+
+                                        <div id="itemInstructions">
+                                                  <label for="itemInstructions">Item Instructions</label>
+                                                  <textarea id="itemInstructions" name="itemInstructions" rows="7"
+                                                            cols="25"></textarea>
+                                        </div>
+
+
+                              </div>
+
+                              <div id="InkColors">
+                                        <div id="InkColors_A">
+                                                  <div id="A1">
+                                                            <label for="A1">A1</label>
+                                                            <input type="text" name="A1" value="">
+
+                                                            <div id="CustomInkCheckbox">
+                                                                      <label for="CustomInk">Custom Ink Color</label>
+                                                                      <input type="checkbox" id="CustomInk">
+                                                            </div>
+                                                  </div>
+
+
+                                                  <div id="A2">
+                                                            <label for="A2">A2</label>
+                                                            <input type="text" name="A2" value="">
+                                                            <div id="CustomInkCheckbox">
+                                                                      <label for="CustomInk">Custom Ink Color</label>
+                                                                      <input type="checkbox" id="CustomInk">
+                                                            </div>
+                                                  </div>
+
+                                                  <div id="A3">
+                                                            <label for="A3">A3</label>
+                                                            <input type="text" name="A3" value="">
+                                                            <div id="CustomInkCheckbox">
+                                                                      <label for="CustomInk">Custom Ink Color</label>
+                                                                      <input type="checkbox" id="CustomInk">
+                                                            </div>
+                                                  </div>
+
+
+                                                  <div id="A4">
+                                                            <label for="A1">A4</label>
+                                                            <input type="text" name="A4" value="">
+                                                            <div id="CustomInkCheckbox">
+                                                                      <label for="CustomInk">Custom Ink Color</label>
+                                                                      <input type="checkbox" id="CustomInk">
+                                                            </div>
+                                                  </div>
+
+                                        </div>
+                                        <div id="InkColors_C">
+                                                  <div id="C1">
+                                                            <label for="C1">C1</label>
+                                                            <input type="text" name="C1" value="">
+                                                            <div id="CustomInkCheckbox">
+                                                                      <label for="CustomInk">Custom Ink Color</label>
+                                                                      <input type="checkbox" id="CustomInk">
+                                                            </div>
+                                                  </div>
+
+                                                  <div id="C2">
+                                                            <label for="C2">C2</label>
+                                                            <input type="text" name="C2" value="">
+                                                            <div id="CustomInkCheckbox">
+                                                                      <label for="CustomInk">Custom Ink Color</label>
+                                                                      <input type="checkbox" id="CustomInk">
+                                                            </div>
+                                                  </div>
+
+                                                  <div id="C3">
+                                                            <label for="C3">C3</label>
+                                                            <input type="text" name="A3" value="">
+                                                            <div id="CustomInkCheckbox">
+                                                                      <label for="CustomInk">Custom Ink Color</label>
+                                                                      <input type="checkbox" id="CustomInk">
+                                                            </div>
+                                                  </div>
+
+                                                  <div id="C4">
+                                                            <label for="C1">C4</label>
+                                                            <input type="text" name="C4" value="">
+                                                            <div id="CustomInkCheckbox">
+                                                                      <label for="CustomInk">Custom Ink Color</label>
+                                                                      <input type="checkbox" id="CustomInk">
+                                                            </div>
+                                                  </div>
+
+                                        </div>
+
+
+
+                                        <br>
+                                        <br>
+
+
+
+                                        <div id="submitButtons">
+                                                  <button type="button">Submit</button>
+                                                  <button type="button">Cancel</button>
+                                        </div>
+          </section>
+
+
+
+          </form>
 </body>
+
 </html>
