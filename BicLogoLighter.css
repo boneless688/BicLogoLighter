@@ -1,138 +1,78 @@
-
-#CustomerInfo {
-          text-align: center;
-          background-color: rgb(182, 223, 250);
-          font-family: Arial, Helvetica, sans-serif;
+.Logo {      
+}
+.master {
+          display: flex;
+          flex-direction: column;
+          background-color:rgb(224, 246, 255);
+          border-style: solid;
+          border-width: 4px;
+          border-color: black;
           padding: 15px;
-          width: 100%;
+          width: 1200px;
+          height: 800px;
 }
 
-
-
-
-#OrderInfo {
-          text-align: center;
-          background-color:bisque;
-          padding: 45px;
-}
-
-
-
-
-#Item {
-          text-align: center;
-          background-color:rgb(244, 209, 253);
-          padding: 45px;
-}
-
-
-
-#itemInstructions {
-          text-align: center;
-
-}
-
-
-#areaLeft {
-          text-align: center;
-          display: inline-block;
-
-}
-
-#areaCenter {
-          text-align: center;
-          display: inline-block;
-}
-
-#areaRight {
-          text-align: center;
-          display: inline-block;
-}
-
-
-
-
-
-.label {
-          text-align: center;
-          display: block;
-          color: rgb(0, 0, 0);
-          
-}
-
-.unit1 {
-          text-align: center;
-
-          display: inline-block;
-          margin: auto;
-          padding: 15px;
-          width: 30%;
-
-}
-
-.unit2 {
-          display: inline-block;
-          margin: auto;
-          padding: 15px;
-          width: 30%;
-
-}
-
-.unit3 {
-          display: inline-block;
-          margin: auto;
-          padding: 25px;
-          float: right;
-          width: 40%;
-
-}
-
-
-
-
-
-#Order_1 {
-          display: inline-block;
-          width: 33%
-
-}
-
-
-#submitButtons {
-          background-color:rgb(83, 94, 196);
-          padding: 45px;
-}
-
-
-#InkColors_A, #InkColors_C {
-          display: inline-block;
-          width: 100%;
+.alpha {
+          display: flex;
+          flex-direction: column;
+          background-color: lightgray;
+          border-style: solid;
+          border-radius: 10px;
+          border-width: 2px;
           margin: 10px;
-}
-
-#A1, #A2, #A3, #A4{
-          text-align: center;
-          background-color:rgb(191, 191, 226);
-          display: block;
-          width: 10%;
-          margin: 10px;
-          padding: 20px;
-}
-
-#C1, #C2, #C3, #C4{
-          text-align: center;
-          background-color:rgb(191, 213, 226);
-          display: block;
-          width: 10%;
-          margin: 10px;
-          padding: 20px;
+          padding: 5px;
+          font-family: sans-serif;
+          height: 400px;
 }
 
 .bravo {
-          background-color: coral;
-          border-width: 3px;
-          display: inline-block;
-          width: 20%;
+          display: flex;
+          flex-direction: row;
+          font-family: sans-serif;
+}
+
+.charlie {
+          display: flex;
+          flex-direction: row;
+          background-color: rgb(255, 251, 251);
+          border-style: solid;
+          border-radius: 10px;
+          border-width: 2px;
           margin: 10px;
-          padding: 10px;
+          padding: 5px;
+          font-family: sans-serif;
+          height:150px;  
+}
+
+#charlie01_bravo01 {
+          width: 300px;
+}
+
+#charlie02_bravo01 {
+          width: 900px;
+}
+
+#charlie01_bravo02 {
+          display: flex;
+          flex-direction: row;
+          background-color: rgb(255, 251, 251);
+          border-radius: 10px;
+          margin: 5px;
+          padding: 5px;
+          font-family: sans-serif;
+          width: 1200px;
+          height: 200px; 
+}
+
+footer {
+          display: flex;
+          flex-direction: row;
+          background-color: lightgray;
+          border-style: solid;
+          border-radius: 10px;
+          border-width: 2px;
+          margin: 10px;
+          padding: 5px;
+          font-family: sans-serif;
+          height: 50px;
 }
