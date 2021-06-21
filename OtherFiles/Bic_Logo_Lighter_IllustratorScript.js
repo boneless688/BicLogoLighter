@@ -584,23 +584,3 @@ production_instructions.contents = instructionsProduction_edit.text;
 
 var customerService_instructions = app.activeDocument.textFrames.getByName("Customer Service Instructions");
 customerService_instructions.contents = instructionsCustomerService_edit.text;
-
-/* This section tells Illustrator to execute a menu command, which in this case is to open a new file from a template (.ait) file.
-
-// This might be able to open an illustrator file
-var bravo = app.open("C:\Users\JBavitz\OneDrive BIC\Desktop\Proof_Template_Layout.ai");
-
-
-app.executeMenuCommand(newFromtemplate) 
- */
-
-/* This section is going to save the currently open, but unsaved, file to the '3 - Art Proof sent' folder as a PDF with no dialog boxes. 
-var originalInteractionLevel = userInteractionLevel;
-userInteractionLevel = UserInteractionLevel.DONTDISPLAYALERTS;
-userInteractionLevel = originalInteractionLevel;
-
-var path = app.
-var saveOpts = new PDFSaveOptions();
-saveOpts.PDFXStandard = 2;
-var destination = new File (C:\Users\JBavitz\BIC\BIC logo lighter Customer Service - General\Graphic Design\3 - Art Proof sent);
-app.activeDocument.saveAs (pdfFile, saveOpts); */
