@@ -212,6 +212,7 @@ var ink_A2Number = inkBox_Master_A2.add("edittext", undefined, "");
 ink_A2Number.characters = 4;
 var ink_A2Text = inkBox_Master_A2.add("edittext", undefined, "");
 ink_A2Text.characters = 10;
+//ink_A2Text.text = "reflex blue"
 var ink_A2Checkbox = inkBox_Master_A2.add("checkbox", undefined, "Custom ink");
 ink_A2Checkbox.value = false;
 
@@ -222,6 +223,7 @@ var ink_A3Number = inkBox_Master_A3.add("edittext", undefined, "");
 ink_A3Number.characters = 4;
 var ink_A3Text = inkBox_Master_A3.add("edittext", undefined, "");
 ink_A3Text.characters = 10;
+//ink_A3Text.text = "reflex blue"
 var ink_A3Checkbox = inkBox_Master_A3.add("checkbox", undefined, "Custom ink");
 ink_A3Checkbox.value = false;
 
@@ -232,6 +234,7 @@ var ink_A4Number = inkBox_Master_A4.add("edittext", undefined, "");
 ink_A4Number.characters = 4;
 var ink_A4Text = inkBox_Master_A4.add("edittext", undefined, "");
 ink_A4Text.characters = 10;
+//ink_A4Text.text = "reflex blue"
 var ink_A4Checkbox = inkBox_Master_A4.add("checkbox", undefined, "Custom ink");
 ink_A4Checkbox.value = false;
 
@@ -250,8 +253,10 @@ var inkBox_Master_C1 = inkColors_C.add("panel", undefined, "Screen C1");
 inkBox_Master_C1.orientation = "column";
 var ink_C1Number = inkBox_Master_C1.add("edittext", undefined, "");
 ink_C1Number.characters = 4;
+ink_C1Number.text = "211"
 var ink_C1Text = inkBox_Master_C1.add("edittext", undefined, "");
 ink_C1Text.characters = 10;
+ink_C1Text.text = "pink"
 var ink_C1Checkbox = inkBox_Master_C1.add("checkbox", undefined, "Custom ink");
 ink_C1Checkbox.value = false;
 
@@ -262,6 +267,7 @@ var ink_C2Number = inkBox_Master_C2.add("edittext", undefined, "");
 ink_C2Number.characters = 4;
 var ink_C2Text = inkBox_Master_C2.add("edittext", undefined, "");
 ink_C2Text.characters = 10;
+//ink_C2Text.text = "reflex blue"
 var ink_C2Checkbox = inkBox_Master_C2.add("checkbox", undefined, "Custom ink");
 ink_C2Checkbox.value = false;
 
@@ -272,6 +278,7 @@ var ink_C3Number = inkBox_Master_C3.add("edittext", undefined, "");
 ink_C3Number.characters = 4;
 var ink_C3Text = inkBox_Master_C3.add("edittext", undefined, "");
 ink_C3Text.characters = 10;
+//ink_C3Text.text = "reflex blue"
 var ink_C3Checkbox = inkBox_Master_C3.add("checkbox", undefined, "Custom ink");
 ink_C3Checkbox.value = false;
 
@@ -282,6 +289,7 @@ var ink_C4Number = inkBox_Master_C4.add("edittext", undefined, "");
 ink_C4Number.characters = 4;
 var ink_C4Text = inkBox_Master_C4.add("edittext", undefined, "");
 ink_C4Text.characters = 10;
+//ink_C4Text.text = "reflex blue"
 var ink_C4Checkbox = inkBox_Master_C4.add("checkbox", undefined, "Custom ink");
 ink_C4Checkbox.value = false;
 
@@ -350,21 +358,28 @@ var item_A1_frame = app.activeDocument.pathItems.getByName("A1_Frame");
 var item_A1_name = app.activeDocument.textFrames.getByName("A1_Name");
 var item_A1_color = app.activeDocument.pathItems.getByName("A1_Color");
 var item_A1_chip = app.activeDocument.pathItems.getByName("A1_Chip");
+var item_A1_screenName = app.activeDocument.textFrames.getByName("A1 Screen Ink Color");
 
 var item_A2_frame = app.activeDocument.pathItems.getByName("A2_Frame");
 var item_A2_name = app.activeDocument.textFrames.getByName("A2_Name");
 var item_A2_color = app.activeDocument.pathItems.getByName("A2_Color");
 var item_A2_chip = app.activeDocument.pathItems.getByName("A2_Chip");
+var item_A2_screenName = app.activeDocument.textFrames.getByName("A2 Screen Ink Color");
+
 
 var item_A3_frame = app.activeDocument.pathItems.getByName("A3_Frame");
 var item_A3_name = app.activeDocument.textFrames.getByName("A3_Name");
 var item_A3_color = app.activeDocument.pathItems.getByName("A3_Color");
 var item_A3_chip = app.activeDocument.pathItems.getByName("A3_Chip");
+var item_A3_screenName = app.activeDocument.textFrames.getByName("A3 Screen Ink Color");
+
 
 var item_A4_frame = app.activeDocument.pathItems.getByName("A4_Frame");
 var item_A4_name = app.activeDocument.textFrames.getByName("A4_Name");
 var item_A4_color = app.activeDocument.pathItems.getByName("A4_Color");
 var item_A4_chip = app.activeDocument.pathItems.getByName("A4_Chip");
+var item_A4_screenName = app.activeDocument.textFrames.getByName("A4 Screen Ink Color");
+
 
 
 
@@ -374,21 +389,28 @@ var item_C1_frame = app.activeDocument.pathItems.getByName("C1_Frame");
 var item_C1_name = app.activeDocument.textFrames.getByName("C1_Name");
 var item_C1_color = app.activeDocument.pathItems.getByName("C1_Color");
 var item_C1_chip = app.activeDocument.pathItems.getByName("C1_Chip");
+var item_C1_screenName = app.activeDocument.textFrames.getByName("C1 Screen Ink Color");
 
 var item_C2_frame = app.activeDocument.pathItems.getByName("C2_Frame");
 var item_C2_name = app.activeDocument.textFrames.getByName("C2_Name");
 var item_C2_color = app.activeDocument.pathItems.getByName("C2_Color");
 var item_C2_chip = app.activeDocument.pathItems.getByName("C2_Chip");
+var item_C2_screenName = app.activeDocument.textFrames.getByName("C2 Screen Ink Color");
+
 
 var item_C3_frame = app.activeDocument.pathItems.getByName("C3_Frame");
 var item_C3_name = app.activeDocument.textFrames.getByName("C3_Name");
 var item_C3_color = app.activeDocument.pathItems.getByName("C3_Color");
 var item_C3_chip = app.activeDocument.pathItems.getByName("C3_Chip");
+var item_C3_screenName = app.activeDocument.textFrames.getByName("C3 Screen Ink Color");
+
 
 var item_C4_frame = app.activeDocument.pathItems.getByName("C4_Frame");
 var item_C4_name = app.activeDocument.textFrames.getByName("C4_Name");
 var item_C4_color = app.activeDocument.pathItems.getByName("C4_Color");
 var item_C4_chip = app.activeDocument.pathItems.getByName("C4_Chip");
+var item_C4_screenName = app.activeDocument.textFrames.getByName("C4 Screen Ink Color");
+
 
 
 var item_OriginalArt_A = "original art side A";
@@ -399,35 +421,15 @@ var item_originalArt_C = "original art side C";
 
 
 
+var screenInk_A1 = app.activeDocument.textFrames.getByName('A1 Screen Ink Color');
+var screenInk_A2 = app.activeDocument.textFrames.getByName('A2 Screen Ink Color');
+var screenInk_A3 = app.activeDocument.textFrames.getByName('A3 Screen Ink Color');
+var screenInk_A4 = app.activeDocument.textFrames.getByName('A4 Screen Ink Color');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var screenInk_C1 = app.activeDocument.textFrames.getByName('C1 Screen Ink Color');
+var screenInk_C2 = app.activeDocument.textFrames.getByName('C2 Screen Ink Color');
+var screenInk_C3 = app.activeDocument.textFrames.getByName('C3 Screen Ink Color');
+var screenInk_C4 = app.activeDocument.textFrames.getByName('C4 Screen Ink Color');
 
 
 
@@ -460,6 +462,7 @@ if (ink_A1Text.text === 'white') {
   item_A1_color.selected = true;
   item_A1_color.fillColor = newWhite;
   item_A1_chip.fillColor = newWhite;
+  item_A1_frame.strokeWidth = 1.25;
 } else {
   if (ink_A1Text.text === 'black') {
     item_A1_name.contents = 'Black';
@@ -471,19 +474,24 @@ if (ink_A1Text.text === 'white') {
     item_A1_color.selected = true;
     item_A1_color.fillColor = newBlack;
     item_A1_chip.fillColor = newBlack;
+    item_A1_frame.strokeWidth = 1.25;
   }
 }
 
-if (ink_A1Number.text.length > 0 && ink_A1Text.text.length > 0) {
-  if (ink_A1Number.text.length > 0) {
+if (ink_A1Number.text.length > 0) {
     item_A1_name.contents = 'PANTONE' + ' ' + ink_A1Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_A1Text.text);
+    screenInk_A1.contents = ink_A1Number.text + ' ' + capitalize_function(ink_A1Text.text);
   } else {
-    item_A1_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_A1Text.text) + ' ' + 'C';
+    if (ink_A1Number.text.length < 1 && ink_A1Text.text.length > 0) {
+      item_A1_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_A1Text.text) + ' ' + 'C';
+      screenInk_A1.contents = capitalize_function(ink_A1Text.text);
+    }
+
+    item_A1_color.selected = true;
+    item_A1_color.fillColor = app.activeDocument.swatches.getByName(alphaOne).color;
+    item_A1_chip.fillColor = app.activeDocument.swatches.getByName(alphaOne).color;
   }
-  item_A1_color.selected = true;
-  item_A1_color.fillColor = app.activeDocument.swatches.getByName(alphaOne).color;
-  item_A1_chip.fillColor = app.activeDocument.swatches.getByName(alphaOne).color;
-}
+
 
 var standardInk = ['114', '116', '1345', '1545', '172', '186', '202', '205', '208', '211', '316', '327', '341', '355', '281', '293', '2587', '424', '872', '877'];
 for (i = 0; i < standardInk.length; i++) {
@@ -494,71 +502,142 @@ for (i = 0; i < standardInk.length; i++) {
 
 
 
-/* this part makes the stroke of the swatch box thicker if the custom color box is checked.
-  if (ink_A1Checkbox.value != true) {
-    item_A1_frame.strokeWidth = 0.5;
+
+
+
+
+
+
+
+
+
+
+
+
+if (ink_A2Text.length < 1) {
+  app.activeDocument.groupItems.getByName("Screen2").remove();
+} else {
+  if (ink_A2Text.text === 'white') {
+  item_A2_name.contents = 'White';
+  var newWhite = new CMYKColor();
+  newWhite.black = 00;
+  newWhite.cyan = 00;
+  newWhite.magenta = 00;
+  newWhite.yellow = 00;
+  item_A2_color.selected = true;
+  item_A2_color.fillColor = newWhite;
+  item_A2_chip.fillColor = newWhite;
+    item_A2_frame.strokeWidth = 1.25;
   } else {
-    item_A1_frame.strokeWidth = 1.25;
+  if (ink_A2Text.text === 'black') {
+    item_A2_name.contents = 'Black';
+    var newBlack = new CMYKColor();
+    newBlack.black = 100;
+    newBlack.cyan = 00;
+    newBlack.magenta = 00;
+    newBlack.yellow = 00;
+    item_A2_color.selected = true;
+    item_A2_color.fillColor = newBlack;
+    item_A2_chip.fillColor = newBlack;
+    item_A2_frame.strokeWidth = 1.25;
   }
 }
-*/
 
-
-
-
-
-/*
 if (ink_A2Number.text.length > 0) {
   item_A2_name.contents = 'PANTONE' + ' ' + ink_A2Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_A2Text.text);
+  screenInk_A2.contents = ink_A2Number.text + ' ' + capitalize_function(ink_A2Text.text);
 } else {
   item_A2_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_A2Text.text) + ' ' + 'C';
+  screenInk_A2.contents = capitalize_function(ink_A2Text.text);
 }
 
-item_A2_color.selected = true; 
-item_A2_color.fillColor = app.activeDocument.swatches.getByName(alphaTwo).color;
-item_A2_chip.fillColor = app.activeDocument.swatches.getByName(alphaTwo).color;
-
-// this part makes the stroke of the swatch box thicker if the custom color box is checked.
-if (ink_A2Checkbox.value != true) {
-  item_A2_frame.strokeWidth = 0.5
-}else{
-  item_A2_frame.strokeWidth = 1
+for (i = 0; i < standardInk.length; i++) {
+  if (ink_A2Number.text == standardInk[i]) {
+    item_A2_frame.strokeWidth = 1.25;
+  }
 }
 
+
+  item_A2_color.selected = true;
+  item_A2_color.fillColor = app.activeDocument.swatches.getByName(alphaTwo).color;
+  item_A2_chip.fillColor = app.activeDocument.swatches.getByName(alphaTwo).color;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if (ink_A3Text.text === 'white') {
+  item_A3_name.contents = 'White';
+  var newWhite = new CMYKColor();
+  newWhite.black = 00;
+  newWhite.cyan = 00;
+  newWhite.magenta = 00;
+  newWhite.yellow = 00;
+  item_A3_color.selected = true;
+  item_A3_color.fillColor = newWhite;
+  item_A3_chip.fillColor = newWhite;
+  item_A3_frame.strokeWidth = 1.25;
+} else {
+  if (ink_A3Text.text === 'black') {
+    item_A3_name.contents = 'Black';
+    var newBlack = new CMYKColor();
+    newBlack.black = 100;
+    newBlack.cyan = 00;
+    newBlack.magenta = 00;
+    newBlack.yellow = 00;
+    item_A3_color.selected = true;
+    item_A3_color.fillColor = newBlack;
+    item_A3_chip.fillColor = newBlack;
+    item_A3_frame.strokeWidth = 1.25;
+  }
+}
 
 if (ink_A3Number.text.length > 0) {
   item_A3_name.contents = 'PANTONE' + ' ' + ink_A3Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_A3Text.text);
+  screenInk_A3.contents = ink_A3Number.text + ' ' + capitalize_function(ink_A3Text.text);
 } else {
   item_A3_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_A3Text.text) + ' ' + 'C';
-}
-
-item_A3_color.selected = true; 
-item_A3_color.fillColor = app.activeDocument.swatches.getByName(alphaThree).color;
-item_A3_chip.fillColor = app.activeDocument.swatches.getByName(alphaThree).color;
-
-// this part makes the stroke of the swatch box thicker if the custom color box is checked.
-if (ink_A3Checkbox.value != true) {
-  item_A3_frame.strokeWidth = 0.5
-}else{
-  item_A3_frame.strokeWidth = 1
+  screenInk_A3.contents = capitalize_function(ink_A3Text.text);
 }
 
 
-if (ink_A4Number.text.length > 0) {
-  item_A4_name.contents = 'PANTONE' + ' ' + ink_A4Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_A4Text.text);
+
+for (i = 0; i < standardInk.length; i++) {
+  if (ink_A3Number.text == standardInk[i]) {
+    item_A3_frame.strokeWidth = 1.25;
+  }
+}
+
+if (ink_A3Text.length < 1) {
+  app.activeDocument.groupItems.getByName("Screen3").remove();
 } else {
-  item_A4_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_A4Text.text) + ' ' + 'C';
-}
-
-item_A4_color.selected = true; 
-item_A4_color.fillColor = app.activeDocument.swatches.getByName(alphaFour).color;
-item_A4_chip.fillColor = app.activeDocument.swatches.getByName(alphaFour).color;
-
-// this part makes the stroke of the swatch box thicker if the custom color box is checked.
-if (ink_A4Checkbox.value != true) {
-  item_A4_frame.strokeWidth = 0.5
-}else{
-  item_A4_frame.strokeWidth = 1
+  item_A3_color.selected = true;
+  item_A3_color.fillColor = app.activeDocument.swatches.getByName(alphaThree).color;
+  item_A3_chip.fillColor = app.activeDocument.swatches.getByName(alphaThree).color;
 }
 
 
@@ -571,92 +650,293 @@ if (ink_A4Checkbox.value != true) {
 
 
 
-if (ink_C1Number.text.length > 0) {
-  item_C1_name.contents = 'PANTONE' + ' ' + ink_C1Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C1Text.text);
+
+
+
+
+
+if (ink_A4Text.text === 'white') {
+  item_A4_name.contents = 'White';
+  var newWhite = new CMYKColor();
+  newWhite.black = 00;
+  newWhite.cyan = 00;
+  newWhite.magenta = 00;
+  newWhite.yellow = 00;
+  item_A4_color.selected = true;
+  item_A4_color.fillColor = newWhite;
+  item_A4_chip.fillColor = newWhite;
+  item_A4_frame.strokeWidth = 1.25;
 } else {
-  item_C1_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_C1Text.text) + ' ' + 'C';
+  if (ink_A4Text.text === 'black') {
+    item_A4_name.contents = 'Black';
+    var newBlack = new CMYKColor();
+    newBlack.black = 100;
+    newBlack.cyan = 00;
+    newBlack.magenta = 00;
+    newBlack.yellow = 00;
+    item_A4_color.selected = true;
+    item_A4_color.fillColor = newBlack;
+    item_A4_chip.fillColor = newBlack;
+    item_A4_frame.strokeWidth = 1.25;
+  }
 }
 
-item_C1_color.selected = true; 
-item_C1_color.fillColor = app.activeDocument.swatches.getByName(bravoOne).color;
-item_C1_chip.fillColor = app.activeDocument.swatches.getByName(bravoOne).color;
+  if (ink_A4Number.text.length > 0) {
+    item_A4_name.contents = 'PANTONE' + ' ' + ink_A4Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_A4Text.text);
+    screenInk_A4.contents = ink_A4Number.text + ' ' + capitalize_function(ink_A4Text.text);
+  } else {
+    item_A4_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_A4Text.text) + ' ' + 'C';
+    screenInk_A4.contents = capitalize_function(ink_A4Text.text);
+  }
 
-// this part makes the stroke of the swatch box thicker if the custom color box is checked.
-if (ink_C1Checkbox.value != true) {
-  item_C1_frame.strokeWidth = 0.5
-}else{
-  item_C1_frame.strokeWidth = 1
+
+
+for (i = 0; i < standardInk.length; i++) {
+  if (ink_A4Number.text == standardInk[i]) {
+    item_A4_frame.strokeWidth = 1.25;
+  }
 }
 
-
-
-
-if (ink_C2Number.text.length > 0) {
-  item_C2_name.contents = 'PANTONE' + ' ' + ink_C2Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C2Text.text);
+if (ink_A4Text.length < 1) {
+  app.activeDocument.groupItems.getByName("Screen4").remove();
 } else {
-  item_C2_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_C2Text.text) + ' ' + 'C';
-}
-
-item_C2_color.selected = true; 
-item_C2_color.fillColor = app.activeDocument.swatches.getByName(bravoTwo).color;
-item_C2_chip.fillColor = app.activeDocument.swatches.getByName(bravoTwo).color;
-
-// this part makes the stroke of the swatch box thicker if the custom color box is checked.
-if (ink_C2Checkbox.value != true) {
-  item_C2_frame.strokeWidth = 0.5
-}else{
-  item_C2_frame.strokeWidth = 1
+  item_A4_color.selected = true;
+  item_A4_color.fillColor = app.activeDocument.swatches.getByName(alphaFour).color;
+  item_A4_chip.fillColor = app.activeDocument.swatches.getByName(alphaFour).color;
 }
 
 
 
 
-if (ink_C3Number.text.length > 0) {
-  item_C3_name.contents = 'PANTONE' + ' ' + ink_C3Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C3Text.text);
+
+
+
+
+
+
+
+
+
+
+
+
+
+if (ink_C1Text.text === 'white') {
+  item_C1_name.contents = 'White';
+  var newWhite = new CMYKColor();
+  newWhite.black = 00;
+  newWhite.cyan = 00;
+  newWhite.magenta = 00;
+  newWhite.yellow = 00;
+  item_C1_color.selected = true;
+  item_C1_color.fillColor = newWhite;
+  item_C1_chip.fillColor = newWhite;
+  item_C1_frame.strokeWidth = 1.25;
 } else {
-  item_C3_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_C3Text.text) + ' ' + 'C';
+  if (ink_C1Text.text === 'black') {
+    item_C1_name.contents = 'Black';
+    var newBlack = new CMYKColor();
+    newBlack.black = 100;
+    newBlack.cyan = 00;
+    newBlack.magenta = 00;
+    newBlack.yellow = 00;
+    item_C1_color.selected = true;
+    item_C1_color.fillColor = newBlack;
+    item_C1_chip.fillColor = newBlack;
+    item_C1_frame.strokeWidth = 1.25;
+  }
 }
 
-item_C3_color.selected = true; 
-item_C3_color.fillColor = app.activeDocument.swatches.getByName(bravoThree).color;
-item_C3_chip.fillColor = app.activeDocument.swatches.getByName(bravoThree).color;
+  if (ink_C1Number.text.length > 0) {
+    item_C1_name.contents = 'PANTONE' + ' ' + ink_C1Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C1Text.text);
+    screenInk_C1.contents = ink_C1Number.text + ' ' + capitalize_function(ink_C1Text.text);
+  } else {
+    item_C1_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_C1Text.text) + ' ' + 'C';
+    screenInk_C1.contents = capitalize_function(ink_C1Text.text);
+  }
 
-// this part makes the stroke of the swatch box thicker if the custom color box is checked.
-if (ink_C3Checkbox.value != true) {
-  item_C3_frame.strokeWidth = 0.5
-}else{
-  item_C3_frame.strokeWidth = 1
+
+
+var standardInk = ['114', '116', '1345', '1545', '172', '186', '202', '205', '208', '211', '316', '327', '341', '355', '281', '293', '2587', '424', '872', '877'];
+for (i = 0; i < standardInk.length; i++) {
+  if (ink_C1Number.text == standardInk[i]) {
+    item_C1_frame.strokeWidth = 1.25;
+  }
 }
 
-
-
-
-if (ink_C4Number.text.length > 0) {
-  item_C4_name.contents = 'PANTONE' + ' ' + ink_C4Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C4Text.text);
+if (ink_C1Text.length < 1) {
+  app.activeDocument.groupItems.getByName("Screen5").remove();
 } else {
-  item_C4_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_C4Text.text) + ' ' + 'C';
+  item_C1_color.selected = true;
+  item_C1_color.fillColor = app.activeDocument.swatches.getByName(bravoOne).color;
+  item_C1_chip.fillColor = app.activeDocument.swatches.getByName(bravoOne).color;
 }
 
-item_C4_color.selected = true; 
-item_C4_color.fillColor = app.activeDocument.swatches.getByName(bravoFour).color;
-item_C4_chip.fillColor = app.activeDocument.swatches.getByName(bravoFour).color;
 
-// this part makes the stroke of the swatch box thicker if the custom color box is checked.
-if (ink_C4Checkbox.value != true) {
-  item_C4_frame.strokeWidth = 0.5
-}else{
-  item_C4_frame.strokeWidth = 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if (ink_C2Text.text === 'white') {
+  item_C2_name.contents = 'White';
+  var newWhite = new CMYKColor();
+  newWhite.black = 00;
+  newWhite.cyan = 00;
+  newWhite.magenta = 00;
+  newWhite.yellow = 00;
+  item_C2_color.selected = true;
+  item_C2_color.fillColor = newWhite;
+  item_C2_chip.fillColor = newWhite;
+  item_C2_frame.strokeWidth = 1.25;
+} else {
+  if (ink_C2Text.text === 'black') {
+    item_C2_name.contents = 'Black';
+    var newBlack = new CMYKColor();
+    newBlack.black = 100;
+    newBlack.cyan = 00;
+    newBlack.magenta = 00;
+    newBlack.yellow = 00;
+    item_C2_color.selected = true;
+    item_C2_color.fillColor = newBlack;
+    item_C2_chip.fillColor = newBlack;
+    item_C2_frame.strokeWidth = 1.25;
+  }
 }
 
-*/
+  if (ink_C2Number.text.length > 0) {
+    item_C2_name.contents = 'PANTONE' + ' ' + ink_C2Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C2Text.text);
+    screenInk_C2.contents = ink_C2Number.text + ' ' + capitalize_function(ink_C2Text.text);
+  } else {
+    item_C2_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_C2Text.text) + ' ' + 'C';
+    screenInk_C2.contents = capitalize_function(ink_C2Text.text);
+  }
 
 
-//  This section hides all the body color layers in illustrator and then unhides the body color layer specified in the UI.
+  if (ink_C2Text.length < 1) {
+    app.activeDocument.groupItems.getByName("Screen6").remove();
+  } else {
+    item_C2_color.selected = true;
+    item_C2_color.fillColor = app.activeDocument.swatches.getByName(bravoTwo).color;
+    item_C2_chip.fillColor = app.activeDocument.swatches.getByName(bravoTwo).color;
+  }
+
+
+
+
+
+
+
+
+
+if (ink_C3Text.text === 'white') {
+  item_C3_name.contents = 'White';
+  var newWhite = new CMYKColor();
+  newWhite.black = 00;
+  newWhite.cyan = 00;
+  newWhite.magenta = 00;
+  newWhite.yellow = 00;
+  item_C3_color.selected = true;
+  item_C3_color.fillColor = newWhite;
+  item_C3_chip.fillColor = newWhite;
+  item_C3_frame.strokeWidth = 1.25;
+} else {
+  if (ink_C3Text.text === 'black') {
+    item_C3_name.contents = 'Black';
+    var newBlack = new CMYKColor();
+    newBlack.black = 100;
+    newBlack.cyan = 00;
+    newBlack.magenta = 00;
+    newBlack.yellow = 00;
+    item_C3_color.selected = true;
+    item_C3_color.fillColor = newBlack;
+    item_C3_chip.fillColor = newBlack;
+    item_C3_frame.strokeWidth = 1.25;
+  }
+}
+
+  if (ink_C3Number.text.length > 0) {
+    item_C3_name.contents = 'PANTONE' + ' ' + ink_C3Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C3Text.text);
+    screenInk_C3.contents = ink_C3Number.text + ' ' + capitalize_function(ink_C3Text.text);
+  } else {
+    item_C3_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_C3Text.text) + ' ' + 'C';
+    screenInk_C3.contents = capitalize_function(ink_C3Text.text);
+  }
+
+
+  if (ink_C3Text.length < 1) {
+    app.activeDocument.groupItems.getByName("Screen7").remove();
+  } else {
+    item_C3_color.selected = true;
+    item_C3_color.fillColor = app.activeDocument.swatches.getByName(bravoThree).color;
+    item_C3_chip.fillColor = app.activeDocument.swatches.getByName(bravoThree).color;
+  }
+
+
+
+
+
+
+if (ink_C4Text.text === 'white') {
+  item_C4_name.contents = 'White';
+  var newWhite = new CMYKColor(); 
+  newWhite.black = 00;
+  newWhite.cyan = 00;
+  newWhite.magenta = 00;
+  newWhite.yellow = 00;
+  item_C4_color.selected = true;
+  item_C4_color.fillColor = newWhite;
+  item_C4_chip.fillColor = newWhite;
+  item_C4_frame.strokeWidth = 1.25;
+} else {
+  if (ink_C4Text.text === 'black') {
+    item_C4_name.contents = 'Black';
+    var newBlack = new CMYKColor();
+    newBlack.black = 100;
+    newBlack.cyan = 00;
+    newBlack.magenta = 00;
+    newBlack.yellow = 00;
+    item_C4_color.selected = true;
+    item_C4_color.fillColor = newBlack;
+    item_C4_chip.fillColor = newBlack;
+    item_C4_frame.strokeWidth = 1.25;
+  }
+}
+
+  if (ink_C4Number.text.length > 0) {
+    item_C4_name.contents = 'PANTONE' + ' ' + ink_C4Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C4Text.text);
+    screenInk_C4.contents = ink_C4Number.text + ' ' + capitalize_function(ink_C4Text.text);
+  } else {
+    item_C4_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_C4Text.text) + ' ' + 'C';
+    screenInk_C4.contents = capitalize_function(ink_C4Text.text);
+  }
+
+
+  if (ink_C4Text.length < 1) {
+    app.activeDocument.groupItems.getByName("Screen8").remove();
+  } else {
+    item_C4_color.selected = true;
+    item_C4_color.fillColor = app.activeDocument.swatches.getByName(bravoFour).color;
+    item_C4_chip.fillColor = app.activeDocument.swatches.getByName(bravoFour).color;
+  }
+
+
+
+
 function bodyColor_function() {
   var bodyColorAlpha = app.activeDocument.layers.getByName("Body Colors").layers.getByName(bodyColorList.selection.text);
   bodyColorAlpha.visible = true;
-}
-
+};
 function customerInfo_function() {
   var rep_Name = app.activeDocument.textFrames.getByName("RepName");
   rep_Name.contents = repNameEdit.text;
@@ -745,7 +1025,11 @@ function fileName_function() {
     "A4 Screen FileName",
     "C4 Screen FileName",
   ];
+}
+  
 
+  /*
+  
   for (i = 0; i < illustratorFrame.length; i++) {
     if (itemNumber_edit.text < 2) {
       var echo = illustratorFrame[i];
@@ -757,8 +1041,10 @@ function fileName_function() {
       illo_2.contents = longName;
     }
   }
-};
+  */
+  
 
+};
 function originalFile() {
   var originalFile_A = app.activeDocument.textFrames.getByName("Original Art - Side A");
   originalFile_A.contents = originalArt_A_edit.text;
@@ -773,26 +1059,33 @@ function currentDate_function() {
   var a = app.activeDocument.textFrames.getByName("DateBox");
   a.contents = date_B;
 };
-
 function ship_function() {
   var ship = app.activeDocument.textFrames.getByName("Ship Date");
   ship.contents = shipDate_edit.text;
 };
-
 function InHands_function() {
   var inHands = app.activeDocument.textFrames.getByName("In Hands Date");
   inHands.contents = inHandsDate_edit.text;
 };
-
 function web_function() {
   var web = app.activeDocument.textFrames.getByName("Web");
   web.contents = webPrefix.selection.text + webNumber_edit.text;
 };
-
 function JDE_function() {
   var jde = app.activeDocument.textFrames.getByName("jde number");
   jde.contents = jdeNumber_edit.text;
 };
+function checkBox_function() {
+  var checkBox_array = [ink_A1Checkbox, ink_A2Checkbox, ink_A3Checkbox, ink_A4Checkbox, ink_C1Checkbox, ink_C2Checkbox, ink_C3Checkbox, ink_C4Checkbox];
+  var checkBox_frames = [item_A1_frame, item_A2_frame, item_A3_frame, item_A4_frame, item_C1_frame, item_C2_frame, item_C3_frame, item_C4_frame];
+  for (n = 0; n < checkBox_array.length; n++) {
+    if (checkBox_array[n].value != true) {
+      checkBox_frames[n].strokeWidth = 0.5;
+    } else {
+      checkBox_frames[n].strokeWidth = 1.25;
+    }
+  }
+}
 //#endregion
 
 var customer_instructions = app.activeDocument.textFrames.getByName("Customer Instructions");
@@ -816,6 +1109,7 @@ po_function();
 bodyColor_function();
 currentDate_function();
 JDE_function();
+checkBox_function();
 web_function();
 InHands_function();
 ship_function();
@@ -824,3 +1118,13 @@ originalFile();
 //frameWidth();
 //swatch_A1();
 //#endregion
+
+
+
+/*   TO DO
+
+1. Delete screen info groups if the screens are not used.
+3. If there is no JDE number, insert the web order number into the name of the file.
+4. In the Illustrator file, add a web order number section.
+5. In the Illustrator file, add the Canadian proof, and have the layer deletable depending on the nationality that is selected in the UI.
+*/
