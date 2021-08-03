@@ -308,7 +308,6 @@ master.show();
 
 
 
-
 /* These are the inputs from the UI.
 ink_A1Number
 ink_A1Text
@@ -418,9 +417,6 @@ var item_originalArt_C = "original art side C";
 
 
 
-
-
-
 var screenInk_A1 = app.activeDocument.textFrames.getByName('A1 Screen Ink Color');
 var screenInk_A2 = app.activeDocument.textFrames.getByName('A2 Screen Ink Color');
 var screenInk_A3 = app.activeDocument.textFrames.getByName('A3 Screen Ink Color');
@@ -432,27 +428,15 @@ var screenInk_C3 = app.activeDocument.textFrames.getByName('C3 Screen Ink Color'
 var screenInk_C4 = app.activeDocument.textFrames.getByName('C4 Screen Ink Color');
 
 
-
-
-
-var alphaOne = 'PANTONE' + ' ' + ink_A1Number.text + ' ' + 'C';
-var alphaTwo = 'PANTONE' + ' ' + ink_A2Number.text + ' ' + 'C';
-var alphaThree = 'PANTONE' + ' ' + ink_A3Number.text + ' ' + 'C';
-var alphaFour = 'PANTONE' + ' ' + ink_A4Number.text + ' ' + 'C';
-
-var bravoOne = 'PANTONE' + ' ' + ink_C1Number.text + ' ' + 'C';
-var bravoTwo = 'PANTONE' + ' ' + ink_C2Number.text + ' ' + 'C';
-var bravoThree = 'PANTONE' + ' ' + ink_C3Number.text + ' ' + 'C';
-var bravoFour = 'PANTONE' + ' ' + ink_C4Number.text + ' ' + 'C';
-
-
 /*
 The examples below are how the colors are named in illustrator.
 PANTONE Reflex Blue C
 PANTONE 186 C
 */
 
+//#region     This area deals with the color ink swatches and the screen info.
 if (ink_A1Text.text === 'white') {
+  //  This fills the text box with the word white and creates the white color swatch.
   item_A1_name.contents = 'White';
   var newWhite = new CMYKColor();
   newWhite.black = 00;
@@ -465,6 +449,7 @@ if (ink_A1Text.text === 'white') {
   item_A1_frame.strokeWidth = 1.25;
 } else {
   if (ink_A1Text.text === 'black') {
+      //  This fills the text box with the word black and creates the black color swatch.
     item_A1_name.contents = 'Black';
     var newBlack = new CMYKColor();
     newBlack.black = 100;
@@ -479,23 +464,48 @@ if (ink_A1Text.text === 'white') {
 }
 
 if (ink_A1Number.text.length > 0) {
-    item_A1_name.contents = 'PANTONE' + ' ' + ink_A1Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_A1Text.text);
-    screenInk_A1.contents = ink_A1Number.text + ' ' + capitalize_function(ink_A1Text.text);
-  } else {
-    if (ink_A1Number.text.length < 1 && ink_A1Text.text.length > 0) {
-      item_A1_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_A1Text.text) + ' ' + 'C';
-      screenInk_A1.contents = capitalize_function(ink_A1Text.text);
-    }
-
-    item_A1_color.selected = true;
-    item_A1_color.fillColor = app.activeDocument.swatches.getByName(alphaOne).color;
-    item_A1_chip.fillColor = app.activeDocument.swatches.getByName(alphaOne).color;
+  //  If there are characters entered into the PMS number field, this block will run.
+  item_A1_name.contents = 'PANTONE' + ' ' + ink_A1Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_A1Text.text);
+  screenInk_A1.contents = ink_A1Number.text + ' ' + capitalize_function(ink_A1Text.text);
+  item_A1_color.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_A1Number.text + ' ' + 'C').color;
+  item_A1_chip.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_A1Number.text + ' ' + 'C').color;
+} else {
+  
+  if (ink_A1Number.text.length < 1 && ink_A1Text.text.length > 0) {
+    //  If there is nothing entered in the PMS number field, but something typed in the PMS name field, this block will run.
+    item_A1_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_A1Text.text) + ' ' + 'C';
+    screenInk_A1.contents = capitalize_function(ink_A1Text.text);
+    item_A1_color.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_A1.contents + " " + "C").color;
+    item_A1_chip.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_A1.contents + " " + "C").color;
   }
+}
 
+var standardInk = [
+  '114',
+  '116',
+  '1345',
+  '1545',
+  '172',
+  '186',
+  '202',
+  '205',
+  '208',
+  '211',
+  '316',
+  '327',
+  '341',
+  '355',
+  '281',
+  '293',
+  '2587',
+  '424',
+  '872',
+  '877'
+];
 
-var standardInk = ['114', '116', '1345', '1545', '172', '186', '202', '205', '208', '211', '316', '327', '341', '355', '281', '293', '2587', '424', '872', '877'];
 for (i = 0; i < standardInk.length; i++) {
   if (ink_A1Number.text == standardInk[i]) {
+    //  If the text entered into the PMS number field matches one of the standard inks, this block will run.
     item_A1_frame.strokeWidth = 1.25;
   }
 }
@@ -506,18 +516,8 @@ for (i = 0; i < standardInk.length; i++) {
 
 
 
-
-
-
-
-
-
-
-
-if (ink_A2Text.length < 1) {
-  app.activeDocument.groupItems.getByName("Screen2").remove();
-} else {
-  if (ink_A2Text.text === 'white') {
+if (ink_A2Text.text === 'white') {
+  //  This fills the text box with the word white and creates the white color swatch.
   item_A2_name.contents = 'White';
   var newWhite = new CMYKColor();
   newWhite.black = 00;
@@ -527,9 +527,10 @@ if (ink_A2Text.length < 1) {
   item_A2_color.selected = true;
   item_A2_color.fillColor = newWhite;
   item_A2_chip.fillColor = newWhite;
-    item_A2_frame.strokeWidth = 1.25;
-  } else {
+  item_A2_frame.strokeWidth = 1.25;
+} else {
   if (ink_A2Text.text === 'black') {
+      //  This fills the text box with the word black and creates the black color swatch.
     item_A2_name.contents = 'Black';
     var newBlack = new CMYKColor();
     newBlack.black = 100;
@@ -544,53 +545,36 @@ if (ink_A2Text.length < 1) {
 }
 
 if (ink_A2Number.text.length > 0) {
+  //  If there are characters entered into the PMS number field, this block will run.
   item_A2_name.contents = 'PANTONE' + ' ' + ink_A2Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_A2Text.text);
   screenInk_A2.contents = ink_A2Number.text + ' ' + capitalize_function(ink_A2Text.text);
+  item_A2_color.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_A2Number.text + ' ' + 'C').color;
+  item_A2_chip.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_A2Number.text + ' ' + 'C').color;
 } else {
-  item_A2_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_A2Text.text) + ' ' + 'C';
-  screenInk_A2.contents = capitalize_function(ink_A2Text.text);
+  
+  if (ink_A2Number.text.length < 1 && ink_A2Text.text.length > 0) {
+    //  If there is nothing entered in the PMS number field, but something typed in the PMS name field, this block will run.
+    item_A2_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_A2Text.text) + ' ' + 'C';
+    screenInk_A2.contents = capitalize_function(ink_A2Text.text);
+    item_A2_color.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_A2.contents + " " + "C").color;
+    item_A2_chip.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_A2.contents + " " + "C").color;
+  } else {
+    app.activeDocument.groupItems.getByName("Screen2").remove();
+  }
 }
 
+var standardInk = ['114', '116', '1345', '1545', '172', '186', '202', '205', '208', '211', '316', '327', '341', '355', '281', '293', '2587', '424', '872', '877'];
 for (i = 0; i < standardInk.length; i++) {
   if (ink_A2Number.text == standardInk[i]) {
+    //  If the text entered into the PMS number field matches one of the standard inks, this block will run.
     item_A2_frame.strokeWidth = 1.25;
   }
 }
 
 
-  item_A2_color.selected = true;
-  item_A2_color.fillColor = app.activeDocument.swatches.getByName(alphaTwo).color;
-  item_A2_chip.fillColor = app.activeDocument.swatches.getByName(alphaTwo).color;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 if (ink_A3Text.text === 'white') {
+  //  This fills the text box with the word white and creates the white color swatch.
   item_A3_name.contents = 'White';
   var newWhite = new CMYKColor();
   newWhite.black = 00;
@@ -603,6 +587,7 @@ if (ink_A3Text.text === 'white') {
   item_A3_frame.strokeWidth = 1.25;
 } else {
   if (ink_A3Text.text === 'black') {
+      //  This fills the text box with the word black and creates the black color swatch.
     item_A3_name.contents = 'Black';
     var newBlack = new CMYKColor();
     newBlack.black = 100;
@@ -617,45 +602,36 @@ if (ink_A3Text.text === 'white') {
 }
 
 if (ink_A3Number.text.length > 0) {
+  //  If there are characters entered into the PMS number field, this block will run.
   item_A3_name.contents = 'PANTONE' + ' ' + ink_A3Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_A3Text.text);
   screenInk_A3.contents = ink_A3Number.text + ' ' + capitalize_function(ink_A3Text.text);
+  item_A3_color.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_A3Number.text + ' ' + 'C').color;
+  item_A3_chip.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_A3Number.text + ' ' + 'C').color;
 } else {
-  item_A3_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_A3Text.text) + ' ' + 'C';
-  screenInk_A3.contents = capitalize_function(ink_A3Text.text);
+  
+  if (ink_A3Number.text.length < 1 && ink_A3Text.text.length > 0) {
+    //  If there is nothing entered in the PMS number field, but something typed in the PMS name field, this block will run.
+    item_A3_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_A3Text.text) + ' ' + 'C';
+    screenInk_A3.contents = capitalize_function(ink_A3Text.text);
+    item_A3_color.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_A3.contents + " " + "C").color;
+    item_A3_chip.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_A3.contents + " " + "C").color;
+  } else {
+    app.activeDocument.groupItems.getByName("Screen3").remove();
+  }
 }
 
-
-
+var standardInk = ['114', '116', '1345', '1545', '172', '186', '202', '205', '208', '211', '316', '327', '341', '355', '281', '293', '2587', '424', '872', '877'];
 for (i = 0; i < standardInk.length; i++) {
   if (ink_A3Number.text == standardInk[i]) {
+    //  If the text entered into the PMS number field matches one of the standard inks, this block will run.
     item_A3_frame.strokeWidth = 1.25;
   }
 }
 
-if (ink_A3Text.length < 1) {
-  app.activeDocument.groupItems.getByName("Screen3").remove();
-} else {
-  item_A3_color.selected = true;
-  item_A3_color.fillColor = app.activeDocument.swatches.getByName(alphaThree).color;
-  item_A3_chip.fillColor = app.activeDocument.swatches.getByName(alphaThree).color;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if (ink_A4Text.text === 'white') {
+  //  This fills the text box with the word white and creates the white color swatch.
   item_A4_name.contents = 'White';
   var newWhite = new CMYKColor();
   newWhite.black = 00;
@@ -668,6 +644,7 @@ if (ink_A4Text.text === 'white') {
   item_A4_frame.strokeWidth = 1.25;
 } else {
   if (ink_A4Text.text === 'black') {
+      //  This fills the text box with the word black and creates the black color swatch.
     item_A4_name.contents = 'Black';
     var newBlack = new CMYKColor();
     newBlack.black = 100;
@@ -681,47 +658,39 @@ if (ink_A4Text.text === 'white') {
   }
 }
 
-  if (ink_A4Number.text.length > 0) {
-    item_A4_name.contents = 'PANTONE' + ' ' + ink_A4Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_A4Text.text);
-    screenInk_A4.contents = ink_A4Number.text + ' ' + capitalize_function(ink_A4Text.text);
-  } else {
+if (ink_A4Number.text.length > 0) {
+  //  If there are characters entered into the PMS number field, this block will run.
+  item_A4_name.contents = 'PANTONE' + ' ' + ink_A4Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_A4Text.text);
+  screenInk_A4.contents = ink_A4Number.text + ' ' + capitalize_function(ink_A4Text.text);
+  item_A4_color.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_A4Number.text + ' ' + 'C').color;
+  item_A4_chip.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_A4Number.text + ' ' + 'C').color;
+} else {
+  
+  if (ink_A4Number.text.length < 1 && ink_A4Text.text.length > 0) {
+    //  If there is nothing entered in the PMS number field, but something typed in the PMS name field, this block will run.
     item_A4_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_A4Text.text) + ' ' + 'C';
     screenInk_A4.contents = capitalize_function(ink_A4Text.text);
+    item_A4_color.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_A4.contents + " " + "C").color;
+    item_A4_chip.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_A4.contents + " " + "C").color;
+  } else {
+    app.activeDocument.groupItems.getByName("Screen4").remove();
   }
+}
 
-
-
+var standardInk = ['114', '116', '1345', '1545', '172', '186', '202', '205', '208', '211', '316', '327', '341', '355', '281', '293', '2587', '424', '872', '877'];
 for (i = 0; i < standardInk.length; i++) {
   if (ink_A4Number.text == standardInk[i]) {
+    //  If the text entered into the PMS number field matches one of the standard inks, this block will run.
     item_A4_frame.strokeWidth = 1.25;
   }
 }
-
-if (ink_A4Text.length < 1) {
-  app.activeDocument.groupItems.getByName("Screen4").remove();
-} else {
-  item_A4_color.selected = true;
-  item_A4_color.fillColor = app.activeDocument.swatches.getByName(alphaFour).color;
-  item_A4_chip.fillColor = app.activeDocument.swatches.getByName(alphaFour).color;
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 
 
 if (ink_C1Text.text === 'white') {
+  //  This fills the text box with the word white and creates the white color swatch.
   item_C1_name.contents = 'White';
   var newWhite = new CMYKColor();
   newWhite.black = 00;
@@ -734,6 +703,7 @@ if (ink_C1Text.text === 'white') {
   item_C1_frame.strokeWidth = 1.25;
 } else {
   if (ink_C1Text.text === 'black') {
+      //  This fills the text box with the word black and creates the black color swatch.
     item_C1_name.contents = 'Black';
     var newBlack = new CMYKColor();
     newBlack.black = 100;
@@ -747,40 +717,32 @@ if (ink_C1Text.text === 'white') {
   }
 }
 
-  if (ink_C1Number.text.length > 0) {
-    item_C1_name.contents = 'PANTONE' + ' ' + ink_C1Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C1Text.text);
-    screenInk_C1.contents = ink_C1Number.text + ' ' + capitalize_function(ink_C1Text.text);
-  } else {
+if (ink_C1Number.text.length > 0) {
+  //  If there are characters entered into the PMS number field, this block will run.
+  item_C1_name.contents = 'PANTONE' + ' ' + ink_C1Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C1Text.text);
+  screenInk_C1.contents = ink_C1Number.text + ' ' + capitalize_function(ink_C1Text.text);
+  item_C1_color.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_C1Number.text + ' ' + 'C').color;
+  item_C1_chip.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_C1Number.text + ' ' + 'C').color;
+} else {
+  
+  if (ink_C1Number.text.length < 1 && ink_C1Text.text.length > 0) {
+    //  If there is nothing entered in the PMS number field, but something typed in the PMS name field, this block will run.
     item_C1_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_C1Text.text) + ' ' + 'C';
     screenInk_C1.contents = capitalize_function(ink_C1Text.text);
+    item_C1_color.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_C1.contents + " " + "C").color;
+    item_C1_chip.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_C1.contents + " " + "C").color;
+  } else {
+    app.activeDocument.groupItems.getByName("Screen5").remove();
   }
-
-
+}
 
 var standardInk = ['114', '116', '1345', '1545', '172', '186', '202', '205', '208', '211', '316', '327', '341', '355', '281', '293', '2587', '424', '872', '877'];
 for (i = 0; i < standardInk.length; i++) {
   if (ink_C1Number.text == standardInk[i]) {
+    //  If the text entered into the PMS number field matches one of the standard inks, this block will run.
     item_C1_frame.strokeWidth = 1.25;
   }
 }
-
-if (ink_C1Text.length < 1) {
-  app.activeDocument.groupItems.getByName("Screen5").remove();
-} else {
-  item_C1_color.selected = true;
-  item_C1_color.fillColor = app.activeDocument.swatches.getByName(bravoOne).color;
-  item_C1_chip.fillColor = app.activeDocument.swatches.getByName(bravoOne).color;
-}
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -789,6 +751,7 @@ if (ink_C1Text.length < 1) {
 
 
 if (ink_C2Text.text === 'white') {
+  //  This fills the text box with the word white and creates the white color swatch.
   item_C2_name.contents = 'White';
   var newWhite = new CMYKColor();
   newWhite.black = 00;
@@ -801,6 +764,7 @@ if (ink_C2Text.text === 'white') {
   item_C2_frame.strokeWidth = 1.25;
 } else {
   if (ink_C2Text.text === 'black') {
+      //  This fills the text box with the word black and creates the black color swatch.
     item_C2_name.contents = 'Black';
     var newBlack = new CMYKColor();
     newBlack.black = 100;
@@ -814,32 +778,37 @@ if (ink_C2Text.text === 'white') {
   }
 }
 
-  if (ink_C2Number.text.length > 0) {
-    item_C2_name.contents = 'PANTONE' + ' ' + ink_C2Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C2Text.text);
-    screenInk_C2.contents = ink_C2Number.text + ' ' + capitalize_function(ink_C2Text.text);
-  } else {
+if (ink_C2Number.text.length > 0) {
+  //  If there are characters entered into the PMS number field, this block will run.
+  item_C2_name.contents = 'PANTONE' + ' ' + ink_C2Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C2Text.text);
+  screenInk_C2.contents = ink_C2Number.text + ' ' + capitalize_function(ink_C2Text.text);
+  item_C2_color.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_C2Number.text + ' ' + 'C').color;
+  item_C2_chip.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_C2Number.text + ' ' + 'C').color;
+} else {
+  
+  if (ink_C2Number.text.length < 1 && ink_C2Text.text.length > 0) {
+    //  If there is nothing entered in the PMS number field, but something typed in the PMS name field, this block will run.
     item_C2_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_C2Text.text) + ' ' + 'C';
     screenInk_C2.contents = capitalize_function(ink_C2Text.text);
-  }
-
-
-  if (ink_C2Text.length < 1) {
-    app.activeDocument.groupItems.getByName("Screen6").remove();
+    item_C2_color.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_C2.contents + " " + "C").color;
+    item_C2_chip.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_C2.contents + " " + "C").color;
   } else {
-    item_C2_color.selected = true;
-    item_C2_color.fillColor = app.activeDocument.swatches.getByName(bravoTwo).color;
-    item_C2_chip.fillColor = app.activeDocument.swatches.getByName(bravoTwo).color;
+    app.activeDocument.groupItems.getByName("Screen6").remove();
   }
+}
 
-
-
-
-
-
+var standardInk = ['114', '116', '1345', '1545', '172', '186', '202', '205', '208', '211', '316', '327', '341', '355', '281', '293', '2587', '424', '872', '877'];
+for (i = 0; i < standardInk.length; i++) {
+  if (ink_A2Number.text == standardInk[i]) {
+    //  If the text entered into the PMS number field matches one of the standard inks, this block will run.
+    item_A2_frame.strokeWidth = 1.25;
+  }
+}
 
 
 
 if (ink_C3Text.text === 'white') {
+  //  This fills the text box with the word white and creates the white color swatch.
   item_C3_name.contents = 'White';
   var newWhite = new CMYKColor();
   newWhite.black = 00;
@@ -852,6 +821,7 @@ if (ink_C3Text.text === 'white') {
   item_C3_frame.strokeWidth = 1.25;
 } else {
   if (ink_C3Text.text === 'black') {
+      //  This fills the text box with the word black and creates the black color swatch.
     item_C3_name.contents = 'Black';
     var newBlack = new CMYKColor();
     newBlack.black = 100;
@@ -865,31 +835,39 @@ if (ink_C3Text.text === 'white') {
   }
 }
 
-  if (ink_C3Number.text.length > 0) {
-    item_C3_name.contents = 'PANTONE' + ' ' + ink_C3Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C3Text.text);
-    screenInk_C3.contents = ink_C3Number.text + ' ' + capitalize_function(ink_C3Text.text);
-  } else {
+if (ink_C3Number.text.length > 0) {
+  //  If there are characters entered into the PMS number field, this block will run.
+  item_C3_name.contents = 'PANTONE' + ' ' + ink_C3Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C3Text.text);
+  screenInk_C3.contents = ink_C3Number.text + ' ' + capitalize_function(ink_C3Text.text);
+  item_C3_color.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_C3Number.text + ' ' + 'C').color;
+  item_C3_chip.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_C3Number.text + ' ' + 'C').color;
+} else {
+  
+  if (ink_C3Number.text.length < 1 && ink_C3Text.text.length > 0) {
+    //  If there is nothing entered in the PMS number field, but something typed in the PMS name field, this block will run.
     item_C3_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_C3Text.text) + ' ' + 'C';
     screenInk_C3.contents = capitalize_function(ink_C3Text.text);
-  }
-
-
-  if (ink_C3Text.length < 1) {
-    app.activeDocument.groupItems.getByName("Screen7").remove();
+    item_C3_color.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_C3.contents + " " + "C").color;
+    item_C3_chip.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_C3.contents + " " + "C").color;
   } else {
-    item_C3_color.selected = true;
-    item_C3_color.fillColor = app.activeDocument.swatches.getByName(bravoThree).color;
-    item_C3_chip.fillColor = app.activeDocument.swatches.getByName(bravoThree).color;
+    app.activeDocument.groupItems.getByName("Screen7").remove();
   }
+}
 
-
-
+var standardInk = ['114', '116', '1345', '1545', '172', '186', '202', '205', '208', '211', '316', '327', '341', '355', '281', '293', '2587', '424', '872', '877'];
+for (i = 0; i < standardInk.length; i++) {
+  if (ink_C3Number.text == standardInk[i]) {
+    //  If the text entered into the PMS number field matches one of the standard inks, this block will run.
+    item_C3_frame.strokeWidth = 1.25;
+  }
+}
 
 
 
 if (ink_C4Text.text === 'white') {
+  //  This fills the text box with the word white and creates the white color swatch.
   item_C4_name.contents = 'White';
-  var newWhite = new CMYKColor(); 
+  var newWhite = new CMYKColor();
   newWhite.black = 00;
   newWhite.cyan = 00;
   newWhite.magenta = 00;
@@ -900,6 +878,7 @@ if (ink_C4Text.text === 'white') {
   item_C4_frame.strokeWidth = 1.25;
 } else {
   if (ink_C4Text.text === 'black') {
+      //  This fills the text box with the word black and creates the black color swatch.
     item_C4_name.contents = 'Black';
     var newBlack = new CMYKColor();
     newBlack.black = 100;
@@ -913,22 +892,44 @@ if (ink_C4Text.text === 'white') {
   }
 }
 
-  if (ink_C4Number.text.length > 0) {
-    item_C4_name.contents = 'PANTONE' + ' ' + ink_C4Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C4Text.text);
-    screenInk_C4.contents = ink_C4Number.text + ' ' + capitalize_function(ink_C4Text.text);
-  } else {
+if (ink_C4Number.text.length > 0) {
+  //  If there are characters entered into the PMS number field, this block will run.
+  item_C4_name.contents = 'PANTONE' + ' ' + ink_C4Number.text + ' ' + 'C' + '  ' + capitalize_function(ink_C4Text.text);
+  screenInk_C4.contents = ink_C4Number.text + ' ' + capitalize_function(ink_C4Text.text);
+  item_C4_color.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_C4Number.text + ' ' + 'C').color;
+  item_C4_chip.fillColor = app.activeDocument.swatches.getByName('PANTONE' + ' ' + ink_C4Number.text + ' ' + 'C').color;
+} else {
+  
+  if (ink_C4Number.text.length < 1 && ink_C4Text.text.length > 0) {
+    //  If there is nothing entered in the PMS number field, but something typed in the PMS name field, this block will run.
     item_C4_name.contents = 'PANTONE' + ' ' + capitalize_function(ink_C4Text.text) + ' ' + 'C';
     screenInk_C4.contents = capitalize_function(ink_C4Text.text);
-  }
-
-
-  if (ink_C4Text.length < 1) {
-    app.activeDocument.groupItems.getByName("Screen8").remove();
+    item_C4_color.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_C4.contents + " " + "C").color;
+    item_C4_chip.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + screenInk_C4.contents + " " + "C").color;
   } else {
-    item_C4_color.selected = true;
-    item_C4_color.fillColor = app.activeDocument.swatches.getByName(bravoFour).color;
-    item_C4_chip.fillColor = app.activeDocument.swatches.getByName(bravoFour).color;
+    app.activeDocument.groupItems.getByName("Screen8").remove();
   }
+}
+
+var standardInk = ['114', '116', '1345', '1545', '172', '186', '202', '205', '208', '211', '316', '327', '341', '355', '281', '293', '2587', '424', '872', '877'];
+for (i = 0; i < standardInk.length; i++) {
+  if (ink_C4Number.text == standardInk[i]) {
+    //  If the text entered into the PMS number field matches one of the standard inks, this block will run.
+    item_C4_frame.strokeWidth = 1.25;
+  }
+}
+//#endregion
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -995,6 +996,7 @@ function po_function() {
   }
 };
 function capitalize_function(u) {
+  //  This capitalizes every letter that comes after a space.
   u = u.toLowerCase();
   u = u.split(' ');
   for (var i = 0; i < u.length; i++) {
@@ -1014,37 +1016,32 @@ function fileName_function() {
   var shortName = jdeNumber_edit.text + "_" + descriptionField_function() + "_A";
   var longName = jdeNumber_edit.text + "_" + descriptionField_function() + "_" + bodyColorList.selection.text + "_A";
 
+
   var illustratorFrame = [
     "FileName",
     "A1 Screen FileName",
-    "C1 Screen FileName",
     "A2 Screen FileName",
-    "C2 Screen FileName",
     "A3 Screen FileName",
-    "C3 Screen FileName",
     "A4 Screen FileName",
-    "C4 Screen FileName",
+    "C1 Screen FileName",
+    "C2 Screen FileName",
+    "C3 Screen FileName",
+    "C4 Screen FileName"
   ];
-}
-  
 
-  /*
-  
   for (i = 0; i < illustratorFrame.length; i++) {
-    if (itemNumber_edit.text < 2) {
-      var echo = illustratorFrame[i];
-      var illo = app.activeDocument.textFrames.getByName(echo);
-      illo.contents = shortName;
+    if (itemNumber_edit.text > 1) {
+      var alpha2 = app.activeDocument.textFrames.getByName(illustratorFrame[i]);
+      alpha2.contents = longName;
     } else {
-      var fox = illustratorFrame[i];
-      var illo_2 = app.activeDocument.textFrames.getByName(fox);
-      illo_2.contents = longName;
+      var bravo2 = app.activeDocument.textFrames.getByName(illustratorFrame[i]);
+      bravo2.contents = shortName;
     }
   }
-  */
-  
+}
 
-};
+
+
 function originalFile() {
   var originalFile_A = app.activeDocument.textFrames.getByName("Original Art - Side A");
   originalFile_A.contents = originalArt_A_edit.text;
@@ -1115,16 +1112,16 @@ InHands_function();
 ship_function();
 fileName_function();
 originalFile();
-//frameWidth();
-//swatch_A1();
 //#endregion
 
 
 
 /*   TO DO
 
-1. Delete screen info groups if the screens are not used.
 3. If there is no JDE number, insert the web order number into the name of the file.
-4. In the Illustrator file, add a web order number section.
 5. In the Illustrator file, add the Canadian proof, and have the layer deletable depending on the nationality that is selected in the UI.
 */
+
+
+
+
