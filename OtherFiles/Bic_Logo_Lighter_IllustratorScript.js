@@ -22,12 +22,12 @@ var repName = customerInfo_outer.add("statictext", undefined, "Rep name");
 var repNameEdit = customerInfo_outer.add("edittext", undefined, "");
 repNameEdit.characters = 20;
 repNameEdit.active = true;
-//repNameEdit.text = "glenda vilchez";
+repNameEdit.text = "glenda vilchez";
 
 var repEmail = customerInfo_outer.add("statictext", undefined, "Rep Email");
 var repEmail_Edit = customerInfo_outer.add("edittext", undefined, "");
 repEmail_Edit.characters = 20;
-//repEmail_Edit.text = "glenda@rockstarpromos.com";
+repEmail_Edit.text = "glenda@rockstarpromos.com";
 
 var companyGroup = customerInfo_outer.add("panel", undefined, "");
 companyGroup.orientation = "row";
@@ -35,7 +35,7 @@ companyGroup.orientation = "row";
 var company_A = companyGroup.add("statictext", undefined, "Company");
 var company_A_Edit = companyGroup.add("edittext", undefined, "");
 company_A_Edit.characters = 10;
-//company_A_Edit.text = "rock star promos";
+company_A_Edit.text = "rock star promos";
 
 var vipCheckbox = companyGroup.add("checkbox", undefined, "VIP");
 
@@ -61,12 +61,12 @@ orderOne.orientation = "row";
 var jdeNumber = orderOne.add("statictext", undefined, "JDE Number");
 var jdeNumber_edit = orderOne.add("edittext", undefined, "");
 jdeNumber_edit.characters = 7;
-//jdeNumber_edit.text = "6187745";
+jdeNumber_edit.text = "6187745";
 
 var poNumber = orderOne.add("statictext", undefined, "PO Number");
 var poNumber_edit = orderOne.add("edittext", undefined, "");
 poNumber_edit.characters = 20;
-//poNumber_edit.text = "PO-6743";
+poNumber_edit.text = "PO-6743";
 
 var webPrefix = orderOne.add("dropdownlist", undefined, [
   "    ",
@@ -80,7 +80,7 @@ webPrefix.selection = 0;
 var webNumber = orderOne.add("statictext", undefined, "Web Number");
 var webNumber_edit = orderOne.add("edittext", undefined, "");
 webNumber_edit.characters = 10;
-//webNumber_edit.text = "2485";
+webNumber_edit.text = "2485";
 
 var orderThree = topRight.add("panel", undefined, "");
 orderThree.orientation = "row";
@@ -89,12 +89,12 @@ orderThree.alignment = "left";
 var inHandsDate = orderThree.add("statictext", undefined, "In-hands Date");
 var inHandsDate_edit = orderThree.add("edittext", undefined, "");
 inHandsDate_edit.characters = 10;
-//inHandsDate_edit.text = "11/24/2021";
+inHandsDate_edit.text = "11/24/2021";
 
 var shipDate = orderThree.add("statictext", undefined, "Ship Date");
 var shipDate_edit = orderThree.add("edittext", undefined, "");
 shipDate_edit.characters = 10;
-//shipDate_edit.text = "10/13/2022";
+shipDate_edit.text = "10/13/2022";
 
 var rushCheckbox = orderThree.add("checkbox", undefined, "Rush order");
 
@@ -200,7 +200,7 @@ var descriptionBox = descriptionSide.add(
 );
 var descriptionBox_edit = descriptionSide.add("edittext", undefined, "");
 descriptionBox_edit.characters = 20;
-//descriptionBox_edit.text = "the only thing";
+descriptionBox_edit.text = "the only thing";
 
 var spacerBox = descriptionSide.add("statictext", undefined, "");
 spacerBox.margins = 20;
@@ -212,7 +212,7 @@ var originalArt_A = descriptionSide.add(
 );
 var originalArt_A_edit = descriptionSide.add("edittext", undefined, "");
 originalArt_A_edit.characters = 20;
-//originalArt_A_edit.text = "Original art file name for side A.";
+originalArt_A_edit.text = "Original art file name for side A.";
 
 var originalArt_C = descriptionSide.add(
   "statictext",
@@ -221,7 +221,7 @@ var originalArt_C = descriptionSide.add(
 );
 var originalArt_C_edit = descriptionSide.add("edittext", undefined, "");
 originalArt_C_edit.characters = 20;
-//originalArt_C_edit.text = "Original art file name for side C.";
+originalArt_C_edit.text = "Original art file name for side C.";
 
 var inkMaster = colors.add("group");
 inkMaster.orientation = "column";
@@ -238,25 +238,25 @@ inkBox_Master_A1.orientation = "column";
 inkBox_Master_A1.margins = [15, 15, 5, 15];
 var ink_A1 = inkBox_Master_A1.add("edittext", undefined, "");
 ink_A1.characters = 10;
-//ink_A1.text = "cool gray 1";
+ink_A1.text = "cool gray 1";
 
 var inkBox_Master_A2 = inkColors_A.add("panel", undefined, "Screen A2");
 inkBox_Master_A2.orientation = "column";
 var ink_A2 = inkBox_Master_A2.add("edittext", undefined, "");
 ink_A2.characters = 10;
-//ink_A2.text = "reflex blue";
+ink_A2.text = "reflex blue";
 
 var inkBox_Master_A3 = inkColors_A.add("panel", undefined, "Screen A3");
 inkBox_Master_A3.orientation = "column";
 var ink_A3 = inkBox_Master_A3.add("edittext", undefined, "");
 ink_A3.characters = 10;
-//ink_A3.text = "186 red";
+ink_A3.text = "186 red";
 
 var inkBox_Master_A4 = inkColors_A.add("panel", undefined, "Screen A4");
 inkBox_Master_A4.orientation = "column";
 var ink_A4 = inkBox_Master_A4.add("edittext", undefined, "");
 ink_A4.characters = 10;
-//ink_A4.text = "142 yellow";
+ink_A4.text = "142 yellow";
 
 var inkColors_C = inkColors_2.add("panel", undefined, "inkColors_C");
 inkColors_C.preferredSize = [400, 100];
@@ -267,25 +267,25 @@ var inkBox_Master_C1 = inkColors_C.add("panel", undefined, "Screen C1");
 inkBox_Master_C1.orientation = "column";
 var ink_C1 = inkBox_Master_C1.add("edittext", undefined, "");
 ink_C1.characters = 10;
-//ink_C1.text = "black";
+ink_C1.text = "black";
 
 var inkBox_Master_C2 = inkColors_C.add("panel", undefined, "Screen C2");
 inkBox_Master_C2.orientation = "column";
 var ink_C2 = inkBox_Master_C2.add("edittext", undefined, "");
 ink_C2.characters = 10;
-//ink_C2.text = "211 pink";
+ink_C2.text = "211 pink";
 
 var inkBox_Master_C3 = inkColors_C.add("panel", undefined, "Screen C3");
 inkBox_Master_C3.orientation = "column";
 var ink_C3 = inkBox_Master_C3.add("edittext", undefined, "");
 ink_C3.characters = 10;
-//ink_C3.text = "877 metallic silver";
+ink_C3.text = "877 metallic silver";
 
 var inkBox_Master_C4 = inkColors_C.add("panel", undefined, "Screen C4");
 inkBox_Master_C4.orientation = "column";
 var ink_C4 = inkBox_Master_C4.add("edittext", undefined, "");
 ink_C4.characters = 10;
-//ink_C4.text = "116 athletic gold";
+ink_C4.text = "116 athletic gold";
 
 /* #region  OKAY / Cancel buttons */
 var buttonGroup = master.add("panel");
@@ -298,6 +298,7 @@ master.show();
 //#endregion
 
  
+/*
 //This block creates new Illustrator documents from the .ait template files.
 if (bodyColorList.selection.index === 11 || bodyColorList.selection.index === 12) {
   app.open(new File("/C/Users/JBavitz/OneDrive - BIC/Desktop/BicLogoLighter/OtherFiles/Proof_Template_Assorted.ait"));
@@ -306,7 +307,7 @@ if (bodyColorList.selection.index === 11 || bodyColorList.selection.index === 12
 } else {
   app.open(new File("/C/Users/JBavitz/OneDrive - BIC/Desktop/BicLogoLighter/OtherFiles/Proof_Template_Combined.ait"));
 }
-
+*/
 
 
 
@@ -323,65 +324,49 @@ if (bodyColorList.selection.index < 11) {
   var item_A1_name = app.activeDocument.textFrames.getByName("A1_Name");
   var item_A1_color = app.activeDocument.pathItems.getByName("A1_Color");
   var item_A1_chip = app.activeDocument.pathItems.getByName("A1_Chip");
-  var item_A1_screenName = app.activeDocument.textFrames.getByName(
-    "A1 Screen Ink Color"
-  );
+  var item_A1_screenName = app.activeDocument.textFrames.getByName("A1 Screen Ink Color");
 
   var item_A2_frame = app.activeDocument.pathItems.getByName("A2_Frame");
   var item_A2_name = app.activeDocument.textFrames.getByName("A2_Name");
   var item_A2_color = app.activeDocument.pathItems.getByName("A2_Color");
   var item_A2_chip = app.activeDocument.pathItems.getByName("A2_Chip");
-  var item_A2_screenName = app.activeDocument.textFrames.getByName(
-    "A2 Screen Ink Color"
-  );
+  var item_A2_screenName = app.activeDocument.textFrames.getByName("A2 Screen Ink Color");
 
   var item_A3_frame = app.activeDocument.pathItems.getByName("A3_Frame");
   var item_A3_name = app.activeDocument.textFrames.getByName("A3_Name");
   var item_A3_color = app.activeDocument.pathItems.getByName("A3_Color");
   var item_A3_chip = app.activeDocument.pathItems.getByName("A3_Chip");
-  var item_A3_screenName = app.activeDocument.textFrames.getByName(
-    "A3 Screen Ink Color"
-  );
+  var item_A3_screenName = app.activeDocument.textFrames.getByName("A3 Screen Ink Color");
 
   var item_A4_frame = app.activeDocument.pathItems.getByName("A4_Frame");
   var item_A4_name = app.activeDocument.textFrames.getByName("A4_Name");
   var item_A4_color = app.activeDocument.pathItems.getByName("A4_Color");
   var item_A4_chip = app.activeDocument.pathItems.getByName("A4_Chip");
-  var item_A4_screenName = app.activeDocument.textFrames.getByName(
-    "A4 Screen Ink Color"
-  );
+  var item_A4_screenName = app.activeDocument.textFrames.getByName("A4 Screen Ink Color");
 
   var item_C1_frame = app.activeDocument.pathItems.getByName("C1_Frame");
   var item_C1_name = app.activeDocument.textFrames.getByName("C1_Name");
   var item_C1_color = app.activeDocument.pathItems.getByName("C1_Color");
   var item_C1_chip = app.activeDocument.pathItems.getByName("C1_Chip");
-  var item_C1_screenName = app.activeDocument.textFrames.getByName(
-    "C1 Screen Ink Color"
-  );
+  var item_C1_screenName = app.activeDocument.textFrames.getByName("C1 Screen Ink Color");
 
   var item_C2_frame = app.activeDocument.pathItems.getByName("C2_Frame");
   var item_C2_name = app.activeDocument.textFrames.getByName("C2_Name");
   var item_C2_color = app.activeDocument.pathItems.getByName("C2_Color");
   var item_C2_chip = app.activeDocument.pathItems.getByName("C2_Chip");
-  var item_C2_screenName = app.activeDocument.textFrames.getByName(
-    "C2 Screen Ink Color"
-  );
-
+  var item_C2_screenName = app.activeDocument.textFrames.getByName("C2 Screen Ink Color");
+ 
   var item_C3_frame = app.activeDocument.pathItems.getByName("C3_Frame");
   var item_C3_name = app.activeDocument.textFrames.getByName("C3_Name");
   var item_C3_color = app.activeDocument.pathItems.getByName("C3_Color");
   var item_C3_chip = app.activeDocument.pathItems.getByName("C3_Chip");
-  var item_C3_screenName = app.activeDocument.textFrames.getByName(
-    "C3 Screen Ink Color"
-  );
+  var item_C3_screenName = app.activeDocument.textFrames.getByName("C3 Screen Ink Color");
 
   var item_C4_frame = app.activeDocument.pathItems.getByName("C4_Frame");
   var item_C4_name = app.activeDocument.textFrames.getByName("C4_Name");
   var item_C4_color = app.activeDocument.pathItems.getByName("C4_Color");
   var item_C4_chip = app.activeDocument.pathItems.getByName("C4_Chip");
-  var item_C4_screenName = app.activeDocument.textFrames.getByName(
-    "C4 Screen Ink Color"
-  );
+  var item_C4_screenName = app.activeDocument.textFrames.getByName("C4 Screen Ink Color");
 
   var newWhite = new CMYKColor();
   newWhite.black = 00;
@@ -446,16 +431,7 @@ if (bodyColorList.selection.index < 11) {
     var gray = capitalize_function(ink_A1.text);
     var grayArray = gray.split(" ");
     if (grayArray[0] === "Cool" || grayArray[0] === "Warm") {
-      var grayName =
-        "PANTONE" +
-        " " +
-        grayArray[0] +
-        " " +
-        grayArray[1] +
-        " " +
-        grayArray[2] +
-        " " +
-        "C";
+      var grayName = "PANTONE" + " " + grayArray[0] + " " + grayArray[1] + " " + grayArray[2] + " " + "C";
       item_A1_name.contents = grayName;
       item_A1_screenName.contents = grayName;
       item_A1_color.fillColor =
@@ -468,22 +444,10 @@ if (bodyColorList.selection.index < 11) {
       var mike = ink_A1.text.substring(kilo);
 
       pmsNumberA1 = pmsNumberA1.replace(/,/g, "");
-      item_A1_name.contents =
-        "PANTONE" +
-        " " +
-        pmsNumberA1 +
-        " " +
-        "C" +
-        "  " +
-        capitalize_function(mike);
-      item_A1_screenName.contents =
-        pmsNumberA1 + " " + capitalize_function(mike);
-      item_A1_color.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + pmsNumberA1 + " " + "C"
-      ).color;
-      item_A1_chip.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + pmsNumberA1 + " " + "C"
-      ).color;
+      item_A1_name.contents = "PANTONE" + " " + pmsNumberA1 + " " + "C" + "  " + capitalize_function(mike);
+      item_A1_screenName.contents = pmsNumberA1 + " " + capitalize_function(mike);
+      item_A1_color.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + pmsNumberA1 + " " + "C").color;
+      item_A1_chip.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + pmsNumberA1 + " " + "C").color;
     }
   }
 
@@ -502,15 +466,9 @@ if (bodyColorList.selection.index < 11) {
       item_A1_chip.fillColor = newBlack;
       item_A1_frame.strokeWidth = 1.25;
     } else {
-      item_A1_name.contents =
-        "PANTONE" + " " + capitalize_function(ink_A1.text) + " " + "C";
+      item_A1_name.contents = "PANTONE" + " " + capitalize_function(ink_A1.text) + " " + "C";
       item_A1_screenName.contents = capitalize_function(ink_A1.text);
-      item_A1_color.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + capitalize_function(ink_A1.text) + " " + "C"
-      ).color;
-      item_A1_chip.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + capitalize_function(ink_A1.text) + " " + "C"
-      ).color;
+      item_A1_color.fillColor = app.activeDocument.swatches.getByName("PANTONE" + " " + capitalize_function(ink_A1.text) + " " + "C").color;
     }
   }
 
@@ -1280,7 +1238,7 @@ function customerInfo_function() {
     email.contents = email.contents.toLowerCase();
   }
 }
-  
+   
    
   var companyName = app.activeDocument.textFrames.getByName("Company");
   companyName.contents = company_A_Edit.text;
@@ -1314,9 +1272,9 @@ function rush_function() {
 function po_function() {
   if (nationalityCanada.value === true) {
     var purchaseOrder =
-      app.activeDocument.textFrames.getByName("Canada PO Number");
+      app.activeDocument.layers.getByName('Canada').textFrames.getByName("Canada PO Number");
   } else {
-    var purchaseOrder = app.activeDocument.textFrames.getByName("PO");
+    var purchaseOrder = app.activeDocument.layers.getByName('USA').textFrames.getByName("PO");
   }
   purchaseOrder.contents = poNumber_edit.text;
   if (purchaseOrder === null) {
@@ -1354,12 +1312,12 @@ function fileName_function() {
 
 
   var sleeveName = jdeNumber_edit.text + '_' + descriptionField_function() + '_' + 'SLEEVE' + '_' + 'A';
-
+ 
   var darkAssortName = jdeNumber_edit.text + '_' + descriptionField_function() + '_' + 'DarkAssort' + '_' + 'A';
   var lightAssortName = jdeNumber_edit.text + '_' + descriptionField_function() + '_' + 'LightAssort' + '_' + 'A';
 
   var USFileName = app.activeDocument.layers.getByName('USA').textFrames.getByName("FileName");
-  var CanadaFileName = app.activeDocument.layers.getByName('Canada').textFrames.getByName("Canada File Name");
+  var CanadaFileName = app.activeDocument.layers.getByName('Canada').textFrames.getByName("FileName");
   
 
 
@@ -1369,7 +1327,6 @@ function fileName_function() {
 }
 
   if (nationalityUS.value === true) {
-
     if (bodyColorList.selection == 11) {
       USFileName.contents = darkAssortName;
     }
@@ -1386,12 +1343,17 @@ function fileName_function() {
 }
 
 
-
+  
+  
+  /*
+if(  
+  "DarkAssort", //11
+)
+  */
 
 
   if (bodyColorList.selection.index < 11) {
     var illustratorFrame = [
-      "Canada File Name",
       "FileName",
       "A1 Screen FileName",
       "A2 Screen FileName",
@@ -1404,20 +1366,28 @@ function fileName_function() {
     ];
 
     for (i = 0; i < illustratorFrame.length; i++) {
-      if (itemNumber_edit.text > 1) {
-        var alpha2 = app.activeDocument.textFrames.getByName(
-          illustratorFrame[i]
-        );
-        alpha2.contents = longName;
-      } else {
-        var bravo2 = app.activeDocument.textFrames.getByName(
-          illustratorFrame[i]
-        );
-        bravo2.contents = shortName;
+      if (nationalityUS.value == true) {
+        if (itemNumber_edit.text > 1) {
+          var alpha2 = app.activeDocument.layers.getByName('USA').getByName(illustratorFrame[i]);
+          alpha2.contents = longName;
+        } else {
+          alert(illustratorFrame[i]);
+          var bravo2 = app.activeDocument.layers.getByName('USA').textFrames.getByName(illustratorFrame[i]);
+          bravo2.contents = shortName;
+        };
+        
+        if (nationalityCanada.value == true) {
+          var alpha2 = app.activeDocument.layers.getByName('Canada').getByName(illustratorFrame[i]);
+          alpha2.contents = longName;
+        } else {
+          var bravo2 = app.activeDocument.layers.getByName('Canada').textFrames.getByName(illustratorFrame[i]);
+          bravo2.contents = shortName;
+        }
       }
     }
   }
 }
+
 
 
 
@@ -1466,14 +1436,16 @@ function InHands_function() {
     var inHands = app.activeDocument.layers.getByName('Canada').textFrames.getByName("In Hands Date");
     inHands.contents = capitalize_function(inHandsDate_edit.text);
   }
-}; function web_function() {
+};
+
+function web_function() {
   if (nationalityCanada.value === true) {
-    var web = app.activeDocument.textFrames.getByName("Canada Web");
+    var web = app.activeDocument.layers.getByName('Canada').textFrames.getByName("Canada Web");
   } else {
-    var web = app.activeDocument.textFrames.getByName("Web");
+    var web = app.activeDocument.layers.getByName('USA').textFrames.getByName("Web");
   }
   web.contents = webPrefix.selection.text + webNumber_edit.text;
-}
+};
 
 function JDE_function() {
   if (nationalityUS.value === true) {
@@ -1511,7 +1483,7 @@ rush_function();
 po_function();
 if (bodyColorList.selection.index < 11) {
   bodyColor_function();
-}
+};
 currentDate_function();
 JDE_function();
 web_function();
