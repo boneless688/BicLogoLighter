@@ -315,6 +315,17 @@ String.prototype.trim = function () {
   return this.replace(/^\s+/, "").replace(/\s+$/, "");  
 };
 
+if (nationalityCanada.value === true) {
+  app.activeDocument.layers.getByName("USA").visible = true;
+  app.activeDocument.layers.getByName("USA").remove();
+  app.activeDocument.layers.getByName("Canada").visible = true;
+} else {
+  app.activeDocument.layers.getByName("Canada").visible = true;
+  app.activeDocument.layers.getByName("Canada").remove();
+  app.activeDocument.layers.getByName("USA").visible = true;
+}
+
+
 /* #region  Outputs to Illustrator */
 
 // region: ASSORTED - If the order is one of the assorted color proofs or a sleeve, the ink color code is bypassed.
@@ -434,10 +445,8 @@ if (bodyColorList.selection.index < 11) {
       var grayName = "PANTONE" + " " + grayArray[0] + " " + grayArray[1] + " " + grayArray[2] + " " + "C";
       item_A1_name.contents = grayName;
       item_A1_screenName.contents = grayName;
-      item_A1_color.fillColor =
-        app.activeDocument.swatches.getByName(grayName).color;
-      item_A1_chip.fillColor =
-        app.activeDocument.swatches.getByName(grayName).color;
+      item_A1_color.fillColor = app.activeDocument.swatches.getByName(grayName).color;
+      item_A1_chip.fillColor = app.activeDocument.swatches.getByName(grayName).color;
     } else {
       var kilo = ink_A1.text.search(" ");
       var pmsNumberA1 = ink_A1.text.substring(0, kilo);
@@ -1197,11 +1206,11 @@ var item_originalArt_C = "original art side C";
 
 function customerInfo_function() {
   if (nationalityUS.value === true) {
-    var rep_Name = app.activeDocument.layers.getByName('USA').textFrames.getByName("RepName");
+    var rep_Name = app.activeDocument.textFrames.getByName("RepName");
     rep_Name.contents = repNameEdit.text;
     rep_Name.contents = capitalize_function(rep_Name.contents);
 
-    var repNameSignature = app.activeDocument.layers.getByName('USA').textFrames.getByName("RepName_Signature");
+    var repNameSignature = app.activeDocument.textFrames.getByName("RepName_Signature");
     repNameSignature.contents = repNameEdit.text;
     repNameSignature.contents = capitalize_function(repNameSignature.contents);
   
@@ -1209,40 +1218,39 @@ function customerInfo_function() {
     email.contents = repEmail_Edit.text;
     email.contents = email.contents.toLowerCase();
 
-    var repNameSignature = app.activeDocument.layers.getByName('USA').textFrames.getByName("RepName_Signature");
+    var repNameSignature = app.activeDocument.textFrames.getByName("RepName_Signature");
     repNameSignature.contents = repNameEdit.text;
     repNameSignature.contents = capitalize_function(repNameSignature.contents);
   
-    var email = app.activeDocument.layers.getByName('USA').textFrames.getByName("RepEmail");
+    var email = app.activeDocument.textFrames.getByName("RepEmail");
     email.contents = repEmail_Edit.text;
     email.contents = email.contents.toLowerCase();
   } else {
-    var rep_Name = app.activeDocument.layers.getByName('Canada').textFrames.getByName("RepName");
+    var rep_Name = app.activeDocument.textFrames.getByName("RepName");
     rep_Name.contents = repNameEdit.text;
     rep_Name.contents = capitalize_function(rep_Name.contents);
 
-    var repNameSignature = app.activeDocument.layers.getByName('Canada').textFrames.getByName("RepName_Signature");
+    var repNameSignature = app.activeDocument.textFrames.getByName("RepName_Signature");
     repNameSignature.contents = repNameEdit.text;
     repNameSignature.contents = capitalize_function(repNameSignature.contents);
   
-    var email = app.activeDocument.layers.getByName('Canada').textFrames.getByName("RepEmail");
+    var email = app.activeDocument.textFrames.getByName("RepEmail");
     email.contents = repEmail_Edit.text;
     email.contents = email.contents.toLowerCase();
 
-    var repNameSignature = app.activeDocument.layers.getByName('Canada').textFrames.getByName("RepName_Signature");
+    var repNameSignature = app.activeDocument.textFrames.getByName("RepName_Signature");
     repNameSignature.contents = repNameEdit.text;
     repNameSignature.contents = capitalize_function(repNameSignature.contents);
   
-    var email = app.activeDocument.layers.getByName('Canada').textFrames.getByName("RepEmail");
+    var email = app.activeDocument.textFrames.getByName("RepEmail");
     email.contents = repEmail_Edit.text;
     email.contents = email.contents.toLowerCase();
   }
 }
-   
-   
-  var companyName = app.activeDocument.textFrames.getByName("Company");
-  companyName.contents = company_A_Edit.text;
-  companyName.contents = capitalize_function(companyName.contents);
+
+var companyName = app.activeDocument.textFrames.getByName("Company");
+companyName.contents = company_A_Edit.text;
+companyName.contents = capitalize_function(companyName.contents);
 
 function vip_function() {
   var vipBox = app.activeDocument.layers
@@ -1272,9 +1280,9 @@ function rush_function() {
 function po_function() {
   if (nationalityCanada.value === true) {
     var purchaseOrder =
-      app.activeDocument.layers.getByName('Canada').textFrames.getByName("Canada PO Number");
+      app.activeDocument.textFrames.getByName("Canada PO Number");
   } else {
-    var purchaseOrder = app.activeDocument.layers.getByName('USA').textFrames.getByName("PO");
+    var purchaseOrder = app.activeDocument.textFrames.getByName("PO");
   }
   purchaseOrder.contents = poNumber_edit.text;
   if (purchaseOrder === null) {
@@ -1301,13 +1309,18 @@ function descriptionField_function(bodyColorLayer) {
   }
   return bodyColorLayer.join("");
 }
-function fileName_function() {
-  if (jdeNumber_edit.text.length < 1) {
-    var shortName =  webPrefix.selection.text + webNumber_edit.text + "_" + descriptionField_function() + "_A";
+
+
+
+
+
+
+if (jdeNumber_edit.text.length < 1) {
+    var shortName = webPrefix.selection.text + webNumber_edit.text + "_" + descriptionField_function() + "_A";
     var longName = webPrefix.selection.text + webNumber_edit.text + "_" + descriptionField_function() + "_" + bodyColorList.selection.text + "_A";
   } else {
     var shortName = jdeNumber_edit.text + "_" + descriptionField_function() + "_A";
-    var longName = jdeNumber_edit.text + "_" + descriptionField_function() + "_" +  bodyColorList.selection.text + "_A";
+    var longName = jdeNumber_edit.text + "_" + descriptionField_function() + "_" + bodyColorList.selection.text + "_A";
   }
 
 
@@ -1316,80 +1329,47 @@ function fileName_function() {
   var darkAssortName = jdeNumber_edit.text + '_' + descriptionField_function() + '_' + 'DarkAssort' + '_' + 'A';
   var lightAssortName = jdeNumber_edit.text + '_' + descriptionField_function() + '_' + 'LightAssort' + '_' + 'A';
 
-  var USFileName = app.activeDocument.layers.getByName('USA').textFrames.getByName("FileName");
-  var CanadaFileName = app.activeDocument.layers.getByName('Canada').textFrames.getByName("FileName");
-  
+  var AlphaFileName = app.activeDocument.textFrames.getByName("FileName");
 
 
   if (bodyColorList.selection == 14) {
-    USFileName.contents = sleeveName;
-    CanadaFileName.contents = sleeveName;
-}
-
-  if (nationalityUS.value === true) {
-    if (bodyColorList.selection == 11) {
-      USFileName.contents = darkAssortName;
-    }
-    if (bodyColorList.selection == 12) {
-      USFileName.contents = lightAssortName;
-    }
-  } else {
-    if (bodyColorList.selection == 11) {
-      CanadaFileName.contents = darkAssortName;
-    }
-    if (bodyColorList.selection == 12) {
-      CanadaFileName.contents = lightAssortName;
-    }
-}
+    AlphaFileName.contents = sleeveName;
+  }
+  if (bodyColorList.selection == 11) {
+    AlphaFileName.contents = darkAssortName;
+  }
+  if (bodyColorList.selection == 12) {
+    AlphaFileName.contents = lightAssortName;
+  }
 
 
-  
-  
-  /*
-if(  
-  "DarkAssort", //11
-)
-  */
 
+if (bodyColorList.selection.index < 11) {
 
-  if (bodyColorList.selection.index < 11) {
-    var illustratorFrame = [
-      "FileName",
-      "A1 Screen FileName",
-      "A2 Screen FileName",
-      "A3 Screen FileName",
-      "A4 Screen FileName",
-      "C1 Screen FileName",
-      "C2 Screen FileName",
-      "C3 Screen FileName",
-      "C4 Screen FileName",
-    ];
+  var illustratorFrame = ["FileName", "A1 Screen FileName", "A2 Screen FileName", "A3 Screen FileName", "A4 Screen FileName", "C1 Screen FileName", "C2 Screen FileName", "C3 Screen FileName", "C4 Screen FileName"];
 
-    for (i = 0; i < illustratorFrame.length; i++) {
-      if (nationalityUS.value == true) {
-        if (itemNumber_edit.text > 1) {
-          var alpha2 = app.activeDocument.layers.getByName('USA').getByName(illustratorFrame[i]);
-          alpha2.contents = longName;
-        } else {
-          alert(illustratorFrame[i]);
-          var bravo2 = app.activeDocument.layers.getByName('USA').textFrames.getByName(illustratorFrame[i]);
-          bravo2.contents = shortName;
-        };
-        
-        if (nationalityCanada.value == true) {
-          var alpha2 = app.activeDocument.layers.getByName('Canada').getByName(illustratorFrame[i]);
-          alpha2.contents = longName;
-        } else {
-          var bravo2 = app.activeDocument.layers.getByName('Canada').textFrames.getByName(illustratorFrame[i]);
-          bravo2.contents = shortName;
-        }
-      }
+  for (i = 0; i < illustratorFrame.length; i++) {
+    if (itemNumber_edit.text > 1) {
+      var alpha2 = app.activeDocument.textFrames.getByName(illustratorFrame[i]);
+      alpha2.contents = longName;
+    } else {
+      var bravo2 = app.activeDocument.textFrames.getByName(illustratorFrame[i]);
+      bravo2.contents = shortName;
     }
   }
 }
 
-
-
+if (nationalityCanada.value === true) {
+  for (i = 0; i < illustratorFrame.length; i++) {
+    if (itemNumber_edit.text > 1) {
+      var alpha2 = app.activeDocument.layers.getByName('Canada').textFrames.getByName(illustratorFrame[i]);
+      alpha2.contents = longName;
+    } else {
+      var bravo2 = app.activeDocument.layers.getByName('Canada').textFrames.getByName(illustratorFrame[i]);
+      bravo2.contents = shortName;
+    }
+  }
+}
 
 
 
@@ -1410,50 +1390,35 @@ function currentDate_function() {
   var date = currentDate.toDateString();
   var date_A = date.split(" ");
   var date_B = date_A[0] + ", " + date_A[1] + " " + date_A[2] + ", " + date_A[3];
-  if (nationalityCanada.value === true) {
-    var a = app.activeDocument.layers.getByName("Canada").textFrames.getByName("Canada Proof Date");
-  } else {
-    var a = app.activeDocument.layers.getByName("USA").textFrames.getByName("DateBox");
-  }
+  var a = app.activeDocument.textFrames.getByName("DateBox");
   a.contents = date_B;
-}
+};
+
 
 function ship_function() {
-  if (nationalityUS.value == true) {
-    var ship = app.activeDocument.layers.getByName('USA').textFrames.getByName("Ship Date");
+    var ship = app.activeDocument.textFrames.getByName("Ship Date");
     ship.contents = capitalize_function(shipDate_edit.text);
-  } else {
-    var ship = app.activeDocument.layers.getByName('Canada').textFrames.getByName("Ship Date");
-    ship.contents = capitalize_function(shipDate_edit.text);
-  };
-};
+}
+  
 
 function InHands_function() {
-  if (nationalityUS.value == true) {
-    var inHands = app.activeDocument.layers.getByName('USA').textFrames.getByName("In Hands Date");
-    inHands.contents = capitalize_function(inHandsDate_edit.text);
-  } else {
-    var inHands = app.activeDocument.layers.getByName('Canada').textFrames.getByName("In Hands Date");
+    var inHands = app.activeDocument.textFrames.getByName("In Hands Date");
     inHands.contents = capitalize_function(inHandsDate_edit.text);
   }
-};
+  
 
 function web_function() {
-  if (nationalityCanada.value === true) {
-    var web = app.activeDocument.layers.getByName('Canada').textFrames.getByName("Canada Web");
-  } else {
-    var web = app.activeDocument.layers.getByName('USA').textFrames.getByName("Web");
-  }
+  var web = app.activeDocument.textFrames.getByName("Web");
   web.contents = webPrefix.selection.text + webNumber_edit.text;
-};
+}
 
 function JDE_function() {
   if (nationalityUS.value === true) {
-    var jde = app.activeDocument.layers.getByName("USA").textFrames.getByName("jde number");
+    var jde = app.activeDocument.textFrames.getByName("jde number");
     jde.contents = jdeNumber_edit.text;
   } else {
-    var jde = app.activeDocument.layers.getByName("Canada").textFrames.getByName("Canada JDE Number");
-    jde.contents = jdeNumber_edit.text;
+    var canadaJde = app.activeDocument.layers.getByName('Canada').textFrames.getByName('Canada JDE Number');
+    canadaJde.contents = jdeNumber_edit.text;
   }
 }
 
@@ -1489,7 +1454,7 @@ JDE_function();
 web_function();
 InHands_function();
 ship_function();
-fileName_function();
+//fileName_function();
 originalFile();
 //#endregion
 
@@ -1584,13 +1549,5 @@ if (bodyColorList.selection.index < 11) {
   }
 }
 
-if (nationalityCanada.value === true) {
-  app.activeDocument.layers.getByName("USA").visible = true;
-  app.activeDocument.layers.getByName("USA").remove();
-  app.activeDocument.layers.getByName("Canada").visible = true;
-} else {
-  app.activeDocument.layers.getByName("Canada").visible = true;
-  app.activeDocument.layers.getByName("Canada").remove();
-  app.activeDocument.layers.getByName("USA").visible = true;
-}
+
 /* #endregion */
