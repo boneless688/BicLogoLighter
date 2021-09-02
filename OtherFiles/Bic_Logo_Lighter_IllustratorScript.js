@@ -297,8 +297,8 @@ buttonGroup.add("button", undefined, "Cancel");
 master.show();
 //#endregion
 
- 
-/*
+ /*
+
 //This block creates new Illustrator documents from the .ait template files.
 if (bodyColorList.selection.index === 11 || bodyColorList.selection.index === 12) {
   app.open(new File("/C/Users/JBavitz/OneDrive - BIC/Desktop/BicLogoLighter/OtherFiles/Proof_Template_Assorted.ait"));
@@ -307,8 +307,8 @@ if (bodyColorList.selection.index === 11 || bodyColorList.selection.index === 12
 } else {
   app.open(new File("/C/Users/JBavitz/OneDrive - BIC/Desktop/BicLogoLighter/OtherFiles/Proof_Template_Combined.ait"));
 }
-*/
 
+*/
 
 
 String.prototype.trim = function () {
