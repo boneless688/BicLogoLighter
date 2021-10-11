@@ -39,6 +39,27 @@ company_A_Edit.characters = 10;
 
 var vipCheckbox = companyGroup.add("checkbox", undefined, "VIP");
 
+var designerMaster = customerInfo_outer.add("panel", undefined, " ");
+designerMaster.orientation = "row";
+
+var designerLeft = designerMaster.add("panel", undefined, " ");
+
+var designerLabel = designerLeft.add("statictext", undefined, "Designer");
+
+var designerList = designerLeft.add("dropdownlist", undefined, [
+  "MMiraglia",
+  "GVisgaitis",
+  "JBavitz",
+]);
+designerList.characters = 10;
+designerList.selection = 2;
+var designerRight = designerMaster.add("panel", undefined, " ");
+var designerCheckbox = designerMaster.add(
+  "checkbox",
+  undefined,
+  "Default Artist"
+);
+
 var nationalityGroup = topLeft.add("panel", undefined, "");
 nationalityGroup.orientation = "row";
 nationalityGroup.margins = [20, 20, 20, 5];
@@ -193,6 +214,13 @@ var bodyColorList = bodyColor.add("dropdownlist", undefined, [
 
 bodyColorList.selection = 0;
 
+var doubleSided = bodyColor.add("panel", undefined);
+var doubleSidedCheckbox = bodyColor.add(
+  "checkbox",
+  undefined,
+  "Assortment - 2 Sided"
+);
+
 var descriptionBox = descriptionSide.add(
   "statictext",
   undefined,
@@ -201,6 +229,13 @@ var descriptionBox = descriptionSide.add(
 var descriptionBox_edit = descriptionSide.add("edittext", undefined, "");
 descriptionBox_edit.characters = 20;
 //descriptionBox_edit.text = "the only thing";
+
+var autoSave = descriptionSide.add(
+  "checkbox",
+  undefined,
+  "Save the PDF upon opening?"
+);
+autoSave.value = true;
 
 var spacerBox = descriptionSide.add("statictext", undefined, "");
 spacerBox.margins = 20;
@@ -284,109 +319,60 @@ buttonGroup.add("button", undefined, "Cancel");
 master.show();
 //#endregion
 
-//This block creates new Illustrator documents from the .ait template files.
-
-
-// Joe
-
-
+// OPEN TEMPLATES WITH RELATIVE PATHS
 if (
   bodyColorList.selection.index === 11 ||
   bodyColorList.selection.index === 12
 ) {
-  app.open(
-    new File(
-      //"/C/Users/JBavitz/BIC/BIC logo lighter Customer Service - General/Graphic Design/Script_Files/Proof_Template_Assorted.ait"
-     "/C/Users/JBavitz/OneDrive - BIC/Desktop/BicLogoLighter/OtherFiles/Proof_Template_Assorted.ait"
-    )
-  );
+  if (doubleSidedCheckbox.value === false) {
+    var _scriptPath = $.fileName;
+    var _separater = "";
+
+    //Code to get separater based on OS
+    if ($.os.toLowerCase().indexOf("mac") != -1) {
+      _separater = "/";
+    } else if ($.os.toLowerCase().indexOf("window") != -1) {
+      _separater = "\\";
+    }
+    var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater));
+    app.open(File(_path + "/Proof_Template_Assorted_1Side.ait"));
+  } else {
+    var _scriptPath = $.fileName;
+    var _separater = "";
+
+    //Code to get separater based on OS
+    if ($.os.toLowerCase().indexOf("mac") != -1) {
+      _separater = "/";
+    } else if ($.os.toLowerCase().indexOf("window") != -1) {
+      _separater = "\\";
+    }
+    var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater));
+    app.open(File(_path + "/Proof_Template_Assorted_2Side.ait"));
+  }
 } else if (bodyColorList.selection.index === 14) {
-  app.open(
-    new File(
-     //"/C/Users/JBavitz/BIC/BIC logo lighter Customer Service - General/Graphic Design/Script_Files/Proof_Template_Sleeve.ait"
+  var _scriptPath = $.fileName;
+  var _separater = "";
 
-      "/C/Users/JBavitz/OneDrive - BIC/Desktop/BicLogoLighter/OtherFiles/Proof_Template_Sleeve.ait"
-    )
-  );
-} else { 
-  app.open(
-    new File(
-      //"/C/Users/JBavitz/BIC/BIC logo lighter Customer Service - General/Graphic Design/Script_Files/Proof_Template_Standard.ait"
-
-     "/C/Users/JBavitz/OneDrive - BIC/Desktop/BicLogoLighter/OtherFiles/Proof_Template_Standard.ait"
-    )
-  );
+  //Code to get separater based on OS
+  if ($.os.toLowerCase().indexOf("mac") != -1) {
+    _separater = "/";
+  } else if ($.os.toLowerCase().indexOf("window") != -1) {
+    _separater = "\\";
+  }
+  var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater));
+  app.open(File(_path + "/Proof_Template_Sleeve.ait"));
+} else {
+  var _scriptPath = $.fileName;
+  var _separater = "";
+  //Code to get separater based on OS
+  if ($.os.toLowerCase().indexOf("mac") != -1) {
+    _separater = "/";
+  } else if ($.os.toLowerCase().indexOf("window") != -1) {
+    _separater = "\\";
+  }
+  var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater));
+  app.open(File(_path + "/Proof_Template_Standard.ait"));
 }
-
-
-
-
-
-/*
-
-// Gary
-
-if (
-  bodyColorList.selection.index === 11 ||
-  bodyColorList.selection.index === 12
-) {
-  app.open(
-    new File(
-      "/C/Users/GVisgaitis/BIC/BIC logo lighter Customer Service - General/Graphic Design/Script Files/Proof_Template_Assorted_A.ait"
-    )
-  );
-} else if (bodyColorList.selection.index === 14) {
-  app.open(
-    new File(
-      "/C/Users/GVisgaitis/BIC/BIC logo lighter Customer Service - General/Graphic Design/Script Files/Proof_Template_Sleeve.ait"
-    )
-  );
-} else { 
-  app.open(
-    new File(
-      "/C/Users/GVisgaitis/BIC/BIC logo lighter Customer Service - General/Graphic Design/Script Files/Proof_Template_Combined.ait"
-    )
-  );
-}
-
-*/
-
-
-
-
-/*
-// Mark
-
-if (
-  bodyColorList.selection.index === 11 ||
-  bodyColorList.selection.index === 12
-) {
-  app.open(
-    new File(
-      "/C/Users/JBavitz/OneDrive - BIC/Desktop/BicLogoLighter/OtherFiles/Proof_Template_Assorted.ait"
-    )
-  );
-} else if (bodyColorList.selection.index === 14) {
-  app.open(
-    new File(
-      "/C/Users/JBavitz/OneDrive - BIC/Desktop/BicLogoLighter/OtherFiles/Proof_Template_Sleeve.ait"
-    )
-  );
-} else { 
-  app.open(
-    new File(
-      "/C/Users/JBavitz/OneDrive - BIC/Desktop/BicLogoLighter/OtherFiles/Proof_Template_Combined.ait"
-    )
-  );
-}
-*/
-
-
-
-
-
-
-
 
 String.prototype.trim = function () {
   return this.replace(/^\s+/, "").replace(/\s+$/, "");
@@ -401,8 +387,6 @@ if (nationalityCanada.value === true) {
   app.activeDocument.layers.getByName("Canada").remove();
   app.activeDocument.layers.getByName("USA").visible = true;
 }
-
-/* #region  Outputs to Illustrator */
 
 // region: ASSORTED - If the order is one of the assorted color proofs or a sleeve, the ink color code is bypassed.
 if (bodyColorList.selection.index < 11) {
@@ -517,8 +501,20 @@ if (bodyColorList.selection.index < 11) {
   ink_C3.text = ink_C3.text.trim();
   ink_C4.text = ink_C4.text.trim();
 
+  function neonInk(inkString, bravo) {
+    var neonInks = ["801", "802", "803", "804", "805", "806", "807"];
+    var alpha = inkString.search(" ");
+    var numberOnly = inkString.substring(0, alpha);
+    for (i = 0; i < neonInks.length; i++) {
+      if (numberOnly === neonInks[i]) {
+        var neon = app.activeDocument.groupItems.getByName(bravo);
+        neon.hidden = false;
+      }
+    }
+  }
+
   /* A1           If a NUMBER appears in the entered text, then this block will run. This inserts text into the illustrator swatch box and the screen box and adds the fill color to both the big and small color boxes.  The color swatch name format in Illustrator is all caps:  PANTONE 119 C
-  */
+   */
   if (ink_A1.text.length > 0) {
     var pmsTest_A1 = false;
     for (var index = 0; index < ink_A1.text.length; index++) {
@@ -588,13 +584,16 @@ if (bodyColorList.selection.index < 11) {
       item_A1_name.contents = "Black";
       item_A1_screenName.contents = "Black";
       item_A1_color.fillColor = newBlack;
-      item_A1_chip.fillColor = newBlack; 
+      item_A1_chip.fillColor = newBlack;
       item_A1_frame.strokeWidth = 1.25;
     } else {
       item_A1_name.contents =
         "PANTONE" + " " + capitalize_function(ink_A1.text) + " " + "C";
       item_A1_screenName.contents = capitalize_function(ink_A1.text);
       item_A1_color.fillColor = app.activeDocument.swatches.getByName(
+        "PANTONE" + " " + capitalize_function(ink_A1.text) + " " + "C"
+      ).color;
+      item_A1_chip.fillColor = app.activeDocument.swatches.getByName(
         "PANTONE" + " " + capitalize_function(ink_A1.text) + " " + "C"
       ).color;
     }
@@ -611,6 +610,8 @@ if (bodyColorList.selection.index < 11) {
       item_A1_frame.strokeWidth = 1.25;
     }
   }
+
+  neonInk(ink_A1.text, "A1_Warning");
 
   if (ink_A1.text.length > 0) {
     screenCounter_A.push("One");
@@ -705,6 +706,8 @@ if (bodyColorList.selection.index < 11) {
   if (ink_A2.text === "Reflex Blue" || ink_A2.text === "Process Blue") {
     item_A2_frame.strokeWidth = 1.25;
   }
+
+  neonInk(ink_A2.text, "A2_Warning");
 
   for (i = 0; i < standardInkNumber.length; i++) {
     if (pmsNumberA2 === standardInkNumber[i]) {
@@ -805,6 +808,8 @@ if (bodyColorList.selection.index < 11) {
     item_A3_frame.strokeWidth = 1.25;
   }
 
+  neonInk(ink_A3.text, "A3_Warning");
+
   for (i = 0; i < standardInkNumber.length; i++) {
     if (pmsNumberA3 === standardInkNumber[i]) {
       item_A3_frame.strokeWidth = 1.25;
@@ -904,6 +909,8 @@ if (bodyColorList.selection.index < 11) {
     item_A4_frame.strokeWidth = 1.25;
   }
 
+  neonInk(ink_A4.text, "A4_Warning");
+
   for (i = 0; i < standardInkNumber.length; i++) {
     if (pmsNumberA4 === standardInkNumber[i]) {
       item_A4_frame.strokeWidth = 1.25;
@@ -1001,6 +1008,8 @@ if (bodyColorList.selection.index < 11) {
     if (ink_C1.text === "Reflex Blue" || ink_C1.text === "Process Blue") {
       item_C1_frame.strokeWidth = 1.25;
     }
+
+    neonInk(ink_C1.text, "C1_Warning");
 
     for (i = 0; i < standardInkNumber.length; i++) {
       if (pmsNumberC1 === standardInkNumber[i]) {
@@ -1101,6 +1110,8 @@ if (bodyColorList.selection.index < 11) {
       item_C2_frame.strokeWidth = 1.25;
     }
 
+    neonInk(ink_C2.text, "C2_Warning");
+
     for (i = 0; i < standardInkNumber.length; i++) {
       if (pmsNumberC2 === standardInkNumber[i]) {
         item_C2_frame.strokeWidth = 1.25;
@@ -1199,6 +1210,8 @@ if (bodyColorList.selection.index < 11) {
     if (ink_C3.text === "Reflex Blue" || ink_C3.text === "Process Blue") {
       item_C3_frame.strokeWidth = 1.25;
     }
+
+    neonInk(ink_C3.text, "C3_Warning");
 
     for (i = 0; i < standardInkNumber.length; i++) {
       if (pmsNumberC3 === standardInkNumber[i]) {
@@ -1299,6 +1312,8 @@ if (bodyColorList.selection.index < 11) {
       item_C4_frame.strokeWidth = 1.25;
     }
 
+    neonInk(ink_C4.text, "C4_Warning");
+
     for (i = 0; i < standardInkNumber.length; i++) {
       if (pmsNumberC4 === standardInkNumber[i]) {
         item_C4_frame.strokeWidth = 1.25;
@@ -1317,33 +1332,24 @@ if (bodyColorList.selection.index < 11) {
       bodyColorAlpha.visible = true;
     }
   }
-  /* #endregion */
-} // The end of region ASSORTED.
+}
 
 var item_OriginalArt_A = "original art side A";
 var item_originalArt_C = "original art side C";
 
 function customerInfo_function() {
-  var rep = app.activeDocument.layers.getByName('Masque').textFrames.getByName("Rep");
-  rep.contents = capitalize_function(repNameEdit.text) + "     " + repEmail_Edit.text.toLowerCase();
-
+  var rep = app.activeDocument.layers
+    .getByName("Masque")
+    .textFrames.getByName("Rep");
+  rep.contents =
+    capitalize_function(repNameEdit.text) +
+    "     " +
+    repEmail_Edit.text.toLowerCase();
 
   var repNameSignature =
     app.activeDocument.textFrames.getByName("RepName_Signature");
   repNameSignature.contents = repNameEdit.text;
   repNameSignature.contents = capitalize_function(repNameSignature.contents);
-  
-  if (bodyColorList.selection.index === 11 || bodyColorList.selection.index === 12) {
-    var RepName_Signature_Back = app.activeDocument.textFrames.getByName("RepName_Signature_Back");
-    RepName_Signature_Back.contents = repNameEdit.text;
-    RepName_Signature_Back.contents = capitalize_function(repNameSignature.contents);
-  }
-      
-  if (bodyColorList.selection.index === 11 || bodyColorList.selection.index === 12) {
-    var RepEmail_Back = app.activeDocument.textFrames.getByName("RepEmail_Back");
-    RepEmail_Back.contents = repNameEdit.text;
-    RepEmail_Back.contents = capitalize_function(RepEmail_Back.contents);
-  }
 
   var repNameSignature =
     app.activeDocument.textFrames.getByName("RepName_Signature");
@@ -1355,14 +1361,21 @@ var companyName = app.activeDocument.textFrames.getByName("Company");
 companyName.contents = company_A_Edit.text;
 companyName.contents = capitalize_function(companyName.contents);
 
+var designer = app.activeDocument.textFrames.getByName("Designer");
+designer.contents = designerList.selection.text;
+
+if (doubleSidedCheckbox.value === true) {
+  var designerBack = app.activeDocument.textFrames.getByName("Designer_Back");
+  designerBack.contents = designerList.selection.text;
+}
+
 function vip_function() {
   var vipBox = app.activeDocument.layers
     .getByName("Masque")
     .groupItems.getByName("VIP");
   if (vipCheckbox.value === true) {
     vipBox.hidden = false;
-  }
-  if (vipCheckbox.value === false) {
+  } else {
     vipBox.hidden = true;
   }
 }
@@ -1381,13 +1394,14 @@ function rush_function() {
 }
 
 function po_function() {
-
   if (nationalityCanada.value === true) {
-
-    var purchaseOrder = app.activeDocument.layers.getByName('Canada').textFrames.getByName("PO");
-
+    var purchaseOrder = app.activeDocument.layers
+      .getByName("Canada")
+      .textFrames.getByName("PO");
   } else {
-    var purchaseOrder = app.activeDocument.layers.getByName('USA').textFrames.getByName("PO");
+    var purchaseOrder = app.activeDocument.layers
+      .getByName("USA")
+      .textFrames.getByName("PO");
   }
   purchaseOrder.contents = poNumber_edit.text;
   if (purchaseOrder === null) {
@@ -1395,25 +1409,39 @@ function po_function() {
   }
 }
 
+if (
+  bodyColorList.selection.index === 11 ||
+  bodyColorList.selection.index === 12
+) {
+  var repFront = app.activeDocument.textFrames.getByName("Rep");
+  repFront.contents =
+    capitalize_function(repNameEdit.text) +
+    "     " +
+    repEmail_Edit.text.toLowerCase();
 
+  if (doubleSidedCheckbox.value === true) {
+    var repBack = app.activeDocument.textFrames.getByName("Rep_Back");
+    repBack.contents =
+      capitalize_function(repNameEdit.text) +
+      "     " +
+      repEmail_Edit.text.toLowerCase();
 
-if (bodyColorList.selection.index === 11 || bodyColorList.selection.index === 12) {
+    if (nationalityCanada.value === true) {
+      var POBack = app.activeDocument.layers
+        .getByName("Canada")
+        .textFrames.getByName("PO_Back");
+    } else {
+      var POBack = app.activeDocument.layers
+        .getByName("USA")
+        .textFrames.getByName("PO_Back");
+    }
 
-  if (nationalityCanada.value === true) {
-
-    var purchaseOrder = app.activeDocument.layers.getByName('Canada').textFrames.getByName("PO_Back");
-    
-  } else {
-    var purchaseOrderBack = app.activeDocument.layers.getByName('USA').textFrames.getByName("PO_Back");
-  }
-  purchaseOrderBack.contents = poNumber_edit.text;
-  if (purchaseOrderBack === null) {
-    purchaseOrderBack.contents = webPrefix.selection.text + webNumber_edit.text;
+    POBack.contents = poNumber_edit.text;
+    if (POBack === null) {
+      POBack.contents = webPrefix.selection.text + webNumber_edit.text;
+    }
   }
 }
-
-
-
 
 function capitalize_function(u) {
   //  This capitalizes every letter that comes after a space. It takes a string as the input u.
@@ -1436,35 +1464,211 @@ function descriptionField_function(bodyColorLayer) {
 }
 
 if (jdeNumber_edit.text.length < 1) {
-  var shortName = webPrefix.selection.text + webNumber_edit.text + "_" + descriptionField_function() + "_A";
-  var longName = webPrefix.selection.text +  webNumber_edit.text + "_" + descriptionField_function() + "_" + bodyColorList.selection.text + "_A";
+  var shortName =
+    webPrefix.selection.text +
+    webNumber_edit.text +
+    "_" +
+    descriptionField_function() +
+    "_A";
+  var longName =
+    webPrefix.selection.text +
+    webNumber_edit.text +
+    "_" +
+    descriptionField_function() +
+    "_" +
+    bodyColorList.selection.text +
+    "_A";
 } else {
   var shortName =
     jdeNumber_edit.text + "_" + descriptionField_function() + "_A";
-  
-  var longName = jdeNumber_edit.text + "_" + descriptionField_function() + "_" + bodyColorList.selection.text + "_A";
+  var longName =
+    jdeNumber_edit.text +
+    "_" +
+    descriptionField_function() +
+    "_" +
+    bodyColorList.selection.text +
+    "_A";
 }
 
-var sleeveName = "SLEEVE" + "_" + jdeNumber_edit.text + "_" + descriptionField_function() + "_" + "A";
-
-var darkAssortName = jdeNumber_edit.text + "_" + descriptionField_function() + "_" + "DarkAssort" + "_" + "A";
-var lightAssortName = jdeNumber_edit.text + "_" + descriptionField_function() + "_" + "LightAssort" + "_" + "A";
-
-var AlphaFileName = app.activeDocument.textFrames.getByName("FileName");
-
-
-if (bodyColorList.selection == 14) {
-  AlphaFileName.contents = sleeveName;
+if (shortName.length > 39 || longName.length > 39) {
+  var reducedFileName = app.activeDocument.textFrames.getByName("FileName");
+  reducedFileName.textRange.characterAttributes.size = 7;
+  reducedFileName.textRange.characterAttributes.baselineShift = -2;
 }
-if (bodyColorList.selection == 11) {
-  AlphaFileName.contents = darkAssortName;
-  var bravoFileName = app.activeDocument.textFrames.getByName("FileName_Back");
-  bravoFileName.contents = darkAssortName;
+
+if (jdeNumber_edit.text.length < 1) {
+  var darkAssortName =
+    webPrefix.selection.text +
+    webNumber_edit.text +
+    "_" +
+    descriptionField_function() +
+    "_" +
+    "DarkAssort" +
+    "_" +
+    "A";
+  var lightAssortName =
+    webPrefix.selection.text +
+    webNumber_edit.text +
+    "_" +
+    descriptionField_function() +
+    "_" +
+    "LightAssort" +
+    "_" +
+    "A";
+} else {
+  var darkAssortName =
+    jdeNumber_edit.text +
+    "_" +
+    descriptionField_function() +
+    "_" +
+    "DarkAssort" +
+    "_" +
+    "A";
+  var lightAssortName =
+    jdeNumber_edit.text +
+    "_" +
+    descriptionField_function() +
+    "_" +
+    "LightAssort" +
+    "_" +
+    "A";
 }
-if (bodyColorList.selection == 12) {
-  AlphaFileName.contents = lightAssortName;
-  var bravoFileName = app.activeDocument.textFrames.getByName("FileName_Back");
-  bravoFileName.contents = lightAssortName;
+
+var alphaFileName = app.activeDocument.textFrames.getByName("FileName");
+
+if (bodyColorList.selection.index === 11) {
+  var assortFile = app.activeDocument.textFrames.getByName("FileName");
+  assortFile.contents = darkAssortName;
+
+  var assortFileScreen = app.activeDocument.textFrames.getByName(
+    "Assortment Screen Filename"
+  );
+  assortFileScreen.contents = darkAssortName;
+
+  var assortment_chip = app.activeDocument.pathItems.getByName(
+    "Assortment Color Chip"
+  );
+  var assortmentWhite = new CMYKColor();
+  assortmentWhite.black = 00;
+  assortmentWhite.cyan = 00;
+  assortmentWhite.magenta = 00;
+  assortmentWhite.yellow = 00;
+  assortment_chip.fillColor = assortmentWhite;
+
+  var assortment_screenName = app.activeDocument.textFrames.getByName(
+    "Assortment Ink Color"
+  );
+  assortment_screenName.contents = "White";
+
+  if (doubleSidedCheckbox.value === true) {
+    var assortment_screenName_back = app.activeDocument.textFrames.getByName(
+      "Assortment Ink Color Back"
+    );
+    assortment_screenName_back.contents = "White";
+
+    var bravoFileName =
+      app.activeDocument.textFrames.getByName("FileName_Back");
+    bravoFileName.contents = darkAssortName;
+
+    var assortment_chip_back = app.activeDocument.pathItems.getByName(
+      "Assortment Color Chip Back"
+    );
+    var assortmentWhite = new CMYKColor();
+    assortmentWhite.black = 00;
+    assortmentWhite.cyan = 00;
+    assortmentWhite.magenta = 00;
+    assortmentWhite.yellow = 00;
+    assortment_chip_back.fillColor = assortmentWhite;
+
+    var assortment_screenName = app.activeDocument.textFrames.getByName(
+      "Assortment Ink Color"
+    );
+    assortment_screenName.contents = "White";
+
+    var bravoFileNameBack = app.activeDocument.textFrames.getByName(
+      "Assortment Screen Filename Back"
+    );
+    bravoFileNameBack.contents = darkAssortName;
+  }
+}
+
+if (bodyColorList.selection.index === 12) {
+  var assortFile = app.activeDocument.textFrames.getByName("FileName");
+  assortFile.contents = lightAssortName;
+
+  var assortFileScreen = app.activeDocument.textFrames.getByName(
+    "Assortment Screen Filename"
+  );
+  assortFileScreen.contents = lightAssortName;
+
+  var assortment_chip = app.activeDocument.pathItems.getByName(
+    "Assortment Color Chip"
+  );
+  var assortmentBlack = new CMYKColor();
+  assortmentBlack.black = 100;
+  assortmentBlack.cyan = 100;
+  assortmentBlack.magenta = 100;
+  assortmentBlack.yellow = 100;
+  assortment_chip.fillColor = assortmentBlack;
+
+  var assortment_screenName = app.activeDocument.textFrames.getByName(
+    "Assortment Ink Color"
+  );
+  assortment_screenName.contents = "Black";
+
+  if (doubleSidedCheckbox.value === true) {
+    var assortment_screenName_back = app.activeDocument.textFrames.getByName(
+      "Assortment Ink Color Back"
+    );
+    assortment_screenName_back.contents = "Black";
+    var bravoFileName =
+      app.activeDocument.textFrames.getByName("FileName_Back");
+    bravoFileName.contents = lightAssortName;
+
+    var assortment_chip_back = app.activeDocument.pathItems.getByName(
+      "Assortment Color Chip Back"
+    );
+    var assortmentBlack = new CMYKColor();
+    assortmentBlack.black = 100;
+    assortmentBlack.cyan = 100;
+    assortmentBlack.magenta = 100;
+    assortmentBlack.yellow = 100;
+    assortment_chip_back.fillColor = assortmentBlack;
+
+    var assortment_screenName = app.activeDocument.textFrames.getByName(
+      "Assortment Ink Color"
+    );
+    assortment_screenName.contents = "black";
+
+    var bravoFileNameBack = app.activeDocument.textFrames.getByName(
+      "Assortment Screen Filename Back"
+    );
+    bravoFileNameBack.contents = lightAssortName;
+  }
+}
+
+if (bodyColorList.selection.index === 14) {
+  if (jdeNumber_edit.text.length < 1) {
+    var sleeveName =
+      "SLEEVE" +
+      "_" +
+      webPrefix.selection.text +
+      webNumber_edit.text +
+      "_" +
+      descriptionField_function() +
+      "_" +
+      "A";
+  } else {
+    var sleeveName =
+      "SLEEVE" +
+      "_" +
+      jdeNumber_edit.text +
+      "_" +
+      descriptionField_function() +
+      "_" +
+      "A";
+  }
+  alphaFileName.contents = sleeveName;
 }
 
 if (bodyColorList.selection.index < 11) {
@@ -1491,25 +1695,6 @@ if (bodyColorList.selection.index < 11) {
   }
 }
 
-if (nationalityCanada.value === true) {
-  for (i = 0; i < illustratorFrame.length; i++) {
-    if (itemNumber_edit.text > 1) {
-      var alpha3 = app.activeDocument.layers
-        .getByName("Canada")
-        .textFrames.getByName(illustratorFrame[0]);
-        //.textFrames.getByName(illustratorFrame[i]);
-      alpha3.contents = longName;
-    } else {
-      var bravo3 = app.activeDocument.layers
-        .getByName("Canada")
-        .textFrames.getByName(illustratorFrame[0]);
-        //.textFrames.getByName(illustratorFrame[i]);
-
-      bravo3.contents = shortName;
-    }
-  }
-}
-
 function originalFile() {
   var originalFile = app.activeDocument.textFrames.getByName("Original Art");
   originalFile.contents = originalArt_edit.text;
@@ -1523,12 +1708,14 @@ function currentDate_function() {
     date_A[0] + ", " + date_A[1] + " " + date_A[2] + ", " + date_A[3];
   var a = app.activeDocument.textFrames.getByName("DateBox");
   a.contents = date_B;
-if (bodyColorList.selection.index === 11 || bodyColorList.selection.index === 12) {
-  var b = app.activeDocument.textFrames.getByName("DateBox_Back");
-  b.contents = date_B;
+  if (
+    bodyColorList.selection.index === 11 ||
+    (bodyColorList.selection.index === 12 && doubleSidedCheckbox.value === true)
+  ) {
+    var b = app.activeDocument.textFrames.getByName("DateBox_Back");
+    b.contents = date_B;
   }
 }
-  
 
 function ship_function() {
   var ship = app.activeDocument.textFrames.getByName("Ship Date");
@@ -1547,7 +1734,9 @@ function web_function() {
 
 function JDE_function() {
   if (nationalityUS.value === true) {
-    var jde = app.activeDocument.layers.getByName('USA').textFrames.getByName("jde number");
+    var jde = app.activeDocument.layers
+      .getByName("USA")
+      .textFrames.getByName("jde number");
     jde.contents = jdeNumber_edit.text;
   } else {
     var canadaJde = app.activeDocument.layers
@@ -1556,57 +1745,73 @@ function JDE_function() {
     canadaJde.contents = jdeNumber_edit.text;
   }
 }
-
-// BUG FIX  no such element - line 1589 var instructionsCustomerGroup = app.activeDocument.layers.getByname("Masque").groupItems.getByName("Customer Instructions Group')
-
-
 //#endregion
 
-
-
-
 /* #region  This is the code for the special instructions boxes */
-var customer_instructions = app.activeDocument.textFrames.getByName("Customer Instructions");
+var customer_instructions = app.activeDocument.textFrames.getByName(
+  "Customer Instructions"
+);
 customer_instructions.contents = instructionsCustomer_text.text;
 if (instructionsCustomer_text.text.length < 1) {
-  var instructionsCustomerGroup = app.activeDocument.layers.getByName('Masque').groupItems.getByName('Customer Instructions Group');
-  instructionsCustomerGroup.remove()
+  var instructionsCustomerGroup = app.activeDocument.groupItems.getByName(
+    "Customer Instructions Group"
+  );
+  instructionsCustomerGroup.remove();
 }
 
-
-
-var production_instructions = app.activeDocument.textFrames.getByName("Production Instructions");
+var production_instructions = app.activeDocument.textFrames.getByName(
+  "Production Instructions"
+);
 production_instructions.contents = instructionsProduction_edit.text;
-
 if (instructionsProduction_edit.text.length < 1) {
-  var instructionsProductionGroup = app.activeDocument.layers.getByName('Masque').groupItems.getByName('Production Instructions Group');
-  instructionsProductionGroup.remove()
+  var instructionsProductionGroup = app.activeDocument.groupItems.getByName(
+    "Production Instructions Group"
+  );
+  instructionsProductionGroup.remove();
 }
-
 
 var customerService_instructions = app.activeDocument.textFrames.getByName(
   "Customer Service Instructions"
 );
 customerService_instructions.contents = instructionsCustomerService_edit.text;
-var instructionsCustomerServiceGroup = app.activeDocument.layers.getByName('Masque').groupItems.getByName('Customer Service Instructions Group');
 if (instructionsCustomerService_edit.text.length < 1) {
-  instructionsCustomerServiceGroup.remove()
+  var instructionsCustomerServiceGroup =
+    app.activeDocument.groupItems.getByName(
+      "Customer Service Instructions Group"
+    );
+  instructionsCustomerServiceGroup.remove();
 }
-
 
 //  if there is no information in all 3 boxes, delete artboard 2 and everything on it.
-if (instructionsCustomer_text.text.length < 1 && instructionsProduction_edit.text.length < 1 && instructionsCustomerService_edit.text.length < 1) {
-  app.activeDocument.artboards.getByName('Artboard 2').remove();
-var artboardLogo = app.activeDocument.groupItems.getByName('Bic Logo Group');
-  artboardLogo.remove();
+if (
+  instructionsCustomer_text.text.length < 1 &&
+  instructionsProduction_edit.text.length < 1 &&
+  instructionsCustomerService_edit.text.length < 1
+) {
+  if (bodyColorList.selection < 11) {
+    var artboardLogo =
+      app.activeDocument.groupItems.getByName("Bic Logo Group");
+    artboardLogo.remove();
+    app.activeDocument.artboards.getByName("Back").remove();
+  }
+
+  // 11 is the dark assortment. 12 is the light assortment.
+  if (
+    bodyColorList.selection.index === 11 ||
+    bodyColorList.selection.index === 12
+  ) {
+    if (doubleSidedCheckbox.value === false) {
+      var artboardLogo =
+        app.activeDocument.groupItems.getByName("Bic Logo Group");
+      artboardLogo.remove();
+      app.activeDocument.artboards.getByName("Back").remove();
+    } else {
+      var SILayer = app.activeDocument.layers.getByName("Special Instructions");
+      SILayer.visible = true;
+      SILayer.remove();
+    }
+  }
 }
-
-
-
-
-
-
-
 
 //#region function calls
 customerInfo_function();
@@ -1626,18 +1831,15 @@ originalFile();
 
 if (bodyColorList.selection.index === 11) {
   app.activeDocument.layers.getByName("LIGHT ASSORTMENT").visible = false;
-  //app.activeDocument.layers.getByName("LIGHT ASSORTMENT").remove();
   app.activeDocument.layers.getByName("DARK ASSORTMENT").visible = true;
 }
 
 if (bodyColorList.selection.index === 12) {
   app.activeDocument.layers.getByName("DARK ASSORTMENT").visible = false;
-  //app.activeDocument.layers.getByName("DARK ASSORTMENT").remove();
   app.activeDocument.layers.getByName("LIGHT ASSORTMENT").visible = true;
 }
 
 /* #region  This section looks at the number of ink colors entered for each side, and calculates the number and order of screens in the screen information section. */
-
 if (bodyColorList.selection.index < 11) {
   var screenTotal = screenCounter_A.length + screenCounter_C.length;
 
@@ -1712,5 +1914,20 @@ if (bodyColorList.selection.index < 11) {
     app.activeDocument.groupItems.getByName("Screen5").remove();
   }
 }
-
 /* #endregion */
+
+//This area saves the file as a PDF in the Artworks Sent folder if the autoSave checkbox is checked in the UI.
+if (autoSave.value === true) {
+  var doc = app.activeDocument;
+  var docPath =
+    "/c/Users/JBavitz/BIC/BIC logo lighter Customer Service - General/Graphic Design/3 - Art Proof sent";
+  {
+    var opts = new PDFSaveOptions();
+    opts.PDFPreset = "Illustrator Default";
+    if (shortName.length > 0) {
+      doc.saveAs(File(docPath + "/" + shortName + ".pdf"), opts);
+    } else {
+      doc.saveAs(File(docPath + "/" + longName + ".pdf"), opts);
+    }
+  }
+}
