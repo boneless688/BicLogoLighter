@@ -53,19 +53,13 @@ var designerList = designerLeft.add("dropdownlist", undefined, [
 ]);
 designerList.characters = 10;
 designerList.selection = 2;
-var designerRight = designerMaster.add("panel", undefined, " ");
-var designerCheckbox = designerMaster.add(
-  "checkbox",
-  undefined,
-  "Default Artist"
-);
 
-var nationalityGroup = topLeft.add("panel", undefined, "");
-nationalityGroup.orientation = "row";
+var nationalityGroup = designerMaster.add("panel", undefined, "");
+nationalityGroup.orientation = "column";
 nationalityGroup.margins = [20, 20, 20, 5];
 
 var nationalityUS = nationalityGroup.add("radiobutton", undefined, "US");
-nationalityUS.orientation = "row";
+nationalityUS.orientation = "column";
 nationalityUS.value = true;
 var nationalityCanada = nationalityGroup.add(
   "radiobutton",
@@ -84,12 +78,21 @@ var jdeNumber_edit = orderOne.add("edittext", undefined, "");
 jdeNumber_edit.characters = 7;
 //jdeNumber_edit.text = "6187745";
 
+
+
 var poNumber = orderOne.add("statictext", undefined, "PO Number");
 var poNumber_edit = orderOne.add("edittext", undefined, "");
-poNumber_edit.characters = 20;
+poNumber_edit.characters = 10;
 //poNumber_edit.text = "PO-6743";
 
-var webPrefix = orderOne.add("dropdownlist", undefined, [
+var webSpacer = orderOne.add("panel", undefined," " );
+webSpacer.margins = [75, 75, 75, 75];
+
+
+
+var webArea = orderOne.add("panel", undefined, "Web Number");
+
+var webPrefix = webArea.add("dropdownlist", undefined, [
   "    ",
   "B2B",
   "D2CWEB",
@@ -98,8 +101,7 @@ var webPrefix = orderOne.add("dropdownlist", undefined, [
 webPrefix.characters = 6;
 webPrefix.selection = 0;
 
-var webNumber = orderOne.add("statictext", undefined, "Web Number");
-var webNumber_edit = orderOne.add("edittext", undefined, "");
+var webNumber_edit = webArea.add("edittext", undefined, "");
 webNumber_edit.characters = 10;
 //webNumber_edit.text = "2485";
 
@@ -137,14 +139,14 @@ var instructionsCustomer_title = orderFour.add(
   undefined,
   "Instructions - Customer"
 );
-var instructionsCustomer_text = instructionsCustomer_title.add(
+var instructionsCustomer_edit = instructionsCustomer_title.add(
   "edittext",
   undefined,
   "",
   { multiline: true }
 );
-instructionsCustomer_text.minimumSize.width = 200;
-instructionsCustomer_text.minimumSize.height = 100;
+instructionsCustomer_edit.minimumSize.width = 200;
+instructionsCustomer_edit.minimumSize.height = 100;
 //instructionsCustomer_text.text = "Instructions from the customer.";
 
 var instructionsCustomerService_title = orderFour.add(
@@ -193,6 +195,7 @@ var colors = itemTopRow.add("group");
 colors.margins = [50, 0, 0, 0];
 
 var bodyColor = descriptionSide.add("panel", undefined, "Body Color");
+bodyColor.orientation = 'row'
 
 var bodyColorList = bodyColor.add("dropdownlist", undefined, [
   "Black",
@@ -218,8 +221,10 @@ var doubleSided = bodyColor.add("panel", undefined);
 var doubleSidedCheckbox = bodyColor.add(
   "checkbox",
   undefined,
-  "Assortment - 2 Sided"
+  "Assort-2 Sided"
 );
+
+doubleSidedCheckbox.value = false;
 
 var descriptionBox = descriptionSide.add(
   "statictext",
@@ -233,24 +238,33 @@ descriptionBox_edit.characters = 20;
 var autoSave = descriptionSide.add(
   "checkbox",
   undefined,
-  "Save the PDF upon opening?"
+  "Save the PDF?"
 );
 autoSave.value = true;
 
 var spacerBox = descriptionSide.add("statictext", undefined, "");
-spacerBox.margins = 20;
+spacerBox.margins = 40;
 
 var originalArt = descriptionSide.add("statictext", undefined, "Original Art");
 var originalArt_edit = descriptionSide.add("edittext", undefined, "");
 originalArt_edit.characters = 20;
 //originalArt_edit.text = "Original art file name.";
 
+var repeatOrder = descriptionSide.add("statictext", undefined, "Repeat order");
+var repeatOrder_edit = descriptionSide.add("edittext", undefined, "");
+repeatOrder_edit.characters = 20;
+
+
+
+
+
+
 var inkMaster = colors.add("group");
 inkMaster.orientation = "column";
 var inkColors_1 = inkMaster.add("group");
 var inkColors_2 = inkMaster.add("group");
 
-var inkColors_A = inkColors_1.add("panel", undefined, "inkColors_A");
+var inkColors_A = inkColors_1.add("panel", undefined, "Inks Front.");
 inkColors_A.preferredSize = [400, 100];
 inkColors_A.margins = [20, 20, 20, 20];
 inkColors_A.orientation = "row";
@@ -280,7 +294,7 @@ var ink_A4 = inkBox_Master_A4.add("edittext", undefined, "");
 ink_A4.characters = 10;
 //ink_A4.text = "142 yellow";
 
-var inkColors_C = inkColors_2.add("panel", undefined, "inkColors_C");
+var inkColors_C = inkColors_2.add("panel", undefined, "Inks Back");
 inkColors_C.preferredSize = [400, 100];
 inkColors_C.margins = [20, 20, 20, 20];
 inkColors_C.orientation = "row";
@@ -312,12 +326,21 @@ ink_C4.characters = 10;
 /* #region  OKAY / Cancel buttons */
 var buttonGroup = master.add("panel");
 buttonGroup.orientation = "row";
-buttonGroup.add("button", undefined, "OK");
-buttonGroup.add("button", undefined, "Cancel");
+var okButton = buttonGroup.add("button", undefined, "OK");
+var cancelButton = buttonGroup.add("button", undefined, "Cancel");
+
+
+
 /* #endregion */
 
-master.show();
+master.show()
+
 //#endregion
+
+
+
+
+
 
 // OPEN TEMPLATES WITH RELATIVE PATHS
 if (
@@ -388,7 +411,9 @@ if (nationalityCanada.value === true) {
   app.activeDocument.layers.getByName("USA").visible = true;
 }
 
-// region: ASSORTED - If the order is one of the assorted color proofs or a sleeve, the ink color code is bypassed.
+
+
+// region: ASSORTED - If the order uses the standard template, then the body and ink color code is run. If it isn't, then the code is bypassed.
 if (bodyColorList.selection.index < 11) {
   /* #region   */
   var item_A1_frame = app.activeDocument.pathItems.getByName("A1_Frame");
@@ -602,12 +627,15 @@ if (bodyColorList.selection.index < 11) {
   // This block makes the stroke of the box thicker if the ink is a standard color.
   ink_A1.text = capitalize_function(ink_A1.text);
   if (ink_A1.text === "Reflex Blue" || ink_A1.text === "Process Blue") {
-    item_A1_frame.strokeWidth = 1.25;
+    item_A1_frame.strokeWidth = 0.5;
   }
 
   for (i = 0; i < standardInkNumber.length; i++) {
     if (pmsNumberA1 === standardInkNumber[i]) {
-      item_A1_frame.strokeWidth = 1.25;
+      item_A1_frame.strokeWidth = 0.5;
+    } else {
+      item_A1_frame.strokeWidth = 1.5 ;
+
     }
   }
 
@@ -1507,7 +1535,7 @@ if (jdeNumber_edit.text.length < 1) {
     "_" +
     "A";
   var lightAssortName =
-    webPrefix.selection.text +
+    webPrefix.selection.text + "-" +
     webNumber_edit.text +
     "_" +
     descriptionField_function() +
@@ -1647,6 +1675,8 @@ if (bodyColorList.selection.index === 12) {
   }
 }
 
+
+//FILENAME  SLEEVE TEMPLATE
 if (bodyColorList.selection.index === 14) {
   if (jdeNumber_edit.text.length < 1) {
     var sleeveName =
@@ -1671,6 +1701,9 @@ if (bodyColorList.selection.index === 14) {
   alphaFileName.contents = sleeveName;
 }
 
+
+
+//FILENAME STANDARD TEMPLATE
 if (bodyColorList.selection.index < 11) {
   var illustratorFrame = [
     "FileName",
@@ -1700,6 +1733,9 @@ function originalFile() {
   originalFile.contents = originalArt_edit.text;
 }
 
+var repeatOrder = app.activeDocument.textFrames.getByName('RepeatOrderText')
+repeatOrder.contents = repeatOrder_edit.text;
+
 function currentDate_function() {
   var currentDate = new Date();
   var date = currentDate.toDateString();
@@ -1708,12 +1744,10 @@ function currentDate_function() {
     date_A[0] + ", " + date_A[1] + " " + date_A[2] + ", " + date_A[3];
   var a = app.activeDocument.textFrames.getByName("DateBox");
   a.contents = date_B;
-  if (
-    bodyColorList.selection.index === 11 ||
-    (bodyColorList.selection.index === 12 && doubleSidedCheckbox.value === true)
-  ) {
-    var b = app.activeDocument.textFrames.getByName("DateBox_Back");
-    b.contents = date_B;
+
+  if (doubleSidedCheckbox.value === true) {
+    var dateBoxBack = app.activeDocument.textFrames.getByName("DateBox_Back");
+    dateBoxBack.contents = date_B;
   }
 }
 
@@ -1729,7 +1763,7 @@ function InHands_function() {
 
 function web_function() {
   var web = app.activeDocument.textFrames.getByName("Web");
-  web.contents = webPrefix.selection.text + " " + webNumber_edit.text;
+  web.contents = webPrefix.selection.text + webNumber_edit.text;
 }
 
 function JDE_function() {
@@ -1751,23 +1785,14 @@ function JDE_function() {
 var customer_instructions = app.activeDocument.textFrames.getByName(
   "Customer Instructions"
 );
-customer_instructions.contents = instructionsCustomer_text.text;
-if (instructionsCustomer_text.text.length < 1) {
+
+customer_instructions.contents = instructionsCustomer_edit.text;
+
+if (instructionsCustomer_edit.length < 0) {
   var instructionsCustomerGroup = app.activeDocument.groupItems.getByName(
     "Customer Instructions Group"
   );
   instructionsCustomerGroup.remove();
-}
-
-var production_instructions = app.activeDocument.textFrames.getByName(
-  "Production Instructions"
-);
-production_instructions.contents = instructionsProduction_edit.text;
-if (instructionsProduction_edit.text.length < 1) {
-  var instructionsProductionGroup = app.activeDocument.groupItems.getByName(
-    "Production Instructions Group"
-  );
-  instructionsProductionGroup.remove();
 }
 
 var customerService_instructions = app.activeDocument.textFrames.getByName(
@@ -1782,12 +1807,19 @@ if (instructionsCustomerService_edit.text.length < 1) {
   instructionsCustomerServiceGroup.remove();
 }
 
+var production_instructions = app.activeDocument.textFrames.getByName("Production Instructions");
+production_instructions.contents = instructionsProduction_edit.text;
+if (instructionsProduction_edit.text.length < 1) {
+  var instructionsProductionGroup = app.activeDocument.groupItems.getByName("Production Instructions Group");
+  instructionsProductionGroup.remove();
+}
+
 //  if there is no information in all 3 boxes, delete artboard 2 and everything on it.
 if (
-  instructionsCustomer_text.text.length < 1 &&
+  instructionsCustomer_edit.text.length < 1 &&
   instructionsProduction_edit.text.length < 1 &&
   instructionsCustomerService_edit.text.length < 1
-) {
+)  {
   if (bodyColorList.selection < 11) {
     var artboardLogo =
       app.activeDocument.groupItems.getByName("Bic Logo Group");
@@ -1805,13 +1837,22 @@ if (
         app.activeDocument.groupItems.getByName("Bic Logo Group");
       artboardLogo.remove();
       app.activeDocument.artboards.getByName("Back").remove();
-    } else {
+    }
+
+    if (doubleSidedCheckbox.value === true) {
       var SILayer = app.activeDocument.layers.getByName("Special Instructions");
       SILayer.visible = true;
       SILayer.remove();
     }
   }
 }
+
+
+
+
+
+
+
 
 //#region function calls
 customerInfo_function();
@@ -1838,6 +1879,8 @@ if (bodyColorList.selection.index === 12) {
   app.activeDocument.layers.getByName("DARK ASSORTMENT").visible = false;
   app.activeDocument.layers.getByName("LIGHT ASSORTMENT").visible = true;
 }
+
+
 
 /* #region  This section looks at the number of ink colors entered for each side, and calculates the number and order of screens in the screen information section. */
 if (bodyColorList.selection.index < 11) {
@@ -1919,15 +1962,36 @@ if (bodyColorList.selection.index < 11) {
 //This area saves the file as a PDF in the Artworks Sent folder if the autoSave checkbox is checked in the UI.
 if (autoSave.value === true) {
   var doc = app.activeDocument;
-  var docPath =
-    "/c/Users/JBavitz/BIC/BIC logo lighter Customer Service - General/Graphic Design/3 - Art Proof sent";
+  var docPath = "/c/Users/JBavitz/BIC/BIC logo lighter Customer Service - General/Graphic Design/3 - Art Proof sent";
   {
     var opts = new PDFSaveOptions();
     opts.PDFPreset = "Illustrator Default";
-    if (shortName.length > 0) {
-      doc.saveAs(File(docPath + "/" + shortName + ".pdf"), opts);
+
+
+
+
+    if(bodyColorList.selection.index < 11) {
+      if (itemNumber_edit.text > 1) {
+      doc.saveAs(File(docPath + "/" + longName + ".pdf"), opts)
     } else {
-      doc.saveAs(File(docPath + "/" + longName + ".pdf"), opts);
+      doc.saveAs(File(docPath + "/" + shortName + ".pdf"), opts)
     }
   }
-}
+  
+  
+  if(bodyColorList.selection.index === 11) {
+       doc.saveAs(File(docPath + "/" + darkAssortName + ".pdf"), opts)
+      }
+      
+      
+      if(bodyColorList.selection.index === 12) {
+         doc.saveAs(File(docPath + "/" + lightAssortName + ".pdf"), opts)
+        }
+
+        if(bodyColorList.selection.index === 14) {
+           doc.saveAs(File(docPath + "/" + sleeveName + ".pdf"), opts)
+          }
+        }
+      }
+    
+  
