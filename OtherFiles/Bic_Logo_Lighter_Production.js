@@ -1,4 +1,4 @@
-﻿//#region  ExtendScript UI Layout
+﻿//#region                                ExtendScript UI Layout
 var master = new Window("dialog");
 master.maximumSize.height = 900;
 master.maximumSize.width = 1400;
@@ -78,22 +78,18 @@ var jdeNumber_edit = orderOne.add("edittext", undefined, "");
 jdeNumber_edit.characters = 7;
 //jdeNumber_edit.text = "6187745";
 
-
-
 var poNumber = orderOne.add("statictext", undefined, "PO Number");
 var poNumber_edit = orderOne.add("edittext", undefined, "");
 poNumber_edit.characters = 10;
 //poNumber_edit.text = "PO-6743";
 
-var webSpacer = orderOne.add("panel", undefined," " );
+var webSpacer = orderOne.add("panel", undefined, " ");
 webSpacer.margins = [75, 75, 75, 75];
-
-
 
 var webArea = orderOne.add("panel", undefined, "Web Number");
 
 var webPrefix = webArea.add("dropdownlist", undefined, [
-  "    ",
+  "-",
   "B2B",
   "D2CWEB",
   "CA2C",
@@ -134,11 +130,7 @@ var orderFour = topRight.add("group");
 orderFour.orientation = "row";
 orderFour.preferredSize.height = 100;
 
-var instructionsCustomer_title = orderFour.add(
-  "panel",
-  undefined,
-  "Instructions - Customer"
-);
+var instructionsCustomer_title = orderFour.add("panel", undefined, "Instructions - Customer");
 var instructionsCustomer_edit = instructionsCustomer_title.add(
   "edittext",
   undefined,
@@ -195,7 +187,7 @@ var colors = itemTopRow.add("group");
 colors.margins = [50, 0, 0, 0];
 
 var bodyColor = descriptionSide.add("panel", undefined, "Body Color");
-bodyColor.orientation = 'row'
+bodyColor.orientation = "row";
 
 var bodyColorList = bodyColor.add("dropdownlist", undefined, [
   "Black",
@@ -235,11 +227,7 @@ var descriptionBox_edit = descriptionSide.add("edittext", undefined, "");
 descriptionBox_edit.characters = 20;
 //descriptionBox_edit.text = "the only thing";
 
-var autoSave = descriptionSide.add(
-  "checkbox",
-  undefined,
-  "Save the PDF?"
-);
+var autoSave = descriptionSide.add("checkbox", undefined, "Save the PDF?");
 autoSave.value = true;
 
 var spacerBox = descriptionSide.add("statictext", undefined, "");
@@ -253,11 +241,6 @@ originalArt_edit.characters = 20;
 var repeatOrder = descriptionSide.add("statictext", undefined, "Repeat order");
 var repeatOrder_edit = descriptionSide.add("edittext", undefined, "");
 repeatOrder_edit.characters = 20;
-
-
-
-
-
 
 var inkMaster = colors.add("group");
 inkMaster.orientation = "column";
@@ -323,27 +306,30 @@ var ink_C4 = inkBox_Master_C4.add("edittext", undefined, "");
 ink_C4.characters = 10;
 //ink_C4.text = "116 athletic gold";
 
-/* #region  OKAY / Cancel buttons */
+/*/* #region  OKAY / Cancel buttons */
 var buttonGroup = master.add("panel");
 buttonGroup.orientation = "row";
 var okButton = buttonGroup.add("button", undefined, "OK");
 var cancelButton = buttonGroup.add("button", undefined, "Cancel");
 
-
-
 /* #endregion */
 
-master.show()
+master.show();
 
 //#endregion
 
 
 
 
+/* if(jdeNumber_edit.text.length < 1 && webNumber_edit.text.length < 1) {
+     throw 'A JDE number or a web number must be entered.'  //This throws an error and stops the rest of the script from being executed.
+} */
 
 
+
+//#region                                OPEN TEMPLATE FILE
 // OPEN TEMPLATES WITH RELATIVE PATHS
-if (
+ if (
   bodyColorList.selection.index === 11 ||
   bodyColorList.selection.index === 12
 ) {
@@ -395,12 +381,19 @@ if (
   }
   var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater));
   app.open(File(_path + "/Proof_Template_Standard.ait"));
-}
+} 
+//#endregion
 
-String.prototype.trim = function () {
+
+
+
+
+
+ String.prototype.trim = function () {
   return this.replace(/^\s+/, "").replace(/\s+$/, "");
 };
 
+//#region                                NATIONALITY
 if (nationalityCanada.value === true) {
   app.activeDocument.layers.getByName("USA").visible = true;
   app.activeDocument.layers.getByName("USA").remove();
@@ -410,10 +403,9 @@ if (nationalityCanada.value === true) {
   app.activeDocument.layers.getByName("Canada").remove();
   app.activeDocument.layers.getByName("USA").visible = true;
 }
+//#endregion
 
-
-
-// region: ASSORTED - If the order uses the standard template, then the body and ink color code is run. If it isn't, then the code is bypassed.
+//#region     INK COLORS - If the order uses the standard template, then the body and ink color code is run. If it isn't, then the code is bypassed.
 if (bodyColorList.selection.index < 11) {
   /* #region   */
   var item_A1_frame = app.activeDocument.pathItems.getByName("A1_Frame");
@@ -479,6 +471,7 @@ if (bodyColorList.selection.index < 11) {
   var item_C4_screenName = app.activeDocument.textFrames.getByName(
     "C4 Screen Ink Color"
   );
+}
 
   var newWhite = new CMYKColor();
   newWhite.black = 00;
@@ -518,13 +511,21 @@ if (bodyColorList.selection.index < 11) {
   var screenCounter_A = [];
   var screenCounter_C = [];
   ink_A1.text = ink_A1.text.trim();
+  ink_A1.text = ink_A1.text.toLowerCase();
   ink_A2.text = ink_A2.text.trim();
+  ink_A2.text = ink_A2.text.toLowerCase();
   ink_A3.text = ink_A3.text.trim();
+  ink_A3.text = ink_A3.text.toLowerCase();
   ink_A4.text = ink_A4.text.trim();
+  ink_A4.text = ink_A4.text.toLowerCase();
   ink_C1.text = ink_C1.text.trim();
+  ink_C1.text = ink_C1.text.toLowerCase();
   ink_C2.text = ink_C2.text.trim();
+  ink_C2.text = ink_C2.text.toLowerCase();
   ink_C3.text = ink_C3.text.trim();
+  ink_C3.text = ink_C3.text.toLowerCase();
   ink_C4.text = ink_C4.text.trim();
+  ink_C4.text = ink_C4.text.toLowerCase();
 
   function neonInk(inkString, bravo) {
     var neonInks = ["801", "802", "803", "804", "805", "806", "807"];
@@ -537,115 +538,184 @@ if (bodyColorList.selection.index < 11) {
       }
     }
   }
+//#endregion
 
-  /* A1           If a NUMBER appears in the entered text, then this block will run. This inserts text into the illustrator swatch box and the screen box and adds the fill color to both the big and small color boxes.  The color swatch name format in Illustrator is all caps:  PANTONE 119 C
-   */
-  if (ink_A1.text.length > 0) {
-    var pmsTest_A1 = false;
-    for (var index = 0; index < ink_A1.text.length; index++) {
-      for (i = 0; i < digitArray.length; i++) {
-        if (ink_A1.text[index] === digitArray[i]) {
-          pmsTest_A1 = true;
-          break;
+
+
+
+
+
+
+
+
+/* THESE ARE ALL THE PMS INK COLORS WHOSE NAMES DO NOT BEGIN WITH A NUMBER.
+Actual names:
+'PANTONE Black 0961 C', 'PANTONE Black 2 C', 'Pantone Black 3 C', 'Pantone Black 4 C', 'Pantone Black 5 C', 'Pantone Black 6 C', 'Pantone Black 7 C', 'Pantone Black C', 'Pantone Blue 072 C', Pantone Blue 0821 C', 'Pantone Bright Red C', 'Pantone Dark Blue C', 'Pantone Green 0921 C', 'Pantone Green C', 'Pantone Magenta 0521 C', 'Pantone Medium Purple C', 'Pantone Orange 021 C', 'Pantone Pink C', 'Pantone Purple C', 'Pantone Red 032 C', 'Pantone Red 0331 C', 'Pantone Reflex Blue', 'Pantone Rhodamine Red C', 'Pantone Rubine Red C', 'Pantone Violet 0631 C', 'Pantone Violet C', 'Pantone Warm Red C', 'Pantone Yellow 012 C', Pantone Yellow 0131 C', 'Pantone Yellow C', 'Pantone Cool Gray 1 C', 'Pantone Cool Gray 2 C', 'Pantone Cool Gray 3 C', 'Pantone Cool Gray 4 C', 'Pantone Cool Gray 5 C', 'Pantone Cool Gray 6 C', 'Pantone Cool Gray 7 C', 'Pantone Cool Gray 8 C', 'Pantone Cool Gray 9 C', 'Pantone Cool Gray 10 C', 'Pantone Cool Gray 11 C', 'Pantone Warm Gray 1 C', 'Pantone Warm Gray 2 C', 'Pantone Warm Gray 3 C', 'Pantone Warm Gray 4 C', 'Pantone Warm Gray 5 C', 'Pantone Warm Gray 6 C', 'Pantone Warm Gray 7 C', 'Pantone Warm Gray 8 C', 'Pantone Warm Gray 9 C', 'Pantone Warm Gray 10 C', 'Pantone Cool Gray 11 C']
+
+
+['Black 0961', 'Black 2', 'Black 3', 'Black 4', 'Black 5', 'Black 6', 'Black 7', 'Black', 'Blue 072', 'Blue 0821', 'Bright Red', 'Dark Blue', 'Green 0921', 'Green', 'Magenta 0521', 'Medium Purple', 'Orange 021', 'Pink', 'Purple', 'Red 032', 'Red 0331', 'Reflex Blue', 'Rhodamine Red', 'Rubine Red', 'Violet 0631', 'Violet', 'Warm Red', 'Yellow 012', 'Yellow 0131', 'Yellow', 'Cool Gray 1', 'Cool Gray 2', 'Cool Gray 3', 'Cool Gray 4', 'Cool Gray 5', 'Cool Gray 6', 'Cool Gray 7', 'Cool Gray 8', 'Cool Gray 9', 'Cool Gray 10', 'Cool Gray 11', 'Warm Gray 1', 'Warm Gray 2', 'Warm Gray 3', 'Warm Gray 4', 'Warm Gray 5', 'Warm Gray 6', 'Warm Gray 7', 'Warm Gray 8', 'Warm Gray 9', 'Warm Gray 10', 'Cool Gray 11']
+
+*/
+
+var inksNamedArray = ['blue 072', 'magenta 0521', 'orange 021', 'red 032', 'red 0331']
+
+
+for (i = 0; i < inksNamedArray.length; i++) {
+  if (ink_A1.text === inksNamedArray[i]) {
+    item_A1_name.contents = "PANTONE" + capitalizeFunction(inksNamedArray[i]) + " " + "C"
+    alert(item_A1_name)
+    break
+  } else {
+    if (ink_A1.text.length > 0) {
+      var pmsTest_A1 = false;
+      for (var index = 0; index < ink_A1.text.length; index++) {
+        for (i = 0; i < digitArray.length; i++) {
+          if (ink_A1.text[index] === digitArray[i]) {
+            pmsTest_A1 = true;
+            break;
+          }
         }
       }
     }
-  }
 
-  if (pmsTest_A1 === true) {
-    var gray = capitalize_function(ink_A1.text);
-    var grayArray = gray.split(" ");
-    if (grayArray[0] === "Cool" || grayArray[0] === "Warm") {
-      var grayName =
-        "PANTONE" +
-        " " +
-        grayArray[0] +
-        " " +
-        grayArray[1] +
-        " " +
-        grayArray[2] +
-        " " +
-        "C";
-      item_A1_name.contents = grayName;
-      item_A1_screenName.contents = grayName;
-      item_A1_color.fillColor =
-        app.activeDocument.swatches.getByName(grayName).color;
-      item_A1_chip.fillColor =
-        app.activeDocument.swatches.getByName(grayName).color;
-    } else {
-      var kilo = ink_A1.text.search(" ");
-      var pmsNumberA1 = ink_A1.text.substring(0, kilo);
-      var mike = ink_A1.text.substring(kilo);
 
-      pmsNumberA1 = pmsNumberA1.replace(/,/g, "");
-      item_A1_name.contents =
-        "PANTONE" +
-        " " +
-        pmsNumberA1 +
-        " " +
-        "C" +
-        "  " +
-        capitalize_function(mike);
-      item_A1_screenName.contents =
-        pmsNumberA1 + " " + capitalize_function(mike);
-      item_A1_color.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + pmsNumberA1 + " " + "C"
-      ).color;
-      item_A1_chip.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + pmsNumberA1 + " " + "C"
-      ).color;
-    }
-  }
 
-  // If there are no numbers in the entered text, then this block will run. This inserts text into the illustrator swatch box and the screen box and adds the fill color to both the big and small color boxes.
-  if (pmsTest_A1 === false) {
-    if (ink_A1.text === "white") {
-      item_A1_name.contents = "White";
-      item_A1_screenName.contents = "White";
-      item_A1_color.fillColor = newWhite;
-      item_A1_chip.fillColor = newWhite;
-      item_A1_frame.strokeWidth = 1.25;
-    } else if (ink_A1.text === "black") {
-      item_A1_name.contents = "Black";
-      item_A1_screenName.contents = "Black";
-      item_A1_color.fillColor = newBlack;
-      item_A1_chip.fillColor = newBlack;
-      item_A1_frame.strokeWidth = 1.25;
-    } else {
-      item_A1_name.contents =
-        "PANTONE" + " " + capitalize_function(ink_A1.text) + " " + "C";
-      item_A1_screenName.contents = capitalize_function(ink_A1.text);
-      item_A1_color.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + capitalize_function(ink_A1.text) + " " + "C"
-      ).color;
-      item_A1_chip.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + capitalize_function(ink_A1.text) + " " + "C"
-      ).color;
-    }
-  }
 
-  // This block makes the stroke of the box thicker if the ink is a standard color.
-  ink_A1.text = capitalize_function(ink_A1.text);
-  if (ink_A1.text === "Reflex Blue" || ink_A1.text === "Process Blue") {
-    item_A1_frame.strokeWidth = 0.5;
-  }
+  //#region     A1
 
-  for (i = 0; i < standardInkNumber.length; i++) {
-    if (pmsNumberA1 === standardInkNumber[i]) {
-      item_A1_frame.strokeWidth = 0.5;
-    } else {
-      item_A1_frame.strokeWidth = 1.5 ;
 
-    }
-  }
+    if (ink_A1.text.length > 0) {
+     var pmsTest_A1 = false;
+     for (var index = 0; index < ink_A1.text.length; index++) {
+       for (i = 0; i < digitArray.length; i++) {
+         if (ink_A1.text[index] === digitArray[i]) {
+           pmsTest_A1 = true;
+           break;
+         }
+       }
+     }
+   }
+ 
+   if (pmsTest_A1 === true) {
+     var gray = capitalize_function(ink_A1.text);
+     var grayArray = gray.split(" ");
+     if (grayArray[0] === "Cool" || grayArray[0] === "Warm") {
+       var grayName =
+         "PANTONE" +
+         " " +
+         grayArray[0] +
+         " " +
+         grayArray[1] +
+         " " +
+         grayArray[2] +
+         " " +
+         "C";
+       item_A1_name.contents = grayName;
+       item_A1_screenName.contents = grayName;
+       item_A1_color.fillColor =
+         app.activeDocument.swatches.getByName(grayName).color;
+       item_A1_chip.fillColor =
+         app.activeDocument.swatches.getByName(grayName).color;
+     } else {
+       var kilo = ink_A1.text.search(" ");
+       var pmsNumberA2 = ink_A1.text.substring(0, kilo);
+       var mike = ink_A1.text.substring(kilo);
+       pmsNumberA2 = pmsNumberA2.replace(/,/g, "");
+       item_A1_name.contents =
+         "PANTONE" +
+         " " +
+         pmsNumberA2 +
+         " " +
+         "C" +
+         "  " +
+         capitalize_function(mike);
+       item_A1_screenName.contents =
+         pmsNumberA2 + " " + capitalize_function(mike);
+       item_A1_color.fillColor = app.activeDocument.swatches.getByName(
+         "PANTONE" + " " + pmsNumberA2 + " " + "C"
+       ).color;
+       item_A1_chip.fillColor = app.activeDocument.swatches.getByName(
+         "PANTONE" + " " + pmsNumberA2 + " " + "C"
+       ).color;
+     }
+   }
+ 
+   // If the first word is a WORD, then this block will run. This inserts text into the illustrator swatch box and the screen box and adds the fill color to both the big and small color boxes.
+   if (pmsTest_A1 === false) {
+     if (ink_A1.text === "white") {
+       item_A1_name.contents = "White";
+       item_A1_screenName.contents = "White";
+       item_A1_color.fillColor = newWhite;
+       item_A1_chip.fillColor = newWhite;
+       item_A1_frame.strokeWidth = 1.25;
+     } else if (ink_A1.text === "black") {
+       item_A1_name.contents = "Black";
+       item_A1_screenName.contents = "Black";
+       item_A1_color.fillColor = newBlack;
+       item_A1_chip.fillColor = newBlack;
+       item_A1_frame.strokeWidth = 1.25;
+     } else {
+       item_A1_name.contents =
+         "PANTONE" + " " + capitalize_function(ink_A1.text) + " " + "C";
+       item_A1_screenName.contents = capitalize_function(ink_A1.text);
+       item_A1_color.fillColor = app.activeDocument.swatches.getByName(
+         "PANTONE" + " " + capitalize_function(ink_A1.text) + " " + "C"
+       ).color;
+       item_A1_chip.fillColor = app.activeDocument.swatches.getByName(
+         "PANTONE" + " " + capitalize_function(ink_A1.text) + " " + "C"
+       ).color;
+     }
+   }
+ 
+   // This block makes the stroke of the box thicker if the ink is a standard color.
+   ink_A1.text = capitalize_function(ink_A1.text);
+   if (ink_A1.text === "Reflex Blue" || ink_A1.text === "Process Blue") {
+     item_A1_frame.strokeWidth = 1.25;
+   }
+ 
+   neonInk(ink_A1.text, "A2_Warning");
+ 
+   for (i = 0; i < standardInkNumber.length; i++) {
+     if (pmsNumberA2 === standardInkNumber[i]) {
+       item_A1_frame.strokeWidth = 1.25;
+     }
+   }
+   if (ink_A1.text.length > 0) {
+     screenCounter_A.push("Two");
+   }
 
-  neonInk(ink_A1.text, "A1_Warning");
+  //#endregion
 
-  if (ink_A1.text.length > 0) {
-    screenCounter_A.push("One");
-  }
 
-  // A2           If the first word is a NUMBER, then this block will run. This inserts text into the illustrator swatch box and the screen box, and adds the fill color to both the big and small color boxes.  The color swatch name format in Illustrator is all caps:  PANTONE 119 C
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  //#region     A2
   if (ink_A2.text.length > 0) {
     var pmsTest_A2 = false;
     for (var index = 0; index < ink_A2.text.length; index++) {
@@ -745,8 +815,12 @@ if (bodyColorList.selection.index < 11) {
   if (ink_A2.text.length > 0) {
     screenCounter_A.push("Two");
   }
+  //#endregion
 
-  // A3           If the first word is a NUMBER, then this block will run. This inserts text into the illustrator swatch box and the screen box and adds the fill color to both the big and small color boxes.  The color swatch name format in Illustrator is all caps:  PANTONE 119 C
+
+
+
+  //#region     A3
   if (ink_A3.text.length > 0) {
     var pmsTest_A3 = false;
     for (var index = 0; index < ink_A3.text.length; index++) {
@@ -846,8 +920,8 @@ if (bodyColorList.selection.index < 11) {
   if (ink_A3.text.length > 0) {
     screenCounter_A.push("Three");
   }
-
-  // A4           If the first word is a NUMBER, then this block will run. This inserts text into the illustrator swatch box and the screen box and adds the fill color to both the big and small color boxes.  The color swatch name format in Illustrator is all caps:  PANTONE 119 C
+  //#endregion
+  //#region     A4
   if (ink_A4.text.length > 0) {
     var pmsTest_A4 = false;
     for (var index = 0; index < ink_A4.text.length; index++) {
@@ -947,8 +1021,8 @@ if (bodyColorList.selection.index < 11) {
   if (ink_A4.text.length > 0) {
     screenCounter_A.push("four");
   }
-
-  // C1           If the first word is a NUMBER, then this block will run. This inserts text into the illustrator swatch box and the screen box and adds the fill color to both the big and small color boxes.  The color swatch name format in Illustrator is all caps:  PANTONE 119 C
+  //#endregion
+  //#region     C1
   if (ink_C1.text.length > 0) {
     var pmsTest_C1 = false;
     for (var index = 0; index < ink_C1.text.length; index++) {
@@ -1048,8 +1122,8 @@ if (bodyColorList.selection.index < 11) {
   if (ink_C1.text.length > 0) {
     screenCounter_C.push(1);
   }
-
-  // C2           If the first word is a NUMBER, then this block will run. This inserts text into the illustrator swatch box and the screen box and adds the fill color to both the big and small color boxes.  The color swatch name format in Illustrator is all caps:  PANTONE 119 C
+  //#endregion
+  //#region     C2
   if (ink_C2.text.length > 0) {
     var pmsTest_C2 = false;
     for (var index = 0; index < ink_C2.text.length; index++) {
@@ -1149,8 +1223,8 @@ if (bodyColorList.selection.index < 11) {
   if (ink_C2.text.length > 0) {
     screenCounter_C.push(1);
   }
-
-  // C3           If the first word is a NUMBER, then this block will run. This inserts text into the illustrator swatch box and the screen box and adds the fill color to both the big and small color boxes.  The color swatch name format in Illustrator is all caps:  PANTONE 119 C
+  //#endregion
+  //#region     C3
   if (ink_C3.text.length > 0) {
     var pmsTest_C3 = false;
     for (var index = 0; index < ink_C3.text.length; index++) {
@@ -1250,8 +1324,8 @@ if (bodyColorList.selection.index < 11) {
   if (ink_C3.text.length > 0) {
     screenCounter_C.push(1);
   }
-
-  // C4           If the first word is a NUMBER, then this block will run. This inserts text into the illustrator swatch box and the screen box and adds the fill color to both the big and small color boxes.  The color swatch name format in Illustrator is all caps:  PANTONE 119 C
+  //#endregion
+  //#region     C4
   if (ink_C4.text.length > 0) {
     var pmsTest_C4 = false;
     for (var index = 0; index < ink_C4.text.length; index++) {
@@ -1361,34 +1435,31 @@ if (bodyColorList.selection.index < 11) {
     }
   }
 }
+  //#endregion
 
+//#region                                ORIGINAL ART
 var item_OriginalArt_A = "original art side A";
 var item_originalArt_C = "original art side C";
+//#endregion
 
+//#region                                CUSTOMER INFO
 function customerInfo_function() {
-  var rep = app.activeDocument.layers
-    .getByName("Masque")
-    .textFrames.getByName("Rep");
-  rep.contents =
-    capitalize_function(repNameEdit.text) +
-    "     " +
-    repEmail_Edit.text.toLowerCase();
-
-  var repNameSignature =
-    app.activeDocument.textFrames.getByName("RepName_Signature");
+  var rep = app.activeDocument.layers.getByName("Masque").textFrames.getByName("Rep");
+  rep.contents = capitalize_function(repNameEdit.text) + "     " + repEmail_Edit.text.toLowerCase();
+  var repNameSignature = app.activeDocument.textFrames.getByName("RepName_Signature");
   repNameSignature.contents = repNameEdit.text;
   repNameSignature.contents = capitalize_function(repNameSignature.contents);
 
-  var repNameSignature =
-    app.activeDocument.textFrames.getByName("RepName_Signature");
+  var repNameSignature = app.activeDocument.textFrames.getByName("RepName_Signature");
   repNameSignature.contents = repNameEdit.text;
   repNameSignature.contents = capitalize_function(repNameSignature.contents);
 }
-
 var companyName = app.activeDocument.textFrames.getByName("Company");
 companyName.contents = company_A_Edit.text;
 companyName.contents = capitalize_function(companyName.contents);
+//#endregion
 
+//#region                                DESIGNER
 var designer = app.activeDocument.textFrames.getByName("Designer");
 designer.contents = designerList.selection.text;
 
@@ -1396,6 +1467,7 @@ if (doubleSidedCheckbox.value === true) {
   var designerBack = app.activeDocument.textFrames.getByName("Designer_Back");
   designerBack.contents = designerList.selection.text;
 }
+//#endregion
 
 function vip_function() {
   var vipBox = app.activeDocument.layers
@@ -1437,6 +1509,7 @@ function po_function() {
   }
 }
 
+//#region                                DOUBLE SIDED ASSORTMENT
 if (
   bodyColorList.selection.index === 11 ||
   bodyColorList.selection.index === 12
@@ -1470,6 +1543,7 @@ if (
     }
   }
 }
+//#endregion
 
 function capitalize_function(u) {
   //  This capitalizes every letter that comes after a space. It takes a string as the input u.
@@ -1481,8 +1555,10 @@ function capitalize_function(u) {
   }
   return u.join(" "); //This joins together the capitalized first character of each element with the remaining characters of element.
 }
+//#region                                FILENAME
 function descriptionField_function(bodyColorLayer) {
   var bodyColorLayer = descriptionBox_edit.text;
+  bodyColorLayer = bodyColorLayer.toLowerCase();
   bodyColorLayer = bodyColorLayer.split(" ");
   for (var i = 0; i < bodyColorLayer.length; i++) {
     bodyColorLayer[i] =
@@ -1491,21 +1567,27 @@ function descriptionField_function(bodyColorLayer) {
   return bodyColorLayer.join("");
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if (jdeNumber_edit.text.length < 1) {
-  var shortName =
-    webPrefix.selection.text +
-    webNumber_edit.text +
-    "_" +
-    descriptionField_function() +
-    "_A";
-  var longName =
-    webPrefix.selection.text +
-    webNumber_edit.text +
-    "_" +
-    descriptionField_function() +
-    "_" +
-    bodyColorList.selection.text +
-    "_A";
+
+  var shortName = webPrefix.selection.text + webNumber_edit.text + "_" + descriptionField_function() + "_A";
+  var longName = webPrefix.selection.text + webNumber_edit.text + "_" + descriptionField_function() + "_" + bodyColorList.selection.text + "_A";
 } else {
   var shortName =
     jdeNumber_edit.text + "_" + descriptionField_function() + "_A";
@@ -1525,42 +1607,15 @@ if (shortName.length > 39 || longName.length > 39) {
 }
 
 if (jdeNumber_edit.text.length < 1) {
-  var darkAssortName =
-    webPrefix.selection.text +
-    webNumber_edit.text +
-    "_" +
-    descriptionField_function() +
-    "_" +
-    "DarkAssort" +
+  var darkAssortName = webPrefix.selection.text + webNumber_edit.text + "_" + descriptionField_function() + "_" + "DarkAssort" +
     "_" +
     "A";
-  var lightAssortName =
-    webPrefix.selection.text + "-" +
-    webNumber_edit.text +
-    "_" +
-    descriptionField_function() +
-    "_" +
-    "LightAssort" +
-    "_" +
-    "A";
+  var lightAssortName = webPrefix.selection.text + webNumber_edit.text + "_" + descriptionField_function() + "_" + "LightAssort" + "_" + "A";
 } else {
-  var darkAssortName =
-    jdeNumber_edit.text +
-    "_" +
-    descriptionField_function() +
-    "_" +
-    "DarkAssort" +
-    "_" +
-    "A";
-  var lightAssortName =
-    jdeNumber_edit.text +
-    "_" +
-    descriptionField_function() +
-    "_" +
-    "LightAssort" +
-    "_" +
-    "A";
+  var darkAssortName = jdeNumber_edit.text + "_" + descriptionField_function() + "_" + "DarkAssort" + "_" + "A";
+  var lightAssortName = jdeNumber_edit.text + "_" + descriptionField_function() + "_" + "LightAssort" + "_" + "A";
 }
+//#endregion
 
 var alphaFileName = app.activeDocument.textFrames.getByName("FileName");
 
@@ -1675,8 +1730,7 @@ if (bodyColorList.selection.index === 12) {
   }
 }
 
-
-//FILENAME  SLEEVE TEMPLATE
+//#region                                FILENAME  SLEEVE TEMPLATE
 if (bodyColorList.selection.index === 14) {
   if (jdeNumber_edit.text.length < 1) {
     var sleeveName =
@@ -1700,10 +1754,9 @@ if (bodyColorList.selection.index === 14) {
   }
   alphaFileName.contents = sleeveName;
 }
+//#endregion
 
-
-
-//FILENAME STANDARD TEMPLATE
+//#region                                FILENAME STANDARD TEMPLATE
 if (bodyColorList.selection.index < 11) {
   var illustratorFrame = [
     "FileName",
@@ -1727,14 +1780,19 @@ if (bodyColorList.selection.index < 11) {
     }
   }
 }
+//#endregion
 
 function originalFile() {
   var originalFile = app.activeDocument.textFrames.getByName("Original Art");
   originalFile.contents = originalArt_edit.text;
 }
 
-var repeatOrder = app.activeDocument.textFrames.getByName('RepeatOrderText')
-repeatOrder.contents = repeatOrder_edit.text;
+
+
+
+var repeatOrder = app.activeDocument.textFrames.getByName("RepeatOrderText");
+repeatOrder.contents = repeatOrder_edit.text; 
+
 
 function currentDate_function() {
   var currentDate = new Date();
@@ -1779,9 +1837,8 @@ function JDE_function() {
     canadaJde.contents = jdeNumber_edit.text;
   }
 }
-//#endregion
 
-/* #region  This is the code for the special instructions boxes */
+//#region                                INSTRUCTION BOXES         This is the code for the special instructions boxes
 var customer_instructions = app.activeDocument.textFrames.getByName(
   "Customer Instructions"
 );
@@ -1807,10 +1864,14 @@ if (instructionsCustomerService_edit.text.length < 1) {
   instructionsCustomerServiceGroup.remove();
 }
 
-var production_instructions = app.activeDocument.textFrames.getByName("Production Instructions");
+var production_instructions = app.activeDocument.textFrames.getByName(
+  "Production Instructions"
+);
 production_instructions.contents = instructionsProduction_edit.text;
 if (instructionsProduction_edit.text.length < 1) {
-  var instructionsProductionGroup = app.activeDocument.groupItems.getByName("Production Instructions Group");
+  var instructionsProductionGroup = app.activeDocument.groupItems.getByName(
+    "Production Instructions Group"
+  );
   instructionsProductionGroup.remove();
 }
 
@@ -1819,7 +1880,7 @@ if (
   instructionsCustomer_edit.text.length < 1 &&
   instructionsProduction_edit.text.length < 1 &&
   instructionsCustomerService_edit.text.length < 1
-)  {
+) {
   if (bodyColorList.selection < 11) {
     var artboardLogo =
       app.activeDocument.groupItems.getByName("Bic Logo Group");
@@ -1827,7 +1888,7 @@ if (
     app.activeDocument.artboards.getByName("Back").remove();
   }
 
-  // 11 is the dark assortment. 12 is the light assortment.
+// 11 is the dark assortment. 12 is the light assortment.
   if (
     bodyColorList.selection.index === 11 ||
     bodyColorList.selection.index === 12
@@ -1846,15 +1907,9 @@ if (
     }
   }
 }
+//#endregion
 
-
-
-
-
-
-
-
-//#region function calls
+//#region                                FUNCTION CALLS
 customerInfo_function();
 vip_function();
 rush_function();
@@ -1864,12 +1919,16 @@ if (bodyColorList.selection.index < 11) {
 }
 currentDate_function();
 JDE_function();
-web_function();
+
+if (jdeNumber_edit.text.length < 1) {
+     web_function();
+}
 InHands_function();
 ship_function();
 originalFile();
 //#endregion
 
+//#region                                LIGHT ASSORTMENT / DARK ASSORTMENT VISIBILITY
 if (bodyColorList.selection.index === 11) {
   app.activeDocument.layers.getByName("LIGHT ASSORTMENT").visible = false;
   app.activeDocument.layers.getByName("DARK ASSORTMENT").visible = true;
@@ -1879,10 +1938,9 @@ if (bodyColorList.selection.index === 12) {
   app.activeDocument.layers.getByName("DARK ASSORTMENT").visible = false;
   app.activeDocument.layers.getByName("LIGHT ASSORTMENT").visible = true;
 }
+//#endregion
 
-
-
-/* #region  This section looks at the number of ink colors entered for each side, and calculates the number and order of screens in the screen information section. */
+//#region                                SCREEN ORDER
 if (bodyColorList.selection.index < 11) {
   var screenTotal = screenCounter_A.length + screenCounter_C.length;
 
@@ -1957,41 +2015,49 @@ if (bodyColorList.selection.index < 11) {
     app.activeDocument.groupItems.getByName("Screen5").remove();
   }
 }
-/* #endregion */
+//#endregion
 
-//This area saves the file as a PDF in the Artworks Sent folder if the autoSave checkbox is checked in the UI.
+//#region                                AUTOSAVE              This area saves the file as a PDF in the Artworks Sent folder if the autoSave checkbox is checked in the UI.
 if (autoSave.value === true) {
   var doc = app.activeDocument;
-  var docPath = "/c/Users/JBavitz/BIC/BIC logo lighter Customer Service - General/Graphic Design/3 - Art Proof sent";
+  var docPath =
+    "/c/Users/JBavitz/BIC/BIC logo lighter Customer Service - General/Graphic Design/3 - Art Proof sent";
   {
     var opts = new PDFSaveOptions();
     opts.PDFPreset = "Illustrator Default";
 
-
-
-
-    if(bodyColorList.selection.index < 11) {
+    if (bodyColorList.selection.index < 11) {
       if (itemNumber_edit.text > 1) {
-      doc.saveAs(File(docPath + "/" + longName + ".pdf"), opts)
-    } else {
-      doc.saveAs(File(docPath + "/" + shortName + ".pdf"), opts)
+        doc.saveAs(File(docPath + "/" + longName + ".pdf"), opts);
+      } else {
+        doc.saveAs(File(docPath + "/" + shortName + ".pdf"), opts);
+      }
+    }
+
+    if (bodyColorList.selection.index === 11) {
+      doc.saveAs(File(docPath + "/" + darkAssortName + ".pdf"), opts);
+    }
+
+    if (bodyColorList.selection.index === 12) {
+      doc.saveAs(File(docPath + "/" + lightAssortName + ".pdf"), opts);
+    }
+
+    if (bodyColorList.selection.index === 14) {
+      doc.saveAs(File(docPath + "/" + sleeveName + ".pdf"), opts);
     }
   }
-  
-  
-  if(bodyColorList.selection.index === 11) {
-       doc.saveAs(File(docPath + "/" + darkAssortName + ".pdf"), opts)
-      }
-      
-      
-      if(bodyColorList.selection.index === 12) {
-         doc.saveAs(File(docPath + "/" + lightAssortName + ".pdf"), opts)
-        }
+}
+//#endregion
 
-        if(bodyColorList.selection.index === 14) {
-           doc.saveAs(File(docPath + "/" + sleeveName + ".pdf"), opts)
-          }
-        }
-      }
-    
-  
+
+
+
+
+
+
+//#region                                BUG FIXES
+/*
+The ink color 032 Red C needs to be treated as a named color.
+Make sure the PMS numbers are picking the correct standard ink colors.
+*/
+//#endregion
