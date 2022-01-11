@@ -358,7 +358,7 @@ if (
          _separater = "\\";
        }
        var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater));
-       app.open(File(_path + "/Proof_Template_Assorted_1Side.ait"));
+       app.open(File(_path + "/Templates/Proof_Template_Assorted_1Side.ait"));
      } else {
        var _scriptPath = $.fileName;
        var _separater = "";
@@ -370,7 +370,7 @@ if (
          _separater = "\\";
        }
        var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater));
-       app.open(File(_path + "/Proof_Template_Assorted_2Side.ait"));
+       app.open(File(_path + "/Templates/Proof_Template_Assorted_2Side.ait"));
      }
    } else if (bodyColorList.selection.index === 14) {
      var _scriptPath = $.fileName;
@@ -383,7 +383,7 @@ if (
        _separater = "\\";
      }
      var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater));
-     app.open(File(_path + "/Proof_Template_Sleeve.ait"));
+     app.open(File(_path + "/Templates/Proof_Template_Sleeve.ait"));
    } else {
      var _scriptPath = $.fileName;
      var _separater = "";
@@ -394,7 +394,10 @@ if (
        _separater = "\\";
      }
      var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater));
-     app.open(File(_path + "/Proof_Template_Standard.ait"));
+     app.open(File(_path + "/Templates/Proof_Template_Standard.ait"));
+
+     "C:\Users\JBavitz\OneDrive - BIC\Desktop\BicLogoLighter\OtherFiles\Templates\Proof_Template_Standard.ait"
+
    }
    //#endregion
 
