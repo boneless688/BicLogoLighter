@@ -22,12 +22,12 @@ var repName = customerInfo_outer.add("statictext", undefined, "Rep name");
 var repNameEdit = customerInfo_outer.add("edittext", undefined, "");
 repNameEdit.characters = 20;
 repNameEdit.active = true;
-repNameEdit.text = "glenda vilchez";
+//repNameEdit.text = "glenda vilchez";
 
 var repEmail = customerInfo_outer.add("statictext", undefined, "Rep Email");
 var repEmail_Edit = customerInfo_outer.add("edittext", undefined, "");
 repEmail_Edit.characters = 20;
-repEmail_Edit.text = "glenda@rockstarpromos.com";
+//repEmail_Edit.text = "glenda@rockstarpromos.com";
 
 var companyGroup = customerInfo_outer.add("panel", undefined, "");
 companyGroup.orientation = "row";
@@ -35,7 +35,7 @@ companyGroup.orientation = "row";
 var company_A = companyGroup.add("statictext", undefined, "Company");
 var company_A_Edit = companyGroup.add("edittext", undefined, "");
 company_A_Edit.characters = 10;
-company_A_Edit.text = "rock star promos";
+//company_A_Edit.text = "rock star promos";
 
 var vipCheckbox = companyGroup.add("checkbox", undefined, "VIP");
 
@@ -74,12 +74,12 @@ var nationalityCanada = nationalityGroup.add(
 var jdeNumber = orderOne.add("statictext", undefined, "JDE Number");
 var jdeNumber_edit = orderOne.add("edittext", undefined, "");
 jdeNumber_edit.characters = 7;
-jdeNumber_edit.text = "6187745";
+//jdeNumber_edit.text = "6187745";
 
 var poNumber = orderOne.add("statictext", undefined, "PO Number");
 var poNumber_edit = orderOne.add("edittext", undefined, "");
 poNumber_edit.characters = 10;
-poNumber_edit.text = "PO-6743";
+//poNumber_edit.text = "PO-6743";
 
 var webSpacer = orderOne.add("panel", undefined, " ");
 webSpacer.margins = [75, 75, 75, 75];
@@ -97,7 +97,7 @@ webPrefix.selection = 0;
 
 var webNumber_edit = webArea.add("edittext", undefined, "");
 webNumber_edit.characters = 10;
-webNumber_edit.text = "85";
+//webNumber_edit.text = "85";
 
 var orderThree = topRight.add("panel", undefined, "");
 orderThree.orientation = "row";
@@ -108,12 +108,12 @@ orderThree.margins = 0;
 var inHandsDate = orderThree.add("statictext", undefined, "In-hands Date");
 var inHandsDate_edit = orderThree.add("edittext", undefined, "");
 inHandsDate_edit.characters = 10;
-inHandsDate_edit.text = "11/24/2021";
+//inHandsDate_edit.text = "11/24/2021";
 
 var shipDate = orderThree.add("statictext", undefined, "Ship Date");
 var shipDate_edit = orderThree.add("edittext", undefined, "");
 shipDate_edit.characters = 10;
-shipDate_edit.text = "10/13/2022";
+//shipDate_edit.text = "10/13/2022";
 
 var rushCheckbox = orderThree.add("checkbox", undefined, "Rush order");
 
@@ -236,7 +236,7 @@ var descriptionBox = descriptionSide.add(
 );
 var descriptionBox_edit = descriptionSide.add("edittext", undefined, "");
 descriptionBox_edit.characters = 20;
-descriptionBox_edit.text = "the only thing";
+//descriptionBox_edit.text = "the only thing";
 
 var autoSave = descriptionSide.add("checkbox", undefined, "Save the PDF?");
 autoSave.value = false;
@@ -247,7 +247,7 @@ spacerBox.margins = 40;
 var originalArt = descriptionSide.add("statictext", undefined, "Original Art");
 var originalArt_edit = descriptionSide.add("edittext", undefined, "");
 originalArt_edit.characters = 20;
-originalArt_edit.text = "Original art file name.";
+//originalArt_edit.text = "Original art file name.";
 
 var repeatOrder = descriptionSide.add("statictext", undefined, "Repeat order");
 var repeatOrder_edit = descriptionSide.add("edittext", undefined, "");
@@ -267,25 +267,25 @@ inkBox_Master_A1.orientation = "column";
 inkBox_Master_A1.margins = [15, 15, 5, 15];
 var ink_A1 = inkBox_Master_A1.add("edittext", undefined, "");
 ink_A1.characters = 10;
-ink_A1.text = "186 ruby red";
+//ink_A1.text = "186 ruby red";
 
 var inkBox_Master_A2 = inkColors_A.add("panel", undefined, "Screen A2");
 inkBox_Master_A2.orientation = "column";
 var ink_A2 = inkBox_Master_A2.add("edittext", undefined, "");
 ink_A2.characters = 10;
-ink_A2.text = "281 navy blue";
+//ink_A2.text = "281 navy blue";
 
 var inkBox_Master_A3 = inkColors_A.add("panel", undefined, "Screen A3");
 inkBox_Master_A3.orientation = "column";
 var ink_A3 = inkBox_Master_A3.add("edittext", undefined, "");
 ink_A3.characters = 10;
-ink_A3.text = "186 red";
+//ink_A3.text = "186 red";
 
 var inkBox_Master_A4 = inkColors_A.add("panel", undefined, "Screen A4");
 inkBox_Master_A4.orientation = "column";
 var ink_A4 = inkBox_Master_A4.add("edittext", undefined, "");
 ink_A4.characters = 10;
-ink_A4.text = "142 yellow";
+//ink_A4.text = "142 yellow";
 
 var inkColors_C = inkColors_2.add("panel", undefined, "");
 inkColors_C.preferredSize = [400, 100];
@@ -295,25 +295,25 @@ var inkBox_Master_C1 = inkColors_C.add("panel", undefined, "Screen C1");
 inkBox_Master_C1.orientation = "column";
 var ink_C1 = inkBox_Master_C1.add("edittext", undefined, "");
 ink_C1.characters = 10;
-ink_C1.text = "black";
+//ink_C1.text = "black";
 
 var inkBox_Master_C2 = inkColors_C.add("panel", undefined, "Screen C2");
 inkBox_Master_C2.orientation = "column";
 var ink_C2 = inkBox_Master_C2.add("edittext", undefined, "");
 ink_C2.characters = 10;
-ink_C2.text = "211 pink";
+//ink_C2.text = "211 pink";
 
 var inkBox_Master_C3 = inkColors_C.add("panel", undefined, "Screen C3");
 inkBox_Master_C3.orientation = "column";
 var ink_C3 = inkBox_Master_C3.add("edittext", undefined, "");
 ink_C3.characters = 10;
-ink_C3.text = "877 metallic silver";
+//ink_C3.text = "877 metallic silver";
 
 var inkBox_Master_C4 = inkColors_C.add("panel", undefined, "Screen C4");
 inkBox_Master_C4.orientation = "column";
 var ink_C4 = inkBox_Master_C4.add("edittext", undefined, "");
 ink_C4.characters = 10;
-ink_C4.text = "116 athletic gold";
+//ink_C4.text = "116 athletic gold";
 
 /*/* #region  OKAY / Cancel buttons */
 var buttonGroup = master.add("panel");
@@ -1357,18 +1357,13 @@ var item_originalArt_C = "original art side C";
 //#endregion
 //#region                                CUSTOMER INFO
 function customerInfo_function() {
-  var rep = app.activeDocument.layers
-    .getByName("Masque")
-    .textFrames.getByName("Rep");
-  rep.contents =
-    capitalizeSpaces(repNameEdit.text) + "     " + repEmail_Edit.text.toLowerCase();
-  var repNameSignature =
-    app.activeDocument.textFrames.getByName("RepName_Signature");
+  var rep = app.activeDocument.textFrames.getByName("Rep");
+  rep.contents = capitalizeSpaces(repNameEdit.text) + "     " + repEmail_Edit.text.toLowerCase();
+  var repNameSignature = app.activeDocument.textFrames.getByName("RepName_Signature");
   repNameSignature.contents = repNameEdit.text;
   repNameSignature.contents = capitalizeSpaces(repNameSignature.contents);
 
-  var repNameSignature =
-    app.activeDocument.textFrames.getByName("RepName_Signature");
+  var repNameSignature = app.activeDocument.textFrames.getByName("RepName_Signature");
   repNameSignature.contents = repNameEdit.text;
   repNameSignature.contents = capitalizeSpaces(repNameSignature.contents);
 }
@@ -1473,6 +1468,10 @@ function JDE_function() {
       .textFrames.getByName("jde number");
     canadaJde.contents = jdeNumber_edit.text;
   }
+  if (doubleSidedCheckbox.value === true) {
+var jdeBack = app.activeDocument.textFrames.getByName("jde number_Back");
+jdeBack.contents = jdeNumber_edit.text;
+}
 }
 function repInfo() {
   if (
@@ -1592,8 +1591,10 @@ function filenameOutput() {
 }
 
 function web_function() {
+     if (jdeNumber_edit.characters < 1) {
      var web = app.activeDocument.textFrames.getByName("Web");
  web.contents = magento()
+     }
      }
 
 //#region     FILENAME
@@ -1615,7 +1616,7 @@ if (bodyColorList.selection < 10) {
 }
 
 if (bodyColorList.selection == 11) {
-  if (multi.value === false) {
+  if (multi.value === false) { 
     alpha =
       prefix() + "_" + capitalize(descriptionBox_edit.text) + "_DarkAssort_A";
   } else {
@@ -1664,11 +1665,6 @@ if (bodyColorList.selection == 14) {
 
 
 
-// The FILENAME section all works.
-
-
-
-
 
 
 
@@ -1695,159 +1691,56 @@ backDate();
 //#region     DARK ASSORTMENT
 if (bodyColorList.selection.index === 11) {
   var assortFile = app.activeDocument.textFrames.getByName("FileName");
-  assortFile.contents = darkAssortName;
+  assortFile.contents = alpha;
 
   var assortFileScreen = app.activeDocument.textFrames.getByName(
     "Assortment Screen Filename"
   );
-  assortFileScreen.contents = darkAssortName;
-
-  var assortment_chip = app.activeDocument.pathItems.getByName(
-    "Assortment Color Chip"
-  );
-  var assortmentWhite = new CMYKColor();
-  assortmentWhite.black = 00;
-  assortmentWhite.cyan = 00;
-  assortmentWhite.magenta = 00;
-  assortmentWhite.yellow = 00;
-  assortment_chip.fillColor = assortmentWhite;
-
-  var assortment_screenName = app.activeDocument.textFrames.getByName(
-    "Assortment Ink Color"
-  );
-  assortment_screenName.contents = "White";
-
-  if (doubleSidedCheckbox.value === true) {
-    var assortment_screenName_back = app.activeDocument.textFrames.getByName(
-      "Assortment Ink Color Back"
-    );
-    assortment_screenName_back.contents = "White";
-
-    var bravoFileName =
-      app.activeDocument.textFrames.getByName("FileName_Back");
-    bravoFileName.contents = darkAssortName;
-
-    var assortment_chip_back = app.activeDocument.pathItems.getByName(
-      "Assortment Color Chip Back"
-    );
-    var assortmentWhite = new CMYKColor();
-    assortmentWhite.black = 00;
-    assortmentWhite.cyan = 00;
-    assortmentWhite.magenta = 00;
-    assortmentWhite.yellow = 00;
-    assortment_chip_back.fillColor = assortmentWhite;
-
-    var assortment_screenName = app.activeDocument.textFrames.getByName(
-      "Assortment Ink Color"
-    );
-    assortment_screenName.contents = "White";
-
-    var bravoFileNameBack = app.activeDocument.textFrames.getByName(
-      "Assortment Screen Filename Back"
-    );
-    bravoFileNameBack.contents = darkAssortName;
+  assortFileScreen.contents = alpha;
+  if(doubleSidedCheckbox.value === true) {
+    var bravoFileName = app.activeDocument.textFrames.getByName("FileName_Back");
+    bravoFileName.contents = alpha;
+    var bravoFileNameBack = app.activeDocument.textFrames.getByName("Assortment Screen Filename Back");
+    bravoFileNameBack.contents = alpha;
+    }
   }
-}
+
 //#endregion
 
 //#region     LIGHT ASSORTMENT
 if (bodyColorList.selection.index === 12) {
   var assortFile = app.activeDocument.textFrames.getByName("FileName");
-  assortFile.contents = lightAssortName;
+  assortFile.contents = alpha;
 
   var assortFileScreen = app.activeDocument.textFrames.getByName(
     "Assortment Screen Filename"
   );
-  assortFileScreen.contents = lightAssortName;
+  assortFileScreen.contents = alpha;
 
-  var assortment_chip = app.activeDocument.pathItems.getByName(
-    "Assortment Color Chip"
-  );
-  var assortmentBlack = new CMYKColor();
-  assortmentBlack.black = 100;
-  assortmentBlack.magenta = 100;
-  assortmentBlack.yellow = 100;
-  assortment_chip.fillColor = assortmentBlack;
 
-  var assortment_screenName = app.activeDocument.textFrames.getByName(
-    "Assortment Ink Color"
-  );
-  assortment_screenName.contents = "Black";
 
   if (doubleSidedCheckbox.value === true) {
     var assortment_screenName_back = app.activeDocument.textFrames.getByName(
       "Assortment Ink Color Back"
     );
-    assortment_screenName_back.contents = "Black";
-    var bravoFileName =
-      app.activeDocument.textFrames.getByName("FileName_Back");
-    bravoFileName.contents = lightAssortName;
 
-    var assortment_chip_back = app.activeDocument.pathItems.getByName(
-      "Assortment Color Chip Back"
-    );
-    var assortmentBlack = new CMYKColor();
-    assortmentBlack.black = 100;
-    assortmentBlack.cyan = 100;
-    assortmentBlack.magenta = 100;
-    assortmentBlack.yellow = 100;
-    assortment_chip_back.fillColor = assortmentBlack;
-
-    var assortment_screenName = app.activeDocument.textFrames.getByName(
-      "Assortment Ink Color"
-    );
-    assortment_screenName.contents = "black";
 
     var bravoFileNameBack = app.activeDocument.textFrames.getByName(
       "Assortment Screen Filename Back"
     );
-    bravoFileNameBack.contents = lightAssortName;
+    bravoFileNameBack.contents = alpha;
   }
 }
 //#endregion
 
 //#region     SLEEVE
 var alphaFileName = app.activeDocument.textFrames.getByName("FileName");
-if (bodyColorList.selection.index === 14) {
-  if (jdeNumber_edit.text.length < 1) {
-    var sleeveName =
-      "SLEEVE_" + prefix() +
-      webNumber_edit.text +
-      "_" +
-      description() +
-      "_A";
 
-    if (multi.value === true) {
-      sleeveName =
-      "SLEEVE_" + prefix() +
-      webNumber_edit.text +
-      "_" +
-      description() +
-        "_" +
-        "_Item01_" +
-      "A";
-    }
-  } else {
-    var sleeveName =
-      "SLEEVE" + "_" + jdeNumber_edit.text + "_" + description() + "_" + "A";
-    if (multi.value === true) {
-      sleeveName =
-        "SLEEVE" +
-        "_" +
-        jdeNumber_edit.text +
-        "_" +
-        description() +
-        "_" +
-        "Item01" +
-        "_" +
-        "A";
-    }
-  }
-  alphaFileName.contents = sleeveName;
-}
+  alphaFileName.contents = alpha;
+
 //#endregion
 
-//#region     SPECIAL INSTRUCTIONS
+//#region     SPECIAL INSTRUCTIONS 
 var instructionsArrow = app.activeDocument.groupItems.getByName(
   "SpecialInstructionsArrow"
 );
