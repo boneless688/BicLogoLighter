@@ -22,12 +22,12 @@ var repName = customerInfo_outer.add("statictext", undefined, "Rep name");
 var repNameEdit = customerInfo_outer.add("edittext", undefined, "");
 repNameEdit.characters = 20;
 repNameEdit.active = true;
-//repNameEdit.text = "glenda vilchez";
+repNameEdit.text = "glenda vilchez";
 
 var repEmail = customerInfo_outer.add("statictext", undefined, "Rep Email");
 var repEmail_Edit = customerInfo_outer.add("edittext", undefined, "");
 repEmail_Edit.characters = 20;
-//repEmail_Edit.text = "glenda@rockstarpromos.com";
+repEmail_Edit.text = "glenda@rockstarpromos.com";
 
 var companyGroup = customerInfo_outer.add("panel", undefined, "");
 companyGroup.orientation = "row";
@@ -35,7 +35,7 @@ companyGroup.orientation = "row";
 var company_A = companyGroup.add("statictext", undefined, "Company");
 var company_A_Edit = companyGroup.add("edittext", undefined, "");
 company_A_Edit.characters = 10;
-//company_A_Edit.text = "rock star promos";
+company_A_Edit.text = "rock star promos";
 
 var vipCheckbox = companyGroup.add("checkbox", undefined, "VIP");
 
@@ -79,7 +79,7 @@ jdeNumber_edit.text = "6187745";
 var poNumber = orderOne.add("statictext", undefined, "PO Number");
 var poNumber_edit = orderOne.add("edittext", undefined, "");
 poNumber_edit.characters = 10;
-//poNumber_edit.text = "PO-6743";
+poNumber_edit.text = "PO-6743";
 
 var webSpacer = orderOne.add("panel", undefined, " ");
 webSpacer.margins = [75, 75, 75, 75];
@@ -108,12 +108,12 @@ orderThree.margins = 0;
 var inHandsDate = orderThree.add("statictext", undefined, "In-hands Date");
 var inHandsDate_edit = orderThree.add("edittext", undefined, "");
 inHandsDate_edit.characters = 10;
-//inHandsDate_edit.text = "11/24/2021";
+inHandsDate_edit.text = "11/24/2021";
 
 var shipDate = orderThree.add("statictext", undefined, "Ship Date");
 var shipDate_edit = orderThree.add("edittext", undefined, "");
 shipDate_edit.characters = 10;
-//shipDate_edit.text = "10/13/2022";
+shipDate_edit.text = "10/13/2022";
 
 var rushCheckbox = orderThree.add("checkbox", undefined, "Rush order");
 
@@ -247,7 +247,7 @@ spacerBox.margins = 40;
 var originalArt = descriptionSide.add("statictext", undefined, "Original Art");
 var originalArt_edit = descriptionSide.add("edittext", undefined, "");
 originalArt_edit.characters = 20;
-//originalArt_edit.text = "Original art file name.";
+originalArt_edit.text = "Original art file name.";
 
 var repeatOrder = descriptionSide.add("statictext", undefined, "Repeat order");
 var repeatOrder_edit = descriptionSide.add("edittext", undefined, "");
@@ -267,25 +267,25 @@ inkBox_Master_A1.orientation = "column";
 inkBox_Master_A1.margins = [15, 15, 5, 15];
 var ink_A1 = inkBox_Master_A1.add("edittext", undefined, "");
 ink_A1.characters = 10;
-//ink_A1.text = "cool gray 1";
+ink_A1.text = "186 red";
 
 var inkBox_Master_A2 = inkColors_A.add("panel", undefined, "Screen A2");
 inkBox_Master_A2.orientation = "column";
 var ink_A2 = inkBox_Master_A2.add("edittext", undefined, "");
 ink_A2.characters = 10;
-//ink_A2.text = "reflex blue";
+ink_A2.text = "281 navy blue";
 
 var inkBox_Master_A3 = inkColors_A.add("panel", undefined, "Screen A3");
 inkBox_Master_A3.orientation = "column";
 var ink_A3 = inkBox_Master_A3.add("edittext", undefined, "");
 ink_A3.characters = 10;
-//ink_A3.text = "186 red";
+ink_A3.text = "186 red";
 
 var inkBox_Master_A4 = inkColors_A.add("panel", undefined, "Screen A4");
 inkBox_Master_A4.orientation = "column";
 var ink_A4 = inkBox_Master_A4.add("edittext", undefined, "");
 ink_A4.characters = 10;
-//ink_A4.text = "142 yellow";
+ink_A4.text = "142 yellow";
 
 var inkColors_C = inkColors_2.add("panel", undefined, "");
 inkColors_C.preferredSize = [400, 100];
@@ -295,25 +295,25 @@ var inkBox_Master_C1 = inkColors_C.add("panel", undefined, "Screen C1");
 inkBox_Master_C1.orientation = "column";
 var ink_C1 = inkBox_Master_C1.add("edittext", undefined, "");
 ink_C1.characters = 10;
-//ink_C1.text = "black";
+ink_C1.text = "black";
 
 var inkBox_Master_C2 = inkColors_C.add("panel", undefined, "Screen C2");
 inkBox_Master_C2.orientation = "column";
 var ink_C2 = inkBox_Master_C2.add("edittext", undefined, "");
 ink_C2.characters = 10;
-//ink_C2.text = "211 pink";
+ink_C2.text = "211 pink";
 
 var inkBox_Master_C3 = inkColors_C.add("panel", undefined, "Screen C3");
 inkBox_Master_C3.orientation = "column";
 var ink_C3 = inkBox_Master_C3.add("edittext", undefined, "");
 ink_C3.characters = 10;
-//ink_C3.text = "877 metallic silver";
+ink_C3.text = "877 metallic silver";
 
 var inkBox_Master_C4 = inkColors_C.add("panel", undefined, "Screen C4");
 inkBox_Master_C4.orientation = "column";
 var ink_C4 = inkBox_Master_C4.add("edittext", undefined, "");
 ink_C4.characters = 10;
-//ink_C4.text = "116 athletic gold";
+ink_C4.text = "116 athletic gold";
 
 /*/* #region  OKAY / Cancel buttons */
 var buttonGroup = master.add("panel");
@@ -349,7 +349,7 @@ if (
       _separater = "\\";
     }
     var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater));
-    app.open(File(_path + "/Proof_Template_Assorted_1Side.ait"));
+    app.open(File(_path + "/Templates/Proof_Template_Assorted_1Side.ait"));
   } else {
     var _scriptPath = $.fileName;
     var _separater = "";
@@ -361,7 +361,7 @@ if (
       _separater = "\\";
     }
     var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater));
-    app.open(File(_path + "/Proof_Template_Assorted_2Side.ait"));
+    app.open(File(_path + "/Templates/Proof_Template_Assorted_2Side.ait"));
   }
 } else if (bodyColorList.selection.index === 14) {
   var _scriptPath = $.fileName;
@@ -374,7 +374,7 @@ if (
     _separater = "\\";
   }
   var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater));
-  app.open(File(_path + "/Proof_Template_Sleeve.ait"));
+  app.open(File(_path + "/Templates/Proof_Template_Sleeve.ait"));
 } else {
   var _scriptPath = $.fileName;
   var _separater = "";
@@ -385,7 +385,7 @@ if (
     _separater = "\\";
   }
   var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater));
-  app.open(File(_path + "/Proof_Template_Standard.ait"));
+  app.open(File(_path + "/Templates/Proof_Template_Standard.ait"));
 }
 //#endregion
 //#region                                THIS CREATES THE   .TRIM   FUNCTION
@@ -1551,7 +1551,7 @@ function magento() {
     return "CAENLog" + nineZeroes_Function();
   }
 }
-function prefix() {
+function prefix() {   // The prefix() function works, which also means the magento() function works as well.
   if (jdeNumber_edit.text.length > 0) {
     return jdeNumber_edit.text;
   } else {
@@ -1572,16 +1572,22 @@ function filenameOutput() {
       "C4 Screen FileName",
     ];
 
+
     for (i = 0; i < illustratorFrame.length; i++) {
-     if (multi.value === true) {
-       var alpha2 = app.activeDocument.textFrames.getByName(illustratorFrame[i]);
-       alpha2.contents = multiName;
-     } else {
-       var bravo2 = app.activeDocument.textFrames.getByName(illustratorFrame[i]);
-       bravo2.contents = singleName;
+         var bravo2 = app.activeDocument.textFrames.getByName(illustratorFrame[i]);
+         bravo2.contents = alpha;
      }
    }
-  }
+
+
+
+
+
+
+
+
+
+
 }
 
 //#region     FILENAME
@@ -1649,6 +1655,17 @@ if (bodyColorList.selection == 14) {
     "_Item01_A";
 }
 //#endregion
+
+
+
+// The FILENAME section all works.
+
+
+
+
+
+
+
 
 //#region     FUNCTION CALLS
 repInfo();
@@ -2001,13 +2018,16 @@ if (autoSave.value === true) {
     var opts = new PDFSaveOptions();
     opts.PDFPreset = "Illustrator Default";
 
-    if (bodyColorList.selection.index < 11) {
-      if (multi.value === true) {
+if (bodyColorList.selection.index < 11) {
+
+     doc.saveAs(File(docPath + "/" + alpha + ".pdf"), opts);
+     
+     /*     if (multi.value === true) {
         doc.saveAs(File(docPath + "/" + multiName + ".pdf"), opts);
       } else {
         doc.saveAs(File(docPath + "/" + singleName + ".pdf"), opts);
       }
-    }
+    } */
 
     if (bodyColorList.selection.index === 11) {
       doc.saveAs(File(docPath + "/" + darkAssortName + ".pdf"), opts);
@@ -2022,18 +2042,26 @@ if (autoSave.value === true) {
     }
   }
 }
+}
 //#endregion
+ 
+
+
+
+
 
 //#region     BUG LIST
 /* Certain ink colors don't begin with numbers:
 blue 072
 red 032
 
-Running the code with a USLog number throws an error:
+Error 1302: No such element
+The colors that don't begin with a number are not being found in the swatches pallete.
 
-Error 2: singleName is undefined.
-Line: 2003
--> doc.saveAs(File(docPath + "/" + singleName + ".pdf"), opts);
+
+
+
+
 
 
 */
