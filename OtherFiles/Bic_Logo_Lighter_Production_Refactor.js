@@ -267,7 +267,7 @@ inkBox_Master_A1.orientation = "column";
 inkBox_Master_A1.margins = [15, 15, 5, 15];
 var ink_A1 = inkBox_Master_A1.add("edittext", undefined, "");
 ink_A1.characters = 10;
-ink_A1.text = "186 red";
+ink_A1.text = "186 ruby red";
 
 var inkBox_Master_A2 = inkColors_A.add("panel", undefined, "Screen A2");
 inkBox_Master_A2.orientation = "column";
@@ -523,7 +523,7 @@ var digitArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var screenCounter_A = [];
 var screenCounter_C = [];
 
-//#region                                REMOVES THE WHITE SPACES FROM INK NAMES
+//#region                                REMOVES THE WHITE SPACES FROM INK NAMES FROM BEFORE AND AFTER THE TEXT
 ink_A1.text = ink_A1.text.trim();
 ink_A1.text = ink_A1.text.toLowerCase();
 ink_A2.text = ink_A2.text.trim();
@@ -541,6 +541,8 @@ ink_C3.text = ink_C3.text.toLowerCase();
 ink_C4.text = ink_C4.text.trim();
 ink_C4.text = ink_C4.text.toLowerCase();
 //#endregion
+
+
 
 //#endregion
 
@@ -561,8 +563,7 @@ var inksNamedArray = [
 ];
 for (i = 0; i < inksNamedArray.length; i++) {
   if (ink_A1.text === inksNamedArray[i]) {
-    item_A1_name.contents =
-      "PANTONE" + capitalizeFunction(inksNamedArray[i]) + " " + "C";
+    item_A1_name.contents = "PANTONE" + capitalizeSpaces(inksNamedArray[i]) + " " + "C";
     break;
   } else {
     if (ink_A1.text.length > 0) {
@@ -1519,13 +1520,13 @@ function description(bodyColorLayer) {
 function nineZeroes_Function() {
   var zeroArray = ["0", "0", "0", "0", "0", "0", "0", "0", "0"];
   var a = webNumber_edit.text.split("");
-  var nineZeroes_Function = zeroArray.concat(a);
-  for (var i = 0; i < nineZeroes_Function.length; i++) {
-    if (nineZeroes_Function.length > 9) {
-      nineZeroes_Function.shift();
+  var nineZeroes_alpha = zeroArray.concat(a);
+  for (var i = 0; i < nineZeroes_alpha.length; i++) {
+    if (nineZeroes_alpha.length > 9) {
+     nineZeroes_alpha.shift();
     }
   }
-  return nineZeroes_Function.join("");
+  return nineZeroes_alpha.join("");
 }
 function capitalize(u) {
   u = u.toLowerCase();
@@ -1589,6 +1590,11 @@ function filenameOutput() {
 
 
 }
+
+function web_function() {
+     var web = app.activeDocument.textFrames.getByName("Web");
+ web.contents = magento()
+     }
 
 //#region     FILENAME
 var alpha;
@@ -1674,6 +1680,7 @@ vip_function();
 rush_function();
 po_function();
 JDE_function();
+web_function();
 InHands_function();
 ship_function();
 originalFile_function();
@@ -2057,9 +2064,6 @@ red 032
 
 Error 1302: No such element
 The colors that don't begin with a number are not being found in the swatches pallete.
-
-
-
 
 
 
