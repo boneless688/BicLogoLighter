@@ -1413,14 +1413,13 @@ function po_function() {
     var purchaseOrder = app.activeDocument.layers
       .getByName("Canada")
       .textFrames.getByName("PO");
+      purchaseOrder.contents = poNumber_edit.text
   } else {
     var purchaseOrder = app.activeDocument.layers
       .getByName("USA")
       .textFrames.getByName("PO");
     purchaseOrder.contents = poNumber_edit.text;
-    if (purchaseOrder === null) {
-      purchaseOrder.contents = webPrefix.selection.text + webNumber_edit.text;
-    }
+
   }
 }
 function originalFile_function() {
@@ -1675,8 +1674,6 @@ if (alpha.length > 32) {
 }
 
 
-
-
 var reducedOriginalArt = app.activeDocument.textFrames.getByName("Original Art");
 if (originalArt_edit.text.length > 50) {
      reducedOriginalArt.textRange.characterAttributes.size = 4;
@@ -1689,6 +1686,11 @@ if (poNumber_edit.text.length > 11) {
      reducedPO.textRange.characterAttributes.size = 6;
      reducedPO.textRange.characterAttributes.baselineShift = -3;
 }
+
+
+
+
+
 
 
 
@@ -1741,20 +1743,44 @@ if (bodyColorList.selection.index === 12) {
   );
   assortFileScreen.contents = alpha;
 
-
-
-  if (doubleSidedCheckbox.value === true) {
-    var assortment_screenName_back = app.activeDocument.textFrames.getByName(
-      "Assortment Ink Color Back"
-    );
-
-
-    var bravoFileNameBack = app.activeDocument.textFrames.getByName(
-      "Assortment Screen Filename Back"
-    );
-    bravoFileNameBack.contents = alpha;
   }
-}
+
+  //#region          DOUBLE SIDED ASSORTMENTS
+
+
+
+
+  if (bodyColorList.selection.index === 11 || bodyColorList.selection.index === 12) {
+     if (doubleSidedCheckbox.value == true) {
+       var assortment_screenName_back = app.activeDocument.textFrames.getByName("Assortment Ink Color Back");
+       var bravoFileNameBack = app.activeDocument.textFrames.getByName("Assortment Screen Filename Back");
+       bravoFileNameBack.contents = alpha;
+
+       var reducedDoubleFileName = app.activeDocument.textFrames.getByName("FileName_Back");
+       if (alpha.length > 32) {
+         reducedDoubleFileName.textRange.characterAttributes.size = 6;
+         reducedDoubleFileName.textRange.characterAttributes.baselineShift = -3;
+       }
+       var reducedDoubleOriginalArt = app.activeDocument.textFrames.getByName("Original Art_Back");
+       if (originalArt_edit.text.length > 50) {
+         reducedDoubleOriginalArt.textRange.characterAttributes.size = 4;
+         reducedDoubleOriginalArt.textRange.characterAttributes.baselineShift = -1;
+       }
+       var reducedDoublePO = app.activeDocument.textFrames.getByName("PO_Back");
+       if (poNumber_edit.text.length > 11) {
+         reducedDoublePO.textRange.characterAttributes.size = 6;
+         reducedDoublePO.textRange.characterAttributes.baselineShift = -3;
+       }
+     }
+   }
+  //#endregion
+
+
+
+
+
+
+
 //#endregion
 
 //#region     SLEEVE
