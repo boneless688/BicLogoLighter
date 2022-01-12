@@ -239,7 +239,7 @@ descriptionBox_edit.characters = 20;
 //descriptionBox_edit.text = "the only thing";
 
 var autoSave = descriptionSide.add("checkbox", undefined, "Save the PDF?");
-autoSave.value = false;
+autoSave.value = true;
 
 var spacerBox = descriptionSide.add("statictext", undefined, "");
 spacerBox.margins = 40;
@@ -646,16 +646,17 @@ if (pmsTest_A1 === false) {
     item_A1_frame.strokeWidth = 1.25;
   } else {
     item_A1_name.contents =
-      "PANTONE" + " " + capitalize(ink_A1.text) + " " + "C";
+      "PANTONE" + " " + capitalizeSpaces(ink_A1.text) + " " + "C";
     item_A1_screenName.contents = capitalize(ink_A1.text);
     item_A1_color.fillColor = app.activeDocument.swatches.getByName(
-      "PANTONE" + " " + capitalize(ink_A1.text) + " " + "C"
+      "PANTONE" + " " + capitalizeSpaces(ink_A1.text) + " " + "C"
     ).color;
     item_A1_chip.fillColor = app.activeDocument.swatches.getByName(
-      "PANTONE" + " " + capitalize(ink_A1.text) + " " + "C"
+      "PANTONE" + " " + capitalizeSpaces(ink_A1.text) + " " + "C"
     ).color;
   }
 }
+
 
 // This block makes the stroke of the box thicker if the ink is a standard color.
 ink_A1.text = capitalize(ink_A1.text);
@@ -741,13 +742,13 @@ if (pmsTest_A2 === false) {
     item_A2_frame.strokeWidth = 1.25;
   } else {
     item_A2_name.contents =
-      "PANTONE" + " " + capitalize(ink_A2.text) + " " + "C";
-    item_A2_screenName.contents = capitalize(ink_A2.text);
+      "PANTONE" + " " + capitalizeSpaces(ink_A2.text) + " " + "C";
+    item_A2_screenName.contents = capitalizeSpaces(ink_A2.text);
     item_A2_color.fillColor = app.activeDocument.swatches.getByName(
-      "PANTONE" + " " + capitalize(ink_A2.text) + " " + "C"
+      "PANTONE" + " " + capitalizeSpaces(ink_A2.text) + " " + "C"
     ).color;
     item_A2_chip.fillColor = app.activeDocument.swatches.getByName(
-      "PANTONE" + " " + capitalize(ink_A2.text) + " " + "C"
+      "PANTONE" + " " + capitalizeSpaces(ink_A2.text) + " " + "C"
     ).color;
   }
 }
@@ -836,13 +837,13 @@ if (pmsTest_A3 === false) {
     item_A3_frame.strokeWidth = 1.25;
   } else {
     item_A3_name.contents =
-      "PANTONE" + " " + capitalize(ink_A3.text) + " " + "C";
-    item_A3_screenName.contents = capitalize(ink_A3.text);
+      "PANTONE" + " " + capitalizeSpaces(ink_A3.text) + " " + "C";
+    item_A3_screenName.contents = capitalizeSpaces(ink_A3.text);
     item_A3_color.fillColor = app.activeDocument.swatches.getByName(
-      "PANTONE" + " " + capitalize(ink_A3.text) + " " + "C"
+      "PANTONE" + " " + capitalizeSpaces(ink_A3.text) + " " + "C"
     ).color;
     item_A3_chip.fillColor = app.activeDocument.swatches.getByName(
-      "PANTONE" + " " + capitalize(ink_A3.text) + " " + "C"
+      "PANTONE" + " " + capitalizeSpaces(ink_A3.text) + " " + "C"
     ).color;
   }
 }
@@ -931,13 +932,13 @@ if (pmsTest_A4 === false) {
     item_A4_frame.strokeWidth = 1.25;
   } else {
     item_A4_name.contents =
-      "PANTONE" + " " + capitalize(ink_A4.text) + " " + "C";
-    item_A4_screenName.contents = capitalize(ink_A4.text);
+      "PANTONE" + " " + capitalizeSpaces(ink_A4.text) + " " + "C";
+    item_A4_screenName.contents = capitalizeSpaces(ink_A4.text);
     item_A4_color.fillColor = app.activeDocument.swatches.getByName(
-      "PANTONE" + " " + capitalize(ink_A4.text) + " " + "C"
+      "PANTONE" + " " + capitalizeSpaces(ink_A4.text) + " " + "C"
     ).color;
     item_A4_chip.fillColor = app.activeDocument.swatches.getByName(
-      "PANTONE" + " " + capitalize(ink_A4.text) + " " + "C"
+      "PANTONE" + " " + capitalizeSpaces(ink_A4.text) + " " + "C"
     ).color;
   }
 }
@@ -1025,13 +1026,13 @@ if (ink_C1.text.length > 0) {
       item_C1_frame.strokeWidth = 1.25;
     } else {
       item_C1_name.contents =
-        "PANTONE" + " " + capitalize(ink_C1.text) + " " + "C";
-      item_C1_screenName.contents = capitalize(ink_C1.text);
+        "PANTONE" + " " + capitalizeSpaces(ink_C1.text) + " " + "C";
+      item_C1_screenName.contents = capitalizeSpaces(ink_C1.text);
       item_C1_color.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + capitalize(ink_C1.text) + " " + "C"
+        "PANTONE" + " " + capitalizeSpaces(ink_C1.text) + " " + "C"
       ).color;
       item_C1_chip.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + capitalize(ink_C1.text) + " " + "C"
+        "PANTONE" + " " + capitalizeSpaces(ink_C1.text) + " " + "C"
       ).color;
     }
   }
@@ -1120,13 +1121,13 @@ if (ink_C2.text.length > 0) {
       item_C2_frame.strokeWidth = 1.25;
     } else {
       item_C2_name.contents =
-        "PANTONE" + " " + capitalize(ink_C2.text) + " " + "C";
-      item_C2_screenName.contents = capitalize(ink_C2.text);
+        "PANTONE" + " " + capitalizeSpaces(ink_C2.text) + " " + "C";
+      item_C2_screenName.contents = capitalizeSpaces(ink_C2.text);
       item_C2_color.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + capitalize(ink_C2.text) + " " + "C"
+        "PANTONE" + " " + capitalizeSpaces(ink_C2.text) + " " + "C"
       ).color;
       item_C2_chip.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + capitalize(ink_C2.text) + " " + "C"
+        "PANTONE" + " " + capitalizeSpaces(ink_C2.text) + " " + "C"
       ).color;
     }
   }
@@ -1215,13 +1216,13 @@ if (ink_C3.text.length > 0) {
       item_C3_frame.strokeWidth = 1.25;
     } else {
       item_C3_name.contents =
-        "PANTONE" + " " + capitalize(ink_C3.text) + " " + "C";
-      item_C3_screenName.contents = capitalize(ink_C3.text);
+        "PANTONE" + " " + capitalizeSpaces(ink_C3.text) + " " + "C";
+      item_C3_screenName.contents = capitalizeSpaces(ink_C3.text);
       item_C3_color.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + capitalize(ink_C3.text) + " " + "C"
+        "PANTONE" + " " + capitalizeSpaces(ink_C3.text) + " " + "C"
       ).color;
       item_C3_chip.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + capitalize(ink_C3.text) + " " + "C"
+        "PANTONE" + " " + capitalizeSpaces(ink_C3.text) + " " + "C"
       ).color;
     }
   }
@@ -1317,13 +1318,13 @@ if (ink_C4.text.length > 0) {
       item_C4_frame.strokeWidth = 1.25;
     } else {
       item_C4_name.contents =
-        "PANTONE" + " " + capitalize(ink_C4.text) + " " + "C";
-      item_C4_screenName.contents = capitalize(ink_C4.text);
+        "PANTONE" + " " + capitalizeSpaces(ink_C4.text) + " " + "C";
+      item_C4_screenName.contents = capitalizeSpaces(ink_C4.text);
       item_C4_color.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + capitalize(ink_C4.text) + " " + "C"
+        "PANTONE" + " " + capitalizeSpaces(ink_C4.text) + " " + "C"
       ).color;
       item_C4_chip.fillColor = app.activeDocument.swatches.getByName(
-        "PANTONE" + " " + capitalize(ink_C4.text) + " " + "C"
+        "PANTONE" + " " + capitalizeSpaces(ink_C4.text) + " " + "C"
       ).color;
     }
   }
@@ -1591,11 +1592,11 @@ function filenameOutput() {
 }
 
 function web_function() {
-     if (jdeNumber_edit.characters < 1) {
+     if (jdeNumber_edit.text.length < 1) {
      var web = app.activeDocument.textFrames.getByName("Web");
- web.contents = magento()
-     }
-     }
+     web.contents = magento();
+}
+}
 
 //#region     FILENAME
 var alpha;
