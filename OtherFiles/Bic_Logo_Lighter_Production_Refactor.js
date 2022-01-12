@@ -79,7 +79,7 @@ jdeNumber_edit.characters = 7;
 var poNumber = orderOne.add("statictext", undefined, "PO Number");
 var poNumber_edit = orderOne.add("edittext", undefined, "");
 poNumber_edit.characters = 10;
-//poNumber_edit.text = "PO-6743";
+//poNumber_edit.text = "MMMMMMMMMMM11";
 
 var webSpacer = orderOne.add("panel", undefined, " ");
 webSpacer.margins = [75, 75, 75, 75];
@@ -236,7 +236,7 @@ var descriptionBox = descriptionSide.add(
 );
 var descriptionBox_edit = descriptionSide.add("edittext", undefined, "");
 descriptionBox_edit.characters = 20;
-//descriptionBox_edit.text = "the only thing";
+//descriptionBox_edit.text = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX32";
 
 var autoSave = descriptionSide.add("checkbox", undefined, "Save the PDF?");
 autoSave.value = true;
@@ -247,7 +247,7 @@ spacerBox.margins = 40;
 var originalArt = descriptionSide.add("statictext", undefined, "Original Art");
 var originalArt_edit = descriptionSide.add("edittext", undefined, "");
 originalArt_edit.characters = 20;
-//originalArt_edit.text = "Original art file name.";
+//originalArt_edit.text = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx55";
 
 var repeatOrder = descriptionSide.add("statictext", undefined, "Repeat order");
 var repeatOrder_edit = descriptionSide.add("edittext", undefined, "");
@@ -1552,7 +1552,7 @@ function magento() {
     return "CAENLog" + nineZeroes_Function();
   }
 }
-function prefix() {   // The prefix() function works, which also means the magento() function works as well.
+function prefix() {
   if (jdeNumber_edit.text.length > 0) {
     return jdeNumber_edit.text;
   } else {
@@ -1666,6 +1666,29 @@ if (bodyColorList.selection == 14) {
 
 
 
+
+
+var reducedFileName = app.activeDocument.textFrames.getByName("FileName");
+if (alpha.length > 32) {
+     reducedFileName.textRange.characterAttributes.size = 6;
+     reducedFileName.textRange.characterAttributes.baselineShift = -3;
+}
+
+
+
+
+var reducedOriginalArt = app.activeDocument.textFrames.getByName("Original Art");
+if (originalArt_edit.text.length > 50) {
+     reducedOriginalArt.textRange.characterAttributes.size = 4;
+     reducedOriginalArt.textRange.characterAttributes.baselineShift = -1;
+}
+
+
+var reducedPO = app.activeDocument.textFrames.getByName("PO");
+if (poNumber_edit.text.length > 11) { 
+     reducedPO.textRange.characterAttributes.size = 6;
+     reducedPO.textRange.characterAttributes.baselineShift = -3;
+}
 
 
 
@@ -1955,10 +1978,6 @@ if (bodyColorList.selection.index < 11) {
 /* Certain ink colors don't begin with numbers:
 blue 072
 red 032
-
-Error 1302: No such element
-The colors that don't begin with a number are not being found in the swatches pallete.
-
 
 
 
