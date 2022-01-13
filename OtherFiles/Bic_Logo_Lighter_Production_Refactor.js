@@ -594,7 +594,7 @@ if (ink_A1.text.length > 0) {
 }
 
 if (pmsTest_A1 === true) {
-  var gray = capitalize(ink_A1.text);
+  var gray = capitalizeSpaces(ink_A1.text);
   var grayArray = gray.split(" ");
   if (grayArray[0] === "Cool" || grayArray[0] === "Warm") {
     var grayName =
@@ -647,7 +647,7 @@ if (pmsTest_A1 === false) {
   } else {
     item_A1_name.contents =
       "PANTONE" + " " + capitalizeSpaces(ink_A1.text) + " " + "C";
-    item_A1_screenName.contents = capitalize(ink_A1.text);
+    item_A1_screenName.contents = capitalizeSpaces(ink_A1.text);
     item_A1_color.fillColor = app.activeDocument.swatches.getByName(
       "PANTONE" + " " + capitalizeSpaces(ink_A1.text) + " " + "C"
     ).color;
@@ -1479,8 +1479,13 @@ function repInfo() {
     bodyColorList.selection.index === 12
   ) {
     var repFront = app.activeDocument.textFrames.getByName("Rep");
-    repFront.contents =
-      capitalize(repNameEdit.text) + "     " + repEmail_Edit.text.toLowerCase();
+    repFront.contents = capitalize(repNameEdit.text) + "     " + repEmail_Edit.text.toLowerCase();
+
+      var reducedRep = app.activeDocument.textFrames.getByName("Rep");
+if (repFront.contents.length > 50) {
+     reducedRep.textRange.characterAttributes.size = 9;
+     reducedRep.textRange.characterAttributes.baselineShift = -1;
+}
 
     if (doubleSidedCheckbox.value === true) {
       var repBack = app.activeDocument.textFrames.getByName("Rep_Back");
@@ -1669,7 +1674,7 @@ if (bodyColorList.selection == 14) {
 
 var reducedFileName = app.activeDocument.textFrames.getByName("FileName");
 if (alpha.length > 32) {
-     reducedFileName.textRange.characterAttributes.size = 6;
+     reducedFileName.textRange.characterAttributes.size = 7;
      reducedFileName.textRange.characterAttributes.baselineShift = -3;
 }
 
@@ -1686,6 +1691,8 @@ if (poNumber_edit.text.length > 11) {
      reducedPO.textRange.characterAttributes.size = 6;
      reducedPO.textRange.characterAttributes.baselineShift = -3;
 }
+
+
 
 
 
