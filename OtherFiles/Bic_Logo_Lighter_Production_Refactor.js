@@ -220,6 +220,17 @@ var bodyColorList = bodyColor.add("dropdownlist", undefined, [
 
 bodyColorList.selection = 0;
 
+var mockup = bodyColor.add("panel", undefined);
+var mockupCheckbox = bodyColor.add(
+  "checkbox",
+  undefined,
+  "Mockup"
+);
+
+mockupCheckbox.value = false;
+
+
+
 var doubleSided = bodyColor.add("panel", undefined);
 var doubleSidedCheckbox = bodyColor.add(
   "checkbox",
@@ -1601,6 +1612,14 @@ function web_function() {
      web.contents = magento();
 }
 }
+
+if (mockupCheckbox.value === false) {
+      app.activeDocument.layers.getByName("Mockup").visible = true;
+      app.activeDocument.layers.getByName("Mockup").remove();
+     } else {
+          app.activeDocument.layers.getByName("Mockup").visible = true;
+     }
+
 
 //#region     FILENAME
 var alpha;
