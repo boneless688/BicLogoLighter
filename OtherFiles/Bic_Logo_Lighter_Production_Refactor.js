@@ -1968,38 +1968,29 @@ if (bodyColorList.selection.index < 11) {
 
 //#region     AUTOSAVE
 if (autoSave.value === true) {
-  var doc = app.activeDocument;
-  var docPath =
-    "/c/Users/JBavitz/BIC/BIC logo lighter Customer Service - General/Graphic Design/3 - Art Proof sent";
-  {
-    var opts = new PDFSaveOptions();
-    opts.PDFPreset = "Illustrator Default";
-
-if (bodyColorList.selection.index < 11) {
-
-     doc.saveAs(File(docPath + "/" + alpha + ".pdf"), opts);
-     
-     /*     if (multi.value === true) {
-        doc.saveAs(File(docPath + "/" + multiName + ".pdf"), opts);
-      } else {
-        doc.saveAs(File(docPath + "/" + singleName + ".pdf"), opts);
-      }
-    } */
-
-    if (bodyColorList.selection.index === 11) {
-      doc.saveAs(File(docPath + "/" + darkAssortName + ".pdf"), opts);
-    }
-
-    if (bodyColorList.selection.index === 12) {
-      doc.saveAs(File(docPath + "/" + lightAssortName + ".pdf"), opts);
-    }
-
-    if (bodyColorList.selection.index === 14) {
-      doc.saveAs(File(docPath + "/" + sleeveName + ".pdf"), opts);
-    }
-  }
-}
-}
+     var doc = app.activeDocument;
+     var docPath = "/c/Users/JBavitz/BIC/BIC logo lighter Customer Service - General/Graphic Design/3 - Art Proof sent";
+     var sleevePath = "/c/Users/JBavitz/BIC/BIC logo lighter Customer Service - General/Graphic Design/5 - Sleeves/Sleeve_ Proof_Sent";
+     var opts = new PDFSaveOptions();
+     opts.PDFPreset = "Illustrator Default";
+   
+   
+     if (bodyColorList.selection.index < 11) {
+       doc.saveAs(File(docPath + "/" + alpha + ".pdf"), opts);
+     }
+   
+     if (bodyColorList.selection.index === 11) {
+       doc.saveAs(File(docPath + "/" + nineZeroes_alpha + ".pdf"), opts);
+     }
+   
+     if (bodyColorList.selection.index === 12) {
+       doc.saveAs(File(docPath + "/" + alpha + ".pdf"), opts);
+     }
+   
+     if (bodyColorList.selection.index === 14) {
+       doc.saveAs(File(sleevePath + "/" + alpha + ".pdf"), opts);
+     }
+   }
 //#endregion
  
 
