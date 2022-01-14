@@ -1688,13 +1688,13 @@ if (bodyColorList.selection == 14) {
 //#endregion
 
 
-
-
-
 var reducedFileName = app.activeDocument.textFrames.getByName("FileName");
-if (alpha.length > 32) {
-     reducedFileName.textRange.characterAttributes.size = 7;
+if (alpha.length > 44) {
+     reducedFileName.textRange.characterAttributes.size = 6;
      reducedFileName.textRange.characterAttributes.baselineShift = -3;
+} else if (alpha.length > 35 && alpha.length < 44) {
+     reducedFileName.textRange.characterAttributes.size = 7;
+     reducedFileName.textRange.characterAttributes.baselineShift = -2;
 }
 
 
@@ -1710,13 +1710,6 @@ if (poNumber_edit.text.length > 11) {
      reducedPO.textRange.characterAttributes.size = 6;
      reducedPO.textRange.characterAttributes.baselineShift = -3;
 }
-
-
-
-
-
-
-
 
 
 
