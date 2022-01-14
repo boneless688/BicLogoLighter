@@ -630,8 +630,8 @@ if (pmsTest_A1 === true) {
     var mike = ink_A1.text.substring(kilo);
     pmsNumberA2 = pmsNumberA2.replace(/,/g, "");
     item_A1_name.contents =
-      "PANTONE" + " " + pmsNumberA2 + " " + "C" + "  " + capitalize(mike);
-    item_A1_screenName.contents = pmsNumberA2 + " " + capitalize(mike);
+      "PANTONE" + " " + pmsNumberA2 + " " + "C" + "  " + capitalizeSpaces(mike);
+    item_A1_screenName.contents = pmsNumberA2 + " " + capitalizeSpaces(mike);
     item_A1_color.fillColor = app.activeDocument.swatches.getByName(
       "PANTONE" + " " + pmsNumberA2 + " " + "C"
     ).color;
@@ -670,7 +670,7 @@ if (pmsTest_A1 === false) {
 
 
 // This block makes the stroke of the box thicker if the ink is a standard color.
-ink_A1.text = capitalize(ink_A1.text);
+ink_A1.text = capitalizeSpaces(ink_A1.text);
 if (ink_A1.text === "Reflex Blue" || ink_A1.text === "Process Blue") {
   item_A1_frame.strokeWidth = 1.25;
 }
@@ -701,7 +701,7 @@ if (ink_A2.text.length > 0) {
 }
 
 if (pmsTest_A2 === true) {
-  var gray = capitalize(ink_A2.text);
+  var gray = capitalizeSpaces(ink_A2.text);
   var grayArray = gray.split(" ");
   if (grayArray[0] === "Cool" || grayArray[0] === "Warm") {
     var grayName =
@@ -726,8 +726,8 @@ if (pmsTest_A2 === true) {
     var mike = ink_A2.text.substring(kilo);
     pmsNumberA2 = pmsNumberA2.replace(/,/g, "");
     item_A2_name.contents =
-      "PANTONE" + " " + pmsNumberA2 + " " + "C" + "  " + capitalize(mike);
-    item_A2_screenName.contents = pmsNumberA2 + " " + capitalize(mike);
+      "PANTONE" + " " + pmsNumberA2 + " " + "C" + "  " + capitalizeSpaces(mike);
+    item_A2_screenName.contents = pmsNumberA2 + " " + capitalizeSpaces(mike);
     item_A2_color.fillColor = app.activeDocument.swatches.getByName(
       "PANTONE" + " " + pmsNumberA2 + " " + "C"
     ).color;
@@ -765,7 +765,7 @@ if (pmsTest_A2 === false) {
 }
 
 // This block makes the stroke of the box thicker if the ink is a standard color.
-ink_A2.text = capitalize(ink_A2.text);
+ink_A2.text = capitalizeSpaces(ink_A2.text);
 if (ink_A2.text === "Reflex Blue" || ink_A2.text === "Process Blue") {
   item_A2_frame.strokeWidth = 1.25;
 }
@@ -796,7 +796,7 @@ if (ink_A3.text.length > 0) {
 }
 
 if (pmsTest_A3 === true) {
-  var gray = capitalize(ink_A3.text);
+  var gray = capitalizeSpaces(ink_A3.text);
   var grayArray = gray.split(" ");
   if (grayArray[0] === "Cool" || grayArray[0] === "Warm") {
     var grayName =
@@ -821,8 +821,8 @@ if (pmsTest_A3 === true) {
     var mike = ink_A3.text.substring(kilo);
     pmsNumberA3 = pmsNumberA3.replace(/,/g, "");
     item_A3_name.contents =
-      "PANTONE" + " " + pmsNumberA3 + " " + "C" + "  " + capitalize(mike);
-    item_A3_screenName.contents = pmsNumberA3 + " " + capitalize(mike);
+      "PANTONE" + " " + pmsNumberA3 + " " + "C" + "  " + capitalizeSpaces(mike);
+    item_A3_screenName.contents = pmsNumberA3 + " " + capitalizeSpaces(mike);
     item_A3_color.fillColor = app.activeDocument.swatches.getByName(
       "PANTONE" + " " + pmsNumberA3 + " " + "C"
     ).color;
@@ -860,7 +860,7 @@ if (pmsTest_A3 === false) {
 }
 
 // This block makes the stroke of the box thicker if the ink is a standard color.
-ink_A3.text = capitalize(ink_A3.text);
+ink_A3.text = capitalizeSpaces(ink_A3.text);
 if (ink_A3.text === "Reflex Blue" || ink_A3.text === "Process Blue") {
   item_A3_frame.strokeWidth = 1.25;
 }
@@ -891,7 +891,7 @@ if (ink_A4.text.length > 0) {
 }
 
 if (pmsTest_A4 === true) {
-  var gray = capitalize(ink_A4.text);
+  var gray = capitalizeSpaces(ink_A4.text);
   var grayArray = gray.split(" ");
   if (grayArray[0] === "Cool" || grayArray[0] === "Warm") {
     var grayName =
@@ -916,8 +916,8 @@ if (pmsTest_A4 === true) {
     var mike = ink_A4.text.substring(kilo);
     pmsNumberA4 = pmsNumberA4.replace(/,/g, "");
     item_A4_name.contents =
-      "PANTONE" + " " + pmsNumberA4 + " " + "C" + "  " + capitalize(mike);
-    item_A4_screenName.contents = pmsNumberA4 + " " + capitalize(mike);
+      "PANTONE" + " " + pmsNumberA4 + " " + "C" + "  " + capitalizeSpaces(mike);
+    item_A4_screenName.contents = pmsNumberA4 + " " + capitalizeSpaces(mike);
     item_A4_color.fillColor = app.activeDocument.swatches.getByName(
       "PANTONE" + " " + pmsNumberA4 + " " + "C"
     ).color;
@@ -955,7 +955,7 @@ if (pmsTest_A4 === false) {
 }
 
 // This block makes the stroke of the box thicker if the ink is a standard color.
-ink_A4.text = capitalize(ink_A4.text);
+ink_A4.text = capitalizeSpaces(ink_A4.text);
 if (ink_A4.text === "Reflex Blue" || ink_A4.text === "Process Blue") {
   item_A4_frame.strokeWidth = 1.25;
 }
@@ -985,7 +985,7 @@ if (ink_C1.text.length > 0) {
   }
 
   if (pmsTest_C1 === true) {
-    var gray = capitalize(ink_C1.text);
+    var gray = capitalizeSpaces(ink_C1.text);
     var grayArray = gray.split(" ");
     if (grayArray[0] === "Cool" || grayArray[0] === "Warm") {
       var grayName =
@@ -1010,8 +1010,8 @@ if (ink_C1.text.length > 0) {
       var mike = ink_C1.text.substring(kilo);
       pmsNumberC1 = pmsNumberC1.replace(/,/g, "");
       item_C1_name.contents =
-        "PANTONE" + " " + pmsNumberC1 + " " + "C" + "  " + capitalize(mike);
-      item_C1_screenName.contents = pmsNumberC1 + " " + capitalize(mike);
+        "PANTONE" + " " + pmsNumberC1 + " " + "C" + "  " + capitalizeSpaces(mike);
+      item_C1_screenName.contents = pmsNumberC1 + " " + capitalizeSpaces(mike);
       item_C1_color.fillColor = app.activeDocument.swatches.getByName(
         "PANTONE" + " " + pmsNumberC1 + " " + "C"
       ).color;
@@ -1049,7 +1049,7 @@ if (ink_C1.text.length > 0) {
   }
 
   // This block makes the stroke of the box thicker if the ink is a standard color.
-  ink_C1.text = capitalize(ink_C1.text);
+  ink_C1.text = capitalizeSpaces(ink_C1.text);
   if (ink_C1.text === "Reflex Blue" || ink_C1.text === "Process Blue") {
     item_C1_frame.strokeWidth = 1.25;
   }
@@ -1080,7 +1080,7 @@ if (ink_C2.text.length > 0) {
   }
 
   if (pmsTest_C2 === true) {
-    var gray = capitalize(ink_C2.text);
+    var gray = capitalizeSpaces(ink_C2.text);
     var grayArray = gray.split(" ");
     if (grayArray[0] === "Cool" || grayArray[0] === "Warm") {
       var grayName =
@@ -1105,8 +1105,8 @@ if (ink_C2.text.length > 0) {
       var mike = ink_C2.text.substring(kilo);
       pmsNumberC2 = pmsNumberC2.replace(/,/g, "");
       item_C2_name.contents =
-        "PANTONE" + " " + pmsNumberC2 + " " + "C" + "  " + capitalize(mike);
-      item_C2_screenName.contents = pmsNumberC2 + " " + capitalize(mike);
+        "PANTONE" + " " + pmsNumberC2 + " " + "C" + "  " + capitalizeSpaces(mike);
+      item_C2_screenName.contents = pmsNumberC2 + " " + capitalizeSpaces(mike);
       item_C2_color.fillColor = app.activeDocument.swatches.getByName(
         "PANTONE" + " " + pmsNumberC2 + " " + "C"
       ).color;
@@ -1144,7 +1144,7 @@ if (ink_C2.text.length > 0) {
   }
 
   // This block makes the stroke of the box thicker if the ink is a standard color.
-  ink_C2.text = capitalize(ink_C2.text);
+  ink_C2.text = capitalizeSpaces(ink_C2.text);
   if (ink_C2.text === "Reflex Blue" || ink_C2.text === "Process Blue") {
     item_C2_frame.strokeWidth = 1.25;
   }
@@ -1175,7 +1175,7 @@ if (ink_C3.text.length > 0) {
   }
 
   if (pmsTest_C3 === true) {
-    var gray = capitalize(ink_C1.text);
+    var gray = capitalizeSpaces(ink_C1.text);
     var grayArray = gray.split(" ");
     if (grayArray[0] === "Cool" || grayArray[0] === "Warm") {
       var grayName =
@@ -1239,7 +1239,7 @@ if (ink_C3.text.length > 0) {
   }
 
   // This block makes the stroke of the box thicker if the ink is a standard color.
-  ink_C3.text = capitalize(ink_C3.text);
+  ink_C3.text = capitalizeSpaces(ink_C3.text);
   if (ink_C3.text === "Reflex Blue" || ink_C3.text === "Process Blue") {
     item_C3_frame.strokeWidth = 1.25;
   }
@@ -1277,7 +1277,7 @@ if (ink_C4.text.length > 0) {
   }
 
   if (pmsTest_C4 === true) {
-    var gray = capitalize(ink_C4.text);
+    var gray = capitalizeSpaces(ink_C4.text);
     var grayArray = gray.split(" ");
     if (grayArray[0] === "Cool" || grayArray[0] === "Warm") {
       var grayName =
@@ -1302,8 +1302,8 @@ if (ink_C4.text.length > 0) {
       var mike = ink_C4.text.substring(kilo);
       pmsNumberC4 = pmsNumberC4.replace(/,/g, "");
       item_C4_name.contents =
-        "PANTONE" + " " + pmsNumberC4 + " " + "C" + "  " + capitalize(mike);
-      item_C4_screenName.contents = pmsNumberC4 + " " + capitalize(mike);
+        "PANTONE" + " " + pmsNumberC4 + " " + "C" + "  " + capitalizeSpaces(mike);
+      item_C4_screenName.contents = pmsNumberC4 + " " + capitalizeSpaces(mike);
       item_C4_color.fillColor = app.activeDocument.swatches.getByName(
         "PANTONE" + " " + pmsNumberC4 + " " + "C"
       ).color;
@@ -1341,7 +1341,7 @@ if (ink_C4.text.length > 0) {
   }
 
   // This block makes the stroke of the box thicker if the ink is a standard color.
-  ink_C4.text = capitalize(ink_C4.text);
+  ink_C4.text = capitalizeSpaces(ink_C4.text);
   if (ink_C4.text === "Reflex Blue" || ink_C4.text === "Process Blue") {
     item_C4_frame.strokeWidth = 1.25;
   }
@@ -1362,7 +1362,7 @@ if (bodyColorList.selection.index < 11) {
   bodyColor_function();
 }
 //#endregion
-//#endregion
+//#endregion 
 //#region                                ORIGINAL ART
 var item_OriginalArt_A = "original art side A";
 var item_originalArt_C = "original art side C";
@@ -1551,7 +1551,7 @@ function capitalize(u) {
   }
   return u.join("");
 }
-function capitalizeSpaces(n) {
+function capitalizeSpaces(n) {    
   n = n.toLowerCase();
   n = n.split(" ");
   for (var i = 0; i < n.length; i++) {
@@ -1573,7 +1573,7 @@ function prefix() {
   } else {
     return magento();
   }
-}
+} 
 function filenameOutput() {
   if (bodyColorList.selection.index < 11) {
     var illustratorFrame = [
