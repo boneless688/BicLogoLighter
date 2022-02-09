@@ -121,6 +121,7 @@ var spacer = orderThree.add("group");
 
 var multiPanel = orderThree.add("panel", undefined, "");
 var multi = multiPanel.add("checkbox", undefined, "Multiple Items");
+var multiNumber = multiPanel.add("edittext", undefined, "Number")
 var multiSub = multiPanel.add("panel", undefined, "");
 multiSub.orientation = "row";
 var multi_bodyColor = multiSub.add("radiobutton", undefined, "Body Color");
@@ -1388,6 +1389,18 @@ function companyName_function() {
 
 //#endregion
 
+
+
+
+
+function totalItems_function () {
+     var total = app.activeDocument.textFrames.getByName("Item Total");
+     total.contents = multiNumber.text;
+}
+
+
+
+
 function designer_function() {
   var designer = app.activeDocument.textFrames.getByName("Designer");
   designer.contents = designerList.selection.text;
@@ -1728,6 +1741,7 @@ originalFile_function();
 repeatOrder_function();
 companyName_function();
 designer_function();
+totalItems_function ()
 filenameOutput();
 proofDate();
 backDate();
@@ -1978,6 +1992,8 @@ if (bodyColorList.selection.index < 11) {
 }
 //#endregion
 
+
+
 //#region     AUTOSAVE
 if (autoSave.value === true) {
      var doc = app.activeDocument;
@@ -1992,7 +2008,7 @@ if (autoSave.value === true) {
      }
    
      if (bodyColorList.selection.index === 11) {
-       doc.saveAs(File(docPath + "/" + nineZeroes_alpha + ".pdf"), opts);
+       doc.saveAs(File(docPath + "/" + alpha + ".pdf"), opts);
      }
    
      if (bodyColorList.selection.index === 12) {
@@ -2011,9 +2027,8 @@ if (autoSave.value === true) {
 
 
 //#region     BUG LIST
-/* Certain ink colors don't begin with numbers:
-blue 072
-red 032
+/*
+Item Total
 
 
 
