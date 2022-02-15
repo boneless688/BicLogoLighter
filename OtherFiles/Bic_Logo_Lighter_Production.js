@@ -87,13 +87,7 @@ webSpacer.margins = [75, 75, 75, 75];
 var webArea = orderOne.add("panel", undefined, "Web Number");
 webArea.orientation = "row";
 
-var webPrefix = webArea.add("dropdownlist", undefined, [
-  "USLog",
-  "CAENLog"
-]);
 
-webPrefix.characters = 8;
-webPrefix.selection = 0;
 
 var webNumber_edit = webArea.add("edittext", undefined, "");
 webNumber_edit.characters = 10;
@@ -227,8 +221,14 @@ var mockupCheckbox = bodyColor.add(
   undefined,
   "Mockup"
 );
+var genericCheckbox = bodyColor.add(
+     "checkbox",
+     undefined,
+     "Generic"
+   );
 
 mockupCheckbox.value = false;
+genericCheckbox.value = false;
 
 
 
@@ -261,9 +261,9 @@ var originalArt_edit = descriptionSide.add("edittext", undefined, "");
 originalArt_edit.characters = 20;
 //originalArt_edit.text = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx55";
 
-var repeatOrder = descriptionSide.add("statictext", undefined, "Repeat order");
-var repeatOrder_edit = descriptionSide.add("edittext", undefined, "");
-repeatOrder_edit.characters = 20;
+var notes = descriptionSide.add("statictext", undefined, "Notes");
+var notes_edit = descriptionSide.add("edittext", undefined, "");
+notes_edit.characters = 20;
 
 var inkMaster = colors.add("group");
 inkMaster.orientation = "column";
@@ -1395,7 +1395,11 @@ function companyName_function() {
 
 function totalItems_function () {
      var total = app.activeDocument.textFrames.getByName("Item Total");
-     total.contents = multiNumber.text;
+     if (multiNumber.text === "Number") {
+          total.contents = "1"
+          } else {
+          total.contents = multiNumber.text;
+     }
 }
 
 
@@ -1450,9 +1454,9 @@ function originalFile_function() {
   var originalFile = app.activeDocument.textFrames.getByName("Original Art");
   originalFile.contents = originalArt_edit.text;
 }
-function repeatOrder_function() {
-  var repeatOrder = app.activeDocument.textFrames.getByName("RepeatOrderText");
-  repeatOrder.contents = repeatOrder_edit.text;
+function notes_function() {
+  var notes = app.activeDocument.textFrames.getByName("RepeatOrderText");
+  notes.contents = descriptionBox_edit.text + "    " + notes_edit.text;
 }
 function currentDate() {
   var currentDate = new Date();
@@ -1573,13 +1577,12 @@ function capitalizeSpaces(n) {
   return n.join(" ");
 }
 function magento() {
-  if (webPrefix.selection == 0) {
-    return "USLog" + nineZeroes_Function();
-  }
-  if (webPrefix.selection == 1) {
-    return "CAENLog" + nineZeroes_Function();
-  }
-}
+     if (nationalityUS.value === true) {
+       return "USLOG" + nineZeroes_Function();
+     } else {
+          return "CAENLOG" + nineZeroes_Function();
+     }
+   }
 function prefix() {
   if (jdeNumber_edit.text.length > 0) {
     return jdeNumber_edit.text;
@@ -1626,12 +1629,25 @@ function web_function() {
 }
 }
 
-if (mockupCheckbox.value === false) {
-      app.activeDocument.layers.getByName("Mockup").visible = true;
-      app.activeDocument.layers.getByName("Mockup").remove();
-     } else {
+
+function generic_function () {
+     if (mockupCheckbox.value === false) {
           app.activeDocument.layers.getByName("Mockup").visible = true;
-     }
+          app.activeDocument.layers.getByName("Mockup").remove();
+         } else {
+              app.activeDocument.layers.getByName("Mockup").visible = true;
+         }
+    
+         if (genericCheckbox.value === false) {
+              app.activeDocument.layers.getByName("Generic").visible = true;
+              app.activeDocument.layers.getByName("Generic").remove();
+         } else {
+              app.activeDocument.layers.getByName("Generic").visible = true;
+         }
+}
+
+
+
 
 
 //#region     FILENAME
@@ -1729,6 +1745,7 @@ if (poNumber_edit.text.length > 11) {
 
 //#region     FUNCTION CALLS
 repInfo();
+generic_function();
 customerInfo_function();
 vip_function();
 rush_function();
@@ -1738,9 +1755,9 @@ web_function();
 InHands_function();
 ship_function();
 originalFile_function();
-repeatOrder_function();
+notes_function();
 companyName_function();
-designer_function();
+designer_function(); 
 totalItems_function ()
 filenameOutput();
 proofDate();
@@ -2025,10 +2042,22 @@ if (autoSave.value === true) {
 
 
 
+/*
+TO DO LIST
+
+If the canadian radio button is checked, the web number is preset to CAENLOG.
+
+If the name of a VIP is entered, the other information is automatically entered.
+
+
+*/
+
+
+
+
 
 //#region     BUG LIST
 /*
-Item Total
 
 
 
