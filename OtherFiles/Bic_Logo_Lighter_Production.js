@@ -18,6 +18,37 @@ topLeft.preferredSize.width = 200;
 var customerInfo_outer = topLeft.add("group");
 customerInfo_outer.orientation = "column";
 
+var repName = customerInfo_outer.add("statictext", undefined, "Rep name")
+var regulars = customerInfo_outer.add("dropdownlist", undefined, [
+	"Regulars",
+	"Jonathan Le",
+	"Glenda Vilchez",
+     "Aaron Schimmel",
+	"Sarah Gillen",
+	"Mitch Sigurdson",
+	"Aline Nas",
+	"Darryl Quinge",
+	"Angela Cicchini",
+	"Erica Heft",
+	"Alex Walker",
+	"Shelby",
+     "Cindy",
+	"Kim Robinson",
+	"Ryan Zvibleman",
+	"Jeff Mancini",
+	"Danielle Treloar",
+	"Will Kunz",
+	"Kari Matlack",
+	"Kyung Kim",
+	"Tyler Groves",
+	"Jay Tittman",
+	"Robyn Govberg",
+     "Brian Eskenazi",
+	"Jennifer",
+     "MARCO"
+])
+regulars.selection = 0
+
 var repName = customerInfo_outer.add("statictext", undefined, "Rep name");
 var repNameEdit = customerInfo_outer.add("edittext", undefined, "");
 repNameEdit.characters = 20;
@@ -405,8 +436,245 @@ String.prototype.trim = function () {
   return this.replace(/^\s+/, "").replace(/\s+$/, "");
 };
 //#endregion
+
+
+
+
+//#region                                CUSTOMER INFO
+var rep = {
+	name: capitalizeSpaces(repNameEdit.text),
+	email: repEmail_Edit.text,
+	company: capitalizeSpaces(company_A_Edit.text),
+     nationality: null,
+     vip: null
+}
+var repName = app.activeDocument.textFrames.getByName("Rep")
+
+
+
+if (regulars.selection.text === "Regulars") {
+     var repNameSignature = app.activeDocument.textFrames.getByName("RepName_Signature")
+	var companyName = app.activeDocument.textFrames.getByName("Company")
+	repName.contents = rep.name + "     " + rep.email
+	repNameSignature.contents = rep.name
+	companyName.contents = rep.company
+
+} else {
+	if (regulars.selection.text === "Jonathan Le") {
+		rep.name = "Jonathan Le"
+		rep.email = "jonathan@bugbranding.com"
+		rep.company = "Lightning Bug Branding"
+          rep.nationality = "US"
+          rep.vip = true
+
+	} else if (regulars.selection.text === "Glenda Vilchez") {
+		rep.name = "Glenda Vilchez"
+		rep.email = "glenda@rockstarpromos.com"
+		rep.company = "Rock Star Promotions"
+          rep.nationality = "US"
+          rep.vip = true
+
+     
+     } else if (regulars.selection.text === "Aaron Schimmel") {
+		rep.name = "Aaron Schimmel"
+		rep.email = "aaron@rockstarpromos.com"
+		rep.company = "Rock Star Promotions"
+          rep.nationality = "US"
+          rep.vip = true
+
+
+	} else if (regulars.selection.text === "Sarah Gillen") {
+		rep.name = "Sarah Gillen"
+		rep.email = "logolighters@live.com"
+		rep.company = "LogoLighters, LLC"
+          rep.nationality = "US"
+          rep.vip = true
+
+
+	} else if (regulars.selection.text === "Mitch Sigurdson") {
+		rep.name = "Mitch Sigurdson"
+		rep.email = "mitch@bobhq.com"
+		rep.company = "Humble and Fume"
+          rep.nationality = "Canada"
+          rep.vip = false
+
+
+	} else if (regulars.selection.text === "Aline Nas") {
+		rep.name = "Aline Nas"
+		rep.email = "aline@cannabispromotions.com"
+		rep.company = "Cannabis Promotions"
+          rep.nationality = "US"
+          rep.vip = false
+
+
+	} else if (regulars.selection.text === "Darryl Quinge") {
+		rep.name = "Darryl Quinge"
+		rep.email = "darryl@pemamericainc.com"
+		rep.company = "PEM America Inc"
+          rep.nationality = "US"
+          rep.vip = true
+
+
+	} else if (regulars.selection.text === "Angela Cicchini") {
+		rep.name = "Angela Cicchini"
+		rep.email = "angelac@bobhq.com"
+		rep.company = "Humble and Fume"
+          rep.nationality = "Canada"
+          rep.vip = false
+
+     } else if (regulars.selection.text === "MARCO") {
+          rep.name = "Will Kunz"
+          rep.email = "orders@marcopdx.com"
+          rep.company = "MARCO Ideas Unlimited"
+          rep.nationality = "US"
+          rep.vip = false
+
+
+	} else if (regulars.selection.text === "Erica Heft") {
+		rep.name = "Erica Heft"
+		rep.email = "erica@4allpromos.com"
+		rep.company = "4AllPromos"
+          rep.nationality = "US"
+          rep.vip = true
+     
+
+     } else if (regulars.selection.text === "Cindy") {
+     rep.name = "Cindy"
+     rep.email = "cindy@4allpromos.com"
+     rep.company = "4AllPromos"
+     rep.nationality = "US"
+     rep.vip = true
+
+	} else if (regulars.selection.text === "Alex Walker") {
+		rep.name = "Alex Walker"
+		rep.email = "alex@humblecs.com"
+		rep.company = "Humble & Fume"
+          rep.nationality = "Canada"
+          rep.vip = false
+
+
+	} else if (regulars.selection.text === "Shelby") {
+		rep.name = "Shelby"
+		rep.email = "shelby@4allpromos.com"
+		rep.company = "4AllPromos"
+          rep.nationality = "US"
+          rep.vip = true
+
+
+	} else if (regulars.selection.text === "Kim Robinson") {
+		rep.name = "Kim Robinson"
+		rep.email = "kim@4allpromos.com"
+		rep.company = "4AllPromos"
+          rep.nationality = "US"
+          rep.vip = true
+
+
+	} else if (regulars.selection.text === "Ryan Zvibleman") {
+		rep.name = "Ryan Zvibleman"
+		rep.email = "orders@cannabispromotions.com"
+		rep.company = "Cannabis Promotions"
+          rep.nationality = "US"
+          rep.vip = false
+
+
+	} else if (regulars.selection.text === "Jeff Mancini") {
+		rep.name = "Jeff Mancini"
+		rep.email = "jeff@m5group.com"
+		rep.company = "M5 Group"
+          rep.nationality = "US"
+          rep.vip = false
+
+
+	} else if (regulars.selection.text === "Danielle Treloar") {
+		rep.name = "Danielle Treloar"
+		rep.email = "danielle@rushimprint.com"
+		rep.company = "RUSH Imprint"
+          rep.nationality = "US"
+          rep.vip = true
+
+
+	} else if (regulars.selection.text === "Will Kunz") {
+		rep.name = "Will Kunz"
+		rep.email = "orders@marcopdx.com"
+		rep.company = "MARCO Ideas Unlimited"
+          rep.nationality = "US"
+          rep.vip = true
+
+
+	} else if (regulars.selection.text === "Kari Matlack") {
+		rep.name = "Kari Matlack"
+		rep.email = "kari@rushimprint.com"
+		rep.company = "RUSH Imprint"
+          rep.nationality = "US"
+          rep.vip = true
+
+
+	} else if (regulars.selection.text === "Kyung Kim") {
+		rep.name = "Kyung Kim"
+		rep.email = "kyung@identity-links.com"
+		rep.company = "Identity Links"
+          rep.nationality = "US"
+          rep.vip = true
+
+
+	} else if (regulars.selection.text === "Tyler Groves") {
+		rep.name = "Tyler Groves"
+		rep.email = "tyler@bobhq.com"
+		rep.company = "Humble & Fume"
+          rep.nationality = "Canada"
+          rep.vip = false
+
+
+	} else if (regulars.selection.text === "Jay Tittman") {
+		rep.name = "Jay Tittman"
+		rep.email = "jay@rmbp.com"
+		rep.company = "Rocky Mountain Business Products"
+          rep.nationality = "US"
+          rep.vip = false
+
+
+     } else if (regulars.selection.text === "Brian Eskenazi") {
+		rep.name = "High Mountain Imports"
+		rep.email = "orders@highmountainimports.com"
+		rep.company = "High Mountain Imports"
+          rep.nationality = "US"
+          rep.vip = false
+
+	} else if (regulars.selection.text === "Robyn Govberg") {
+		rep.name = "Robyn Govberg"
+		rep.email = "robyn@highmountainimports.com"
+		rep.company = "High Mountain Imports"
+          rep.nationality = "US"
+          rep.vip = false
+
+
+	} else if (regulars.selection.text === "Jennifer") {
+		rep.name = "Jennifer"
+		rep.email = "jennifer@pensrus.com"
+		rep.company = "Pens R Us"
+          rep.nationality = "US"
+          rep.vip = true
+	}
+
+
+
+	repNameSignature = app.activeDocument.textFrames.getByName("RepName_Signature")
+     companyName = app.activeDocument.textFrames.getByName("Company")
+
+	repName.contents = rep.name + "     " + rep.email
+     if (repName.contents.length > 50) {
+          repName.textRange.characterAttributes.size = 9;
+          repName.textRange.characterAttributes.baselineShift = -1;
+     }
+     repNameSignature.contents = rep.name
+     companyName.contents = rep.company
+
+}
+
+//#endregion
+
 //#region                                NATIONALITY
-if (nationalityCanada.value === true) {
+if (nationalityCanada.value === true || rep.nationality === "Canada") {
   app.activeDocument.layers.getByName("USA").visible = true;
   app.activeDocument.layers.getByName("USA").remove();
   app.activeDocument.layers.getByName("Canada").visible = true;
@@ -418,7 +686,14 @@ if (nationalityCanada.value === true) {
 //#endregion
 //#region                                INK COLORS
 //#region    If the order uses the standard template, then the body and ink color code is run. If it isn't, then the code is bypassed.
+
+
+
+
+
+
 function neonInk(inkString, bravo) {
+     //The group name in Illustrator is A1_Warning, etc.
   var neonInks = ["801", "802", "803", "804", "805", "806", "807"];
   var alpha = inkString.search(" ");
   var numberOnly = inkString.substring(0, alpha);
@@ -429,6 +704,12 @@ function neonInk(inkString, bravo) {
     }
   }
 }
+
+
+
+
+
+
 
 if (bodyColorList.selection.index < 11) {
   var item_A1_frame = app.activeDocument.pathItems.getByName("A1_Frame");
@@ -1368,26 +1649,7 @@ if (bodyColorList.selection.index < 11) {
 var item_OriginalArt_A = "original art side A";
 var item_originalArt_C = "original art side C";
 //#endregion
-//#region                                CUSTOMER INFO
-function customerInfo_function() {
-  var rep = app.activeDocument.textFrames.getByName("Rep");
-  rep.contents = capitalizeSpaces(repNameEdit.text) + "     " + repEmail_Edit.text.toLowerCase();
-  var repNameSignature = app.activeDocument.textFrames.getByName("RepName_Signature");
-  repNameSignature.contents = repNameEdit.text;
-  repNameSignature.contents = capitalizeSpaces(repNameSignature.contents);
 
-  var repNameSignature = app.activeDocument.textFrames.getByName("RepName_Signature");
-  repNameSignature.contents = repNameEdit.text;
-  repNameSignature.contents = capitalizeSpaces(repNameSignature.contents);
-}
-
-function companyName_function() {
-  var companyName = app.activeDocument.textFrames.getByName("Company");
-  companyName.contents = company_A_Edit.text;
-  companyName.contents = companyName.contents;
-}
-
-//#endregion
 
 
 
@@ -1417,7 +1679,7 @@ function vip_function() {
   var vipBox = app.activeDocument.layers
     .getByName("Masque")
     .groupItems.getByName("VIP");
-  if (vipCheckbox.value === true) {
+  if (vipCheckbox.value === true || rep.vip === true) {
     vipBox.hidden = false;
   } else {
     vipBox.hidden = true;
@@ -1437,19 +1699,10 @@ function rush_function() {
   }
 }
 function po_function() {
-  if (nationalityCanada.value === true) {
-    var purchaseOrder = app.activeDocument.layers
-      .getByName("Canada")
-      .textFrames.getByName("PO");
+    var purchaseOrder = app.activeDocument.textFrames.getByName("PO");
       purchaseOrder.contents = poNumber_edit.text
-  } else {
-    var purchaseOrder = app.activeDocument.layers
-      .getByName("USA")
-      .textFrames.getByName("PO");
-    purchaseOrder.contents = poNumber_edit.text;
-
   }
-}
+
 function originalFile_function() {
   var originalFile = app.activeDocument.textFrames.getByName("Original Art");
   originalFile.contents = originalArt_edit.text;
@@ -1485,29 +1738,24 @@ function InHands_function() {
   inHands.contents = capitalizeSpaces(inHandsDate_edit.text);
 }
 function JDE_function() {
-  if (nationalityUS.value === true) {
-    var jde = app.activeDocument.layers
-      .getByName("USA")
-      .textFrames.getByName("jde number");
+    var jde = app.activeDocument.textFrames.getByName("jde number");
     jde.contents = jdeNumber_edit.text;
-  } else {
-    var canadaJde = app.activeDocument.layers
-      .getByName("Canada")
-      .textFrames.getByName("jde number");
-    canadaJde.contents = jdeNumber_edit.text;
-  }
+  } 
+
+
   if (doubleSidedCheckbox.value === true) {
 var jdeBack = app.activeDocument.textFrames.getByName("jde number_Back");
 jdeBack.contents = jdeNumber_edit.text;
 }
-}
+
+
 function repInfo() {
   if (
     bodyColorList.selection.index === 11 ||
     bodyColorList.selection.index === 12
   ) {
     var repFront = app.activeDocument.textFrames.getByName("Rep");
-    repFront.contents = capitalize(repNameEdit.text) + "     " + repEmail_Edit.text.toLowerCase();
+    repFront.contents = rep.name + "     " + rep.email
 
       var reducedRep = app.activeDocument.textFrames.getByName("Rep");
 if (repFront.contents.length > 50) {
@@ -1517,25 +1765,16 @@ if (repFront.contents.length > 50) {
 
     if (doubleSidedCheckbox.value === true) {
       var repBack = app.activeDocument.textFrames.getByName("Rep_Back");
-      repBack.contents =
-        capitalize(repNameEdit.text) +
-        "     " +
-        repEmail_Edit.text.toLowerCase();
+      repBack.contents = rep.name + "     " + rep.email
 
-      if (nationalityCanada.value === true) {
-        var POBack = app.activeDocument.layers
-          .getByName("Canada")
-          .textFrames.getByName("PO_Back");
-      } else {
-        var POBack = app.activeDocument.layers
-          .getByName("USA")
-          .textFrames.getByName("PO_Back");
-      }
 
-      POBack.contents = poNumber_edit.text;
+
+
+     var POBack = app.activeDocument.textFrames.getByName("PO_Back");
+     POBack.contents = poNumber_edit.text;
       if (POBack === null) {
         POBack.contents = webPrefix.selection.text + webNumber_edit.text;
-      }
+      } 
     }
   }
 }
@@ -1584,12 +1823,15 @@ function magento() {
      }
    }
 function prefix() {
+     if(mockupCheckbox.value === true) 
+     return "MOCKUP"
   if (jdeNumber_edit.text.length > 0) {
     return jdeNumber_edit.text;
   } else {
     return magento();
-  }
+}
 } 
+
 function filenameOutput() {
   if (bodyColorList.selection.index < 11) {
     var illustratorFrame = [
@@ -1623,22 +1865,23 @@ function filenameOutput() {
 }
 
 function web_function() {
-     if (jdeNumber_edit.text.length < 1) {
      var web = app.activeDocument.textFrames.getByName("Web");
+     if (mockupCheckbox.value === true) {
+          web.contents = " "
+     } else if (jdeNumber_edit.text.length < 1) {
      web.contents = magento();
 }
 }
 
 
+
+
+
+
+
+
 function generic_function () {
-     if (mockupCheckbox.value === false) {
-          app.activeDocument.layers.getByName("Mockup").visible = true;
-          app.activeDocument.layers.getByName("Mockup").remove();
-         } else {
-              app.activeDocument.layers.getByName("Mockup").visible = true;
-         }
-    
-         if (genericCheckbox.value === false) {
+     if (genericCheckbox.value === false) {
               app.activeDocument.layers.getByName("Generic").visible = true;
               app.activeDocument.layers.getByName("Generic").remove();
          } else {
@@ -1646,7 +1889,14 @@ function generic_function () {
          }
 }
 
-
+function mockup_function () {
+     if (mockupCheckbox.value === false) {
+          app.activeDocument.layers.getByName("Mockup").visible = true;
+          app.activeDocument.layers.getByName("Mockup").remove();
+         } else {
+              app.activeDocument.layers.getByName("Mockup").visible = true;
+         }
+}
 
 
 
@@ -1746,7 +1996,8 @@ if (poNumber_edit.text.length > 11) {
 //#region     FUNCTION CALLS
 repInfo();
 generic_function();
-customerInfo_function();
+mockup_function();
+//customerInfo_function();
 vip_function();
 rush_function();
 po_function();
@@ -1756,7 +2007,7 @@ InHands_function();
 ship_function();
 originalFile_function();
 notes_function();
-companyName_function();
+//companyName_function();
 designer_function(); 
 totalItems_function ()
 filenameOutput();
@@ -1796,10 +2047,6 @@ if (bodyColorList.selection.index === 12) {
   }
 
   //#region          DOUBLE SIDED ASSORTMENTS
-
-
-
-
   if (bodyColorList.selection.index === 11 || bodyColorList.selection.index === 12) {
      if (doubleSidedCheckbox.value == true) {
        var assortment_screenName_back = app.activeDocument.textFrames.getByName("Assortment Ink Color Back");
@@ -1821,6 +2068,26 @@ if (bodyColorList.selection.index === 12) {
          reducedDoublePO.textRange.characterAttributes.size = 6;
          reducedDoublePO.textRange.characterAttributes.baselineShift = -3;
        }
+
+       var fileName_Back
+
+       var companyBack = app.activeDocument.textFrames.getByName("Company_Back")
+       companyBack.contents = rep.company
+        
+       var repSignatureBack = app.activeDocument.textFrames.getByName("RepName_Signature_Back")
+       repSignatureBack.contents = rep.name
+       
+       var originalArtBack = app.activeDocument.textFrames.getByName("Original Art_Back")
+       originalArtBack.contents = originalArt_edit.text
+       
+       var shipDateBack = app.activeDocument.textFrames.getByName("Ship Date_Back")
+       shipDateBack.contents = shipDate_edit.text
+       
+       var inHandsDateBack = app.activeDocument.textFrames.getByName("In Hands Date_Back")
+       inHandsDateBack.contents = inHandsDate_edit.text
+
+
+       
      }
    }
   //#endregion
@@ -2045,9 +2312,6 @@ if (autoSave.value === true) {
 /*
 TO DO LIST
 
-If the canadian radio button is checked, the web number is preset to CAENLOG.
-
-If the name of a VIP is entered, the other information is automatically entered.
 
 
 */
