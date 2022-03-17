@@ -22,7 +22,8 @@ var repName = customerInfo_outer.add("statictext", undefined, "Rep name")
 var regulars = customerInfo_outer.add("dropdownlist", undefined, [
 	"Regulars",
 	"Jonathan Le",
-	"Aaron Schimmel",
+	"Glenda Vilchez",
+     "Aaron Schimmel",
 	"Sarah Gillen",
 	"Mitch Sigurdson",
 	"Aline Nas",
@@ -52,12 +53,12 @@ var repName = customerInfo_outer.add("statictext", undefined, "Rep name");
 var repNameEdit = customerInfo_outer.add("edittext", undefined, "");
 repNameEdit.characters = 20;
 repNameEdit.active = true;
-//repNameEdit.text = "glenda vilchez";
+//repNameEdit.text = "Custom name";
 
 var repEmail = customerInfo_outer.add("statictext", undefined, "Rep Email");
 var repEmail_Edit = customerInfo_outer.add("edittext", undefined, "");
 repEmail_Edit.characters = 20;
-//repEmail_Edit.text = "glenda@rockstarpromos.com";
+//repEmail_Edit.text = "custom email";
 
 var companyGroup = customerInfo_outer.add("panel", undefined, "");
 companyGroup.orientation = "row";
@@ -65,7 +66,7 @@ companyGroup.orientation = "row";
 var company_A = companyGroup.add("statictext", undefined, "Company");
 var company_A_Edit = companyGroup.add("edittext", undefined, "");
 company_A_Edit.characters = 10;
-//company_A_Edit.text = "rock star promos";
+//company_A_Edit.text = "custom company";
 
 var vipCheckbox = companyGroup.add("checkbox", undefined, "VIP");
 
@@ -310,24 +311,29 @@ inkBox_Master_A1.margins = [15, 15, 5, 15];
 var ink_A1 = inkBox_Master_A1.add("edittext", undefined, "");
 ink_A1.characters = 10;
 //ink_A1.text = "186 ruby red";
+var ink_A1_Double = inkBox_Master_A1.add("checkbox", undefined, "Double hit")
+
 
 var inkBox_Master_A2 = inkColors_A.add("panel", undefined, "Screen A2");
 inkBox_Master_A2.orientation = "column";
 var ink_A2 = inkBox_Master_A2.add("edittext", undefined, "");
 ink_A2.characters = 10;
 //ink_A2.text = "281 navy blue";
+var ink_A2_Double = inkBox_Master_A2.add("checkbox", undefined, "Double hit")
 
 var inkBox_Master_A3 = inkColors_A.add("panel", undefined, "Screen A3");
 inkBox_Master_A3.orientation = "column";
 var ink_A3 = inkBox_Master_A3.add("edittext", undefined, "");
 ink_A3.characters = 10;
 //ink_A3.text = "186 red";
+var ink_A3_Double = inkBox_Master_A3.add("checkbox", undefined, "Double hit")
 
 var inkBox_Master_A4 = inkColors_A.add("panel", undefined, "Screen A4");
 inkBox_Master_A4.orientation = "column";
 var ink_A4 = inkBox_Master_A4.add("edittext", undefined, "");
 ink_A4.characters = 10;
 //ink_A4.text = "142 yellow";
+var ink_A4_Double = inkBox_Master_A4.add("checkbox", undefined, "Double hit")
 
 var inkColors_C = inkColors_2.add("panel", undefined, "");
 inkColors_C.preferredSize = [400, 100];
@@ -338,24 +344,31 @@ inkBox_Master_C1.orientation = "column";
 var ink_C1 = inkBox_Master_C1.add("edittext", undefined, "");
 ink_C1.characters = 10;
 //ink_C1.text = "black";
+var ink_C1_Double = inkBox_Master_C1.add("checkbox", undefined, "Double hit")
 
 var inkBox_Master_C2 = inkColors_C.add("panel", undefined, "Screen C2");
 inkBox_Master_C2.orientation = "column";
 var ink_C2 = inkBox_Master_C2.add("edittext", undefined, "");
 ink_C2.characters = 10;
 //ink_C2.text = "211 pink";
+var ink_C2_Double = inkBox_Master_C2.add("checkbox", undefined, "Double hit")
+
 
 var inkBox_Master_C3 = inkColors_C.add("panel", undefined, "Screen C3");
 inkBox_Master_C3.orientation = "column";
 var ink_C3 = inkBox_Master_C3.add("edittext", undefined, "");
 ink_C3.characters = 10;
 //ink_C3.text = "877 metallic silver";
+var ink_C3_Double = inkBox_Master_C3.add("checkbox", undefined, "Double hit")
+
 
 var inkBox_Master_C4 = inkColors_C.add("panel", undefined, "Screen C4");
 inkBox_Master_C4.orientation = "column";
 var ink_C4 = inkBox_Master_C4.add("edittext", undefined, "");
 ink_C4.characters = 10;
 //ink_C4.text = "116 athletic gold";
+var ink_C4_Double = inkBox_Master_C4.add("checkbox", undefined, "Double hit")
+
 
 /*/* #region  OKAY / Cancel buttons */
 var buttonGroup = master.add("panel");
@@ -941,6 +954,11 @@ for (i = 0; i < standardInkNumber.length; i++) {
 if (ink_A1.text.length > 0) {
   screenCounter_A.push("Two");
 }
+
+if (ink_A1_Double.value === true) {
+     var A1_DoubleBox = app.activeDocument.groupItems.getByName("Double_A1")
+     A1_DoubleBox.hidden = false
+}
 //#endregion
 
 //#region     A2
@@ -1035,6 +1053,11 @@ for (i = 0; i < standardInkNumber.length; i++) {
 }
 if (ink_A2.text.length > 0) {
   screenCounter_A.push("Two");
+}
+
+if (ink_A2_Double.value === true) {
+     var A2_DoubleBox = app.activeDocument.groupItems.getByName("Double_A2")
+     A2_DoubleBox.hidden = false
 }
 //#endregion
 
@@ -1131,6 +1154,11 @@ for (i = 0; i < standardInkNumber.length; i++) {
 if (ink_A3.text.length > 0) {
   screenCounter_A.push("Three");
 }
+
+if (ink_A3_Double.value === true) {
+     var A3_DoubleBox = app.activeDocument.groupItems.getByName("Double_A3")
+     A3_DoubleBox.hidden = false
+}
 //#endregion
 
 //#region     A4
@@ -1225,6 +1253,11 @@ for (i = 0; i < standardInkNumber.length; i++) {
 }
 if (ink_A4.text.length > 0) {
   screenCounter_A.push("four");
+}
+
+if (ink_A4_Double.value === true) {
+     var A4_DoubleBox = app.activeDocument.groupItems.getByName("Double_A4")
+     A4_DoubleBox.hidden = false
 }
 //#endregion
 
@@ -1321,6 +1354,11 @@ if (ink_C1.text.length > 0) {
 if (ink_C1.text.length > 0) {
   screenCounter_C.push(1);
 }
+
+if (ink_C1_Double.value === true) {
+     var C1_DoubleBox = app.activeDocument.groupItems.getByName("Double_C1")
+     C1_DoubleBox.hidden = false
+}
 //#endregion
 
 //#region     C2
@@ -1415,6 +1453,11 @@ if (ink_C2.text.length > 0) {
 }
 if (ink_C2.text.length > 0) {
   screenCounter_C.push(1);
+}
+
+if (ink_C2_Double.value === true) {
+     var C2_DoubleBox = app.activeDocument.groupItems.getByName("Double_C2")
+     C2_DoubleBox.hidden = false
 }
 //#endregion
 
@@ -1512,6 +1555,10 @@ if (ink_C3.text.length > 0) {
   screenCounter_C.push(1);
 }
 
+if (ink_C3_Double.value === true) {
+     var C3_DoubleBox = app.activeDocument.groupItems.getByName("Double_C3")
+     C3_DoubleBox.hidden = false
+}
 //#endregion
 
 //#region     C4
@@ -1616,6 +1663,11 @@ if (ink_C4.text.length > 0) {
 
 if (bodyColorList.selection.index < 11) {
   bodyColor_function();
+}
+
+if (ink_C4_Double.value === true) {
+     var C4_DoubleBox = app.activeDocument.groupItems.getByName("Double_C4")
+     C4_DoubleBox.hidden = false
 }
 //#endregion
 //#endregion 
