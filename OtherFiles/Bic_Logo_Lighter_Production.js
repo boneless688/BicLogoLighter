@@ -22,8 +22,7 @@ var repName = customerInfo_outer.add("statictext", undefined, "Rep name")
 var regulars = customerInfo_outer.add("dropdownlist", undefined, [
 	"Regulars",
 	"Jonathan Le",
-	"Glenda Vilchez",
-     "Aaron Schimmel",
+	"Aaron Schimmel",
 	"Sarah Gillen",
 	"Mitch Sigurdson",
 	"Aline Nas",
@@ -441,235 +440,210 @@ String.prototype.trim = function () {
 
 
 //#region                                CUSTOMER INFO
-var rep = {
-	name: capitalizeSpaces(repNameEdit.text),
-	email: repEmail_Edit.text,
-	company: capitalizeSpaces(company_A_Edit.text),
-     nationality: null,
-     vip: null
-}
 var repName = app.activeDocument.textFrames.getByName("Rep")
-
-
-
-if (regulars.selection.text === "Regulars") {
      var repNameSignature = app.activeDocument.textFrames.getByName("RepName_Signature")
-	var companyName = app.activeDocument.textFrames.getByName("Company")
-	repName.contents = rep.name + "     " + rep.email
-	repNameSignature.contents = rep.name
-	companyName.contents = rep.company
+     var companyName = app.activeDocument.textFrames.getByName("Company")
 
-} else {
+
+     var rep = {
+          name: null,
+          email: null,
+          company: null,
+          nationality: null,
+          vip: null
+     }
+     
+     
+     
+     if (regulars.selection.text === "Regulars") {
+		rep.name = capitalizeSpaces(repNameEdit.text),
+		rep.email = repEmail_Edit.text,
+		rep.company = capitalizeSpaces(company_A_Edit.text),
+		rep.nationality = null,
+		rep.vip = null
+
+          if (nationalityUS.value === true) {
+               rep.nationality = "US"
+          } else {
+               rep.nationality = "Canada"
+          }
+     }
+
+
 	if (regulars.selection.text === "Jonathan Le") {
 		rep.name = "Jonathan Le"
 		rep.email = "jonathan@bugbranding.com"
 		rep.company = "Lightning Bug Branding"
-          rep.nationality = "US"
-          rep.vip = true
-
-	} else if (regulars.selection.text === "Glenda Vilchez") {
-		rep.name = "Glenda Vilchez"
-		rep.email = "glenda@rockstarpromos.com"
-		rep.company = "Rock Star Promotions"
-          rep.nationality = "US"
-          rep.vip = true
-
-     
-     } else if (regulars.selection.text === "Aaron Schimmel") {
+		rep.nationality = "US"
+		rep.vip = true
+	}
+	if (regulars.selection.text === "Aaron Schimmel") {
 		rep.name = "Aaron Schimmel"
 		rep.email = "aaron@rockstarpromos.com"
 		rep.company = "Rock Star Promotions"
-          rep.nationality = "US"
-          rep.vip = true
-
-
-	} else if (regulars.selection.text === "Sarah Gillen") {
+		rep.nationality = "US"
+		rep.vip = true
+	}
+	if (regulars.selection.text === "Sarah Gillen") {
 		rep.name = "Sarah Gillen"
 		rep.email = "logolighters@live.com"
 		rep.company = "LogoLighters, LLC"
-          rep.nationality = "US"
-          rep.vip = true
-
-
-	} else if (regulars.selection.text === "Mitch Sigurdson") {
+		rep.nationality = "US"
+		rep.vip = true
+	}
+	if (regulars.selection.text === "Mitch Sigurdson") {
 		rep.name = "Mitch Sigurdson"
 		rep.email = "mitch@bobhq.com"
 		rep.company = "Humble and Fume"
-          rep.nationality = "Canada"
-          rep.vip = false
-
-
-	} else if (regulars.selection.text === "Aline Nas") {
+		rep.nationality = "Canada"
+		rep.vip = false
+	}
+	if (regulars.selection.text === "Aline Nas") {
 		rep.name = "Aline Nas"
 		rep.email = "aline@cannabispromotions.com"
 		rep.company = "Cannabis Promotions"
-          rep.nationality = "US"
-          rep.vip = false
-
-
-	} else if (regulars.selection.text === "Darryl Quinge") {
+		rep.nationality = "US"
+		rep.vip = false
+	}
+	if (regulars.selection.text === "Darryl Quinge") {
 		rep.name = "Darryl Quinge"
 		rep.email = "darryl@pemamericainc.com"
 		rep.company = "PEM America Inc"
-          rep.nationality = "US"
-          rep.vip = true
-
-
-	} else if (regulars.selection.text === "Angela Cicchini") {
+		rep.nationality = "US"
+		rep.vip = true
+	}
+	if (regulars.selection.text === "Angela Cicchini") {
 		rep.name = "Angela Cicchini"
 		rep.email = "angelac@bobhq.com"
 		rep.company = "Humble and Fume"
-          rep.nationality = "Canada"
-          rep.vip = false
-
-     } else if (regulars.selection.text === "MARCO") {
-          rep.name = "Will Kunz"
-          rep.email = "orders@marcopdx.com"
-          rep.company = "MARCO Ideas Unlimited"
-          rep.nationality = "US"
-          rep.vip = false
-
-
-	} else if (regulars.selection.text === "Erica Heft") {
-		rep.name = "Erica Heft"
-		rep.email = "erica@4allpromos.com"
-		rep.company = "4AllPromos"
-          rep.nationality = "US"
-          rep.vip = true
-     
-
-     } else if (regulars.selection.text === "Cindy") {
-     rep.name = "Cindy"
-     rep.email = "cindy@4allpromos.com"
-     rep.company = "4AllPromos"
-     rep.nationality = "US"
-     rep.vip = true
-
-	} else if (regulars.selection.text === "Alex Walker") {
-		rep.name = "Alex Walker"
-		rep.email = "alex@humblecs.com"
-		rep.company = "Humble & Fume"
-          rep.nationality = "Canada"
-          rep.vip = false
-
-
-	} else if (regulars.selection.text === "Shelby") {
-		rep.name = "Shelby"
-		rep.email = "shelby@4allpromos.com"
-		rep.company = "4AllPromos"
-          rep.nationality = "US"
-          rep.vip = true
-
-
-	} else if (regulars.selection.text === "Kim Robinson") {
-		rep.name = "Kim Robinson"
-		rep.email = "kim@4allpromos.com"
-		rep.company = "4AllPromos"
-          rep.nationality = "US"
-          rep.vip = true
-
-
-	} else if (regulars.selection.text === "Ryan Zvibleman") {
-		rep.name = "Ryan Zvibleman"
-		rep.email = "orders@cannabispromotions.com"
-		rep.company = "Cannabis Promotions"
-          rep.nationality = "US"
-          rep.vip = false
-
-
-	} else if (regulars.selection.text === "Jeff Mancini") {
-		rep.name = "Jeff Mancini"
-		rep.email = "jeff@m5group.com"
-		rep.company = "M5 Group"
-          rep.nationality = "US"
-          rep.vip = false
-
-
-	} else if (regulars.selection.text === "Danielle Treloar") {
-		rep.name = "Danielle Treloar"
-		rep.email = "danielle@rushimprint.com"
-		rep.company = "RUSH Imprint"
-          rep.nationality = "US"
-          rep.vip = true
-
-
-	} else if (regulars.selection.text === "Will Kunz") {
+		rep.nationality = "Canada"
+		rep.vip = false
+	}
+	if (regulars.selection.text === "MARCO") {
 		rep.name = "Will Kunz"
 		rep.email = "orders@marcopdx.com"
 		rep.company = "MARCO Ideas Unlimited"
-          rep.nationality = "US"
-          rep.vip = true
-
-
-	} else if (regulars.selection.text === "Kari Matlack") {
+		rep.nationality = "US"
+		rep.vip = false
+	}
+	if (regulars.selection.text === "Erica Heft") {
+		rep.name = "Erica Heft"
+		rep.email = "erica@4allpromos.com"
+		rep.company = "4AllPromos"
+		rep.nationality = "US"
+		rep.vip = true
+	}
+	if (regulars.selection.text === "Cindy") {
+		rep.name = "Cindy"
+		rep.email = "cindy@4allpromos.com"
+		rep.company = "4AllPromos"
+		rep.nationality = "US"
+		rep.vip = true
+	}
+	if (regulars.selection.text === "Alex Walker") {
+		rep.name = "Alex Walker"
+		rep.email = "alex@humblecs.com"
+		rep.company = "Humble & Fume"
+		rep.nationality = "Canada"
+		rep.vip = false
+	}
+	if (regulars.selection.text === "Shelby") {
+		rep.name = "Shelby"
+		rep.email = "shelby@4allpromos.com"
+		rep.company = "4AllPromos"
+		rep.nationality = "US"
+		rep.vip = true
+	}
+	if (regulars.selection.text === "Kim Robinson") {
+		rep.name = "Kim Robinson"
+		rep.email = "kim@4allpromos.com"
+		rep.company = "4AllPromos"
+		rep.nationality = "US"
+		rep.vip = true
+	}
+	if (regulars.selection.text === "Ryan Zvibleman") {
+		rep.name = "Ryan Zvibleman"
+		rep.email = "orders@cannabispromotions.com"
+		rep.company = "Cannabis Promotions"
+		rep.nationality = "US"
+		rep.vip = false
+	}
+	if (regulars.selection.text === "Jeff Mancini") {
+		rep.name = "Jeff Mancini"
+		rep.email = "jeff@m5group.com"
+		rep.company = "M5 Group"
+		rep.nationality = "US"
+		rep.vip = false
+	}
+	if (regulars.selection.text === "Danielle Treloar") {
+		rep.name = "Danielle Treloar"
+		rep.email = "danielle@rushimprint.com"
+		rep.company = "RUSH Imprint"
+		rep.nationality = "US"
+		rep.vip = true
+	}
+	if (regulars.selection.text === "Will Kunz") {
+		rep.name = "Will Kunz"
+		rep.email = "orders@marcopdx.com"
+		rep.company = "MARCO Ideas Unlimited"
+		rep.nationality = "US"
+		rep.vip = true
+	}
+	if (regulars.selection.text === "Kari Matlack") {
 		rep.name = "Kari Matlack"
 		rep.email = "kari@rushimprint.com"
 		rep.company = "RUSH Imprint"
-          rep.nationality = "US"
-          rep.vip = true
-
-
-	} else if (regulars.selection.text === "Kyung Kim") {
+		rep.nationality = "US"
+		rep.vip = true
+	}
+	if (regulars.selection.text === "Kyung Kim") {
 		rep.name = "Kyung Kim"
 		rep.email = "kyung@identity-links.com"
 		rep.company = "Identity Links"
-          rep.nationality = "US"
-          rep.vip = true
-
-
-	} else if (regulars.selection.text === "Tyler Groves") {
+		rep.nationality = "US"
+		rep.vip = true
+	}
+	if (regulars.selection.text === "Tyler Groves") {
 		rep.name = "Tyler Groves"
 		rep.email = "tyler@bobhq.com"
 		rep.company = "Humble & Fume"
-          rep.nationality = "Canada"
-          rep.vip = false
-
-
-	} else if (regulars.selection.text === "Jay Tittman") {
+		rep.nationality = "Canada"
+		rep.vip = false
+	}
+	if (regulars.selection.text === "Jay Tittman") {
 		rep.name = "Jay Tittman"
 		rep.email = "jay@rmbp.com"
 		rep.company = "Rocky Mountain Business Products"
-          rep.nationality = "US"
-          rep.vip = false
-
-
-     } else if (regulars.selection.text === "Brian Eskenazi") {
+		rep.nationality = "US"
+		rep.vip = false
+	}
+	if (regulars.selection.text === "Brian Eskenazi") {
 		rep.name = "High Mountain Imports"
 		rep.email = "orders@highmountainimports.com"
 		rep.company = "High Mountain Imports"
-          rep.nationality = "US"
-          rep.vip = false
-
-	} else if (regulars.selection.text === "Robyn Govberg") {
+		rep.nationality = "US"
+		rep.vip = false
+	}
+	if (regulars.selection.text === "Robyn Govberg") {
 		rep.name = "Robyn Govberg"
 		rep.email = "robyn@highmountainimports.com"
 		rep.company = "High Mountain Imports"
-          rep.nationality = "US"
-          rep.vip = false
-
-
-	} else if (regulars.selection.text === "Jennifer") {
+		rep.nationality = "US"
+		rep.vip = false
+	}
+	if (regulars.selection.text === "Jennifer") {
 		rep.name = "Jennifer"
 		rep.email = "jennifer@pensrus.com"
 		rep.company = "Pens R Us"
-          rep.nationality = "US"
-          rep.vip = true
+		rep.nationality = "US"
+		rep.vip = true
 	}
+repName.contents = rep.name + "     " + rep.email
+repNameSignature = rep.name
+companyName = rep.company
 
 
 
-	repNameSignature = app.activeDocument.textFrames.getByName("RepName_Signature")
-     companyName = app.activeDocument.textFrames.getByName("Company")
-
-	repName.contents = rep.name + "     " + rep.email
-     if (repName.contents.length > 50) {
-          repName.textRange.characterAttributes.size = 9;
-          repName.textRange.characterAttributes.baselineShift = -1;
-     }
-     repNameSignature.contents = rep.name
-     companyName.contents = rep.company
-
-}
 
 //#endregion
 
@@ -1874,12 +1848,6 @@ function web_function() {
 }
 
 
-
-
-
-
-
-
 function generic_function () {
      if (genericCheckbox.value === false) {
               app.activeDocument.layers.getByName("Generic").visible = true;
@@ -2024,20 +1992,18 @@ if (bodyColorList.selection.index === 11) {
     "Assortment Screen Filename"
   );
   assortFileScreen.contents = alpha;
-  if(doubleSidedCheckbox.value === true) {
-    var bravoFileName = app.activeDocument.textFrames.getByName("FileName_Back");
-    bravoFileName.contents = alpha;
-    var bravoFileNameBack = app.activeDocument.textFrames.getByName("Assortment Screen Filename Back");
-    bravoFileNameBack.contents = alpha;
-    }
+  var darkAssortInk = app.activeDocument.textFrames.getByName("A1 Screen Ink Color")
+  darkAssortInk.contents = "White"
   }
 
 //#endregion
 
 //#region     LIGHT ASSORTMENT
-if (bodyColorList.selection.index === 12) {
+if (bodyColorList.selection.index === 12) { 
   var assortFile = app.activeDocument.textFrames.getByName("FileName");
   assortFile.contents = alpha;
+  var lightAssortInk = app.activeDocument.textFrames.getByName("A1 Screen Ink Color")
+  lightAssortInk.contents = "Black"
 
   var assortFileScreen = app.activeDocument.textFrames.getByName(
     "Assortment Screen Filename"
