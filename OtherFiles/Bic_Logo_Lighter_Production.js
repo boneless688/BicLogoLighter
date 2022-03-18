@@ -513,7 +513,7 @@ var repName = app.activeDocument.textFrames.getByName("Rep")
 	}
 	if (regulars.selection.text === "Aline Nas") {
 		rep.name = "Aline Nas"
-		rep.email = "aline@cannabispromotions.com"
+		rep.email = "orders@cannabispromotions.com"
 		rep.company = "Cannabis Promotions"
 		rep.nationality = "US"
 		rep.vip = false
@@ -655,7 +655,14 @@ repName.contents = rep.name + "     " + rep.email
 repNameSignature = rep.name
 companyName = rep.company
 
+var repNameOutput = app.activeDocument.textFrames.getByName("Rep")
+repNameOutput.contents = rep.name + "     " + rep.email
 
+var repNameSignature = app.activeDocument.textFrames.getByName("RepName_Signature")
+repNameSignature.contents = rep.name
+
+var companyName = app.activeDocument.textFrames.getByName("Company")
+companyName.contents = rep.company
 
 
 //#endregion
@@ -2067,7 +2074,13 @@ if (bodyColorList.selection.index === 12) {
   //#region          DOUBLE SIDED ASSORTMENTS
   if (bodyColorList.selection.index === 11 || bodyColorList.selection.index === 12) {
      if (doubleSidedCheckbox.value == true) {
-       var assortment_screenName_back = app.activeDocument.textFrames.getByName("Assortment Ink Color Back");
+       var assortment_screenName_back = app.activeDocument.textFrames.getByName("A2 Screen Ink Color");
+if (bodyColorList.selection.index === 11) {
+     assortment_screenName_back.contents = "White"
+} else if (bodyColorList.selection.index === 12) {
+     assortment_screenName_back.contents = "Black"
+}  
+
        var bravoFileNameBack = app.activeDocument.textFrames.getByName("Assortment Screen Filename Back");
        bravoFileNameBack.contents = alpha;
 
@@ -2076,18 +2089,17 @@ if (bodyColorList.selection.index === 12) {
          reducedDoubleFileName.textRange.characterAttributes.size = 6;
          reducedDoubleFileName.textRange.characterAttributes.baselineShift = -3;
        }
-       var reducedDoubleOriginalArt = app.activeDocument.textFrames.getByName("Original Art_Back");
-       if (originalArt_edit.text.length > 50) {
-         reducedDoubleOriginalArt.textRange.characterAttributes.size = 4;
-         reducedDoubleOriginalArt.textRange.characterAttributes.baselineShift = -1;
-       }
+
        var reducedDoublePO = app.activeDocument.textFrames.getByName("PO_Back");
        if (poNumber_edit.text.length > 11) {
          reducedDoublePO.textRange.characterAttributes.size = 6;
          reducedDoublePO.textRange.characterAttributes.baselineShift = -3;
-       }
+       } 
 
        var fileName_Back
+
+       var repBack = app.activeDocument.textFrames.getByName("Rep_Back")
+       repBack.contents = rep.name + "     " + rep.email
 
        var companyBack = app.activeDocument.textFrames.getByName("Company_Back")
        companyBack.contents = rep.company
@@ -2095,20 +2107,16 @@ if (bodyColorList.selection.index === 12) {
        var repSignatureBack = app.activeDocument.textFrames.getByName("RepName_Signature_Back")
        repSignatureBack.contents = rep.name
        
-       var originalArtBack = app.activeDocument.textFrames.getByName("Original Art_Back")
-       originalArtBack.contents = originalArt_edit.text
+
        
        var shipDateBack = app.activeDocument.textFrames.getByName("Ship Date_Back")
        shipDateBack.contents = shipDate_edit.text
        
        var inHandsDateBack = app.activeDocument.textFrames.getByName("In Hands Date_Back")
        inHandsDateBack.contents = inHandsDate_edit.text
-
-
-       
      }
    }
-  //#endregion
+  //#endregion 
 
 
 
