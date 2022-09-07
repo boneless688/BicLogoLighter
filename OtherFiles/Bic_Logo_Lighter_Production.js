@@ -46,10 +46,11 @@ var regulars = customerInfo_outer.add("dropdownlist", undefined, [
 	"Luvbuds", //25
 	"Alex Lavoie - High Mountain Imports", //26
 	"Sandy Johnson - Show Your Logo Inc", //27
-	"LaVerne Petry - Custom420promos",  //28
-     "Arlene LaRoe - Blue Sky Marketing Group"  //29
+	"LaVerne Petry - Custom420promos", //28
+	"Arlene LaRoe - Blue Sky Marketing Group", //29
+	"Superior Promos", //30
 ])
-regulars.selection = 0
+regulars.selection = 3
 
 var repName = customerInfo_outer.add("statictext", undefined, "Rep name")
 var repNameEdit = customerInfo_outer.add("edittext", undefined, "")
@@ -108,12 +109,12 @@ nationalityUS.value = true
 var jdeNumber = orderOne.add("statictext", undefined, "JDE Number")
 var jdeNumber_edit = orderOne.add("edittext", undefined, "")
 jdeNumber_edit.characters = 7
-//jdeNumber_edit.text = "6187745"
+jdeNumber_edit.text = "6187745"
 
 var poNumber = orderOne.add("statictext", undefined, "PO Number")
 var poNumber_edit = orderOne.add("edittext", undefined, "")
 poNumber_edit.characters = 10
-//poNumber_edit.text = "PO NUMBER"
+poNumber_edit.text = "PO NUMBER"
 
 var webSpacer = orderOne.add("panel", undefined, " ")
 
@@ -131,12 +132,12 @@ orderThree.alignment = "left"
 var inHandsDate = orderThree.add("statictext", undefined, "In-hands Date")
 var inHandsDate_edit = orderThree.add("edittext", undefined, "")
 inHandsDate_edit.characters = 10
-//inHandsDate_edit.text = "11/24"
+//HandsDate_edit.text = "11/24"
 
 var shipDate = orderThree.add("statictext", undefined, "Ship Date")
 var shipDate_edit = orderThree.add("edittext", undefined, "")
 shipDate_edit.characters = 10
-//shipDate_edit.text = "10/13"
+//ipDate_edit.text = "10/13"
 
 var rushCheckbox = orderThree.add("checkbox", undefined, "Rush order")
 
@@ -241,7 +242,7 @@ var bodyColorList = bodyColor.add("dropdownlist", undefined, [
 	"Sleeve", //14
 ])
 
-bodyColorList.selection = 0
+bodyColorList.selection = 2
 
 var mockup = bodyColor.add("panel", undefined)
 var mockupCheckbox = bodyColor.add("checkbox", undefined, "Mockup")
@@ -262,22 +263,22 @@ doubleSidedCheckbox.value = false
 var descriptionBox = descriptionSide.add("statictext", undefined, "Description")
 var descriptionBox_edit = descriptionSide.add("edittext", undefined, "")
 descriptionBox_edit.characters = 20
-//descriptionBox_edit.text = "the only thing"
+descriptionBox_edit.text = "the only thing"
 
 var autoSave = descriptionSide.add("checkbox", undefined, "Save the PDF?")
-autoSave.value = true;
+autoSave.value = false
 
 var spacerBox = descriptionSide.add("statictext", undefined, "")
 
 var originalArt = descriptionSide.add("statictext", undefined, "Original Art")
 var originalArt_edit = descriptionSide.add("edittext", undefined, "")
 originalArt_edit.characters = 20
-//originalArt_edit.text = "original art"
+originalArt_edit.text = "original art"
 
 var notes = descriptionSide.add("statictext", undefined, "Notes")
 var notes_edit = descriptionSide.add("edittext", undefined, "")
 notes_edit.characters = 20
-//notes_edit.text = "These are the notes."
+notes_edit.text = "These are the notes."
 
 var inkMaster = colors.add("group")
 inkMaster.orientation = "column"
@@ -293,7 +294,7 @@ inkBox_Master_A1.orientation = "column"
 inkBox_Master_A1.margins = [10, 10, 5, 10]
 var ink_A1 = inkBox_Master_A1.add("edittext", undefined, "")
 ink_A1.characters = 10
-//ink_A1.text = "186 ruby red"
+ink_A1.text = "186 ruby red"
 var ink_A1_Double = inkBox_Master_A1.add("checkbox", undefined, "Double hit")
 
 var inkBox_Master_A2 = inkColors_A.add("panel", undefined, "Screen A2")
@@ -325,7 +326,7 @@ var inkBox_Master_C1 = inkColors_C.add("panel", undefined, "Screen C1")
 inkBox_Master_C1.orientation = "column"
 var ink_C1 = inkBox_Master_C1.add("edittext", undefined, "")
 ink_C1.characters = 10
-//ink_C1.text = "black"
+ink_C1.text = "black"
 var ink_C1_Double = inkBox_Master_C1.add("checkbox", undefined, "Double hit")
 
 var inkBox_Master_C2 = inkColors_C.add("panel", undefined, "Screen C2")
@@ -674,11 +675,19 @@ if (regulars.selection.index === 28) {
 }
 
 if (regulars.selection.index === 29) {
-     rep.name = "Arlene LaRoe"
-     rep.email = "alaroe@buybluesky.com"
-     rep.company = "Blue Sky Marketing Group"
-     rep.nationality = "US"
-     rep.vip = true
+	rep.name = "Arlene LaRoe"
+	rep.email = "alaroe@buybluesky.com"
+	rep.company = "Blue Sky Marketing Group"
+	rep.nationality = "US"
+	rep.vip = true
+}
+
+if (regulars.selection.index === 30) {
+	rep.name = "Superior Promos"
+	rep.email = "art@superiorpromos.com"
+	rep.company = "Superior Promos, Inc"
+	rep.nationality = "US"
+	rep.vip = false
 }
 
 repName.contents = rep.name + "     " + rep.email
@@ -730,8 +739,8 @@ if (nationalityUS.value === true) {
 function neonInk(inkString, bravo) {
 	//The group name in Illustrator is A1_Warning, etc.
 	var neonInks = ["801", "802", "803", "804", "805", "806", "807"]
-	var alpha = inkString.search(" ")
-	var numberOnly = inkString.substring(0, alpha)
+	var fileName_One = inkString.search(" ")
+	var numberOnly = inkString.substring(0, fileName_One)
 	for (i = 0; i < neonInks.length; i++) {
 		if (numberOnly === neonInks[i]) {
 			var neon = app.activeDocument.groupItems.getByName(bravo)
@@ -811,26 +820,12 @@ if (bodyColorList.selection.index < 14) {
 	newWhite.magenta = 2
 	newWhite.yellow = 2
 
-     var spotWhite = app.activeDocument.spots.add();
-     spotWhite.colorType = ColorModel.SPOT;
-     spotWhite.name = "Spot White"
-     spotWhite.color = newWhite;
-     var newSpotColor = new SpotColor();
-     newSpotColor.spot = spotWhite;
-
-
-
-     
-
-
-
-
-
-
-
-
-
-     
+	var spotWhite = app.activeDocument.spots.add()
+	spotWhite.colorType = ColorModel.SPOT
+	spotWhite.name = "Spot White"
+	spotWhite.color = newWhite
+	var newSpotColor = new SpotColor()
+	newSpotColor.spot = spotWhite
 
 	var newBlack = new CMYKColor()
 	newBlack.black = 100
@@ -861,9 +856,11 @@ if (bodyColorList.selection.index < 14) {
 		"877",
 	]
 
-	var digitArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+	//#region   Screen counter array
+     var digitArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 	var screenCounter_A = []
 	var screenCounter_C = []
+     //#endregion
 
 	//#region                                REMOVES THE WHITE SPACES FROM INK NAMES FROM BEFORE AND AFTER THE TEXT
 	ink_A1.text = ink_A1.text.trim()
@@ -1035,7 +1032,7 @@ Actual names:
 		}
 	}
 	if (ink_A1.text.length > 0) {
-		screenCounter_A.push("Two")
+		screenCounter_A.push("One")
 	}
 
 	if (ink_A1_Double.value === true) {
@@ -1377,7 +1374,7 @@ Actual names:
 		}
 	}
 	if (ink_A4.text.length > 0) {
-		screenCounter_A.push("four")
+		screenCounter_A.push("Four")
 	}
 
 	if (ink_A4_Double.value === true) {
@@ -1385,6 +1382,8 @@ Actual names:
 		A4_DoubleBox.hidden = false
 	}
 	//#endregion
+
+
 
 	//#region     C1
 	if (ink_C1.text.length > 0) {
@@ -1941,11 +1940,10 @@ function InHands_function() {
 function JDE_function() {
 	var jde = app.activeDocument.textFrames.getByName("jde number")
 	jde.contents = jdeNumber_edit.text
-}
-
-if (doubleSidedCheckbox.value === true) {
-	var jdeBack = app.activeDocument.textFrames.getByName("jde number_Back")
-	jdeBack.contents = jdeNumber_edit.text
+	if (doubleSidedCheckbox.value === true) {
+		var jdeBack = app.activeDocument.textFrames.getByName("jde number_Back")
+		jdeBack.contents = jdeNumber_edit.text
+	}
 }
 
 function repInfo() {
@@ -2027,30 +2025,6 @@ function prefix() {
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function filenameOutput() {
 	if (bodyColorList.selection.index < 14) {
 		var illustratorFrame = [
@@ -2063,12 +2037,11 @@ function filenameOutput() {
 			"C2 Screen FileName",
 			"C3 Screen FileName",
 			"C4 Screen FileName",
-		]
+		] 
 
 		for (i = 0; i < illustratorFrame.length; i++) {
-			var bravo2 = app.activeDocument.textFrames.getByName(illustratorFrame[i]);
-               //alert(illustratorFrame[i]);   FileName, A1 Screen FileName, 
-			bravo2.contents = alpha;
+			var filenameOutput_One = app.activeDocument.textFrames.getByName(illustratorFrame[i]);
+			filenameOutput_One.contents = fileName_One
 		}
 	}
 }
@@ -2163,73 +2136,44 @@ function generic_function() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //#region     FILENAME
-var alpha;
+var fileName_One
 
 if (bodyColorList.selection < 10) {
-	alpha = prefix() + "_" + capitalize(descriptionBox_edit.text) + "_A"
+	fileName_One = prefix() + "_" + capitalize(descriptionBox_edit.text) + "_A"
 	if (multi.value === true && multi_bodyColor.value === true) {
-		alpha =
-			prefix() +
-			"_" +
-			capitalize(descriptionBox_edit.text) +
-			"_" +
-			bodyColorList.selection.text +
-			"_01_A"
+		fileName_One = prefix() + "_" + capitalize(descriptionBox_edit.text) + "_" + bodyColorList.selection.text + "_01_A"
 	}
 	if (multi.value === true && multi_itemNumber.value === true) {
-		alpha = prefix() + "_" + capitalize(descriptionBox_edit.text) + "_01_A"
+		fileName_One = prefix() + "_" + capitalize(descriptionBox_edit.text) + "_01_A"
 	}
 }
 
-
-if (bodyColorList.selection == 11) {  // Dark Assort
+if (bodyColorList.selection == 11) {
+	// Dark Assort
 	if (multi.value === false) {
-		alpha = prefix() + "_" + capitalize(descriptionBox_edit.text) + "_DarkAssort_A";
-
+		fileName_One =
+			prefix() + "_" + capitalize(descriptionBox_edit.text) + "_DarkAssort_A"
 	} else {
-		alpha = prefix() + "_" + capitalize(descriptionBox_edit.text) + "_DarkAssort_01_A";
-
+		fileName_One =
+			prefix() + "_" + capitalize(descriptionBox_edit.text) + "_DarkAssort_01_A"
 
 		var reducedSize = app.activeDocument.textFrames.getByName("FileName")
 		reducedSize.textRange.characterAttributes.size = 6
 		reducedSize.textRange.characterAttributes.baselineShift = -3
 	}
-
-
-
-
-
-
-
 }
 
-if (bodyColorList.selection == 12) {  //Light Assort
+if (bodyColorList.selection == 12) {
+	//Light Assort
 	if (multi.value === false) {
-		alpha =
+		fileName_One =
 			prefix() +
 			"_" +
 			capitalize(descriptionBox_edit.text) +
 			"_LightAssort_01_A"
 	} else {
-		alpha =
+		fileName_One =
 			prefix() +
 			"_" +
 			capitalize(descriptionBox_edit.text) +
@@ -2240,32 +2184,26 @@ if (bodyColorList.selection == 12) {  //Light Assort
 	}
 }
 
-if (bodyColorList.selection == 14) {  // Sleeve
+if (bodyColorList.selection == 14) {
+	// Sleeve
 	if (multi.value === true) {
-		alpha =
+		fileName_One =
 			"SLEEVE_" +
 			prefix() +
 			"_" +
 			capitalize(descriptionBox_edit.text) +
 			"_01_A"
 	} else {
-		alpha =
+		fileName_One =
 			"SLEEVE_" + prefix() + "_" + capitalize(descriptionBox_edit.text) + "_A"
 	}
 } else if (bodyColorList.selection == 14 && multi.value === true) {
-	alpha =
+	fileName_One =
 		"SLEEVE_" + prefix() + "_" + capitalize(descriptionBox_edit.text) + "_01_A"
 }
 //#endregion
 
-/* var reducedFileName = app.activeDocument.textFrames.getByName("FileName")
-if (alpha.length > 44) {
-	reducedFileName.textRange.characterAttributes.size = 6
-	reducedFileName.textRange.characterAttributes.baselineShift = -3
-} else if (alpha.length > 35 && alpha.length < 44) {
-	reducedFileName.textRange.characterAttributes.size = 7
-	reducedFileName.textRange.characterAttributes.baselineShift = -2
-} */
+
 
 
 
@@ -2282,16 +2220,32 @@ if (poNumber_edit.text.length > 11) {
 	reducedPO.textRange.characterAttributes.baselineShift = -3
 }
 
+
+//#region     FUNCTION CALLS
+repInfo()
+generic_function()
+mockup_function()
+vip_function()
+rush_function()
+po_function()
+JDE_function()
+web_function()
+InHands_function()
+ship_function()
+originalFile_function()
+notes_function()
+designer_function()
+proofDate()
+backDate()
+filenameOutput()
+
+//#endregion
+
 //#region     DARK ASSORTMENT
 if (
 	bodyColorList.selection.index == 11 &&
 	doubleSidedCheckbox.value === false
 ) {
-/* 	app.activeDocument.groupItems.getByName("Screen5").remove()
-	app.activeDocument.groupItems.getByName("Screen6").remove()
-	app.activeDocument.groupItems.getByName("Screen7").remove()
-	app.activeDocument.groupItems.getByName("Screen8").remove() */
-
 	if (ink_A1.text.length < 1) {
 		var lightAssortInk = app.activeDocument.textFrames.getByName(
 			"A1 Screen Ink Color"
@@ -2302,31 +2256,13 @@ if (
 		item_A1_color.fillColor = newSpotColor
 		item_A1_chip.fillColor = newSpotColor
 		item_A1_frame.strokeWidth = 1.25
-
-/* 		if (ink_A2.text.length < 1) {
-			app.activeDocument.groupItems.getByName("Screen2").remove()
-		}
-		if (ink_A3.text.length < 1) {
-			app.activeDocument.groupItems.getByName("Screen3").remove()
-		}
-		if (ink_A4.text.length < 1) {
-			app.activeDocument.groupItems.getByName("Screen4").remove()
-		} */
 	}
 }
 //#endregion
 
 //#region     LIGHT ASSORTMENT
 
-if (
-	bodyColorList.selection.index === 12 &&
-	doubleSidedCheckbox.value === false
-) {
-	app.activeDocument.groupItems.getByName("Screen5").remove()
-	app.activeDocument.groupItems.getByName("Screen6").remove()
-	app.activeDocument.groupItems.getByName("Screen7").remove()
-	app.activeDocument.groupItems.getByName("Screen8").remove()
-
+if (bodyColorList.selection.index === 12 && doubleSidedCheckbox.value === false)
 	if (ink_A1.text.length < 1) {
 		var lightAssortInk = app.activeDocument.textFrames.getByName(
 			"A1 Screen Ink Color"
@@ -2348,7 +2284,6 @@ if (
 			app.activeDocument.groupItems.getByName("Screen4").remove()
 		}
 	}
-}
 
 //#endregion
 
@@ -2360,7 +2295,7 @@ if (
 	if (doubleSidedCheckbox.value == true) {
 		var reducedDoubleFileName =
 			app.activeDocument.textFrames.getByName("FileName_Back")
-		if (alpha.length > 27) {
+		if (fileName_One.length > 27) {
 			reducedDoubleFileName.textRange.characterAttributes.size = 6
 			reducedDoubleFileName.textRange.characterAttributes.baselineShift = -3
 		}
@@ -2371,7 +2306,8 @@ if (
 			reducedDoublePO.textRange.characterAttributes.baselineShift = -3
 		}
 
-		app.activeDocument.textFrames.getByName("FileName_Back").contents = alpha
+		app.activeDocument.textFrames.getByName("FileName_Back").contents =
+			fileName_One
 		app.activeDocument.textFrames.getByName("jde number_Back").contents =
 			jdeNumber_edit.text
 		app.activeDocument.textFrames.getByName("PO_Back").contents =
@@ -2420,22 +2356,18 @@ if (
 		}
 	}
 }
-
 //#endregion
 
 //#region     SLEEVE
 
-if (
-	bodyColorList.selection.index === 14
-) {
-
-var alphaFileName = app.activeDocument.textFrames.getByName("FileName")
-alphaFileName.contents = alpha;
+if (bodyColorList.selection.index === 14) {
+	var alphaFileName = app.activeDocument.textFrames.getByName("FileName")
+	alphaFileName.contents = fileName_One
 }
 
 //#endregion
 
-//#region     SPECIAL INSTRUCTIONS
+//#region SPECIAL INSTRUCTIONS
 var instructionsArrow = app.activeDocument.groupItems.getByName(
 	"Special Instructions Arrow"
 )
@@ -2449,8 +2381,7 @@ var production_instructions = app.activeDocument.textFrames.getByName(
 	"Production Instructions"
 )
 
-
-instructionsArrow.hidden = true;
+instructionsArrow.hidden = true
 
 if (doubleSidedCheckbox.value === true) {
 	if (
@@ -2462,8 +2393,8 @@ if (doubleSidedCheckbox.value === true) {
 		var SILayer = app.activeDocument.layers.getByName("Special Instructions")
 		SILayer.visible = true
 		SILayer.remove()
-		instructionsArrow.remove();
-     }
+		instructionsArrow.remove()
+	}
 
 	if (
 		//  if all 3 of the boxes have text.
@@ -2499,7 +2430,8 @@ if (doubleSidedCheckbox.value === true) {
 		app.activeDocument.groupItems
 			.getByName("Customer - Production - Customer Service")
 			.remove()
-		app.activeDocument.textFrames.getByName("Special Instructions").contents = instructionsCustomer_edit.text
+		app.activeDocument.textFrames.getByName("Special Instructions").contents =
+			instructionsCustomer_edit.text
 	}
 
 	if (
@@ -2543,9 +2475,8 @@ if (doubleSidedCheckbox.value === true) {
 			.getByName("Customer - Production - Customer Service")
 			.remove()
 
-		app.activeDocument.textFrames.getByName(
-			"Special Instructions"
-		).contents = instructionsCustomerService_edit.text
+		app.activeDocument.textFrames.getByName("Special Instructions").contents =
+			instructionsCustomerService_edit.text
 	}
 
 	if (
@@ -2595,7 +2526,7 @@ if (doubleSidedCheckbox.value === true) {
 		).contents = instructionsCustomerService_edit.text
 	}
 
-     if (
+	if (
 		//  if only the PRODUCTION box has text.
 		instructionsCustomer_edit.text.length < 1 &&
 		instructionsProduction_edit.text.length > 0 &&
@@ -2612,32 +2543,29 @@ if (doubleSidedCheckbox.value === true) {
 			.getByName("Customer - Production - Customer Service")
 			.remove()
 
-		app.activeDocument.textFrames.getByName(
-			"Special Instructions"
-		).contents = instructionsProduction_edit.text
+		app.activeDocument.textFrames.getByName("Special Instructions").contents =
+			instructionsProduction_edit.text
+	}
+} else {
+	if (instructionsCustomer_edit.text.length > 0) {
+		instructionsArrow.hidden = false
+		app.activeDocument.textFrames.getByName("Customer Instructions").contents =
+			instructionsCustomer_edit.text
 	}
 
+	if (instructionsCustomerService_edit.text.length > 0) {
+		instructionsArrow.hidden = false
+		app.activeDocument.textFrames.getByName(
+			"Customer Service Instructions"
+		).contents = instructionsCustomerService_edit.text
+	}
 
-} else {
-     if(instructionsCustomer_edit.text.length > 0) {
-     instructionsArrow.hidden=false;
-     app.activeDocument.textFrames.getByName("Customer Instructions").contents =
-     instructionsCustomer_edit.text
-}
-
-if(instructionsCustomerService_edit.text.length > 0) {
-     instructionsArrow.hidden=false;
-     app.activeDocument.textFrames.getByName("Customer Service Instructions").contents =
-     instructionsCustomerService_edit.text
-}
-
-if(instructionsProduction_edit.text.length > 0) {
-     instructionsArrow.hidden=false;
-     app.activeDocument.textFrames.getByName("Production Instructions").contents =
-     instructionsProduction_edit.text
-}
-
-
+	if (instructionsProduction_edit.text.length > 0) {
+		instructionsArrow.hidden = false
+		app.activeDocument.textFrames.getByName(
+			"Production Instructions"
+		).contents = instructionsProduction_edit.text
+	}
 
 	if (instructionsCustomer_edit.text.length < 1) {
 		app.activeDocument.groupItems
@@ -2645,7 +2573,7 @@ if(instructionsProduction_edit.text.length > 0) {
 			.remove()
 	}
 
-     if (instructionsCustomerService_edit.text.length < 1) {
+	if (instructionsCustomerService_edit.text.length < 1) {
 		app.activeDocument.groupItems
 			.getByName("Customer Service Instructions Group")
 			.remove()
@@ -2657,11 +2585,17 @@ if(instructionsProduction_edit.text.length > 0) {
 			.remove()
 	}
 
-     if (instructionsCustomer_edit.text.length < 1 && instructionsCustomerService_edit.text.length < 1 &&  instructionsProduction_edit.text.length < 1) {
-          app.activeDocument.groupItems.getByName("Bic Logo Group").remove();
-          app.activeDocument.artboards.getByName("Back").remove();
-     }
+	if (
+		instructionsCustomer_edit.text.length < 1 &&
+		instructionsCustomerService_edit.text.length < 1 &&
+		instructionsProduction_edit.text.length < 1
+	) {
+		app.activeDocument.groupItems.getByName("Bic Logo Group").remove()
+		app.activeDocument.artboards.getByName("Back").remove()
+	}
 }
+
+//#endregion
 
 //#region     ASSORTMENT VISIBILITY
 if (bodyColorList.selection.index === 11) {
@@ -2724,63 +2658,49 @@ if (bodyColorList.selection.index < 14 && mockupCheckbox.value === false) {
 	screenNumberLast_8.contents = screenTotal
 }
 
-/*  	if (screenCounter_A.length === 3) {
-		app.activeDocument.groupItems.getByName("Screen4").remove()
-	} else if (screenCounter_A.length === 2) {
-		app.activeDocument.groupItems.getByName("Screen4").remove()
-		app.activeDocument.groupItems.getByName("Screen3").remove()
-	} else if (screenCounter_A.length === 1) {
-		app.activeDocument.groupItems.getByName("Screen4").remove()
-		app.activeDocument.groupItems.getByName("Screen3").remove()
-		app.activeDocument.groupItems.getByName("Screen2").remove()
-	}
-     
-
-	if (screenCounter_C.length === 3) {
-		app.activeDocument.groupItems.getByName("Screen8").remove()
-	} else if (screenCounter_C.length === 2) {
-		app.activeDocument.groupItems.getByName("Screen8").remove()
-		app.activeDocument.groupItems.getByName("Screen7").remove()
-	} else if (screenCounter_C.length === 1) {
-		app.activeDocument.groupItems.getByName("Screen8").remove()
-		app.activeDocument.groupItems.getByName("Screen7").remove()
-		app.activeDocument.groupItems.getByName("Screen6").remove()
-	} else if (screenCounter_C.length === 0) {
-		app.activeDocument.groupItems.getByName("Screen8").remove()
-		app.activeDocument.groupItems.getByName("Screen7").remove()
-		app.activeDocument.groupItems.getByName("Screen6").remove()
-		app.activeDocument.groupItems.getByName("Screen5").remove()
-	}  */
 
 
+//#region      This section deletes any unused screen info groups.
+if (mockupCheckbox.value === true) {
+	app.activeDocument.groupItems.getByName("Screen8").remove()
+	app.activeDocument.groupItems.getByName("Screen7").remove()
+	app.activeDocument.groupItems.getByName("Screen6").remove()
+	app.activeDocument.groupItems.getByName("Screen5").remove()
+	app.activeDocument.groupItems.getByName("Screen4").remove()
+	app.activeDocument.groupItems.getByName("Screen3").remove()
+	app.activeDocument.groupItems.getByName("Screen2").remove()
+	app.activeDocument.groupItems.getByName("Screen1").remove()
+} else {
+if (screenCounter_A.length === 3) {
+	app.activeDocument.groupItems.getByName("Screen4").remove()
+} else if (screenCounter_A.length === 2) {
+	app.activeDocument.groupItems.getByName("Screen4").remove()
+	app.activeDocument.groupItems.getByName("Screen3").remove()
+} else if (screenCounter_A.length === 1) {
+	app.activeDocument.groupItems.getByName("Screen4").remove()
+	app.activeDocument.groupItems.getByName("Screen3").remove()
+	app.activeDocument.groupItems.getByName("Screen2").remove()
+}
+
+
+if (screenCounter_C.length === 3) {
+	app.activeDocument.groupItems.getByName("Screen8").remove()
+} else if (screenCounter_C.length === 2) {
+	app.activeDocument.groupItems.getByName("Screen8").remove()
+	app.activeDocument.groupItems.getByName("Screen7").remove()
+} else if (screenCounter_C.length === 1) {
+	app.activeDocument.groupItems.getByName("Screen8").remove()
+	app.activeDocument.groupItems.getByName("Screen7").remove()
+	app.activeDocument.groupItems.getByName("Screen6").remove()
+} else if (screenCounter_C.length === 0) {
+	app.activeDocument.groupItems.getByName("Screen8").remove()
+	app.activeDocument.groupItems.getByName("Screen7").remove()
+	app.activeDocument.groupItems.getByName("Screen6").remove()
+	app.activeDocument.groupItems.getByName("Screen5").remove()
+}
+}
 //#endregion
-
-
-
-
-//#region     FUNCTION CALLS
-repInfo()
-generic_function()
-mockup_function()
-vip_function()
-rush_function()
-po_function()
-JDE_function()
-web_function()
-InHands_function()
-ship_function()
-originalFile_function()
-notes_function()
-designer_function()
-totalItems_function()
-filenameOutput()
-proofDate()
-backDate()
 //#endregion
-
-
-
-
 
 
 //#region     AUTOSAVE
@@ -2794,19 +2714,19 @@ if (autoSave.value === true) {
 	opts.PDFPreset = "Illustrator Default"
 
 	if (bodyColorList.selection.index < 11) {
-		doc.saveAs(File(docPath + "/" + alpha + ".pdf"), opts)
+		doc.saveAs(File(docPath + "/" + fileName_One + ".pdf"), opts)
 	}
 
 	if (bodyColorList.selection.index === 11) {
-		doc.saveAs(File(docPath + "/" + alpha + ".pdf"), opts)
+		doc.saveAs(File(docPath + "/" + fileName_One + ".pdf"), opts)
 	}
 
 	if (bodyColorList.selection.index === 12) {
-		doc.saveAs(File(docPath + "/" + alpha + ".pdf"), opts)
+		doc.saveAs(File(docPath + "/" + fileName_One + ".pdf"), opts)
 	}
 
 	if (bodyColorList.selection.index === 14) {
-		doc.saveAs(File(sleevePath + "/" + alpha + ".pdf"), opts)
+		doc.saveAs(File(sleevePath + "/" + fileName_One + ".pdf"), opts)
 	}
 }
 //#endregion
@@ -2814,5 +2734,10 @@ if (autoSave.value === true) {
 /*
 BUG LIST
 
+The unneeded screen info groups aren't being deleted.
+
 Sleeves aren't working. There is no error, but the file name is not filled in.
+
+The special instructions arrow is not unhiding when info is put into any of the instructions boxes on the standard template.
+
 */
