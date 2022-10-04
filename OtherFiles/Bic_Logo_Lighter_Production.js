@@ -49,7 +49,8 @@ var regulars = customerInfo_outer.add("dropdownlist", undefined, [
 	"LaVerne Petry - Custom420promos", //28
 	"Arlene LaRoe - Blue Sky Marketing Group", //29
 	"Superior Promos", //30
-     "Kaeser & Blair"  //31
+	"Kaeser & Blair", //31
+	"Carey Ray Jaramillo - NotionWorx", //32
 ])
 regulars.selection = 0;
 
@@ -295,28 +296,28 @@ inkBox_Master_A1.orientation = "column"
 inkBox_Master_A1.margins = [10, 10, 5, 10]
 var ink_A1 = inkBox_Master_A1.add("edittext", undefined, "")
 ink_A1.characters = 10
-//ink_A1.text = "186 red"
+//ink_A1.text = "171 Orange"
 var ink_A1_Double = inkBox_Master_A1.add("checkbox", undefined, "Double hit")
 
 var inkBox_Master_A2 = inkColors_A.add("panel", undefined, "Screen A2")
 inkBox_Master_A2.orientation = "column"
 var ink_A2 = inkBox_Master_A2.add("edittext", undefined, "")
 ink_A2.characters = 10
-//ink_A2.text = "7578 orange"
+//ink_A2.text = "reflex blue"
 var ink_A2_Double = inkBox_Master_A2.add("checkbox", undefined, "Double hit")
 
 var inkBox_Master_A3 = inkColors_A.add("panel", undefined, "Screen A3")
 inkBox_Master_A3.orientation = "column"
 var ink_A3 = inkBox_Master_A3.add("edittext", undefined, "")
 ink_A3.characters = 10
-//ink_A3.text = "7444 light blue"
+//ink_A3.text = "black"
 var ink_A3_Double = inkBox_Master_A3.add("checkbox", undefined, "Double hit")
 
 var inkBox_Master_A4 = inkColors_A.add("panel", undefined, "Screen A4")
 inkBox_Master_A4.orientation = "column"
 var ink_A4 = inkBox_Master_A4.add("edittext", undefined, "")
 ink_A4.characters = 10
-//ink_A4.text = "5225 light purple"
+//ink_A4.text = "white"
 var ink_A4_Double = inkBox_Master_A4.add("checkbox", undefined, "Double hit")
 
 var inkColors_C = inkColors_2.add("panel", undefined, "")
@@ -327,7 +328,7 @@ var inkBox_Master_C1 = inkColors_C.add("panel", undefined, "Screen C1")
 inkBox_Master_C1.orientation = "column"
 var ink_C1 = inkBox_Master_C1.add("edittext", undefined, "")
 ink_C1.characters = 10
-//ink_C1.text = "black"
+//ink_C1.text = "process blue"
 var ink_C1_Double = inkBox_Master_C1.add("checkbox", undefined, "Double hit")
 
 var inkBox_Master_C2 = inkColors_C.add("panel", undefined, "Screen C2")
@@ -358,7 +359,7 @@ var okButton = buttonGroup.add("button", undefined, "OK")
 var cancelButton = buttonGroup.add("button", undefined, "Cancel")
 
 /* #endregion */
- 
+
 master.show()
 
 //#endregion
@@ -430,12 +431,9 @@ String.prototype.trim = function () {
 }
 //#endregion
 
-
-
-if (bodyColorList.selection.index < 10) {
-     doubleSidedCheckbox.value = false
-     }
-
+if (bodyColorList.selection.index < 10 || bodyColorList.selection === 14) {
+	doubleSidedCheckbox.value = false
+}
 
 //#region                                CUSTOMER INFO
 var repName = app.activeDocument.textFrames.getByName("Rep")
@@ -706,6 +704,13 @@ if (regulars.selection.index === 31) {
 	rep.vip = false
 }
 
+if (regulars.selection.index === 32) {
+	rep.name = "Carey Ray Jaramillo"
+	rep.email = "vendor@notionworx.com"
+	rep.company = "NotionWorx"
+	rep.nationality = "US"
+	rep.vip = false
+}
 
 repName.contents = rep.name + "     " + rep.email
 repNameSignature = rep.name
@@ -750,7 +755,6 @@ if (nationalityUS.value === true) {
 //#endregion
 
 //#region                                 INK COLORS
-//#region
 //#region    If the order uses the standard template, then the body and ink color code is run. If it isn't, then the code is bypassed.
 
 function neonInk(inkString, bravo) {
@@ -850,8 +854,7 @@ if (bodyColorList.selection.index < 14) {
 	newBlack.magenta = 1
 	newBlack.yellow = 1
 
-
-     var spotBlack = app.activeDocument.spots.add()
+	var spotBlack = app.activeDocument.spots.add()
 	spotBlack.colorType = ColorModel.SPOT
 	spotBlack.name = "Spot Black"
 	spotBlack.color = newBlack
@@ -878,14 +881,14 @@ if (bodyColorList.selection.index < 14) {
 		"2587",
 		"424",
 		"872",
-		"877"
+		"877",
 	]
 
 	//#region   Screen counter array
-     var digitArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+	var digitArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 	var screenCounter_A = []
 	var screenCounter_C = []
-     //#endregion
+	//#endregion
 
 	//#region                                REMOVES THE WHITE SPACES FROM INK NAMES FROM BEFORE AND AFTER THE TEXT
 	ink_A1.text = ink_A1.text.trim()
@@ -986,23 +989,24 @@ Actual names:
 					app.activeDocument.swatches.getByName(grayName).color
 			} else {
 				var kilo = ink_A1.text.search(" ")
-				var pmsNumberA2 = ink_A1.text.substring(0, kilo)
+				var pmsNumber_alpha = ink_A1.text.substring(0, kilo)
 				var mike = ink_A1.text.substring(kilo)
-				pmsNumberA2 = pmsNumberA2.replace(/,/g, "")
+				pmsNumber_alpha = pmsNumber_alpha.replace(/,/g, "")
 				item_A1_name.contents =
 					"PANTONE" +
 					" " +
-					pmsNumberA2 +
+					pmsNumber_alpha +
 					" " +
 					"C" +
 					"  " +
 					capitalizeSpaces(mike)
-				item_A1_screenName.contents = pmsNumberA2 + " " + capitalizeSpaces(mike)
+				item_A1_screenName.contents =
+					pmsNumber_alpha + " " + capitalizeSpaces(mike)
 				item_A1_color.fillColor = app.activeDocument.swatches.getByName(
-					"PANTONE" + " " + pmsNumberA2 + " " + "C"
+					"PANTONE" + " " + pmsNumber_alpha + " " + "C"
 				).color
 				item_A1_chip.fillColor = app.activeDocument.swatches.getByName(
-					"PANTONE" + " " + pmsNumberA2 + " " + "C"
+					"PANTONE" + " " + pmsNumber_alpha + " " + "C"
 				).color
 			}
 		}
@@ -1016,14 +1020,16 @@ Actual names:
 			item_A1_color.fillColor = newSpotColor
 			item_A1_chip.fillColor = newSpotColor
 			item_A1_frame.strokeWidth = 1
-               item_A1_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
+			item_A1_frame.strokeColor =
+				app.activeDocument.swatches.getByName("Black").color
 		} else if (ink_A1.text === "black") {
 			item_A1_name.contents = "Black"
 			item_A1_screenName.contents = "Black"
 			item_A1_color.fillColor = newSpotBlack
 			item_A1_chip.fillColor = newSpotBlack
 			item_A1_frame.strokeWidth = 1
-               item_A1_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
+			item_A1_frame.strokeColor =
+				app.activeDocument.swatches.getByName("Black").color
 		} else if (ink_A1.text === "Yellow") {
 			item_A1_name.contents = "PANTONE Yellow C"
 			item_A1_screenName.contents = "PANTONE Yellow C"
@@ -1032,7 +1038,8 @@ Actual names:
 			item_A1_chip.fillColor =
 				app.activeDocument.swatches.getByName("PANTONE Yellow C").color
 			item_A1_frame.strokeWidth = 1
-               item_A1_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
+			item_A1_frame.strokeColor =
+				app.activeDocument.swatches.getByName("Black").color
 		} else {
 			item_A1_name.contents =
 				"PANTONE" + " " + capitalizeSpaces(ink_A1.text) + " " + "C"
@@ -1050,34 +1057,30 @@ Actual names:
 	ink_A1.text = capitalizeSpaces(ink_A1.text)
 	if (ink_A1.text === "Reflex Blue" || ink_A1.text === "Process Blue") {
 		item_A1_frame.strokeWidth = 1
-          item_A1_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
+		item_A1_frame.strokeColor =
+			app.activeDocument.swatches.getByName("Black").color
 	}
-
 
 	for (i = 0; i < standardInkNumber.length; i++) {
-		if (pmsNumberA2 === standardInkNumber[i]) {
+		if (pmsNumber_alpha === standardInkNumber[i]) {
 			item_A1_frame.strokeWidth = 1
-               item_A1_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
+			item_A1_frame.strokeColor =
+				app.activeDocument.swatches.getByName("Black").color
 		}
 	}
-
-
 
 	neonInk(ink_A1.text, "A1_Warning")
 
 	if (ink_A1.text.length > 0) {
 		screenCounter_A.push("One")
-          item_A1_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
+		item_A1_frame.strokeColor =
+			app.activeDocument.swatches.getByName("Black").color
 	}
 
 	if (ink_A1_Double.value === true) {
 		var A1_DoubleBox = app.activeDocument.groupItems.getByName("Double_A1")
 		A1_DoubleBox.hidden = false
 	}
-
-
-
-
 
 	//#endregion
 
@@ -1116,23 +1119,23 @@ Actual names:
 				app.activeDocument.swatches.getByName(grayName).color
 		} else {
 			var kilo = ink_A2.text.search(" ")
-			var pmsNumberA2 = ink_A2.text.substring(0, kilo)
+			var pmsNumber_A2 = ink_A2.text.substring(0, kilo)
 			var mike = ink_A2.text.substring(kilo)
-			pmsNumberA2 = pmsNumberA2.replace(/,/g, "")
+			pmsNumber_A2 = pmsNumber_A2.replace(/,/g, "")
 			item_A2_name.contents =
 				"PANTONE" +
 				" " +
-				pmsNumberA2 +
+				pmsNumber_A2 +
 				" " +
 				"C" +
 				"  " +
 				capitalizeSpaces(mike)
-			item_A2_screenName.contents = pmsNumberA2 + " " + capitalizeSpaces(mike)
+			item_A2_screenName.contents = pmsNumber_A2 + " " + capitalizeSpaces(mike)
 			item_A2_color.fillColor = app.activeDocument.swatches.getByName(
-				"PANTONE" + " " + pmsNumberA2 + " " + "C"
+				"PANTONE" + " " + pmsNumber_A2 + " " + "C"
 			).color
 			item_A2_chip.fillColor = app.activeDocument.swatches.getByName(
-				"PANTONE" + " " + pmsNumberA2 + " " + "C"
+				"PANTONE" + " " + pmsNumber_A2 + " " + "C"
 			).color
 		}
 	}
@@ -1175,22 +1178,24 @@ Actual names:
 	// This block makes the stroke of the box thicker if the ink is a standard color.
 	ink_A2.text = capitalizeSpaces(ink_A2.text)
 	if (ink_A2.text === "Reflex Blue" || ink_A2.text === "Process Blue") {
-		item_A2_frame.strokeWidth = 1;
-          item_A2_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
+		item_A2_frame.strokeWidth = 1
+		item_A2_frame.strokeColor =
+			app.activeDocument.swatches.getByName("Black").color
 	}
 
 	neonInk(ink_A2.text, "A2_Warning")
 
 	for (i = 0; i < standardInkNumber.length; i++) {
-		if (pmsNumberA2 === standardInkNumber[i]) {
+		if (pmsNumber_A2 === standardInkNumber[i]) {
 			item_A2_frame.strokeWidth = 1
-               item_A2_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+			item_A2_frame.strokeColor =
+				app.activeDocument.swatches.getByName("Black").color
 		}
 	}
 	if (ink_A2.text.length > 0) {
 		screenCounter_A.push("Two")
-          item_A2_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
+		item_A2_frame.strokeColor =
+			app.activeDocument.swatches.getByName("Black").color
 	}
 
 	if (ink_A2_Double.value === true) {
@@ -1269,7 +1274,8 @@ Actual names:
 			item_A3_color.fillColor = newSpotBlack
 			item_A3_chip.fillColor = newSpotBlack
 			item_A3_frame.strokeWidth = 1
-               item_A3_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
+			item_A3_frame.strokeColor =
+				app.activeDocument.swatches.getByName("Black").color
 		} else if (ink_A3.text === "Yellow") {
 			item_A3_name.contents = "PANTONE Yellow C"
 			item_A3_screenName.contents = "PANTONE Yellow C"
@@ -1278,8 +1284,8 @@ Actual names:
 			item_A3_chip.fillColor =
 				app.activeDocument.swatches.getByName("PANTONE Yellow C").color
 			item_A3_frame.strokeWidth = 1
-               item_A3_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+			item_A3_frame.strokeColor =
+				app.activeDocument.swatches.getByName("Black").color
 		} else {
 			item_A3_name.contents =
 				"PANTONE" + " " + capitalizeSpaces(ink_A3.text) + " " + "C"
@@ -1297,8 +1303,8 @@ Actual names:
 	ink_A3.text = capitalizeSpaces(ink_A3.text)
 	if (ink_A3.text === "Reflex Blue" || ink_A3.text === "Process Blue") {
 		item_A3_frame.strokeWidth = 1
-          item_A3_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+		item_A3_frame.strokeColor =
+			app.activeDocument.swatches.getByName("Black").color
 	}
 
 	neonInk(ink_A3.text, "A3_Warning")
@@ -1306,13 +1312,14 @@ Actual names:
 	for (i = 0; i < standardInkNumber.length; i++) {
 		if (pmsNumberA3 === standardInkNumber[i]) {
 			item_A3_frame.strokeWidth = 1
-               item_A3_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+			item_A3_frame.strokeColor =
+				app.activeDocument.swatches.getByName("Black").color
 		}
 	}
 	if (ink_A3.text.length > 0) {
 		screenCounter_A.push("Three")
-          item_A3_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
+		item_A3_frame.strokeColor =
+			app.activeDocument.swatches.getByName("Black").color
 	}
 
 	if (ink_A3_Double.value === true) {
@@ -1391,8 +1398,8 @@ Actual names:
 			item_A4_color.fillColor = newSpotBlack
 			item_A4_chip.fillColor = newSpotBlack
 			item_A4_frame.strokeWidth = 1
-               item_A4_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+			item_A4_frame.strokeColor =
+				app.activeDocument.swatches.getByName("Black").color
 		} else if (ink_A4.text === "Yellow") {
 			item_A4_name.contents = "PANTONE Yellow C"
 			item_A4_screenName.contents = "PANTONE Yellow C"
@@ -1401,8 +1408,8 @@ Actual names:
 			item_A4_chip.fillColor =
 				app.activeDocument.swatches.getByName("PANTONE Yellow C").color
 			item_A4_frame.strokeWidth = 1
-               item_A4_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+			item_A4_frame.strokeColor =
+				app.activeDocument.swatches.getByName("Black").color
 		} else {
 			item_A4_name.contents =
 				"PANTONE" + " " + capitalizeSpaces(ink_A4.text) + " " + "C"
@@ -1420,8 +1427,8 @@ Actual names:
 	ink_A4.text = capitalizeSpaces(ink_A4.text)
 	if (ink_A4.text === "Reflex Blue" || ink_A4.text === "Process Blue") {
 		item_A4_frame.strokeWidth = 1
-          item_A4_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+		item_A4_frame.strokeColor =
+			app.activeDocument.swatches.getByName("Black").color
 	}
 
 	neonInk(ink_A4.text, "A4_Warning")
@@ -1429,13 +1436,14 @@ Actual names:
 	for (i = 0; i < standardInkNumber.length; i++) {
 		if (pmsNumberA4 === standardInkNumber[i]) {
 			item_A4_frame.strokeWidth = 1
-               item_A4_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+			item_A4_frame.strokeColor =
+				app.activeDocument.swatches.getByName("Black").color
 		}
 	}
 	if (ink_A4.text.length > 0) {
 		screenCounter_A.push("Four")
-          item_A4_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
+		item_A4_frame.strokeColor =
+			app.activeDocument.swatches.getByName("Black").color
 	}
 
 	if (ink_A4_Double.value === true) {
@@ -1443,8 +1451,6 @@ Actual names:
 		A4_DoubleBox.hidden = false
 	}
 	//#endregion
-
-
 
 	//#region     C1
 	if (ink_C1.text.length > 0) {
@@ -1515,8 +1521,8 @@ Actual names:
 				item_C1_color.fillColor = newSpotBlack
 				item_C1_chip.fillColor = newSpotBlack
 				item_C1_frame.strokeWidth = 1
-                    item_C1_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+				item_C1_frame.strokeColor =
+					app.activeDocument.swatches.getByName("Black").color
 			} else if (ink_C1.text === "Yellow") {
 				item_C1_name.contents = "PANTONE Yellow C"
 				item_C1_screenName.contents = "PANTONE Yellow C"
@@ -1525,8 +1531,8 @@ Actual names:
 				item_C1_chip.fillColor =
 					app.activeDocument.swatches.getByName("PANTONE Yellow C").color
 				item_C1_frame.strokeWidth = 1
-                    item_C1_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+				item_C1_frame.strokeColor =
+					app.activeDocument.swatches.getByName("Black").color
 			} else {
 				item_C1_name.contents =
 					"PANTONE" + " " + capitalizeSpaces(ink_C1.text) + " " + "C"
@@ -1544,8 +1550,8 @@ Actual names:
 		ink_C1.text = capitalizeSpaces(ink_C1.text)
 		if (ink_C1.text === "Reflex Blue" || ink_C1.text === "Process Blue") {
 			item_C1_frame.strokeWidth = 1
-               item_C1_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+			item_C1_frame.strokeColor =
+				app.activeDocument.swatches.getByName("Black").color
 		}
 
 		neonInk(ink_C1.text, "C1_Warning")
@@ -1553,14 +1559,15 @@ Actual names:
 		for (i = 0; i < standardInkNumber.length; i++) {
 			if (pmsNumberC1 === standardInkNumber[i]) {
 				item_C1_frame.strokeWidth = 1
-                    item_C1_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+				item_C1_frame.strokeColor =
+					app.activeDocument.swatches.getByName("Black").color
 			}
 		}
 	}
 	if (ink_C1.text.length > 0) {
 		screenCounter_C.push(1)
-          item_C1_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
+		item_C1_frame.strokeColor =
+			app.activeDocument.swatches.getByName("Black").color
 	}
 
 	if (ink_C1_Double.value === true) {
@@ -1632,8 +1639,8 @@ Actual names:
 				item_C2_color.fillColor = newSpotColor
 				item_C2_chip.fillColor = newSpotColor
 				item_C2_frame.strokeWidth = 1
-                    item_C2_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+				item_C2_frame.strokeColor =
+					app.activeDocument.swatches.getByName("Black").color
 			} else if (ink_C2.text === "black") {
 				item_C2_name.contents = "Black"
 				item_C2_screenName.contents = "Black"
@@ -1648,8 +1655,8 @@ Actual names:
 				item_C2_chip.fillColor =
 					app.activeDocument.swatches.getByName("PANTONE Yellow C").color
 				item_C2_frame.strokeWidth = 1
-                    item_C2_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+				item_C2_frame.strokeColor =
+					app.activeDocument.swatches.getByName("Black").color
 			} else {
 				item_C2_name.contents =
 					"PANTONE" + " " + capitalizeSpaces(ink_C2.text) + " " + "C"
@@ -1667,8 +1674,8 @@ Actual names:
 		ink_C2.text = capitalizeSpaces(ink_C2.text)
 		if (ink_C2.text === "Reflex Blue" || ink_C2.text === "Process Blue") {
 			item_C2_frame.strokeWidth = 1
-               item_C2_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+			item_C2_frame.strokeColor =
+				app.activeDocument.swatches.getByName("Black").color
 		}
 
 		neonInk(ink_C2.text, "C2_Warning")
@@ -1676,15 +1683,15 @@ Actual names:
 		for (i = 0; i < standardInkNumber.length; i++) {
 			if (pmsNumberC2 === standardInkNumber[i]) {
 				item_C2_frame.strokeWidth = 1
-                    item_C2_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+				item_C2_frame.strokeColor =
+					app.activeDocument.swatches.getByName("Black").color
 			}
 		}
 	}
 	if (ink_C2.text.length > 0) {
 		screenCounter_C.push(1)
-          item_C2_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+		item_C2_frame.strokeColor =
+			app.activeDocument.swatches.getByName("Black").color
 	}
 
 	if (ink_C2_Double.value === true) {
@@ -1756,16 +1763,16 @@ Actual names:
 				item_C3_color.fillColor = newSpotColor
 				item_C3_chip.fillColor = newSpotColor
 				item_C3_frame.strokeWidth = 1
-                    item_C3_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+				item_C3_frame.strokeColor =
+					app.activeDocument.swatches.getByName("Black").color
 			} else if (ink_C3.text === "black") {
 				item_C3_name.contents = "Black"
 				item_C3_screenName.contents = "Black"
 				item_C3_color.fillColor = newSpotBlack
 				item_C3_chip.fillColor = newSpotBlack
 				item_C3_frame.strokeWidth = 1
-                    item_C3_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+				item_C3_frame.strokeColor =
+					app.activeDocument.swatches.getByName("Black").color
 			} else if (ink_C3.text === "Yellow") {
 				item_C3_name.contents = "PANTONE Yellow C"
 				item_C3_screenName.contents = "PANTONE Yellow C"
@@ -1774,8 +1781,8 @@ Actual names:
 				item_C3_chip.fillColor =
 					app.activeDocument.swatches.getByName("PANTONE Yellow C").color
 				item_C3_frame.strokeWidth = 1
-                    item_C3_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+				item_C3_frame.strokeColor =
+					app.activeDocument.swatches.getByName("Black").color
 			} else {
 				item_C3_name.contents =
 					"PANTONE" + " " + capitalizeSpaces(ink_C3.text) + " " + "C"
@@ -1793,8 +1800,8 @@ Actual names:
 		ink_C3.text = capitalizeSpaces(ink_C3.text)
 		if (ink_C3.text === "Reflex Blue" || ink_C3.text === "Process Blue") {
 			item_C3_frame.strokeWidth = 1
-               item_C3_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+			item_C3_frame.strokeColor =
+				app.activeDocument.swatches.getByName("Black").color
 		}
 
 		neonInk(ink_C3.text, "C3_Warning")
@@ -1802,15 +1809,15 @@ Actual names:
 		for (i = 0; i < standardInkNumber.length; i++) {
 			if (pmsNumberC3 === standardInkNumber[i]) {
 				item_C3_frame.strokeWidth = 1
-                    item_C3_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+				item_C3_frame.strokeColor =
+					app.activeDocument.swatches.getByName("Black").color
 			}
 		}
 	}
 	if (ink_C3.text.length > 0) {
 		screenCounter_C.push(1)
-          item_C3_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+		item_C3_frame.strokeColor =
+			app.activeDocument.swatches.getByName("Black").color
 	}
 
 	if (ink_C3_Double.value === true) {
@@ -1888,16 +1895,16 @@ Actual names:
 				item_C4_color.fillColor = newSpotColor
 				item_C4_chip.fillColor = newSpotColor
 				item_C4_frame.strokeWidth = 1
-                    item_C4_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+				item_C4_frame.strokeColor =
+					app.activeDocument.swatches.getByName("Black").color
 			} else if (ink_C4.text === "black") {
 				item_C4_name.contents = "Black"
 				item_C4_screenName.contents = "Black"
 				item_C4_color.fillColor = newSpotBlack
 				item_C4_chip.fillColor = newSpotBlack
 				item_C4_frame.strokeWidth = 1
-                    item_C4_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+				item_C4_frame.strokeColor =
+					app.activeDocument.swatches.getByName("Black").color
 			} else if (ink_C4.text === "Yellow") {
 				item_C4_name.contents = "PANTONE Yellow C"
 				item_C4_screenName.contents = "PANTONE Yellow C"
@@ -1906,8 +1913,8 @@ Actual names:
 				item_C4_chip.fillColor =
 					app.activeDocument.swatches.getByName("PANTONE Yellow C").color
 				item_C4_frame.strokeWidth = 1
-                    item_C4_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+				item_C4_frame.strokeColor =
+					app.activeDocument.swatches.getByName("Black").color
 			} else {
 				item_C4_name.contents =
 					"PANTONE" + " " + capitalizeSpaces(ink_C4.text) + " " + "C"
@@ -1925,8 +1932,8 @@ Actual names:
 		ink_C4.text = capitalizeSpaces(ink_C4.text)
 		if (ink_C4.text === "Reflex Blue" || ink_C4.text === "Process Blue") {
 			item_C4_frame.strokeWidth = 1
-               item_C4_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+			item_C4_frame.strokeColor =
+				app.activeDocument.swatches.getByName("Black").color
 		}
 
 		neonInk(ink_C4.text, "C4_Warning")
@@ -1934,15 +1941,15 @@ Actual names:
 		for (i = 0; i < standardInkNumber.length; i++) {
 			if (pmsNumberC4 === standardInkNumber[i]) {
 				item_C4_frame.strokeWidth = 1
-                    item_C4_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+				item_C4_frame.strokeColor =
+					app.activeDocument.swatches.getByName("Black").color
 			}
 		}
 	}
 	if (ink_C4.text.length > 0) {
 		screenCounter_C.push(1)
-          item_C4_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
-
+		item_C4_frame.strokeColor =
+			app.activeDocument.swatches.getByName("Black").color
 	}
 
 	if (bodyColorList.selection.index < 11) {
@@ -2141,10 +2148,12 @@ function filenameOutput() {
 			"C2 Screen FileName",
 			"C3 Screen FileName",
 			"C4 Screen FileName",
-		] 
+		]
 
 		for (i = 0; i < illustratorFrame.length; i++) {
-			var filenameOutput_One = app.activeDocument.textFrames.getByName(illustratorFrame[i]);
+			var filenameOutput_One = app.activeDocument.textFrames.getByName(
+				illustratorFrame[i]
+			)
 			filenameOutput_One.contents = fileName_One
 		}
 	}
@@ -2211,7 +2220,7 @@ function generic_function() {
 		app.activeDocument.groupItems.getByName(
 			"Canada_GenericGroup"
 		).visible = true
-/*           if(bodyColorList.selection.index < 14) {
+		/*           if(bodyColorList.selection.index < 14) {
                layerRemover()
           } */
 	}
@@ -2220,7 +2229,7 @@ function generic_function() {
 		app.activeDocument.groupItems.getByName("USA_GenericGroup").visible = true
 		app.activeDocument.groupItems.getByName("USA_GenericGroup").remove()
 		app.activeDocument.groupItems.getByName("USA_Group").visible = true
-/*           if(bodyColorList.selection.index < 14) {
+		/*           if(bodyColorList.selection.index < 14) {
                layerRemover()
           } */
 	}
@@ -2229,12 +2238,11 @@ function generic_function() {
 		app.activeDocument.groupItems.getByName("USA_Group").visible = true
 		app.activeDocument.groupItems.getByName("USA_Group").remove()
 		app.activeDocument.groupItems.getByName("USA_GenericGroup").visible = true
-  /*         if(bodyColorList.selection.index < 14) {
+		/*         if(bodyColorList.selection.index < 14) {
                layerRemover()
           } */
 	}
 }
-
 
 //#region     FILENAME
 var fileName_One
@@ -2242,10 +2250,17 @@ var fileName_One
 if (bodyColorList.selection < 10) {
 	fileName_One = prefix() + "_" + capitalize(descriptionBox_edit.text) + "_A"
 	if (multi.value === true && multi_bodyColor.value === true) {
-		fileName_One = prefix() + "_" + capitalize(descriptionBox_edit.text) + "_" + bodyColorList.selection.text + "_01_A"
+		fileName_One =
+			prefix() +
+			"_" +
+			capitalize(descriptionBox_edit.text) +
+			"_" +
+			bodyColorList.selection.text +
+			"_01_A"
 	}
 	if (multi.value === true && multi_itemNumber.value === true) {
-		fileName_One = prefix() + "_" + capitalize(descriptionBox_edit.text) + "_01_A"
+		fileName_One =
+			prefix() + "_" + capitalize(descriptionBox_edit.text) + "_01_A"
 	}
 }
 
@@ -2303,7 +2318,6 @@ if (bodyColorList.selection == 14) {
 }
 //#endregion
 
-
 var reducedOriginalArt = app.activeDocument.textFrames.getByName("Original Art")
 if (originalArt_edit.text.length > 50) {
 	reducedOriginalArt.textRange.characterAttributes.size = 4
@@ -2315,7 +2329,6 @@ if (poNumber_edit.text.length > 11) {
 	reducedPO.textRange.characterAttributes.size = 6
 	reducedPO.textRange.characterAttributes.baselineShift = -3
 }
-
 
 //#region     FUNCTION CALLS
 repInfo()
@@ -2338,7 +2351,8 @@ filenameOutput()
 
 //#endregion
 
-//#region     DARK ASSORTMENT
+//#region     DARK ASSORTMENT DEFAULT INK COLOR
+//If no color is entered in the A1 ink color field and a dark assortment is selected from the body color list, the ink color is set to white ink.
 if (
 	bodyColorList.selection.index == 11 &&
 	doubleSidedCheckbox.value === false
@@ -2357,7 +2371,8 @@ if (
 }
 //#endregion
 
-//#region     LIGHT ASSORTMENT
+//#region     LIGHT ASSORTMENT DEFAULT INK COLOR
+//If no color is entered in the A1 ink color field and a light assortment is selected from the body color list, the ink color is set to black ink.
 
 if (bodyColorList.selection.index === 12 && doubleSidedCheckbox.value === false)
 	if (ink_A1.text.length < 1) {
@@ -2384,188 +2399,109 @@ if (bodyColorList.selection.index === 12 && doubleSidedCheckbox.value === false)
 
 //#endregion
 
-
-
-
-
 //#region         DOUBLE SIDED ASSORTMENTS
 if (
-	bodyColorList.selection.index === 11 ||
-	bodyColorList.selection.index === 12
-) {
-	if (doubleSidedCheckbox.value == true) {
+	bodyColorList.selection.index === 11 || bodyColorList.selection.index === 12 && doubleSidedCheckbox.value == true)
+ {
+	//If the Double Sided checkbox is checked, this block runs.
+	var A1_Name_Back = app.activeDocument.textFrames.getByName("A1_Name_Back")
+	var A2_Name_Back = app.activeDocument.textFrames.getByName("A2_Name_Back")
+	var A3_Name_Back = app.activeDocument.textFrames.getByName("A3_Name_Back")
+	var A4_Name_Back = app.activeDocument.textFrames.getByName("A4_Name_Back")
 
+	var C1_Name_Back = app.activeDocument.textFrames.getByName("C1_Name_Back")
+	var C2_Name_Back = app.activeDocument.textFrames.getByName("C2_Name_Back")
+	var C3_Name_Back = app.activeDocument.textFrames.getByName("C3_Name_Back")
+	var C4_Name_Back = app.activeDocument.textFrames.getByName("C4_Name_Back")
 
+	var A1_Color_Back = app.activeDocument.pathItems.getByName("A1_Color_Back")
+	var A2_Color_Back = app.activeDocument.pathItems.getByName("A2_Color_Back")
+	var A3_Color_Back = app.activeDocument.pathItems.getByName("A3_Color_Back")
+	var A4_Color_Back = app.activeDocument.pathItems.getByName("A4_Color_Back")
 
+	var C1_Color_Back = app.activeDocument.pathItems.getByName("C1_Color_Back")
+	var C2_Color_Back = app.activeDocument.pathItems.getByName("C2_Color_Back")
+	var C3_Color_Back = app.activeDocument.pathItems.getByName("C3_Color_Back")
+	var C4_Color_Back = app.activeDocument.pathItems.getByName("C4_Color_Back")
 
-var A1_Name_Back = app.activeDocument.textFrames.getByName("A1_Name_Back");
-var A2_Name_Back = app.activeDocument.textFrames.getByName("A2_Name_Back");
-var A3_Name_Back = app.activeDocument.textFrames.getByName("A3_Name_Back");
-var A4_Name_Back = app.activeDocument.textFrames.getByName("A4_Name_Back");
+	var A1_Frame_Back = app.activeDocument.pathItems.getByName("A1_Frame_Back")
+	var A2_Frame_Back = app.activeDocument.pathItems.getByName("A2_Frame_Back")
+	var A3_Frame_Back = app.activeDocument.pathItems.getByName("A3_Frame_Back")
+	var A4_Frame_Back = app.activeDocument.pathItems.getByName("A4_Frame_Back")
 
-var C1_Name_Back = app.activeDocument.textFrames.getByName("C1_Name_Back");
-var C2_Name_Back = app.activeDocument.textFrames.getByName("C2_Name_Back");
-var C3_Name_Back = app.activeDocument.textFrames.getByName("C3_Name_Back");
-var C4_Name_Back = app.activeDocument.textFrames.getByName("C4_Name_Back");
+	var C1_Frame_Back = app.activeDocument.pathItems.getByName("C1_Frame_Back")
+	var C2_Frame_Back = app.activeDocument.pathItems.getByName("C2_Frame_Back")
+	var C3_Frame_Back = app.activeDocument.pathItems.getByName("C3_Frame_Back")
+	var C4_Frame_Back = app.activeDocument.pathItems.getByName("C4_Frame_Back")
 
+	A1_Name_Back.contents = ink_A1.text
+	A2_Name_Back.contents = ink_A2.text
+	A3_Name_Back.contents = ink_A3.text
+	A4_Name_Back.contents = ink_A4.text
 
+	C1_Name_Back.contents = ink_C1.text
+	C2_Name_Back.contents = ink_C2.text
+	C3_Name_Back.contents = ink_C3.text
+	C4_Name_Back.contents = ink_C4.text
 
+	A1_Color_Back.fillColor = item_A1_color.fillColor
+	A2_Color_Back.fillColor = item_A2_color.fillColor
+	A3_Color_Back.fillColor = item_A3_color.fillColor
+	A4_Color_Back.fillColor = item_A4_color.fillColor
 
+	C1_Color_Back.fillColor = item_C1_color.fillColor
+	C2_Color_Back.fillColor = item_C2_color.fillColor
+	C3_Color_Back.fillColor = item_C3_color.fillColor
+	C4_Color_Back.fillColor = item_C4_color.fillColor
 
+	A1_Frame_Back.strokeWidth = item_A1_frame.strokeWidth
+	A2_Frame_Back.strokeWidth = item_A2_frame.strokeWidth
+	A3_Frame_Back.strokeWidth = item_A3_frame.strokeWidth
+	A4_Frame_Back.strokeWidth = item_A4_frame.strokeWidth
 
-var A1_Color_Back = app.activeDocument.pathItems.getByName("A1_Color_Back");
-var A2_Color_Back = app.activeDocument.pathItems.getByName("A2_Color_Back");
-var A3_Color_Back = app.activeDocument.pathItems.getByName("A3_Color_Back");
-var A4_Color_Back = app.activeDocument.pathItems.getByName("A4_Color_Back");
+     A1_Frame_Back.strokeColor = item_A1_frame.strokeColor
+	A2_Frame_Back.strokeColor = item_A2_frame.strokeColor
+	A3_Frame_Back.strokeColor = item_A3_frame.strokeColor
+	A4_Frame_Back.strokeColor = item_A4_frame.strokeColor
 
-var C1_Color_Back = app.activeDocument.pathItems.getByName("C1_Color_Back");
-var C2_Color_Back = app.activeDocument.pathItems.getByName("C2_Color_Back");
-var C3_Color_Back = app.activeDocument.pathItems.getByName("C3_Color_Back");
-var C4_Color_Back = app.activeDocument.pathItems.getByName("C4_Color_Back");
+	C1_Frame_Back.strokeWidth = item_C1_frame.strokeWidth
+	C2_Frame_Back.strokeWidth = item_C2_frame.strokeWidth
+	C3_Frame_Back.strokeWidth = item_C3_frame.strokeWidth
+	C4_Frame_Back.strokeWidth = item_C4_frame.strokeWidth
 
+     C1_Frame_Back.strokeColor = item_C1_frame.strokeColor
+	C2_Frame_Back.strokeColor = item_C2_frame.strokeColor
+	C3_Frame_Back.strokeColor = item_C3_frame.strokeColor
+	C4_Frame_Back.strokeColor = item_C4_frame.strokeColor
 
+	app.activeDocument.textFrames.getByName("FileName_Back").contents =
+		fileName_One
+	app.activeDocument.textFrames.getByName("jde number_Back").contents =
+		jdeNumber_edit.text
+	app.activeDocument.textFrames.getByName("PO_Back").contents =
+		poNumber_edit.text
+	app.activeDocument.textFrames.getByName("Web_Back").contents =
+		webNumber_edit.text
 
+	var repBack = app.activeDocument.textFrames.getByName("Rep_Back")
+	repBack.contents = rep.name + "     " + rep.email
 
+	var companyBack = app.activeDocument.textFrames.getByName("Company_Back")
+	companyBack.contents = rep.company
 
-var A1_Frame_Back = app.activeDocument.pathItems.getByName("A1_Frame_Back");
-var A2_Frame_Back = app.activeDocument.pathItems.getByName("A2_Frame_Back");
-var A3_Frame_Back = app.activeDocument.pathItems.getByName("A3_Frame_Back");
-var A4_Frame_Back = app.activeDocument.pathItems.getByName("A4_Frame_Back");
+	var repSignatureBack = app.activeDocument.textFrames.getByName(
+		"RepName_Signature_Back"
+	)
+	repSignatureBack.contents = rep.name
 
-var C1_Frame_Back = app.activeDocument.pathItems.getByName("C1_Frame_Back");
-var C2_Frame_Back = app.activeDocument.pathItems.getByName("C2_Frame_Back");
-var C3_Frame_Back = app.activeDocument.pathItems.getByName("C3_Frame_Back");
-var C4_Frame_Back = app.activeDocument.pathItems.getByName("C4_Frame_Back");
+	var shipDateBack = app.activeDocument.textFrames.getByName("Ship Date_Back")
+	shipDateBack.contents = shipDate_edit.text
 
-
-
-A1_Name_Back.contents = ink_A1.text;
-A2_Name_Back.contents = ink_A2.text;
-A3_Name_Back.contents = ink_A3.text;
-A4_Name_Back.contents = ink_A4.text;
- 
-C1_Name_Back.contents = ink_C1.text;
-C2_Name_Back.contents = ink_C2.text;
-C3_Name_Back.contents = ink_C3.text;
-C4_Name_Back.contents = ink_C4.text;
-
-
-
-
-
-
-
-
-A1_Color_Back.fillColor = item_A1_color.fillColor;
-A2_Color_Back.fillColor = item_A2_color.fillColor;
-A3_Color_Back.fillColor = item_A3_color.fillColor;
-A4_Color_Back.fillColor = item_A4_color.fillColor;
- 
-C1_Color_Back.fillColor = item_C1_color.fillColor;
-C2_Color_Back.fillColor = item_C2_color.fillColor;
-C3_Color_Back.fillColor = item_C3_color.fillColor;
-C4_Color_Back.fillColor = item_C4_color.fillColor;
-
-
-A1_Frame_Back.strokeWidth = item_A1_frame.strokeWidth;
-A2_Frame_Back.strokeWidth = item_A2_frame.strokeWidth;
-A3_Frame_Back.strokeWidth = item_A3_frame.strokeWidth;
-A4_Frame_Back.strokeWidth = item_A4_frame.strokeWidth;
-
-C1_Frame_Back.strokeWidth = item_C1_frame.strokeWidth;
-C2_Frame_Back.strokeWidth = item_C2_frame.strokeWidth;
-C3_Frame_Back.strokeWidth = item_C3_frame.strokeWidth;
-C4_Frame_Back.strokeWidth = item_C4_frame.strokeWidth;
-
-
-
-
-
-
-
-
-//This section fills in the color info and swatch color on the back of the double side assortment.
-
-          if (ink_A1.text.length < 1) {
-               var lightAssortInk_Back = app.activeDocument.textFrames.getByName(
-                    "A1_Color_Back"
-               )
-               lightAssortInk_Back.contents = "White"
-               item_A1_name.contents = "White"
-               item_A1_screenName.contents = "White"
-               item_A1_color_Back.fillColor = newSpotColor
-               item_A1_chip.fillColor = newSpotColor
-               item_A1_frame.strokeWidth = 1
-          }		
-
-
-/* 
-		if (fileName_One.length > 27) {
-
-               var reducedDoubleFileName = app.activeDocument.textFrames.getByName("PO_Back").textRange.characterAttributes.size = 6;  //There us an error created when making a double-sided assortment. reducedDoubleFileName is undefined.       Line: 2367   reducedDoubleFileName.textRange.characterAtributes.size = 6;
-			reducedDoubleFileName.textRange.characterAttributes.baselineShift = -3
-		}
-
-		var reducedDoublePO = app.activeDocument.textFrames.getByName("PO_Back")
-		if (poNumber_edit.text.length > 11) {
-			reducedDoublePO.textRange.characterAttributes.size = 6
-			reducedDoublePO.textRange.characterAttributes.baselineShift = -3
-		} */
-
-		app.activeDocument.textFrames.getByName("FileName_Back").contents =
-			fileName_One
-		app.activeDocument.textFrames.getByName("jde number_Back").contents =
-			jdeNumber_edit.text
-		app.activeDocument.textFrames.getByName("PO_Back").contents =
-			poNumber_edit.text
-		app.activeDocument.textFrames.getByName("Web_Back").contents =
-			webNumber_edit.text
-
-		var repBack = app.activeDocument.textFrames.getByName("Rep_Back")
-		repBack.contents = rep.name + "     " + rep.email
-
-		var companyBack = app.activeDocument.textFrames.getByName("Company_Back")
-		companyBack.contents = rep.company
-
-		var repSignatureBack = app.activeDocument.textFrames.getByName(
-			"RepName_Signature_Back"
-		)
-		repSignatureBack.contents = rep.name
-
-		var shipDateBack = app.activeDocument.textFrames.getByName("Ship Date_Back")
-		shipDateBack.contents = shipDate_edit.text
-
-		var inHandsDateBack =
-			app.activeDocument.textFrames.getByName("In Hands Date_Back")
-		inHandsDateBack.contents = inHandsDate_edit.text
-/* 
-		if (ink_C4.text.length < 1) {
-			app.activeDocument.groupItems.getByName("Screen8").remove()
-		}
-		if (ink_C3.text.length < 1) {
-			app.activeDocument.groupItems.getByName("Screen7").remove()
-		}
-		if (ink_C2.text.length < 1) {
-			app.activeDocument.groupItems.getByName("Screen6").remove()
-		}
-		if (ink_C1.text.length < 1) {
-			app.activeDocument.groupItems.getByName("Screen5").remove()
-		}
-		if (ink_A4.text.length < 1) {
-			app.activeDocument.groupItems.getByName("Screen4").remove()
-		}
-		if (ink_A3.text.length < 1) {
-			app.activeDocument.groupItems.getByName("Screen3").remove()
-		}
-		if (ink_A2.text.length < 1) {
-			app.activeDocument.groupItems.getByName("Screen2").remove()
-		} */
-	}
+	var inHandsDateBack =
+		app.activeDocument.textFrames.getByName("In Hands Date_Back")
+	inHandsDateBack.contents = inHandsDate_edit.text
 }
 //#endregion
-
-
-
 
 //#region     SLEEVE
 
@@ -2589,7 +2525,6 @@ var customerService_instructions = app.activeDocument.textFrames.getByName(
 var production_instructions = app.activeDocument.textFrames.getByName(
 	"Production Instructions"
 )
-
 
 if (doubleSidedCheckbox.value === true) {
 	if (
@@ -2620,12 +2555,14 @@ if (doubleSidedCheckbox.value === true) {
 		app.activeDocument.groupItems.getByName("Customer - Production").remove()
 		app.activeDocument.textFrames.getByName("Customer Instructions").contents =
 			instructionsCustomer_edit.text
-               app.activeDocument.textFrames.getByName("Customer Instructions").contents =
+		app.activeDocument.textFrames.getByName("Customer Instructions").contents =
 			instructionsCustomer_edit.text
 		app.activeDocument.textFrames.getByName(
 			"Production Instructions"
-		).contents = instructionsProduction_edit.text;
-          app.activeDocument.textFrames.getByName("Customer Service Instructions").contents = instructionsCustomerService_edit.text
+		).contents = instructionsProduction_edit.text
+		app.activeDocument.textFrames.getByName(
+			"Customer Service Instructions"
+		).contents = instructionsCustomerService_edit.text
 	}
 
 	if (
@@ -2799,16 +2736,16 @@ if (doubleSidedCheckbox.value === true) {
 			.remove()
 	}
 
-if(bodyColorList.selection.index < 14) {
-     if (
-		instructionsCustomer_edit.text.length < 1 &&
-		instructionsCustomerService_edit.text.length < 1 &&
-		instructionsProduction_edit.text.length < 1
-	) {
-		app.activeDocument.groupItems.getByName("Bic Logo Group").remove()
-		app.activeDocument.artboards.getByName("Back").remove()
+	if (bodyColorList.selection.index < 14) {
+		if (
+			instructionsCustomer_edit.text.length < 1 &&
+			instructionsCustomerService_edit.text.length < 1 &&
+			instructionsProduction_edit.text.length < 1
+		) {
+			app.activeDocument.groupItems.getByName("Bic Logo Group").remove()
+			app.activeDocument.artboards.getByName("Back").remove()
+		}
 	}
-}
 }
 
 //#endregion
@@ -2833,7 +2770,7 @@ if (bodyColorList.selection.index < 14 && mockupCheckbox.value === false) {
 		app.activeDocument.textFrames.getByName("A1 Screen Number")
 	screenNumberLast_1.contents = screenTotal
 
-	var screenNumberLast_2 =  // This has an error, no such element. It prevents the file from being saved, and the screen info number is 1/0.
+	var screenNumberLast_2 = // This has an error, no such element. It prevents the file from being saved, and the screen info number is 1/0.
 		app.activeDocument.textFrames.getByName("A2 Screen Number")
 	screenNumberLast_2.contents = screenTotal
 
@@ -2874,53 +2811,49 @@ if (bodyColorList.selection.index < 14 && mockupCheckbox.value === false) {
 	screenNumberLast_8.contents = screenTotal
 }
 
-
-
 //#region      This section deletes any unused screen info groups.
 
 if (bodyColorList.selection.index < 14) {
-if (mockupCheckbox.value === true) {
-	app.activeDocument.groupItems.getByName("Screen8").remove()
-	app.activeDocument.groupItems.getByName("Screen7").remove()
-	app.activeDocument.groupItems.getByName("Screen6").remove()
-	app.activeDocument.groupItems.getByName("Screen5").remove()
-	app.activeDocument.groupItems.getByName("Screen4").remove()  //light assortment  this produces an error
-	app.activeDocument.groupItems.getByName("Screen3").remove()
-	app.activeDocument.groupItems.getByName("Screen2").remove()
-	app.activeDocument.groupItems.getByName("Screen1").remove()
-} else {
-if (screenCounter_A.length === 3) {
-	app.activeDocument.groupItems.getByName("Screen4").remove()
-} else if (screenCounter_A.length === 2) {
-	app.activeDocument.groupItems.getByName("Screen4").remove()
-	app.activeDocument.groupItems.getByName("Screen3").remove()
-} else if (screenCounter_A.length === 1) {
-	app.activeDocument.groupItems.getByName("Screen4").remove()
-	app.activeDocument.groupItems.getByName("Screen3").remove()
-	app.activeDocument.groupItems.getByName("Screen2").remove()
-}
+	if (mockupCheckbox.value === true) {
+		app.activeDocument.groupItems.getByName("Screen8").remove()
+		app.activeDocument.groupItems.getByName("Screen7").remove()
+		app.activeDocument.groupItems.getByName("Screen6").remove()
+		app.activeDocument.groupItems.getByName("Screen5").remove()
+		app.activeDocument.groupItems.getByName("Screen4").remove() //light assortment  this produces an error
+		app.activeDocument.groupItems.getByName("Screen3").remove()
+		app.activeDocument.groupItems.getByName("Screen2").remove()
+		app.activeDocument.groupItems.getByName("Screen1").remove()
+	} else {
+		if (screenCounter_A.length === 3) {
+			app.activeDocument.groupItems.getByName("Screen4").remove()
+		} else if (screenCounter_A.length === 2) {
+			app.activeDocument.groupItems.getByName("Screen4").remove()
+			app.activeDocument.groupItems.getByName("Screen3").remove()
+		} else if (screenCounter_A.length === 1) {
+			app.activeDocument.groupItems.getByName("Screen4").remove()
+			app.activeDocument.groupItems.getByName("Screen3").remove()
+			app.activeDocument.groupItems.getByName("Screen2").remove()
+		}
 
-
-if (screenCounter_C.length === 3) {
-	app.activeDocument.groupItems.getByName("Screen8").remove()
-} else if (screenCounter_C.length === 2) {
-	app.activeDocument.groupItems.getByName("Screen8").remove()
-	app.activeDocument.groupItems.getByName("Screen7").remove()
-} else if (screenCounter_C.length === 1) {
-	app.activeDocument.groupItems.getByName("Screen8").remove()
-	app.activeDocument.groupItems.getByName("Screen7").remove()
-	app.activeDocument.groupItems.getByName("Screen6").remove()
-} else if (screenCounter_C.length === 0) {
-	app.activeDocument.groupItems.getByName("Screen8").remove()
-	app.activeDocument.groupItems.getByName("Screen7").remove()
-	app.activeDocument.groupItems.getByName("Screen6").remove()
-	app.activeDocument.groupItems.getByName("Screen5").remove()
-}
-}
+		if (screenCounter_C.length === 3) {
+			app.activeDocument.groupItems.getByName("Screen8").remove()
+		} else if (screenCounter_C.length === 2) {
+			app.activeDocument.groupItems.getByName("Screen8").remove()
+			app.activeDocument.groupItems.getByName("Screen7").remove()
+		} else if (screenCounter_C.length === 1) {
+			app.activeDocument.groupItems.getByName("Screen8").remove()
+			app.activeDocument.groupItems.getByName("Screen7").remove()
+			app.activeDocument.groupItems.getByName("Screen6").remove()
+		} else if (screenCounter_C.length === 0) {
+			app.activeDocument.groupItems.getByName("Screen8").remove()
+			app.activeDocument.groupItems.getByName("Screen7").remove()
+			app.activeDocument.groupItems.getByName("Screen6").remove()
+			app.activeDocument.groupItems.getByName("Screen5").remove()
+		}
+	}
 }
 //#endregion
 //#endregion
-
 
 //#region     AUTOSAVE
 if (autoSave.value === true) {
