@@ -265,10 +265,10 @@ doubleSidedCheckbox.value = false;
 var descriptionBox = descriptionSide.add("statictext", undefined, "Description")
 var descriptionBox_edit = descriptionSide.add("edittext", undefined, "")
 descriptionBox_edit.characters = 20
-//descriptionBox_edit.text = "the only thing"
+//descriptionBox_edit.text = "the only thing the only thing the only thing"
 
 var autoSave = descriptionSide.add("checkbox", undefined, "Save the PDF?")
-autoSave.value = true
+autoSave.value = true;
 
 var spacerBox = descriptionSide.add("statictext", undefined, "")
 
@@ -296,7 +296,7 @@ inkBox_Master_A1.orientation = "column"
 inkBox_Master_A1.margins = [10, 10, 5, 10]
 var ink_A1 = inkBox_Master_A1.add("edittext", undefined, "")
 ink_A1.characters = 10
-//ink_A1.text = "171 Orange"
+//ink_A1.text = "white"
 var ink_A1_Double = inkBox_Master_A1.add("checkbox", undefined, "Double hit")
 
 var inkBox_Master_A2 = inkColors_A.add("panel", undefined, "Screen A2")
@@ -431,7 +431,7 @@ String.prototype.trim = function () {
 }
 //#endregion
 
-if (bodyColorList.selection.index < 10 || bodyColorList.selection === 14) {
+if (bodyColorList.selection.index < 10 || bodyColorList.selection == 14) {
 	doubleSidedCheckbox.value = false
 }
 
@@ -2210,7 +2210,7 @@ function generic_function() {
 			"Canada_GenericGroup"
 		).visible = true
 		app.activeDocument.groupItems.getByName("Canada_GenericGroup").remove()
-		app.activeDocument.groupItems.getByName("Canada_Group").visible = true
+		app.activeDocument.groupItems.getByName("Canada_Group").hidden = false
 		//layerRemover()
 	}
 
@@ -2237,7 +2237,7 @@ function generic_function() {
 	if (nationalityUS.value === true && genericCheckbox.value === true) {
 		app.activeDocument.groupItems.getByName("USA_Group").visible = true
 		app.activeDocument.groupItems.getByName("USA_Group").remove()
-		app.activeDocument.groupItems.getByName("USA_GenericGroup").visible = true
+		app.activeDocument.groupItems.getByName("USA_GenericGroup").hidden = false;
 		/*         if(bodyColorList.selection.index < 14) {
                layerRemover()
           } */
@@ -2245,7 +2245,8 @@ function generic_function() {
 }
 
 //#region     FILENAME
-var fileName_One
+
+var fileName_One;
 
 if (bodyColorList.selection < 10) {
 	fileName_One = prefix() + "_" + capitalize(descriptionBox_edit.text) + "_A"
@@ -2316,19 +2317,12 @@ if (bodyColorList.selection == 14) {
 	fileName_One =
 		"SLEEVE_" + prefix() + "_" + capitalize(descriptionBox_edit.text) + "_01_A"
 }
+
+
+
+
+
 //#endregion
-
-var reducedOriginalArt = app.activeDocument.textFrames.getByName("Original Art")
-if (originalArt_edit.text.length > 50) {
-	reducedOriginalArt.textRange.characterAttributes.size = 4
-	reducedOriginalArt.textRange.characterAttributes.baselineShift = -1
-}
-
-var reducedPO = app.activeDocument.textFrames.getByName("PO")
-if (poNumber_edit.text.length > 11) {
-	reducedPO.textRange.characterAttributes.size = 6
-	reducedPO.textRange.characterAttributes.baselineShift = -3
-}
 
 //#region     FUNCTION CALLS
 repInfo()
@@ -2516,6 +2510,8 @@ if (bodyColorList.selection.index === 14) {
 var instructionsArrow = app.activeDocument.groupItems.getByName(
 	"Special Instructions Arrow"
 )
+instructionsArrow.hidden = true;
+
 var customer_instructions = app.activeDocument.textFrames.getByName(
 	"Customer Instructions"
 )
@@ -2770,9 +2766,11 @@ if (bodyColorList.selection.index < 14 && mockupCheckbox.value === false) {
 		app.activeDocument.textFrames.getByName("A1 Screen Number")
 	screenNumberLast_1.contents = screenTotal
 
-	var screenNumberLast_2 = // This has an error, no such element. It prevents the file from being saved, and the screen info number is 1/0.
-		app.activeDocument.textFrames.getByName("A2 Screen Number")
+	var screenNumberLast_2 = app.activeDocument.textFrames.getByName("A2 Screen Number")
 	screenNumberLast_2.contents = screenTotal
+      // This generates an error with LIGHT ASSORTMENTS, no such element. It prevents the file from being saved, and the screen info number is 1/0.
+
+      
 
 	var screenNumberLast_3 =
 		app.activeDocument.textFrames.getByName("A3 Screen Number")
@@ -2809,6 +2807,26 @@ if (bodyColorList.selection.index < 14 && mockupCheckbox.value === false) {
 	var screenNumberLast_8 =
 		app.activeDocument.textFrames.getByName("C4 Screen Number")
 	screenNumberLast_8.contents = screenTotal
+}
+
+
+if (fileName_One.length > 35) {
+     var fileName_box = app.activeDocument.textFrames.getByName("FileName");
+
+     fileName_box.textRange.characterAttributes.size = 8
+	fileName_box.textRange.characterAttributes.baselineShift = -1
+}
+
+var reducedOriginalArt = app.activeDocument.textFrames.getByName("Original Art")
+if (originalArt_edit.text.length > 50) {
+	reducedOriginalArt.textRange.characterAttributes.size = 4
+	reducedOriginalArt.textRange.characterAttributes.baselineShift = -1
+}
+
+var reducedPO = app.activeDocument.textFrames.getByName("PO")
+if (poNumber_edit.text.length > 11) {
+	reducedPO.textRange.characterAttributes.size = 6
+	reducedPO.textRange.characterAttributes.baselineShift = -3
 }
 
 //#region      This section deletes any unused screen info groups.
@@ -2883,8 +2901,7 @@ if (autoSave.value === true) {
 }
 //#endregion
 
-/*
-BUG LIST
+/*      BUG LIST
 
 
 
