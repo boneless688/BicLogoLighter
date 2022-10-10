@@ -364,67 +364,71 @@ master.show()
 
 //#endregion
 
-//#region                                THIS STOPS THE SCRIPT IF THERE ISN'T A JDE NUMBER OR A WEB NUMBER ENTERED.
-/* if (jdeNumber_edit.text.length < 1 || webNumber_edit.text.length < 1) {
-throw ('A JDE number OR a web number must be entered.')
-} */
-//#endregion
+
 //#region                                OPEN TEMPLATE FILE
+
 // OPEN TEMPLATES WITH RELATIVE PATHS
-if (
-	bodyColorList.selection.index === 11 ||
-	bodyColorList.selection.index === 12
-) {
-	if (doubleSidedCheckbox.value === false) {
-		var _scriptPath = $.fileName
-		var _separater = ""
 
-		//Code to get separater based on OS
-		if ($.os.toLowerCase().indexOf("mac") != -1) {
-			_separater = "/"
-		} else if ($.os.toLowerCase().indexOf("window") != -1) {
-			_separater = "\\"
-		}
-		var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater))
-		app.open(File(_path + "/Templates/Proof_Template_Assorted_1Side.ait"))
-	} else {
-		var _scriptPath = $.fileName
-		var _separater = ""
+if (jdeNumber_edit.text.length > 0 || webNumber_edit.text.length > 0) {
+     if (
+          bodyColorList.selection.index === 11 ||
+          bodyColorList.selection.index === 12
+     ) {
+          if (doubleSidedCheckbox.value === false) {
+               var _scriptPath = $.fileName
+               var _separater = ""
+     
+               //Code to get separater based on OS
+               if ($.os.toLowerCase().indexOf("mac") != -1) {
+                    _separater = "/"
+               } else if ($.os.toLowerCase().indexOf("window") != -1) {
+                    _separater = "\\"
+               }
+               var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater))
+               app.open(File(_path + "/Templates/Proof_Template_Assorted_1Side.ait"))
+          } else {
+               var _scriptPath = $.fileName
+               var _separater = ""
+     
+               //Code to get separater based on OS
+               if ($.os.toLowerCase().indexOf("mac") != -1) {
+                    _separater = "/"
+               } else if ($.os.toLowerCase().indexOf("window") != -1) {
+                    _separater = "\\"
+               }
+               var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater))
+               app.open(File(_path + "/Templates/Proof_Template_Assorted_2Side.ait"))
+          }
+     } else if (bodyColorList.selection.index === 14) {
+          var _scriptPath = $.fileName
+          var _separater = ""
+     
+          //Code to get separater based on OS
+          if ($.os.toLowerCase().indexOf("mac") != -1) {
+               _separater = "/"
+          } else if ($.os.toLowerCase().indexOf("window") != -1) {
+               _separater = "\\"
+          }
+          var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater))
+          app.open(File(_path + "/Templates/Proof_Template_Sleeve.ait"))
+     } else {
+          var _scriptPath = $.fileName
+          var _separater = ""
+          //Code to get separater based on OS
+          if ($.os.toLowerCase().indexOf("mac") != -1) {
+               _separater = "/"
+          } else if ($.os.toLowerCase().indexOf("window") != -1) {
+               _separater = "\\"
+          }
+          var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater))
+          app.open(File(_path + "/Templates/Proof_Template_Standard.ait"))
+     }
 
-		//Code to get separater based on OS
-		if ($.os.toLowerCase().indexOf("mac") != -1) {
-			_separater = "/"
-		} else if ($.os.toLowerCase().indexOf("window") != -1) {
-			_separater = "\\"
-		}
-		var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater))
-		app.open(File(_path + "/Templates/Proof_Template_Assorted_2Side.ait"))
-	}
-} else if (bodyColorList.selection.index === 14) {
-	var _scriptPath = $.fileName
-	var _separater = ""
-
-	//Code to get separater based on OS
-	if ($.os.toLowerCase().indexOf("mac") != -1) {
-		_separater = "/"
-	} else if ($.os.toLowerCase().indexOf("window") != -1) {
-		_separater = "\\"
-	}
-	var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater))
-	app.open(File(_path + "/Templates/Proof_Template_Sleeve.ait"))
 } else {
-	var _scriptPath = $.fileName
-	var _separater = ""
-	//Code to get separater based on OS
-	if ($.os.toLowerCase().indexOf("mac") != -1) {
-		_separater = "/"
-	} else if ($.os.toLowerCase().indexOf("window") != -1) {
-		_separater = "\\"
-	}
-	var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater))
-	app.open(File(_path + "/Templates/Proof_Template_Standard.ait"))
+ alert ("A JDE number or a web number needs to be entered.");
 }
 //#endregion
+
 //#region                                THIS CREATES THE   .TRIM   FUNCTION
 String.prototype.trim = function () {
 	return this.replace(/^\s+/, "").replace(/\s+$/, "")
@@ -755,6 +759,7 @@ if (nationalityUS.value === true) {
 //#endregion
 
 //#region                                 INK COLORS
+
 //#region    If the order uses the standard template, then the body and ink color code is run. If it isn't, then the code is bypassed.
 
 function neonInk(inkString, bravo) {
