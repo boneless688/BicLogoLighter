@@ -1,4 +1,316 @@
-﻿//#region      ExtendScript UI Layout
+﻿
+	/* #region      CSV file import */
+	var csv_file = File(
+		"C:/Users/JBavitz/OneDrive - BIC/Desktop/Stuff/BicLogoLighter/OtherFiles/Regular_Customers.csv"
+	);
+	csv_file.open("r");
+	var csv = csv_file.read();
+	csv_file.close();
+
+	var alpha = csv.split("\n");
+	var bravo = alpha.toString();
+	var csvList = bravo.split(",");
+	/* #endregion */
+
+	//#region     Functions
+	function totalItems_function() {
+		var total = app.activeDocument.textFrames.getByName("Item Total");
+		if (multiNumber.text === "Number") {
+			total.contents = "1";
+		} else {
+			total.contents = multiNumber.text;
+		}
+	}
+
+	function designer_function() {
+		var designer = app.activeDocument.textFrames.getByName("Designer");
+		designer.contents = designerList.selection.text;
+		if (doubleSidedCheckbox.value === true) {
+			var designerBack =
+				app.activeDocument.textFrames.getByName("Designer_Back");
+			designerBack.contents = designerList.selection.text;
+		}
+	}
+	function vip_function() {
+		var vipBox = app.activeDocument.layers
+			.getByName("Masque")
+			.groupItems.getByName("VIP");
+		if (vipCheckbox.value === true || rep.vip === true) {
+			vipBox.hidden = false;
+		} else {
+			vipBox.hidden = true;
+		}
+	}
+	function rush_function() {
+		var rushBox = app.activeDocument.layers
+			.getByName("Masque")
+			.groupItems.getByName("Rush");
+		if (rushCheckbox.value === true) {
+			rushBox.hidden = false;
+		}
+		if (rushCheckbox.value === false) {
+			rushBox.hidden = true;
+		} else {
+			rushBox.hidden = false;
+		}
+	}
+	function po_function() {
+		var purchaseOrder = app.activeDocument.textFrames.getByName("PO");
+		purchaseOrder.contents = poNumber_edit.text;
+
+		if (poNumber_edit.text.length < 14) {
+			purchaseOrder.textRange.characterAttributes.size = 10;
+			purchaseOrder.textRange.characterAttributes.baselineShift = 0;
+		}
+
+		if (poNumber_edit.text.length > 14 && poNumber_edit.text.length < 22) {
+			purchaseOrder.textRange.characterAttributes.size = 6;
+			purchaseOrder.textRange.characterAttributes.baselineShift = -3;
+		}
+
+		if (poNumber_edit.text.length > 22) {
+			purchaseOrder.textRange.characterAttributes.size = 4;
+			purchaseOrder.textRange.characterAttributes.baselineShift = -4;
+		}
+
+		purchaseOrder.toUpperCase;
+
+		purchaseOrder = purchaseOrder.trim();
+	}
+
+	function originalFile_function() {
+		var originalFile = app.activeDocument.textFrames.getByName("Original Art");
+		originalFile.contents = originalArt_edit.text;
+	}
+	function notes_function() {
+		var notes = app.activeDocument.textFrames.getByName("Notes text");
+		notes.contents = descriptionBox_edit.text + "    " + notes_edit.text;
+	}
+	function currentDate() {
+		var currentDate = new Date();
+		var date = currentDate.toDateString();
+		var date_A = date.split(" ");
+		var date_B =
+			date_A[0] + ", " + date_A[1] + " " + date_A[2] + ", " + date_A[3];
+		return date_B;
+	}
+	function proofDate() {
+		var proofDate = app.activeDocument.textFrames.getByName("DateBox");
+		proofDate.contents = currentDate();
+	}
+	function backDate() {
+		if (doubleSidedCheckbox.value === true) {
+			var dateBoxBack = app.activeDocument.textFrames.getByName("DateBox_Back");
+			dateBoxBack.contents = currentDate();
+		}
+	}
+	function ship_function() {
+		var ship = app.activeDocument.textFrames.getByName("Ship Date");
+		ship.contents = capitalizeSpaces(shipDate_edit.text);
+	}
+
+	function inHands_function() {
+		var inHands = app.activeDocument.textFrames.getByName("In Hands Date");
+		var beta = inHandsDate_edit.text.split(" ");
+
+		var indii = beta.slice(2, beta.length);
+		var calli = beta[0] + " / " + beta[1];
+		indii = indii.join(" ");
+
+		if (beta.length === 0) {
+			inHands.contents = " ";
+		}
+		if (beta.length > 2) {
+			inHands.contents = calli + "     " + capitalizeSpaces(indii);
+		}
+
+		if (beta.length === 2) {
+			inHands.contents = calli;
+		}
+	}
+
+	function JDE_function() {
+		var jde = app.activeDocument.textFrames.getByName("jde number");
+		jde.contents = jdeNumber_edit.text;
+		if (doubleSidedCheckbox.value === true) {
+			var jdeBack = app.activeDocument.textFrames.getByName("jde number_Back");
+			jdeBack.contents = jdeNumber_edit.text;
+		}
+	}
+
+	function repInfo() {
+		if (
+			bodyColorList.selection.index === 11 ||
+			bodyColorList.selection.index === 12
+		) {
+			var repFront = app.activeDocument.textFrames.getByName("Rep");
+			repFront.contents = rep.name + "     " + rep.email;
+
+			var reducedRep = app.activeDocument.textFrames.getByName("Rep");
+			if (repFront.contents.length > 50) {
+				reducedRep.textRange.characterAttributes.size = 9;
+				reducedRep.textRange.characterAttributes.baselineShift = -1;
+			}
+
+			if (doubleSidedCheckbox.value === true) {
+				var repBack = app.activeDocument.textFrames.getByName("Rep_Back");
+				repBack.contents = rep.name + "     " + rep.email;
+
+				var POBack = app.activeDocument.textFrames.getByName("PO_Back");
+				POBack.contents = poNumber_edit.text;
+				if (POBack === null) {
+					POBack.contents = webPrefix.selection.text + webNumber_edit.text;
+				}
+			}
+		}
+	}
+
+
+     function capitalizeSpaces(n) {
+	n = n.toLowerCase();
+	n = n.split(" ");
+	for (var i = 0; i < n.length; i++) {
+		n[i] = n[i].charAt(0).toUpperCase() + n[i].slice(1);
+	}
+	return n.join(" ");
+}
+	function description(bodyColorLayer) {
+		var bodyColorLayer = descriptionBox_edit.text;
+		bodyColorLayer = bodyColorLayer.toLowerCase();
+		bodyColorLayer = bodyColorLayer.split(" ");
+		for (var i = 0; i < bodyColorLayer.length; i++) {
+			bodyColorLayer[i] =
+				bodyColorLayer[i].charAt(0).toUpperCase() + bodyColorLayer[i].slice(1);
+		}
+		return bodyColorLayer.join("");
+	}
+	function nineZeroes_Function() {
+		var zeroArray = ["0", "0", "0", "0", "0", "0", "0", "0", "0"];
+		var a = webNumber_edit.text.split("");
+		var nineZeroes_alpha = zeroArray.concat(a);
+		for (var i = 0; i < nineZeroes_alpha.length; i++) {
+			if (nineZeroes_alpha.length > 9) {
+				nineZeroes_alpha.shift();
+			}
+		}
+		return nineZeroes_alpha.join("");
+	}
+	function capitalize(u) {
+		u = u.toLowerCase();
+		u = u.split(" ");
+		for (var i = 0; i < u.length; i++) {
+			u[i] = u[i].charAt(0).toUpperCase() + u[i].slice(1);
+		}
+		return u.join("");
+	}
+
+	function magento() {
+		if (rep.nationality === "US") {
+			return "USLOG" + nineZeroes_Function();
+		} else {
+			return "CAENLOG" + nineZeroes_Function();
+		}
+	}
+	function prefix() {
+		if (mockupCheckbox.value === true) return "MOCKUP";
+		if (jdeNumber_edit.text.length > 0) {
+			return jdeNumber_edit.text;
+		} else {
+			return magento();
+		}
+	}
+
+	function filenameOutput() {
+		if (bodyColorList.selection.index < 14) {
+			var illustratorFrame = [
+				"FileName",
+				"A1 Screen FileName",
+				"A2 Screen FileName",
+				"A3 Screen FileName",
+				"A4 Screen FileName",
+				"C1 Screen FileName",
+				"C2 Screen FileName",
+				"C3 Screen FileName",
+				"C4 Screen FileName",
+			];
+
+			for (i = 0; i < illustratorFrame.length; i++) {
+				var filenameOutput_One = app.activeDocument.textFrames.getByName(
+					illustratorFrame[i]
+				);
+				filenameOutput_One.contents = fileName_One;
+			}
+		}
+	}
+
+	function web_function() {
+		var web = app.activeDocument.textFrames.getByName("Web");
+		if (mockupCheckbox.value === true) {
+			web.contents = " ";
+		} else if (jdeNumber_edit.text.length < 1) {
+			web.contents = magento();
+		}
+		if (web.contents.length > 17 && web.contents.length < 23) {
+			web.textRange.characterAttributes.size = 7;
+			web.textRange.characterAttributes.baselineShift = -2;
+		}
+
+		if (web.contents.length > 23) {
+			web.textRange.characterAttributes.size = 4;
+			web.textRange.characterAttributes.baselineShift = -3;
+		}
+	}
+
+	function mockup_function() {
+		if (mockupCheckbox.value === false) {
+			app.activeDocument.layers.getByName("Mockup").visible = true;
+			app.activeDocument.layers.getByName("Mockup").remove();
+		} else {
+			app.activeDocument.layers.getByName("Mockup").visible = true;
+		}
+	}
+
+	function layerRemover() {
+		var emptyLayers = [];
+		getEmptyLayers(doc, emptyLayers);
+		for (var i = 0; i < emptyLayers.length; i++) {
+			emptyLayers[i].visible = true;
+			emptyLayers[i].remove();
+		}
+	}
+
+
+	function generic_function() {
+		if (nationalityCanada.value === true && genericCheckbox.value === false) {
+			app.activeDocument.groupItems.getByName(
+				"Canada_GenericGroup"
+			).visible = true;
+			app.activeDocument.groupItems.getByName("Canada_GenericGroup").remove();
+			app.activeDocument.groupItems.getByName("Canada_Group").hidden = false;
+		}
+
+		if (nationalityCanada.value === true && genericCheckbox.value === true) {
+			app.activeDocument.groupItems.getByName("Canada_Group").visible = true;
+			app.activeDocument.groupItems.getByName("Canada_Group").remove();
+			app.activeDocument.groupItems.getByName(
+				"Canada_GenericGroup"
+			).visible = true;
+		}
+
+		if (nationalityUS.value === true && genericCheckbox.value === false) {
+			app.activeDocument.groupItems.getByName(
+				"USA_GenericGroup"
+			).visible = true;
+			app.activeDocument.groupItems.getByName("USA_GenericGroup").remove();
+			app.activeDocument.groupItems.getByName("USA_Group").visible = true;
+		}
+	}
+
+	//#endregion
+
+
+
+//#region      ExtendScript UI Layout
 var master = new Window("dialog");
 master.maximumSize.height = 800;
 master.maximumSize.width = 1400;
@@ -17,44 +329,487 @@ var customerInfo_outer = topLeft.add("group");
 customerInfo_outer.orientation = "column";
 
 var repName = customerInfo_outer.add("statictext", undefined, "Rep name");
-var regulars = customerInfo_outer.add("dropdownlist", undefined, [
-	"Regulars", //0
-	"Jonathan Le - Lightning Bug", //1
-	"Aaron Schimmel - Rockstar Promos", //2
-	"Sarah Gillen - LogoLighters", //3
-	"Mitch Sigurdson - Humble & Fume", //4
-	"Angela Cicchini - Humble & Fume", //5
-	"Gabrielle Seguin - Humble & Fume", //6
-	"Alex Walker - Humble & Fume", //7
-	"Tyler Groves - Humble & Fume", //8
-	"Aline Nas - Cannabis Promotions", //9
-	"Darryl Quinge - PEM America", //10
-	"Erica Heft - 4 All Promos", //11
-	"Shelby - 4 All Promos", //12
-	"Stephen Pistel - 4 All Promos", //13
-	"Cindy Sumner - 4 All Promos", //14
-	"Kim Robinson - 4 All Promos", //15
-	"Ryan Zvibleman - Cannabis Promotions", //16
-	"Jeff Mancini - M5 Group", //17
-	"Danielle Treloar - Rush Imprint", //18
-	"Will Kunz - MARCO PDX", //19
-	"Kari Matlack - Rush Imprint", //20
-	"Josh Kyung Kim - Identity Links", //21
-	"Jay Tittman - Rocky Mountain Business Products", //22
-	"Brian Eskenazi - High Mountain Imports", //23
-	"Jennifer - Pens R Us", //24
-	"Luvbuds", //25
-	"Alex Lavoie - High Mountain Imports", //26
-	"Sandy Johnson - Show Your Logo Inc", //27
-	"LaVerne Petry - Custom420promos", //28
-	"Arlene LaRoe - Blue Sky Marketing Group", //29
-	"Superior Promos", //30
-	"Kaeser & Blair", //31
-	"Carey Ray Jaramillo - NotionWorx", //32
-]);
-regulars.selection = 4;
 
-var repName = customerInfo_outer.add("statictext", undefined, "Rep name");
+
+
+
+/*
+The length of the regular customer menu needs to be calculated from the number of entries in the CSV file.
+The variable that stores the list is csvList.
+*/
+
+
+
+
+var cst01 =
+	customer02.firstName.toString() +
+	" " +
+	customer02.lastName.toString() +
+	"   -   " +
+	customer02.company.toString();
+cst01 = capitalizeSpaces(cst01);
+
+var cst02 =
+	customer03.firstName.toString() +
+	" " +
+	customer03.lastName.toString() +
+	"   -   " +
+	customer03.company.toString();
+cst02 = capitalizeSpaces(cst02);
+
+var cst03 =
+	customer04.firstName.toString() +
+	" " +
+	customer04.lastName.toString() +
+	"   -   " +
+	customer04.company.toString();
+cst03 = capitalizeSpaces(cst03);
+
+var cst04 =
+	customer05.firstName.toString() +
+	" " +
+	customer05.lastName.toString() +
+	"   -   " +
+	customer05.company.toString();
+cst04 = capitalizeSpaces(cst04);
+
+var cst05 =
+	customer06.firstName.toString() +
+	" " +
+	customer06.lastName.toString() +
+	"   -   " +
+	customer06.company.toString();
+cst05 = capitalizeSpaces(cst05);
+
+var cst06 =
+	customer07.firstName.toString() +
+	" " +
+	customer07.lastName.toString() +
+	"   -   " +
+	customer07.company.toString();
+cst06 = capitalizeSpaces(cst06);
+
+var cst07 =
+	customer08.firstName.toString() +
+	" " +
+	customer08.lastName.toString() +
+	"   -   " +
+	customer08.company.toString();
+cst07 = capitalizeSpaces(cst07);
+
+var cst08 =
+	customer09.firstName.toString() +
+	" " +
+	customer09.lastName.toString() +
+	"   -   " +
+	customer09.company.toString();
+cst08 = capitalizeSpaces(cst08);
+
+var cst09 =
+	customer10.firstName.toString() +
+	" " +
+	customer10.lastName.toString() +
+	"   -   " +
+	customer10.company.toString();
+cst09 = capitalizeSpaces(cst09);
+
+var cst10 =
+	customer11.firstName.toString() +
+	" " +
+	customer11.lastName.toString() +
+	"   -   " +
+	customer11.company.toString();
+cst10 = capitalizeSpaces(cst10);
+
+var cst11 =
+	customer12.firstName.toString() +
+	" " +
+	customer12.lastName.toString() +
+	"   -   " +
+	customer12.company.toString();
+cst11 = capitalizeSpaces(cst11);
+
+var cst12 =
+	customer13.firstName.toString() +
+	" " +
+	customer13.lastName.toString() +
+	"   -   " +
+	customer13.company.toString();
+cst12 = capitalizeSpaces(cst12);
+
+var cst13 =
+	customer14.firstName.toString() +
+	" " +
+	customer14.lastName.toString() +
+	"   -   " +
+	customer14.company.toString();
+cst13 = capitalizeSpaces(cst13);
+
+var cst14 =
+	customer15.firstName.toString() +
+	" " +
+	customer15.lastName.toString() +
+	"   -   " +
+	customer15.company.toString();
+cst14 = capitalizeSpaces(cst14);
+
+var cst15 =
+	customer16.firstName.toString() +
+	" " +
+	customer16.lastName.toString() +
+	"   -   " +
+	customer16.company.toString();
+cst15 = capitalizeSpaces(cst15);
+
+var cst16 =
+	customer17.firstName.toString() +
+	" " +
+	customer17.lastName.toString() +
+	"   -   " +
+	customer17.company.toString();
+cst16 = capitalizeSpaces(cst16);
+
+var cst17 =
+	customer18.firstName.toString() +
+	" " +
+	customer18.lastName.toString() +
+	"   -   " +
+	customer18.company.toString();
+cst17 = capitalizeSpaces(cst17);
+
+var cst18 =
+	customer19.firstName.toString() +
+	" " +
+	customer19.lastName.toString() +
+	"   -   " +
+	customer19.company.toString();
+cst18 = capitalizeSpaces(cst18);
+
+var cst19 =
+	customer20.firstName.toString() +
+	" " +
+	customer20.lastName.toString() +
+	"   -   " +
+	customer20.company.toString();
+cst19 = capitalizeSpaces(cst19);
+
+var cst20 =
+	customer21.firstName.toString() +
+	" " +
+	customer21.lastName.toString() +
+	"   -   " +
+	customer21.company.toString();
+cst20 = capitalizeSpaces(cst20);
+
+var cst21 =
+	customer22.firstName.toString() +
+	" " +
+	customer22.lastName.toString() +
+	"   -   " +
+	customer22.company.toString();
+cst21 = capitalizeSpaces(cst21);
+
+var cst22 =
+	customer23.firstName.toString() +
+	" " +
+	customer23.lastName.toString() +
+	"   -   " +
+	customer23.company.toString();
+cst22 = capitalizeSpaces(cst22);
+
+var cst23 =
+	customer24.firstName.toString() +
+	" " +
+	customer24.lastName.toString() +
+	"   -   " +
+	customer24.company.toString();
+cst23 = capitalizeSpaces(cst23);
+
+var cst24 =
+	customer25.firstName.toString() +
+	" " +
+	customer25.lastName.toString() +
+	"   -   " +
+	customer25.company.toString();
+cst24 = capitalizeSpaces(cst24);
+
+var cst25 =
+	customer26.firstName.toString() +
+	" " +
+	customer26.lastName.toString() +
+	"   -   " +
+	customer26.company.toString();
+cst25 = capitalizeSpaces(cst25);
+
+var cst26 =
+	customer27.firstName.toString() +
+	" " +
+	customer27.lastName.toString() +
+	"   -   " +
+	customer27.company.toString();
+cst26 = capitalizeSpaces(cst26);
+
+var cst27 =
+	customer28.firstName.toString() +
+	" " +
+	customer28.lastName.toString() +
+	"   -   " +
+	customer28.company.toString();
+cst27 = capitalizeSpaces(cst27);
+
+var cst28 =
+	customer29.firstName.toString() +
+	" " +
+	customer29.lastName.toString() +
+	"   -   " +
+	customer29.company.toString();
+cst28 = capitalizeSpaces(cst28);
+
+var cst29 =
+	customer30.firstName.toString() +
+	" " +
+	customer30.lastName.toString() +
+	"   -   " +
+	customer30.company.toString();
+cst29 = capitalizeSpaces(cst29);
+
+var cst30 =
+	customer31.firstName.toString() +
+	" " +
+	customer31.lastName.toString() +
+	"   -   " +
+	customer31.company.toString();
+cst30 = capitalizeSpaces(cst30);
+
+var cst31 =
+	customer32.firstName.toString() +
+	" " +
+	customer32.lastName.toString() +
+	"   -   " +
+	customer32.company.toString();
+cst31 = capitalizeSpaces(cst31);
+
+var cst32 =
+	customer33.firstName.toString() +
+	" " +
+	customer33.lastName.toString() +
+	"   -   " +
+	customer33.company.toString();
+cst32 = capitalizeSpaces(cst32);
+
+var cst33 =
+	customer34.firstName.toString() +
+	" " +
+	customer34.lastName.toString() +
+	"   -   " +
+	customer34.company.toString();
+cst33 = capitalizeSpaces(cst33);
+
+var cst34 =
+	customer35.firstName.toString() +
+	" " +
+	customer35.lastName.toString() +
+	"   -   " +
+	customer35.company.toString();
+cst34 = capitalizeSpaces(cst34);
+
+var cst35 =
+	customer36.firstName.toString() +
+	" " +
+	customer36.lastName.toString() +
+	"   -   " +
+	customer36.company.toString();
+cst35 = capitalizeSpaces(cst35);
+
+var cst36 =
+	customer37.firstName.toString() +
+	" " +
+	customer37.lastName.toString() +
+	"   -   " +
+	customer37.company.toString();
+cst36 = capitalizeSpaces(cst36);
+
+var cst37 =
+	customer38.firstName.toString() +
+	" " +
+	customer38.lastName.toString() +
+	"   -   " +
+	customer38.company.toString();
+cst37 = capitalizeSpaces(cst37);
+
+var cst38 =
+	customer39.firstName.toString() +
+	" " +
+	customer39.lastName.toString() +
+	"   -   " +
+	customer39.company.toString();
+cst38 = capitalizeSpaces(cst38);
+
+var cst39 =
+	customer40.firstName.toString() +
+	" " +
+	customer40.lastName.toString() +
+	"   -   " +
+	customer40.company.toString();
+cst39 = capitalizeSpaces(cst39);
+
+var cst40 =
+	customer41.firstName.toString() +
+	" " +
+	customer41.lastName.toString() +
+	"   -   " +
+	customer41.company.toString();
+cst40 = capitalizeSpaces(cst40);
+
+var cst41 =
+	customer42.firstName.toString() +
+	" " +
+	customer42.lastName.toString() +
+	"   -   " +
+	customer42.company.toString();
+cst41 = capitalizeSpaces(cst41);
+
+var cst42 =
+	customer43.firstName.toString() +
+	" " +
+	customer43.lastName.toString() +
+	"   -   " +
+	customer43.company.toString();
+cst42 = capitalizeSpaces(cst42);
+
+var cst43 =
+	customer44.firstName.toString() +
+	" " +
+	customer44.lastName.toString() +
+	"   -   " +
+	customer44.company.toString();
+cst43 = capitalizeSpaces(cst43);
+
+var cst44 =
+	customer45.firstName.toString() +
+	" " +
+	customer45.lastName.toString() +
+	"   -   " +
+	customer45.company.toString();
+cst44 = capitalizeSpaces(cst44);
+
+var cst45 =
+	customer46.firstName.toString() +
+	" " +
+	customer46.lastName.toString() +
+	"   -   " +
+	customer46.company.toString();
+cst45 = capitalizeSpaces(cst45);
+
+var cst46 =
+	customer47.firstName.toString() +
+	" " +
+	customer47.lastName.toString() +
+	"   -   " +
+	customer47.company.toString();
+cst46 = capitalizeSpaces(cst46);
+
+var cst47 =
+	customer48.firstName.toString() +
+	" " +
+	customer48.lastName.toString() +
+	"   -   " +
+	customer48.company.toString();
+cst47 = capitalizeSpaces(cst47);
+
+var cst48 =
+	customer49.firstName.toString() +
+	" " +
+	customer49.lastName.toString() +
+	"   -   " +
+	customer49.company.toString();
+cst48 = capitalizeSpaces(cst48);
+
+var cst49 =
+	customer50.firstName.toString() +
+	" " +
+	customer50.lastName.toString() +
+	"   -   " +
+	customer50.company.toString();
+cst49 = capitalizeSpaces(cst49);
+
+var regulars = customerInfo_outer.add("dropdownlist", undefined, [
+	"Regulars",
+	cst01,
+	cst02,
+	cst03,
+	cst04,
+	cst05,
+	cst06,
+	cst07,
+	cst08,
+	cst09,
+	cst10,
+	cst11,
+	cst12,
+	cst13,
+	cst14,
+	cst15,
+	cst16,
+	cst17,
+	cst18,
+	cst19,
+	cst20,
+	cst21,
+	cst22,
+	cst23,
+	cst24,
+	cst25,
+	cst26,
+	cst27,
+	cst28,
+	cst29,
+	cst30,
+	cst31,
+	cst32,
+	cst33,
+	cst34,
+	cst35,
+	cst36,
+	cst37,
+	cst38,
+	cst39,
+	cst30,
+	cst31,
+	cst32,
+	cst33,
+	cst34,
+	cst35,
+	cst36,
+	cst37,
+	cst38,
+	cst39,
+	cst40,
+	cst31,
+	cst32,
+	cst33,
+	cst34,
+	cst35,
+	cst36,
+	cst37,
+	cst38,
+	cst39,
+	cst40,
+	cst41,
+	cst42,
+	cst43,
+	cst44,
+	cst45,
+	cst46,
+	cst47,
+	cst48,
+	cst49,
+	cst50,
+]);
+
+regulars.selection = 0;
+
+var repNameCustom = customerInfo_outer.add("statictext", undefined, "Rep name");
 var repNameEdit = customerInfo_outer.add("edittext", undefined, "");
 repNameEdit.characters = 20;
 repNameEdit.active = true;
@@ -109,12 +864,12 @@ var nationalityCanada = nationalityGroup.add(
 var jdeNumber = orderOne.add("statictext", undefined, "JDE Number");
 var jdeNumber_edit = orderOne.add("edittext", undefined, "");
 jdeNumber_edit.characters = 7;
-jdeNumber_edit.text = "6187745";
+//jdeNumber_edit.text = "6187745";
 
 var poNumber = orderOne.add("statictext", undefined, "PO Number");
 var poNumber_edit = orderOne.add("edittext", undefined, "");
 poNumber_edit.characters = 10;
-poNumber_edit.text = "PO 55225";
+poNumber_edit.text = "m e b 21125-8 a b c";
 
 var webSpacer = orderOne.add("panel", undefined, " ");
 
@@ -132,7 +887,7 @@ orderThree.alignment = "left";
 var inHandsDate = orderThree.add("statictext", undefined, "In-hands Date");
 var inHandsDate_edit = orderThree.add("edittext", undefined, "");
 inHandsDate_edit.characters = 10;
-//inHandsDate_edit.text = "12 31 this is a rush"
+//inHandsDate_edit.text = "11 24 firm"
 
 var shipDate = orderThree.add("statictext", undefined, "Ship Date");
 var shipDate_edit = orderThree.add("edittext", undefined, "");
@@ -244,7 +999,7 @@ var bodyColorList = bodyColor.add("dropdownlist", undefined, [
 	"360", //16
 ]);
 
-bodyColorList.selection = 0;
+bodyColorList.selection = 3;
 
 var mockup = bodyColor.add("panel", undefined);
 var mockupCheckbox = bodyColor.add("checkbox", undefined, "Mockup");
@@ -269,7 +1024,7 @@ var descriptionBox = descriptionSide.add(
 );
 var descriptionBox_edit = descriptionSide.add("edittext", undefined, "");
 descriptionBox_edit.characters = 20;
-//descriptionBox_edit.text = "the only thing"
+descriptionBox_edit.text = "the only thing";
 
 var autoSave = descriptionSide.add("checkbox", undefined, "Save the PDF?");
 autoSave.value = false;
@@ -332,14 +1087,14 @@ var inkBox_Master_C1 = inkColors_C.add("panel", undefined, "Screen C1");
 inkBox_Master_C1.orientation = "column";
 var ink_C1 = inkBox_Master_C1.add("edittext", undefined, "");
 ink_C1.characters = 10;
-ink_C1.text = "process blue";
+//ink_C1.text = "process blue"
 var ink_C1_Double = inkBox_Master_C1.add("checkbox", undefined, "Double hit");
 
 var inkBox_Master_C2 = inkColors_C.add("panel", undefined, "Screen C2");
 inkBox_Master_C2.orientation = "column";
 var ink_C2 = inkBox_Master_C2.add("edittext", undefined, "");
 ink_C2.characters = 10;
-ink_C2.text = "211 pink";
+//ink_C2.text = "211 pink"
 var ink_C2_Double = inkBox_Master_C2.add("checkbox", undefined, "Double hit");
 
 var inkBox_Master_C3 = inkColors_C.add("panel", undefined, "Screen C3");
@@ -453,276 +1208,93 @@ if (
 		app.activeDocument.textFrames.getByName("RepName_Signature");
 	var companyName = app.activeDocument.textFrames.getByName("Company");
 
-	var rep = {
-		name: null,
-		email: null,
-		company: null,
-		nationality: null,
-		vip: null,
-	};
 
-	if (regulars.selection.text === "Regulars") {
-		(rep.name = capitalizeSpaces(repNameEdit.text)),
-			(rep.email = repEmail_Edit.text.toLowerCase());
-		(rep.company = capitalizeSpaces(company_A_Edit.text)),
-			(rep.nationality = null),
-			(rep.vip = null);
 
-		if (nationalityUS.value === true) {
-			rep.nationality = "US";
-		} else {
-			rep.nationality = "Canada";
-		}
-	}
 
-	if (regulars.selection.index === 1) {
-		rep.name = "Jonathan Le";
-		rep.email = "jonathan@bugbranding.com";
-		rep.company = "Lightning Bug Branding";
-		rep.nationality = "US";
-		rep.vip = true;
+alert(csvList)
+
+
+
+
+	/* #region       Create the customer object with 6 properties. */
+	function Customer() {
+		var echo = csvList.slice(0, 6);
+		csvList.splice(0, 6);
+		echo = new CustomerObject(
+			echo[0],
+			echo[1],
+			echo[2],
+			echo[3],
+			echo[4],
+			echo[5]
+		);
+		return echo;
 	}
 
-	if (regulars.selection.index === 2) {
-		rep.name = "Aaron Schimmel";
-		rep.email = "aaron@rockstarpromos.com";
-		rep.company = "Rock Star Promotions";
-		rep.nationality = "US";
-		rep.vip = true;
+	function CustomerObject(
+		firstName,
+		lastName,
+		email,
+		company,
+		nationality,
+		vip
+	) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.company = company;
+		this.nationality = nationality;
+		this.vip = vip;
 	}
+	/* #endregion */
 
-	if (regulars.selection.index === 3) {
-		rep.name = "Sarah Gillen";
-		rep.email = "logolighters@live.com";
-		rep.company = "LogoLighters, LLC";
-		rep.nationality = "US";
-		rep.vip = true;
-	}
-
-	if (regulars.selection.index === 4) {
-		rep.name = "Mitch Sigurdson";
-		rep.email = "mitch@bobhq.com";
-		rep.company = "Humble and Fume";
-		rep.nationality = "Canada";
-		rep.vip = false;
-	}
-
-	if (regulars.selection.index === 5) {
-		rep.name = "Angela Cicchini";
-		rep.email = "angelac@bobhq.com";
-		rep.company = "Humble and Fume";
-		rep.nationality = "Canada";
-		rep.vip = false;
-	}
-
-	if (regulars.selection.index === 6) {
-		rep.name = "Gabby Seguin";
-		rep.email = "gabby@humbleandfume.com";
-		rep.company = "Humble & Fume";
-		rep.nationality = "Canada";
-		rep.vip = false;
-	}
-
-	if (regulars.selection.index === 7) {
-		rep.name = "Alex Walker";
-		rep.email = "alex@humblecs.com";
-		rep.company = "Humble & Fume";
-		rep.nationality = "Canada";
-		rep.vip = false;
-	}
-
-	if (regulars.selection.index === 8) {
-		rep.name = "Tyler Groves";
-		rep.email = "tyler@bobhq.com";
-		rep.company = "Humble & Fume";
-		rep.nationality = "Canada";
-		rep.vip = false;
-	}
-
-	if (regulars.selection.index === 9) {
-		rep.name = "Aline Nas";
-		rep.email = "orders@cannabispromotions.com";
-		rep.company = "Cannabis Promotions";
-		rep.nationality = "US";
-		rep.vip = false;
-	}
-
-	if (regulars.selection.index === 10) {
-		rep.name = "Darryl Quinge";
-		rep.email = "darryl@pemamericainc.com";
-		rep.company = "PEM America Inc";
-		rep.nationality = "US";
-		rep.vip = true;
-	}
-
-	if (regulars.selection.index === 11) {
-		rep.name = "Erica Heft";
-		rep.email = "erica@4allpromos.com";
-		rep.company = "4AllPromos";
-		rep.nationality = "US";
-		rep.vip = true;
-	}
-
-	if (regulars.selection.index === 12) {
-		rep.name = "Shelby";
-		rep.email = "shelby@4allpromos.com";
-		rep.company = "4AllPromos";
-		rep.nationality = "US";
-		rep.vip = true;
-	}
-
-	if (regulars.selection.index === 13) {
-		rep.name = "Stephen Pistel";
-		rep.email = "stephen@4allpromos.com";
-		rep.company = "4 All Promos";
-		rep.nationality = "US";
-		rep.vip = true;
-	}
-
-	if (regulars.selection.index === 14) {
-		rep.name = "Cindy Sumner";
-		rep.email = "cindy@4allpromos.com";
-		rep.company = "4AllPromos";
-		rep.nationality = "US";
-		rep.vip = true;
-	}
-	if (regulars.selection.index === 15) {
-		rep.name = "Kim Robinson";
-		rep.email = "kim@4allpromos.com";
-		rep.company = "4AllPromos";
-		rep.nationality = "US";
-		rep.vip = true;
-	}
-	if (regulars.selection.index === 16) {
-		rep.name = "Ryan Zvibleman";
-		rep.email = "orders@cannabispromotions.com";
-		rep.company = "Cannabis Promotions";
-		rep.nationality = "US";
-		rep.vip = false;
-	}
-	if (regulars.selection.index === 17) {
-		rep.name = "Jeff Mancini";
-		rep.email = "jeff@m5group.com";
-		rep.company = "M5 Group";
-		rep.nationality = "US";
-		rep.vip = false;
-	}
-	if (regulars.selection.index === 18) {
-		rep.name = "Danielle Treloar";
-		rep.email = "danielle@rushimprint.com";
-		rep.company = "RUSH Imprint";
-		rep.nationality = "US";
-		rep.vip = true;
-	}
-	if (regulars.selection.index === 19) {
-		rep.name = "Will Kunz";
-		rep.email = "orders@marcopdx.com";
-		rep.company = "MARCO Ideas Unlimited";
-		rep.nationality = "US";
-		rep.vip = false;
-	}
-	if (regulars.selection.index === 20) {
-		rep.name = "Kari Matlack";
-		rep.email = "kari@rushimprint.com";
-		rep.company = "RUSH Imprint";
-		rep.nationality = "US";
-		rep.vip = true;
-	}
-	if (regulars.selection.index === 21) {
-		rep.name = "Josh Kyung Kim";
-		rep.email = "josh@identity-links.com";
-		rep.company = "Identity Links";
-		rep.nationality = "US";
-		rep.vip = false;
-	}
-
-	if (regulars.selection.index === 22) {
-		rep.name = "Jay Tittman";
-		rep.email = "jay@rmbp.com";
-		rep.company = "Rocky Mountain Business Products";
-		rep.nationality = "US";
-		rep.vip = false;
-	}
-
-	if (regulars.selection.index === 23) {
-		rep.name = "High Mountain Imports";
-		rep.email = "orders@highmountainimports.com";
-		rep.company = "High Mountain Imports";
-		rep.nationality = "US";
-		rep.vip = false;
-	}
-
-	if (regulars.selection.index === 24) {
-		rep.name = "Jennifer";
-		rep.email = "jennifer@pensrus.com";
-		rep.company = "Pens R Us";
-		rep.nationality = "US";
-		rep.vip = true;
-	}
-
-	if (regulars.selection.index === 25) {
-		rep.name = "Kevin Giles";
-		rep.email = "kevin@luvbuds.co";
-		rep.company = "Luvbuds, LLC";
-		rep.nationality = "US";
-		rep.vip = false;
-	}
-
-	if (regulars.selection.index === 26) {
-		rep.name = "Alex Lavoie";
-		rep.email = "alex@highmountainimports.com";
-		rep.company = "High Mountain Imports";
-		rep.nationality = "US";
-		rep.vip = false;
-	}
-
-	if (regulars.selection.index === 27) {
-		rep.name = "Sandy Johnson";
-		rep.email = "orders@showyourlogo.com";
-		rep.company = "Show Your Logo, Inc";
-		rep.nationality = "US";
-		rep.vip = true;
-	}
-
-	if (regulars.selection.index === 28) {
-		rep.name = "LaVerne Petry";
-		rep.email = "custom420promos@gmail.com";
-		rep.company = "Custom420promos";
-		rep.nationality = "US";
-		rep.vip = false;
-	}
-
-	if (regulars.selection.index === 29) {
-		rep.name = "Arlene LaRoe";
-		rep.email = "alaroe@buybluesky.com";
-		rep.company = "Blue Sky Marketing Group";
-		rep.nationality = "US";
-		rep.vip = true;
-	}
-
-	if (regulars.selection.index === 30) {
-		rep.name = "Superior Promos";
-		rep.email = "art@superiorpromos.com";
-		rep.company = "Superior Promos, Inc";
-		rep.nationality = "US";
-		rep.vip = false;
-	}
-
-	if (regulars.selection.index === 31) {
-		rep.name = "Kaeser & Blair";
-		rep.email = "orders@kaeser-blair.com";
-		rep.company = "Kaeser & Blair";
-		rep.nationality = "US";
-		rep.vip = false;
-	}
-
-	if (regulars.selection.index === 32) {
-		rep.name = "Carey Ray Jaramillo";
-		rep.email = "vendor@notionworx.com";
-		rep.company = "NotionWorx";
-		rep.nationality = "US";
-		rep.vip = false;
-	}
+	var customer01 = Customer();
+	var customer02 = Customer();
+	var customer03 = Customer();
+	var customer04 = Customer();
+	var customer05 = Customer();
+	var customer06 = Customer();
+	var customer07 = Customer();
+	var customer08 = Customer();
+	var customer09 = Customer();
+	var customer10 = Customer();
+	var customer11 = Customer();
+	var customer12 = Customer();
+	var customer13 = Customer();
+	var customer14 = Customer();
+	var customer15 = Customer();
+	var customer16 = Customer();
+	var customer17 = Customer();
+	var customer18 = Customer();
+	var customer19 = Customer();
+	var customer21 = Customer();
+	var customer22 = Customer();
+	var customer23 = Customer();
+	var customer24 = Customer();
+	var customer25 = Customer();
+	var customer26 = Customer();
+	var customer27 = Customer();
+	var customer28 = Customer();
+	var customer29 = Customer();
+	var customer31 = Customer();
+	var customer32 = Customer();
+	var customer33 = Customer();
+	var customer34 = Customer();
+	var customer35 = Customer();
+	var customer36 = Customer();
+	var customer37 = Customer();
+	var customer38 = Customer();
+	var customer39 = Customer();
+	var customer41 = Customer();
+	var customer42 = Customer();
+	var customer43 = Customer();
+	var customer44 = Customer();
+	var customer45 = Customer();
+	var customer46 = Customer();
+	var customer47 = Customer();
+	var customer48 = Customer();
+	var customer49 = Customer();
+	var customer50 = Customer();
 
 	if (nationalityCanada.value === true) {
 		rep.nationality = "Canada";
@@ -742,6 +1314,18 @@ if (
 
 	var repEmail = app.activeDocument.textFrames.getByName("Email");
 	repEmail.contents = rep.email;
+
+	if (repEmail.contents.length > 30 && repEmail_Edit.characters.length < 45) {
+		var emailBox = app.activeDocument.textFrames.getByName("Email");
+
+		emailBox.textRange.characterAttributes.size = 7;
+		emailBox.textRange.characterAttributes.baselineShift = 0;
+	}
+
+	if (repEmail.contents.length > 45) {
+		emailBox.textRange.characterAttributes.size = 5;
+		emailBox.textRange.characterAttributes.baselineShift = 0;
+	}
 
 	var repNameOutput = app.activeDocument.textFrames.getByName("Rep");
 	repNameOutput.contents = rep.name;
@@ -786,14 +1370,6 @@ if (
 		app.activeDocument.layers.getByName("USA").visible = true;
 	}
 	//#endregion
-
-
-
-
-
-
-
-
 
 	//#region     INK COLORS
 	//#region    If the order uses the standard template, then the body and ink color code is run. If it isn't, then the code is bypassed.
@@ -953,8 +1529,7 @@ if (
 
 		//#endregion
 
-	//#region      OLD ODD INKS
-           /* THESE ARE ALL THE PMS INK COLORS WHOSE NAMES DO NOT BEGIN WITH A NUMBER. 
+		/* THESE ARE ALL THE PMS INK COLORS WHOSE NAMES DO NOT BEGIN WITH A NUMBER. 
 Actual names:
 'PANTONE Black 0961 C', 'PANTONE Black 2 C', 'Pantone Black 3 C', 'Pantone Black 4 C', 'Pantone Black 5 C', 'Pantone Black 6 C', 'Pantone Black 7 C', 'Pantone Black C', 'Pantone Blue 072 C', Pantone Blue 0821 C', 'Pantone Bright Red C', 'Pantone Dark Blue C', 'Pantone Green 0921 C', 'Pantone Green C', 'Pantone Magenta 0521 C', 'Pantone Medium Purple C', 'Pantone Orange 021 C', 'Pantone Pink C', 'Pantone Purple C', 'Pantone Red 032 C', 'Pantone Red 0331 C', 'Pantone Reflex Blue', 'Pantone Rhodamine Red C', 'Pantone Rubine Red C', 'Pantone Violet 0631 C', 'Pantone Violet C', 'Pantone Warm Red C', 'Pantone Yellow 012 C', Pantone Yellow 0131 C', 'Pantone Yellow C', 'Pantone Cool Gray 1 C', 'Pantone Cool Gray 2 C', 'Pantone Cool Gray 3 C', 'Pantone Cool Gray 4 C', 'Pantone Cool Gray 5 C', 'Pantone Cool Gray 6 C', 'Pantone Cool Gray 7 C', 'Pantone Cool Gray 8 C', 'Pantone Cool Gray 9 C', 'Pantone Cool Gray 10 C', 'Pantone Cool Gray 11 C', 'Pantone Warm Gray 1 C', 'Pantone Warm Gray 2 C', 'Pantone Warm Gray 3 C', 'Pantone Warm Gray 4 C', 'Pantone Warm Gray 5 C', 'Pantone Warm Gray 6 C', 'Pantone Warm Gray 7 C', 'Pantone Warm Gray 8 C', 'Pantone Warm Gray 9 C', 'Pantone Warm Gray 10 C', 'Pantone Cool Gray 11 C']
 
@@ -989,29 +1564,16 @@ Actual names:
 			}
 		}
 
-          //#endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		//#region     A1
 		if (ink_A1.text.length > 0) {
+			var CMYK_White = new CMYKColor();
+			CMYK_White.black = 0;
+			CMYK_White.cyan = 0;
+			CMYK_White.magenta = 0;
+			CMYK_White.yellow = 0;
+
+			item_A1_frame.fillColor = CMYK_White;
+
 			var pmsTest_A1 = false;
 			for (var index = 0; index < ink_A1.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
@@ -1147,25 +1709,10 @@ Actual names:
 
 		//#endregion
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		//#region     A2
 		if (ink_A2.text.length > 0) {
+			item_A2_frame.fillColor = CMYK_White;
+
 			var pmsTest_A2 = false;
 			for (var index = 0; index < ink_A2.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
@@ -1287,6 +1834,8 @@ Actual names:
 
 		//#region     A3
 		if (ink_A3.text.length > 0) {
+			item_A3_frame.fillColor = CMYK_White;
+
 			var pmsTest_A3 = false;
 			for (var index = 0; index < ink_A3.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
@@ -1412,6 +1961,8 @@ Actual names:
 
 		//#region     A4
 		if (ink_A4.text.length > 0) {
+			item_A4_frame.fillColor = CMYK_White;
+
 			var pmsTest_A4 = false;
 			for (var index = 0; index < ink_A4.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
@@ -1537,6 +2088,8 @@ Actual names:
 
 		//#region     C1
 		if (ink_C1.text.length > 0) {
+			item_C1_frame.fillColor = CMYK_White;
+
 			var pmsTest_C1 = false;
 			for (var index = 0; index < ink_C1.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
@@ -1648,6 +2201,10 @@ Actual names:
 				}
 			}
 		}
+
+		if (ink_C1.text.length < 1) {
+			app.activeDocument.layers.getByName("Art - C").remove();
+		}
 		if (ink_C1.text.length > 0) {
 			screenCounter_C.push(1);
 			item_C1_frame.strokeColor =
@@ -1662,6 +2219,8 @@ Actual names:
 
 		//#region     C2
 		if (ink_C2.text.length > 0) {
+			item_C2_frame.fillColor = CMYK_White;
+
 			var pmsTest_C2 = false;
 			for (var index = 0; index < ink_C2.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
@@ -1787,6 +2346,8 @@ Actual names:
 
 		//#region     C3
 		if (ink_C3.text.length > 0) {
+			item_C3_frame.fillColor = CMYK_White;
+
 			var pmsTest_C3 = false;
 			for (var index = 0; index < ink_C3.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
@@ -1920,6 +2481,8 @@ Actual names:
 			bodyColorAlpha.visible = true;
 		}
 		if (ink_C4.text.length > 0) {
+			item_C4_frame.fillColor = CMYK_White;
+
 			var pmsTest_C4 = false;
 			for (var index = 0; index < ink_C4.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
@@ -2049,714 +2612,14 @@ Actual names:
 		}
 		//#endregion
 	}
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//#region     This is the new odd ink color section
-
-
-//#region           Odd Inks list
-var oddInks = [
-	"Black 0961",
-	"Black 2",
-	"Black 3",
-	"Black 4",
-	"Black 5",
-	"Black 6",
-	"Black 7",
-	"Black",
-	"Blue 072",
-	"Blue 0821",
-	"Bright Red",
-	"Dark Blue",
-	"Green 0921",
-	"Green",
-	"Magenta 0521",
-	"Medium Purple",
-	"Orange 021",
-	"Pink",
-	"Purple",
-	"Red 032",
-	"Red 0331",
-	"Reflex Blue",
-	"Rhodamine Red",
-	"Rubine Red",
-	"Violet 0631",
-	"Violet",
-	"Warm Red",
-	"Yellow 012",
-	"Yellow 0131",
-	"Yellow",
-	"Cool Gray 1",
-	"Cool Gray 2",
-	"Cool Gray 3",
-	"Cool Gray 4",
-	"Cool Gray 5",
-	"Cool Gray 6",
-	"Cool Gray 7",
-	"Cool Gray 8",
-	"Cool Gray 9",
-	"Cool Gray 10",
-	"Cool Gray 11",
-	"Warm Gray 1",
-	"Warm Gray 2",
-	"Warm Gray 3",
-	"Warm Gray 4",
-	"Warm Gray 5",
-	"Warm Gray 6",
-	"Warm Gray 7",
-	"Warm Gray 8",
-	"Warm Gray 9",
-	"Warm Gray 10",
-	"Warm Gray 11"
-];
-//#endregion
-
-//#region           Multiple Terms list
-var multipleTerms = [
-	"bright",
-	"medium",
-	"purple",
-	"orange",
-	"green",
-	"red",
-	"violet",
-	"purple",
-	"warm",
-	"cool",
-	"black",
-	"gray",
-	"1",
-	"2",
-	"3",
-	"4",
-	"5",
-	"6",
-	"7",
-	"8",
-	"9",
-	"10",
-	"11"
-];
-
-//#endregion
-
-//#region           Specific Terms list
-var specificTerms = [
-	"bright",
-	"dark",
-	"magenta",
-	"pink",
-	"reflex",
-	"rhodamine",
-	"rubine",
-	"0961",
-	"072",
-	"0821",
-	"0921",
-	"0521",
-	"021",
-	"032",
-	"0331"
-];
-//#endregion
-
-
-
-
-
-oddInk_function(ink_A1.text)
-oddInk_function(ink_A2.text)
-oddInk_function(ink_A3.text)
-oddInk_function(ink_A4.text)
-
-oddInk_function(ink_C1.text)
-oddInk_function(ink_C2.text)
-oddInk_function(ink_C3.text)
-oddInk_function(ink_C4.text)
-
-
-
-
-
-
-
-
-function oddInk_function (input) {
-     var inkcolor = input;
-     inkcolor = inkcolor.split(" ");
-     var finalInk = null;
-
-
-
-for (t = 0; t < inkcolor.length; t++) {
-
-     if (inkcolor[t] === "white") {
-          return 'White'
-     }
-
-     if (inkcolor[t] === "gray") {
-       finalInk = grayInk();
-     }
-   
-     if (inkcolor[t] === "black") {
-       finalInk = blackInk();
-     }
-   
-     if (inkcolor[t] === "medium") {
-       finalInk = medium(inkcolor);
-     }
-   
-     if (inkcolor[t] === "green") {
-       finalInk = green(inkcolor)
-     }
-   
-     if (inkcolor[t] === "orange") {
-       finalInk = orange(inkcolor)
-     }
-   
-     if (inkcolor[t] === "purple") {
-       finalInk = purple(inkcolor)
-     }
-   
-     if (inkcolor[t] === "violet") {
-       finalInk = violet(inkcolor)
-     }
-     
-     if (finalInk === null) {
-          finalInk = singleWord(inkcolor)
-}
-   }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-function grayInk() {
-	var grayArray = [];
-	for (i = 0; i < inkcolor.length; i++) {
-		if (inkcolor[i] === "warm") {
-			grayArray.push("Warm");
-		}
-
-		if (inkcolor[i] === "cool") {
-			grayArray.push("Cool");
-		}
-	}
-
-	for (a = 0; a < inkcolor.length; a++) {
-		if (inkcolor[a] === "gray") {
-			grayArray.push("Gray");
-		}
-	}
-
-	for (b = 0; b < inkcolor.length; b++) {
-		var digitArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];
-		for (c = 0; c < digitArray.length; c++) {
-			if (inkcolor[b] === digitArray[c]) {
-				grayArray.push(inkcolor[b]);
-			}
-		}
-	}
-
-	return "PANTONE " + grayArray.join(" ");
-}
-
-function blackInk() {
-	var blackArray = [];
-
-	for (a = 0; a < inkcolor.length; a++) {
-		if (inkcolor[a] === "black") {
-			blackArray.push("Black");
-		}
-
-		if (inkcolor[a] === "0961") {
-			return "PANTONE Black 0961 C";
-			break;
-		}
-	}
-
-	for (b = 0; b < inkcolor.length; b++) {
-		var digitArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];
-		for (c = 0; c < digitArray.length; c++) {
-			if (inkcolor[b] === digitArray[c]) {
-				blackArray.push(inkcolor[b]);
-			}
-		}
-	}
-
-	return "PANTONE " + blackArray.join(" ");
-}
-
-function singleWord(n) {
-	for (i = 0; i < n.length; i++) {
-		if (n[i] === "bright") {
-			return "PANTONE Bright Red C";
-		} else if (n[i] === "dark") {
-			return "PANTONE Dark Blue C";
-		} else if (n[i] === "magenta") {
-			return "PANTONE Magenta 0521 C";
-		} else if (n[i] === "pink") {
-			return "PANTONE Pink C";
-		} else if (n[i] === "reflex") {
-			return "PANTONE Reflex Blue C";
-		} else if (n[i] === "rhodamine") {
-			return "PANTONE Rhodamine Red C";
-		} else if (n[i] === "rubine") {
-			return "PANTONE Rubine Red C";
-		} else if (n[i] === "0961") {
-			return "PANTONE Black 0961 C";
-		} else if (n[i] === "072") {
-			return "PANTONE Blue 072 C";
-		} else if (n[i] === "0821") {
-			return "PANTONE Blue 0821 C";
-		} else if (n[i] === "0921") {
-			return "PANTONE Green 0921 C";
-		} else if (n[i] === "0521") {
-			return "PANTONE Magenta 0521 C";
-		} else if (n[i] === "032") {
-			return "PANTONE Red 032 C";
-		} else if (n[i] === "021") {
-			return "PANTONE Red C";
-		} else if (n[i] === "0331") {
-			return "PANTONE Red 0331 C";
-		}
-	}
-}
-
-function green(n) {
-     for (i = 0; i < n.length; i++) {
-       if (n[i] === "green") {
-         return "PANTONE Green C";
-       }
-     }
-   }
-	
-
-function orange(n) {
-	for (i = 0; i < n.length; i++) {
-		if (n[i] === "orange") {
-			for (index = 0; index < n.length; index++) {
-				if (n[index] === "021" || n[index] === "21") {
-					return "PANTONE Orange 021 C";
-				}
-			}
-		}
-	}
-}
-
-function purple(n) {
-     if (n.length === 1) {
-       return "PANTONE Purple C";
-     }
-   }
-
-
-function violet(n) {
-	for (i = 0; i < n.length; i++) {
-		if (n[i] === "violet") {
-			for (index = 0; index < n.length; index++) {
-				if (n.length < 2) {
-					return "PANTONE Violet C";
-				} else {
-					return "PANTONE Violet 0631 C";
-				}
-			}
-		}
-	}
-}
-
-function medium(n) {
-     for (i = 0; i < n.length; i++) {
-       if (n[i] === "yellow") {
-         return "PANTONE Medium Yellow C";
-       }
-   
-       if (n[i] === "purple") {
-         return "PANTONE Medium Purple C";
-       }
-   
-       if (n[i] === "blue") {
-         return "PANTONE Medium Blue C";
-       }
-     }
-   }
-
-
-
-
-
-
-
 	//#endregion                      END   INK COLORS
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     
-
-
-
 
 	//#region     ORIGINAL ART
 	var item_OriginalArt_A = "original art side A";
 	var item_originalArt_C = "original art side C";
 	//#endregion
 
-	//#region     Functions
-	function totalItems_function() {
-		var total = app.activeDocument.textFrames.getByName("Item Total");
-		if (multiNumber.text === "Number") {
-			total.contents = "1";
-		} else {
-			total.contents = multiNumber.text;
-		}
-	}
 
-	function designer_function() {
-		var designer = app.activeDocument.textFrames.getByName("Designer");
-		designer.contents = designerList.selection.text;
-		if (doubleSidedCheckbox.value === true) {
-			var designerBack =
-				app.activeDocument.textFrames.getByName("Designer_Back");
-			designerBack.contents = designerList.selection.text;
-		}
-	}
-	function vip_function() {
-		var vipBox = app.activeDocument.layers
-			.getByName("Masque")
-			.groupItems.getByName("VIP");
-		if (vipCheckbox.value === true || rep.vip === true) {
-			vipBox.hidden = false;
-		} else {
-			vipBox.hidden = true;
-		}
-	}
-	function rush_function() {
-		var rushBox = app.activeDocument.layers
-			.getByName("Masque")
-			.groupItems.getByName("Rush");
-		if (rushCheckbox.value === true) {
-			rushBox.hidden = false;
-		}
-		if (rushCheckbox.value === false) {
-			rushBox.hidden = true;
-		} else {
-			rushBox.hidden = false;
-		}
-	}
-	function po_function() {
-		var purchaseOrder = app.activeDocument.textFrames.getByName("PO");
-		purchaseOrder.contents = poNumber_edit.text;
-
-		if (poNumber_edit.text.length < 14) {
-			purchaseOrder.textRange.characterAttributes.size = 10;
-			purchaseOrder.textRange.characterAttributes.baselineShift = 0;
-		}
-
-		if (poNumber_edit.text.length > 14 && poNumber_edit.text.length < 22) {
-			purchaseOrder.textRange.characterAttributes.size = 6;
-			purchaseOrder.textRange.characterAttributes.baselineShift = -3;
-		}
-
-		if (poNumber_edit.text.length > 22) {
-			purchaseOrder.textRange.characterAttributes.size = 4;
-			purchaseOrder.textRange.characterAttributes.baselineShift = -4;
-		}
-	}
-
-	function originalFile_function() {
-		var originalFile = app.activeDocument.textFrames.getByName("Original Art");
-		originalFile.contents = originalArt_edit.text;
-	}
-	function notes_function() {
-		var notes = app.activeDocument.textFrames.getByName("Notes text");
-		notes.contents = descriptionBox_edit.text + "    " + notes_edit.text;
-	}
-	function currentDate() {
-		var currentDate = new Date();
-		var date = currentDate.toDateString();
-		var date_A = date.split(" ");
-		var date_B =
-			date_A[0] + ", " + date_A[1] + " " + date_A[2] + ", " + date_A[3];
-		return date_B;
-	}
-	function proofDate() {
-		var proofDate = app.activeDocument.textFrames.getByName("DateBox");
-		proofDate.contents = currentDate();
-	}
-	function backDate() {
-		if (doubleSidedCheckbox.value === true) {
-			var dateBoxBack = app.activeDocument.textFrames.getByName("DateBox_Back");
-			dateBoxBack.contents = currentDate();
-		}
-	}
-	function ship_function() {
-		var ship = app.activeDocument.textFrames.getByName("Ship Date");
-		ship.contents = capitalizeSpaces(shipDate_edit.text);
-	}
-
-
-
-
-
-function inHands_function() {
-  var inHands = app.activeDocument.textFrames.getByName("In Hands Date");
-  var beta = inHandsDate_edit.text.split(" ");
-
-  var indii = beta.slice(2, beta.length);
-  var calli = beta[0] + " / " + beta[1];
-  indii = indii.join(" ");
-
-  if (beta.length === 0) {
-    inHands.contents = " "
-  }
-  if (beta.length > 2) {
-    inHands.contents = calli + "     " + capitalizeSpaces(indii);
-  }
-
-  if (beta.length === 2) {
-    inHands.contents = calli
-  }
-}
-
-
-
-
-
-	function JDE_function() {
-		var jde = app.activeDocument.textFrames.getByName("jde number");
-		jde.contents = jdeNumber_edit.text;
-		if (doubleSidedCheckbox.value === true) {
-			var jdeBack = app.activeDocument.textFrames.getByName("jde number_Back");
-			jdeBack.contents = jdeNumber_edit.text;
-		}
-	}
-
-	function repInfo() {
-		if (
-			bodyColorList.selection.index === 11 ||
-			bodyColorList.selection.index === 12
-		) {
-			var repFront = app.activeDocument.textFrames.getByName("Rep");
-			repFront.contents = rep.name + "     " + rep.email;
-
-			var reducedRep = app.activeDocument.textFrames.getByName("Rep");
-			if (repFront.contents.length > 50) {
-				reducedRep.textRange.characterAttributes.size = 9;
-				reducedRep.textRange.characterAttributes.baselineShift = -1;
-			}
-
-			if (doubleSidedCheckbox.value === true) {
-				var repBack = app.activeDocument.textFrames.getByName("Rep_Back");
-				repBack.contents = rep.name + "     " + rep.email;
-
-				var POBack = app.activeDocument.textFrames.getByName("PO_Back");
-				POBack.contents = poNumber_edit.text;
-				if (POBack === null) {
-					POBack.contents = webPrefix.selection.text + webNumber_edit.text;
-				}
-			}
-		}
-	}
-	function description(bodyColorLayer) {
-		var bodyColorLayer = descriptionBox_edit.text;
-		bodyColorLayer = bodyColorLayer.toLowerCase();
-		bodyColorLayer = bodyColorLayer.split(" ");
-		for (var i = 0; i < bodyColorLayer.length; i++) {
-			bodyColorLayer[i] =
-				bodyColorLayer[i].charAt(0).toUpperCase() + bodyColorLayer[i].slice(1);
-		}
-		return bodyColorLayer.join("");
-	}
-	function nineZeroes_Function() {
-		var zeroArray = ["0", "0", "0", "0", "0", "0", "0", "0", "0"];
-		var a = webNumber_edit.text.split("");
-		var nineZeroes_alpha = zeroArray.concat(a);
-		for (var i = 0; i < nineZeroes_alpha.length; i++) {
-			if (nineZeroes_alpha.length > 9) {
-				nineZeroes_alpha.shift();
-			}
-		}
-		return nineZeroes_alpha.join("");
-	}
-	function capitalize(u) {
-		u = u.toLowerCase();
-		u = u.split(" ");
-		for (var i = 0; i < u.length; i++) {
-			u[i] = u[i].charAt(0).toUpperCase() + u[i].slice(1);
-		}
-		return u.join("");
-	}
-	function capitalizeSpaces(n) {
-		n = n.toLowerCase();
-		n = n.split(" ");
-		for (var i = 0; i < n.length; i++) {
-			n[i] = n[i].charAt(0).toUpperCase() + n[i].slice(1);
-		}
-		return n.join(" ");
-	}
-	function magento() {
-		if (rep.nationality === "US") {
-			return "USLOG" + nineZeroes_Function();
-		} else {
-			return "CAENLOG" + nineZeroes_Function();
-		}
-	}
-	function prefix() {
-		if (mockupCheckbox.value === true) return "MOCKUP";
-		if (jdeNumber_edit.text.length > 0) {
-			return jdeNumber_edit.text;
-		} else {
-			return magento();
-		}
-	}
-
-	function filenameOutput() {
-		if (bodyColorList.selection.index < 14) {
-			var illustratorFrame = [
-				"FileName",
-				"A1 Screen FileName",
-				"A2 Screen FileName",
-				"A3 Screen FileName",
-				"A4 Screen FileName",
-				"C1 Screen FileName",
-				"C2 Screen FileName",
-				"C3 Screen FileName",
-				"C4 Screen FileName",
-			];
-
-			for (i = 0; i < illustratorFrame.length; i++) {
-				var filenameOutput_One = app.activeDocument.textFrames.getByName(
-					illustratorFrame[i]
-				);
-				filenameOutput_One.contents = fileName_One;
-			}
-		}
-	}
-
-	function web_function() {
-		var web = app.activeDocument.textFrames.getByName("Web");
-		if (mockupCheckbox.value === true) {
-			web.contents = " ";
-		} else if (jdeNumber_edit.text.length < 1) {
-			web.contents = magento();
-		}
-		if (web.contents.length > 15 && web.contents.length < 21) {
-			web.textRange.characterAttributes.size = 7;
-			web.textRange.characterAttributes.baselineShift = -2;
-		}
-
-		if (web.contents.length > 21) {
-			web.textRange.characterAttributes.size = 4;
-			web.textRange.characterAttributes.baselineShift = -3;
-		}
-	}
-
-	function mockup_function() {
-		if (mockupCheckbox.value === false) {
-			app.activeDocument.layers.getByName("Mockup").visible = true;
-			app.activeDocument.layers.getByName("Mockup").remove();
-		} else {
-			app.activeDocument.layers.getByName("Mockup").visible = true;
-		}
-	}
-
-	function layerRemover() {
-		var emptyLayers = [];
-		getEmptyLayers(doc, emptyLayers);
-		for (var i = 0; i < emptyLayers.length; i++) {
-			emptyLayers[i].visible = true;
-			emptyLayers[i].remove();
-		}
-	}
-	/* 	function getEmptyLayers(container, arr) {
-		var layers = container.layers
-		for (var ii = 0; ii < layers.length; ii++) {
-			try {
-				var ilayer = layers[ii]
-				ilayer.canDelete = true
-				if (ilayer.layers.length > 0) {
-					getEmptyLayers(ilayer, arr)
-				}
-				if (ilayer.pageItems.length == 0 && ilayer.canDelete) {
-					arr.push(ilayer)
-				} else {
-					ilayer.canDelete = false
-					container.canDelete = false
-				}
-			} catch (e) {}
-		}
-	} */
-
-	function generic_function() {
-		if (nationalityCanada.value === true && genericCheckbox.value === false) {
-			app.activeDocument.groupItems.getByName(
-				"Canada_GenericGroup"
-			).visible = true;
-			app.activeDocument.groupItems.getByName("Canada_GenericGroup").remove();
-			app.activeDocument.groupItems.getByName("Canada_Group").hidden = false;
-		}
-
-		if (nationalityCanada.value === true && genericCheckbox.value === true) {
-			app.activeDocument.groupItems.getByName("Canada_Group").visible = true;
-			app.activeDocument.groupItems.getByName("Canada_Group").remove();
-			app.activeDocument.groupItems.getByName(
-				"Canada_GenericGroup"
-			).visible = true;
-		}
-
-		if (nationalityUS.value === true && genericCheckbox.value === false) {
-			app.activeDocument.groupItems.getByName(
-				"USA_GenericGroup"
-			).visible = true;
-			app.activeDocument.groupItems.getByName("USA_GenericGroup").remove();
-			app.activeDocument.groupItems.getByName("USA_Group").visible = true;
-		}
-	}
-
-	//#endregion
 
 	//#region     FILENAME
 
@@ -2844,7 +2707,7 @@ function inHands_function() {
 
 	//#endregion
 
-	//#region     FUNCTION CALLSa
+	//#region     FUNCTION CALLS
 	repInfo();
 	totalItems_function();
 	generic_function();
@@ -2868,7 +2731,7 @@ function inHands_function() {
 	//#region     DARK ASSORTMENT DEFAULT INK COLOR
 	//If no color is entered in the A1 ink color field and a dark assortment is selected from the body color list, the ink color is set to white ink.
 	if (
-		bodyColorList.selection.index == 11 &&
+		bodyColorList.selection.index === 11 &&
 		doubleSidedCheckbox.value === false
 	) {
 		if (ink_A1.text.length < 1) {
@@ -2919,11 +2782,7 @@ function inHands_function() {
 
 	//#region     DOUBLE SIDED ASSORTMENTS
 
-	if (
-		(doubleSidedCheckbox.value == true &&
-			bodyColorList.selection.index === 11) ||
-		bodyColorList.selection.index === 12
-	) {
+	if (doubleSidedCheckbox.value == true) {
 		//If the Double Sided checkbox is checked, this block runs.
 		var A1_Name_Back = app.activeDocument.textFrames.getByName("A1_Name_Back");
 		var A2_Name_Back = app.activeDocument.textFrames.getByName("A2_Name_Back");
@@ -3439,7 +3298,9 @@ function inHands_function() {
 
 /*      BUG LIST
 
-The single side dark assortment that uses the single default ink color doesn't delete the unused screen info groups.
+The single side dark assortment that uses the single default ink color doesn't delete the unused screen info groups. 
+The problem is with the default color for the assortments code.
 
+line 2520  - No such element    var A1_Name_Back = app.activeDocument.textFrames.getByName("A1_Name_Back")
 
 */
