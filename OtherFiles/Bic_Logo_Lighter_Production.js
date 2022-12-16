@@ -23,38 +23,39 @@ var regulars = customerInfo_outer.add("dropdownlist", undefined, [
 	"Aaron Schimmel - Rockstar Promos", //2
 	"Sarah Gillen - LogoLighters", //3
 	"Mitch Sigurdson - Humble & Fume", //4
-	"Angela Cicchini - Humble & Fume", //5
-	"Gabrielle Seguin - Humble & Fume", //6
-	"Alex Walker - Humble & Fume", //7
-	"Tyler Groves - Humble & Fume", //8
-	"Aline Nas - Cannabis Promotions", //9
-	"Darryl Quinge - PEM America", //10
-	"Erica Heft - 4 All Promos", //11
-	"Shelby - 4 All Promos", //12
-	"Stephen Pistel - 4 All Promos", //13
-	"Cindy Sumner - 4 All Promos", //14
-	"Kim Robinson - 4 All Promos", //15
-	"Ryan Zvibleman - Cannabis Promotions", //16
-	"Jeff Mancini - M5 Group", //17
-	"Danielle Treloar - Rush Imprint", //18
-	"Will Kunz - MARCO PDX", //19
-	"Kari Matlack - Rush Imprint", //20
-	"Josh Kyung Kim - Identity Links", //21
-	"Jay Tittman - Rocky Mountain Business Products", //22
-	"Brian Eskenazi - High Mountain Imports", //23
-	"Jennifer - Pens R Us", //24
-	"Luvbuds", //25
-	"Alex Lavoie - High Mountain Imports", //26
-	"Sandy Johnson - Show Your Logo Inc", //27
-	"LaVerne Petry - Custom420promos", //28
-	"Arlene LaRoe - Blue Sky Marketing Group", //29
-	"Superior Promos", //30
-	"Kaeser & Blair", //31
-	"Carey Ray Jaramillo - NotionWorx", //32
+	"Humble & Fume", //5
+	"Zoe McIntosh  -  PrintGlobe", //6
+	"Aline Nas - Cannabis Promotions", //7
+	"Darryl Quinge - PEM America", //8
+	"Erica Heft - 4 All Promos", //9
+	"Shelby - 4 All Promos", //10
+	"Stephen Pistel - 4 All Promos", //11
+	"Cindy Sumner - 4 All Promos", //12
+	"Kim Robinson - 4 All Promos", //13
+	"Ryan Zvibleman - Cannabis Promotions", //14
+	"Jeff Mancini - M5 Group", //15
+	"Danielle Treloar - Rush Imprint", //16
+	"Will Kunz - MARCO PDX", //17
+	"Kari Matlack - Rush Imprint", //18
+	"Josh Kyung Kim - Identity Links", //19
+	"Jay Tittman - Rocky Mountain Business Products", //20
+	"High Mountain Imports", //21
+	"Jennifer - Pens R Us", //22
+	"Luvbuds", //23
+	"Alex Lavoie - High Mountain Imports", //24
+	"Sandy Johnson - Show Your Logo Inc", //25
+	"LaVerne Petry - Custom420promos", //26
+	"Arlene LaRoe - Blue Sky Marketing Group", //27
+	"Superior Promos", //28
+	"Kaeser & Blair", //29
+	"Carey Ray Jaramillo - NotionWorx", //30
+     "COMMERCIAL ORDER", //31
+     "Crystal Arredondo - Promo Shop LA", //32
+
 ])
 regulars.selection = 0
 
-var repName = customerInfo_outer.add("statictext", undefined, "Rep name")
+var repNameCustom = customerInfo_outer.add("statictext", undefined, "Rep name")
 var repNameEdit = customerInfo_outer.add("edittext", undefined, "")
 repNameEdit.characters = 20
 repNameEdit.active = true
@@ -500,45 +501,31 @@ if (
 
 	if (regulars.selection.index === 4) {
 		rep.name = "Mitch Sigurdson"
-		rep.email = "mitch@bobhq.com"
+		rep.email = "imprint@humbleandfume.com"
 		rep.company = "Humble and Fume"
 		rep.nationality = "Canada"
 		rep.vip = false
 	}
 
-	if (regulars.selection.index === 5) {
-		rep.name = "Angela Cicchini"
-		rep.email = "angelac@bobhq.com"
-		rep.company = "Humble and Fume"
-		rep.nationality = "Canada"
-		rep.vip = false
-	}
-
-	if (regulars.selection.index === 6) {
-		rep.name = "Gabby Seguin"
-		rep.email = "gabby@humbleandfume.com"
+ 	if (regulars.selection.index === 5) {
+		rep.name = "Humble & Fume"
+		rep.email = "imprint@humbleandfume.com; mitch@bobhq.com"
 		rep.company = "Humble & Fume"
 		rep.nationality = "Canada"
+		rep.vip = false
+	} 
+
+
+
+	if (regulars.selection.index === 6) {
+		rep.name = "Zoe McIntosh"
+		rep.email = "zoe.m@printglobe.com"
+		rep.company = "PrintGlobe"
+		rep.nationality = "US"
 		rep.vip = false
 	}
 
 	if (regulars.selection.index === 7) {
-		rep.name = "Alex Walker"
-		rep.email = "alex@humblecs.com"
-		rep.company = "Humble & Fume"
-		rep.nationality = "Canada"
-		rep.vip = false
-	}
-
-	if (regulars.selection.index === 8) {
-		rep.name = "Tyler Groves"
-		rep.email = "tyler@bobhq.com"
-		rep.company = "Humble & Fume"
-		rep.nationality = "Canada"
-		rep.vip = false
-	}
-
-	if (regulars.selection.index === 9) {
 		rep.name = "Aline Nas"
 		rep.email = "orders@cannabispromotions.com"
 		rep.company = "Cannabis Promotions"
@@ -546,7 +533,7 @@ if (
 		rep.vip = false
 	}
 
-	if (regulars.selection.index === 10) {
+	if (regulars.selection.index === 8) {
 		rep.name = "Darryl Quinge"
 		rep.email = "darryl@pemamericainc.com"
 		rep.company = "PEM America Inc"
@@ -554,7 +541,7 @@ if (
 		rep.vip = true
 	}
 
-	if (regulars.selection.index === 11) {
+	if (regulars.selection.index === 9) {
 		rep.name = "Erica Heft"
 		rep.email = "erica@4allpromos.com"
 		rep.company = "4AllPromos"
@@ -562,7 +549,7 @@ if (
 		rep.vip = true
 	}
 
-	if (regulars.selection.index === 12) {
+	if (regulars.selection.index === 10) {
 		rep.name = "Shelby"
 		rep.email = "shelby@4allpromos.com"
 		rep.company = "4AllPromos"
@@ -570,7 +557,7 @@ if (
 		rep.vip = true
 	}
 
-	if (regulars.selection.index === 13) {
+	if (regulars.selection.index === 11) {
 		rep.name = "Stephen Pistel"
 		rep.email = "stephen@4allpromos.com"
 		rep.company = "4 All Promos"
@@ -578,56 +565,56 @@ if (
 		rep.vip = true
 	}
 
-	if (regulars.selection.index === 14) {
+	if (regulars.selection.index === 12) {
 		rep.name = "Cindy Sumner"
 		rep.email = "cindy@4allpromos.com"
 		rep.company = "4AllPromos"
 		rep.nationality = "US"
 		rep.vip = true
 	}
-	if (regulars.selection.index === 15) {
+	if (regulars.selection.index === 13) {
 		rep.name = "Kim Robinson"
 		rep.email = "kim@4allpromos.com"
 		rep.company = "4AllPromos"
 		rep.nationality = "US"
 		rep.vip = true
 	}
-	if (regulars.selection.index === 16) {
+	if (regulars.selection.index === 14) {
 		rep.name = "Ryan Zvibleman"
 		rep.email = "orders@cannabispromotions.com"
 		rep.company = "Cannabis Promotions"
 		rep.nationality = "US"
 		rep.vip = false
 	}
-	if (regulars.selection.index === 17) {
+	if (regulars.selection.index === 15) {
 		rep.name = "Jeff Mancini"
 		rep.email = "jeff@m5group.com"
 		rep.company = "M5 Group"
 		rep.nationality = "US"
 		rep.vip = false
 	}
-	if (regulars.selection.index === 18) {
+	if (regulars.selection.index === 16) {
 		rep.name = "Danielle Treloar"
 		rep.email = "danielle@rushimprint.com"
 		rep.company = "RUSH Imprint"
 		rep.nationality = "US"
 		rep.vip = true
 	}
-	if (regulars.selection.index === 19) {
+	if (regulars.selection.index === 17) {
 		rep.name = "Will Kunz"
 		rep.email = "orders@marcopdx.com"
 		rep.company = "MARCO Ideas Unlimited"
 		rep.nationality = "US"
 		rep.vip = false
 	}
-	if (regulars.selection.index === 20) {
+	if (regulars.selection.index === 18) {
 		rep.name = "Kari Matlack"
 		rep.email = "kari@rushimprint.com"
 		rep.company = "RUSH Imprint"
 		rep.nationality = "US"
 		rep.vip = true
 	}
-	if (regulars.selection.index === 21) {
+	if (regulars.selection.index === 19) {
 		rep.name = "Josh Kyung Kim"
 		rep.email = "josh@identity-links.com"
 		rep.company = "Identity Links"
@@ -635,7 +622,7 @@ if (
 		rep.vip = false
 	}
 
-	if (regulars.selection.index === 22) {
+	if (regulars.selection.index === 20) {
 		rep.name = "Jay Tittman"
 		rep.email = "jay@rmbp.com"
 		rep.company = "Rocky Mountain Business Products"
@@ -643,15 +630,15 @@ if (
 		rep.vip = false
 	}
 
-	if (regulars.selection.index === 23) {
-		rep.name = "High Mountain Imports"
+	if (regulars.selection.index === 21) {
+		rep.name = capitalizeSpaces(repNameEdit.text)
 		rep.email = "orders@highmountainimports.com"
 		rep.company = "High Mountain Imports"
 		rep.nationality = "US"
 		rep.vip = false
 	}
 
-	if (regulars.selection.index === 24) {
+	if (regulars.selection.index === 22) {
 		rep.name = "Jennifer"
 		rep.email = "jennifer@pensrus.com"
 		rep.company = "Pens R Us"
@@ -659,7 +646,7 @@ if (
 		rep.vip = true
 	}
 
-	if (regulars.selection.index === 25) {
+	if (regulars.selection.index === 23) {
 		rep.name = "Kevin Giles"
 		rep.email = "kevin@luvbuds.co"
 		rep.company = "Luvbuds, LLC"
@@ -667,7 +654,7 @@ if (
 		rep.vip = false
 	}
 
-	if (regulars.selection.index === 26) {
+	if (regulars.selection.index === 24) {
 		rep.name = "Alex Lavoie"
 		rep.email = "alex@highmountainimports.com"
 		rep.company = "High Mountain Imports"
@@ -675,7 +662,7 @@ if (
 		rep.vip = false
 	}
 
-	if (regulars.selection.index === 27) {
+	if (regulars.selection.index === 25) {
 		rep.name = "Sandy Johnson"
 		rep.email = "orders@showyourlogo.com"
 		rep.company = "Show Your Logo, Inc"
@@ -683,7 +670,7 @@ if (
 		rep.vip = true
 	}
 
-	if (regulars.selection.index === 28) {
+	if (regulars.selection.index === 26) {
 		rep.name = "LaVerne Petry"
 		rep.email = "custom420promos@gmail.com"
 		rep.company = "Custom420promos"
@@ -691,7 +678,7 @@ if (
 		rep.vip = false
 	}
 
-	if (regulars.selection.index === 29) {
+	if (regulars.selection.index === 27) {
 		rep.name = "Arlene LaRoe"
 		rep.email = "alaroe@buybluesky.com"
 		rep.company = "Blue Sky Marketing Group"
@@ -699,7 +686,7 @@ if (
 		rep.vip = true
 	}
 
-	if (regulars.selection.index === 30) {
+	if (regulars.selection.index === 28) {
 		rep.name = "Superior Promos"
 		rep.email = "art@superiorpromos.com"
 		rep.company = "Superior Promos, Inc"
@@ -707,7 +694,7 @@ if (
 		rep.vip = false
 	}
 
-	if (regulars.selection.index === 31) {
+	if (regulars.selection.index === 29) {
 		rep.name = "Kaeser & Blair"
 		rep.email = "orders@kaeser-blair.com"
 		rep.company = "Kaeser & Blair"
@@ -715,13 +702,32 @@ if (
 		rep.vip = false
 	}
 
-	if (regulars.selection.index === 32) {
+	if (regulars.selection.index === 30) {
 		rep.name = "Carey Ray Jaramillo"
 		rep.email = "vendor@notionworx.com"
 		rep.company = "NotionWorx"
 		rep.nationality = "US"
 		rep.vip = false
 	}
+
+
+
+	if (regulars.selection.index === 31) {
+		rep.name = "Lynn Starr"
+		rep.email = "lynn.starr@bicworld.com"
+		rep.company = "Bic"
+		rep.nationality = "US"
+		rep.vip = false
+	}
+
+     if (regulars.selection.index === 32) {
+		rep.name = "Crystal Arredondo"
+		rep.email = "carredondo@promoshopla.com"
+		rep.company = "Promo Shop LA"
+		rep.nationality = "US"
+		rep.vip = false
+	}
+
 
      if (nationalityCanada.value === true) {
           rep.nationality = "Canada"
@@ -737,12 +743,31 @@ if (
      
           
 
-	repName.contents = rep.name + "     " + rep.email
+	repName.contents = rep.name
 	repNameSignature = rep.name
 	companyName = rep.company
 
+     var repEmail = app.activeDocument.textFrames.getByName('Email')
+     repEmail.contents = rep.email
+
+     if (repEmail.contents.length > 30 && repEmail_Edit.characters.length < 45) {
+          var emailBox = app.activeDocument.textFrames.getByName('Email')
+
+          emailBox.textRange.characterAttributes.size = 7
+          emailBox.textRange.characterAttributes.baselineShift = 0
+     }
+
+     if (repEmail.contents.length > 45) {
+          emailBox.textRange.characterAttributes.size = 5
+          emailBox.textRange.characterAttributes.baselineShift = 0
+     }
+
+
+
+
+
 	var repNameOutput = app.activeDocument.textFrames.getByName("Rep")
-	repNameOutput.contents = rep.name + "     " + rep.email
+	repNameOutput.contents = rep.name
 
 	var repNameSignature =
 		app.activeDocument.textFrames.getByName("RepName_Signature")
@@ -912,7 +937,7 @@ if (
 			"2587",
 			"424",
 			"872",
-			"877",
+			"877"
 		]
 
 		//#region   Screen counter array
@@ -956,7 +981,7 @@ Actual names:
 			"magenta 0521",
 			"orange 021",
 			"red 032",
-			"red 0331",
+			"red 0331"
 		]
 		for (i = 0; i < inksNamedArray.length; i++) {
 			if (ink_A1.text === inksNamedArray[i]) {
@@ -980,6 +1005,14 @@ Actual names:
 
 		//#region     A1
 		if (ink_A1.text.length > 0) {
+               var CMYK_White = new CMYKColor()
+               CMYK_White.black = 0
+               CMYK_White.cyan = 0
+               CMYK_White.magenta = 0
+               CMYK_White.yellow = 0
+
+               item_A1_frame.fillColor = CMYK_White
+
 			var pmsTest_A1 = false
 			for (var index = 0; index < ink_A1.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
@@ -1117,6 +1150,9 @@ Actual names:
 
 		//#region     A2
 		if (ink_A2.text.length > 0) {
+
+               item_A2_frame.fillColor = CMYK_White
+
 			var pmsTest_A2 = false
 			for (var index = 0; index < ink_A2.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
@@ -1238,6 +1274,8 @@ Actual names:
 
 		//#region     A3
 		if (ink_A3.text.length > 0) {
+               item_A3_frame.fillColor = CMYK_White
+
 			var pmsTest_A3 = false
 			for (var index = 0; index < ink_A3.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
@@ -1362,6 +1400,8 @@ Actual names:
 
 		//#region     A4
 		if (ink_A4.text.length > 0) {
+               item_A4_frame.fillColor = CMYK_White
+
 			var pmsTest_A4 = false
 			for (var index = 0; index < ink_A4.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
@@ -1486,7 +1526,9 @@ Actual names:
 
 		//#region     C1
 		if (ink_C1.text.length > 0) {
-			var pmsTest_C1 = false
+               item_C1_frame.fillColor = CMYK_White
+
+               var pmsTest_C1 = false
 			for (var index = 0; index < ink_C1.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
 					if (ink_C1.text[index] === digitArray[i]) {
@@ -1597,6 +1639,21 @@ Actual names:
 				}
 			}
 		}
+
+
+if (bodyColorList.selection < 10) {
+     if (ink_C1.text.length < 1) {
+          app.activeDocument.layers.getByName("Art - C").remove()
+     }
+}
+
+
+
+
+
+
+
+          var pmsTest_C1 = false
 		if (ink_C1.text.length > 0) {
 			screenCounter_C.push(1)
 			item_C1_frame.strokeColor =
@@ -1611,6 +1668,8 @@ Actual names:
 
 		//#region     C2
 		if (ink_C2.text.length > 0) {
+               item_C2_frame.fillColor = CMYK_White
+
 			var pmsTest_C2 = false
 			for (var index = 0; index < ink_C2.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
@@ -1736,6 +1795,8 @@ Actual names:
 
 		//#region     C3
 		if (ink_C3.text.length > 0) {
+               item_C3_frame.fillColor = CMYK_White
+
 			var pmsTest_C3 = false
 			for (var index = 0; index < ink_C3.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
@@ -1869,6 +1930,8 @@ Actual names:
 			bodyColorAlpha.visible = true
 		}
 		if (ink_C4.text.length > 0) {
+               item_C4_frame.fillColor = CMYK_White
+
 			var pmsTest_C4 = false
 			for (var index = 0; index < ink_C4.text.length; index++) {
 				for (i = 0; i < digitArray.length; i++) {
@@ -2065,6 +2128,10 @@ Actual names:
 			purchaseOrder.textRange.characterAttributes.size = 4
 			purchaseOrder.textRange.characterAttributes.baselineShift = -4
 		}
+
+          purchaseOrder.toUpperCase;
+
+
 	}
 
 	function originalFile_function() {
@@ -2097,10 +2164,28 @@ Actual names:
 		var ship = app.activeDocument.textFrames.getByName("Ship Date")
 		ship.contents = capitalizeSpaces(shipDate_edit.text)
 	}
-	function InHands_function() {
-		var inHands = app.activeDocument.textFrames.getByName("In Hands Date")
-		inHands.contents = capitalizeSpaces(inHandsDate_edit.text)
-	}
+
+     function inHands_function() {
+          var inHands = app.activeDocument.textFrames.getByName("In Hands Date");
+          var beta = inHandsDate_edit.text.split(" ");
+        
+          var indii = beta.slice(2, beta.length);
+          var calli = beta[0] + " / " + beta[1];
+          indii = indii.join(" ");
+        
+          if (beta.length === 0) {
+            inHands.contents = " "
+          }
+          if (beta.length > 2) {
+            inHands.contents = calli + "     " + capitalizeSpaces(indii);
+          }
+        
+          if (beta.length === 2) {
+            inHands.contents = calli
+          }
+        }
+
+
 	function JDE_function() {
 		var jde = app.activeDocument.textFrames.getByName("jde number")
 		jde.contents = jdeNumber_edit.text
@@ -2219,13 +2304,13 @@ Actual names:
 		} else if (jdeNumber_edit.text.length < 1) {
 			web.contents = magento()
 		}
-          if(web.contents.length > 15 && web.contents.length < 21) {
+          if(web.contents.length > 17 && web.contents.length < 23) {
                web.textRange.characterAttributes.size = 7
 			web.textRange.characterAttributes.baselineShift = -2
 		
           }
 
-          if(web.contents.length > 21) {
+          if(web.contents.length > 23) {
                web.textRange.characterAttributes.size = 4
 			web.textRange.characterAttributes.baselineShift = -3
 		
@@ -2380,7 +2465,7 @@ Actual names:
 
 	//#endregion
 
-//#region     FUNCTION CALLSa
+//#region     FUNCTION CALLS
 	repInfo()
 	totalItems_function()
 	generic_function()
@@ -2390,7 +2475,7 @@ Actual names:
 	po_function()
 	JDE_function()
 	web_function()
-	InHands_function()
+	inHands_function();
 	ship_function()
 	originalFile_function()
 	notes_function()
@@ -2408,6 +2493,7 @@ Actual names:
 		doubleSidedCheckbox.value === false
 	) {
 		if (ink_A1.text.length < 1) {
+               ink_A1.text = "white";
 			var lightAssortInk = app.activeDocument.textFrames.getByName(
 				"A1 Screen Ink Color"
 			)
@@ -2417,7 +2503,7 @@ Actual names:
 			item_A1_color.fillColor = newSpotColor
 			item_A1_chip.fillColor = newSpotColor
 			item_A1_frame.strokeWidth = 1
-               item_A1_frame.strokeColor = "Spot Black"
+               item_A1_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
 		}
 	}
 	//#endregion
@@ -2439,6 +2525,7 @@ Actual names:
 			item_A1_color.fillColor = newBlack
 			item_A1_chip.fillColor = newBlack
 			item_A1_frame.strokeWidth = 1
+               item_A1_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
 
 			if (ink_A2.text.length < 1) {
 				app.activeDocument.groupItems.getByName("Screen2").remove()
@@ -2455,10 +2542,8 @@ Actual names:
 
 //#region     DOUBLE SIDED ASSORTMENTS
 	
-if (
-     doubleSidedCheckbox.value == true && bodyColorList.selection.index === 11 ||
-		(bodyColorList.selection.index === 12)
-	) {
+if (doubleSidedCheckbox.value == true)
+	 {
 		//If the Double Sided checkbox is checked, this block runs.
 		var A1_Name_Back = app.activeDocument.textFrames.getByName("A1_Name_Back")
 		var A2_Name_Back = app.activeDocument.textFrames.getByName("A2_Name_Back")
@@ -2556,6 +2641,10 @@ if (
 		var inHandsDateBack =
 			app.activeDocument.textFrames.getByName("In Hands Date_Back")
 		inHandsDateBack.contents = inHandsDate_edit.text
+
+               var repEmail_Back = app.activeDocument.textFrames.getByName('Email_Back')
+     repEmail.contents = rep.email
+     repEmail_Back.contents = rep.email
 	}
 	//#endregion
 
@@ -2976,5 +3065,6 @@ if (autoSave.value === true) {
 
 The single side dark assortment that uses the single default ink color doesn't delete the unused screen info groups.
 
+line 2520  - No such element    var A1_Name_Back = app.activeDocument.textFrames.getByName("A1_Name_Back")
 
 */
