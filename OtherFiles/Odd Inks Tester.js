@@ -55,6 +55,10 @@ var oddInks = [
 ];
 //#endregion
 
+
+
+
+
 //#region           Multiple Terms list
 var multipleTerms = [
 	"bright",
@@ -84,6 +88,11 @@ var multipleTerms = [
 
 //#endregion
 
+
+
+
+
+
 //#region           Specific Terms list
 var specificTerms = [
 	"dark",
@@ -103,153 +112,171 @@ var specificTerms = [
 ];
 //#endregion
 
-var ink_A1 = "0521";
-var ink_A2 = "rhodamine red";
-var ink_A3 = "blue 0821";
-var ink_A4 = "medium yellow";
 
-var ink_C1 = "pink";
-var ink_C2 = "black 4";
-var ink_C3 = "warm gray 8";
-var ink_C4 = "cool gray 7";
 
-var inkColor = ink_C2;
+
+
+
+
+var ink_A1 = "0521"; //This color works.
+var ink_A2 = "medium red"; //This color works.
+var ink_A3 = "dark blue"; //This color works.
+var ink_A4 = "medium yellow"; //This color works.
+
+var ink_C1 = "pink"; //This color works.
+var ink_C2 = "black 0961"; //This color works.
+var ink_C3 = "warm gray 8"; //This returns undefined.
+var ink_C4 = "cool gray 7"; //This returns undefined.
+
+var inkColor = ink_A2;
 inkColor = inkColor.split(" ");
 
-var inkColor_Final = 0;
 
-if (inkColor_Final === 0) {
-	inkColor_Final = singleWord(inkColor);
+var inkColor_final = null;
+
+
+
+
+if (inkColor_final === null) {
+	inkColor_final = singleWord(inkColor);
+} else {
+	inkColor_final = null;
 }
 
-if (inkColor_Final === 0) {
-	inkColor_Final = Bright(inkColor);
+
+
+
+
+
+
+
+/* if (inkColor_final === null) {
+	inkColor_final = Bright(inkColor);
+} */
+ 
+
+
+
+
+
+
+
+
+
+if (inkColor_final === null) {
+	inkColor_final = Medium(inkColor);
+} else {
+	inkColor_final = null;
 }
 
-if (inkColor_Final === 0) {
-	inkColor_Final = Medium(inkColor);
+if (inkColor_final === null) {
+	inkColor_final = Violet(inkColor);
+} else {
+	inkColor_final = null;
 }
 
-if (inkColor_Final === 0) {
-	inkColor_Final = Violet(inkColor);
+if (inkColor_final === null) {
+	inkColor_final = Purple(inkColor);
+} else {
+	inkColor_final = null;
 }
 
-if (inkColor_Final === 0) {
-	inkColor_Final = Purple(inkColor);
+if (inkColor_final === null) {
+	inkColor_final = Orange(inkColor);
+} else {
+	inkColor_final = null;
 }
 
-if (inkColor_Final === 0) {
-	inkColor_Final = Orange(inkColor);
+if (inkColor_final === null) {
+	inkColor_final = Green(inkColor);
+} else {
+	inkColor_final = null;
 }
 
-if (inkColor_Final === 0) {
-	inkColor_Final = Green(inkColor);
+if (inkColor_final === null) {
+	inkColor_final = Grays(inkColor);
+} else {
+	inkColor_final = null;
 }
 
-if (inkColor_Final === 0) {
-	inkColor_Final = Grays(inkColor);
+if (inkColor_final === null) {
+	inkColor_final = Blacks(inkColor);
+} else {
+	inkColor_final = null;
 }
 
-if (inkColor_Final === 0) {
-	inkColor_Final = Blacks(inkColor);
-}
 
-function singleWord(n) {
-	for (i = 0; i < n.length; i++) {
-		switch (n[i]) {
-			case "dark":
-				return "PANTONE Dark Blue C";
-				break;
 
-			case "magenta":
-				return "PANTONE Magenta 0521 C";
-				break;
 
-			case "pink":
-				return "PANTONE Pink C";
-				break;
+alert(inkColor_final)
 
-			case "reflex":
-				return "PANTONE Reflex Blue C";
-				break;
 
-			case "rhodamine":
-				return "PANTONE Rhodamine Red C";
-				break;
 
-			case "rubine":
-				return "PANTONE Rubine Red C";
-				break;
 
-			case "0961":
-				return "PANTONE Black 0961 C";
-				break;
 
-			case "072":
-				return "PANTONE Blue 072 C";
-				break;
 
-			case "0821":
-				return "PANTONE Blue 0821 C";
-				break;
 
-			case "0921":
-				return "PANTONE Green 0921 C";
-				break;
 
-			case "0521":
-				return "PANTONE Magenta 0521 C";
-				break;
 
-			case "032":
-				return "PANTONE Red 032 C";
-				break;
 
-			case "021":
-				return "PANTONE Red C";
-				break;
 
-			case "0331":
-				return "PANTONE Red 0331 C";
-				break;
+function Grays(n) {
+	//inkColor is an array of strings:    ["warm", "gray", "8"]
 
-			default:
-				return 0;
+	var hotel;
+	var grayNumbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];
+
+	for (t = 0; t < n.length; t++) {
+		//This sets up the first loop to look for the word 'gray'.
+		if (n[t] === "gray" || n[t] === "grey") {
+			for (r = 0; r < n.length; r++) {
+				//This sets up the second loop to look for the words 'warm' or 'cool'.
+				if (n[r] === "warm") {
+					hotel = "Warm Gray ";
+				} else if (n[r] === "cool") {
+					hotel = "Cool Gray ";
+				}
+
+				for (s = 0; s < grayNumbers.length; s++) {
+					if (n[r] === grayNumbers[s]) {
+						return "PANTONE " + hotel + grayNumbers[s] + " C"; // Warm Gray 8
+					}
+				}
+			}
 		}
 	}
 }
-
-function Grays(n) {
-	for (t = 0; t < n.length; t++) {
-		if (n[t] === "gray" || n[t] === "grey") {
-			for (r = 0; r < n.length; r++) {
-				if (n[r] === "warm") {
-					var hotel = "Warm Gray ";
-				}
-
-				if (n[r] === "cool") {
-					var hotel = "Cool Gray ";
-				}
-			}
-			var grayNumbers = [
-				"1",
-				"2",
-				"3",
-				"4",
-				"5",
-				"6",
-				"7",
-				"8",
-				"9",
-				"10",
-				"11",
-			];
-			for (s = 0; s < grayNumbers.length; s++) {
-				if (n[r] === grayNumbers[s]) {
-					alert(hotel);
-					return "PANTONE " + hotel + grayNumbers[s] + " C"; // Warm Gray 8
-				}
-			}
+function singleWord(n) {
+	// n is an array of strings. ["blue", "0821"]
+	for (i = 0; i < n.length; i++) {
+		if (n[i] === "dark") {
+			return "PANTONE Dark Blue C";
+		} else if (n[i] === "magenta") {
+			return "PANTONE Magenta 0521 C";
+		} else if (n[i] === "pink") {
+			return "PANTONE Pink C";
+		} else if (n[i] === "reflex") {
+			return "PANTONE Reflex Blue C";
+		} else if (n[i] === "rhodamine") {
+			return "PANTONE Rhodamine Red C";
+		} else if (n[i] === "rubine") {
+			return "PANTONE Rubine Red C";
+		} else if (n[i] === "0961") {
+			return "PANTONE Black 0961 C";
+		} else if (n[i] === "072") {
+			return "PANTONE Blue 072 C";
+		} else if (n[i] === "0821") {
+			return "PANTONE Blue 0821 C";
+		} else if (n[i] === "0921") {
+			return "PANTONE Green 0921 C";
+		} else if (n[i] === "0521") {
+			return "PANTONE Magenta 0521 C";
+		} else if (n[i] === "032") {
+			return "PANTONE Red 032 C";
+		} else if (n[i] === "021") {
+			return "PANTONE Red C";
+		} else if (n[i] === "0331") {
+			return "PANTONE Red 0331 C";
 		}
 	}
 }
@@ -258,41 +285,36 @@ function Blacks(n) {
 	for (i = 0; i < n.length; i++) {
 		if (n[i] === "black") {
 			for (y = 0; y < n.length; y++) {
-				switch (n[y]) {
-					case "0961":
-						return "PANTONE Black 0961 C";
-						break;
+				if (n[y] === "0961") {
+					return "PANTONE Black 0961 C";
+				}
 
-					case "neutral":
-						return "PANTONE Neutral Black C";
-						break;
+				if (n[y] === "neutral") {
+					return "PANTONE Neutral Black C";
+				}
 
-					case "2":
-						return "PANTONE Black 2 C";
-						break;
+				if (n[y] === "2") {
+					return "PANTONE Black 2 C";
+				}
 
-					case "3":
-						return "PANTONE Black 3 C";
-						break;
+				if (n[y] === "3") {
+					return "PANTONE Black 3 C";
+				}
 
-					case "4":
-						return "PANTONE Black 4 C";
-						break;
+				if (n[y] === "4") {
+					return "PANTONE Black 4 C";
+				}
 
-					case "5":
-						return "PANTONE Black 5 C";
-						break;
+				if (n[y] === "5") {
+					return "PANTONE Black 5 C";
+				}
 
-					case "6":
-						return "PANTONE Black 6 C";
-						break;
+				if (n[y] === "6") {
+					return "PANTONE Black 6 C";
+				}
 
-					case "7":
-						return "PANTONE Black 7 C";
-						break;
-
-					default:
-						return "PANTONE Black C";
+				if (n[y] === "7") {
+					return "PANTONE Black 7 C";
 				}
 			}
 		}
@@ -357,21 +379,16 @@ function Medium(n) {
 	for (i = 0; i < n.length; i++) {
 		if (n[i] === "medium") {
 			for (y = 0; y < n.length; y++) {
-				switch (n[y]) {
-					case "yellow":
-						return "PANTONE Medium Yellow C";
-						break;
+				if (n[y] === "yellow") {
+					return "PANTONE Medium Yellow C";
+				}
 
-					case "purple":
-						return "PANTONE Medium Purple C";
-						break;
+				if (n[y] === "purple") {
+					return "PANTONE Medium Purple C";
+				}
 
-					case "blue":
-						return "PANTONE Medium Blue C";
-						break;
-
-					default:
-						return 0;
+				if (n[y] === "blue") {
+					return "PANTONE Medium Blue C";
 				}
 			}
 		}
@@ -380,7 +397,6 @@ function Medium(n) {
 
 function Bright(n) {
 	for (i = 0; i < n.length; i++) {
-		//null is not an object
 		if (n[i] === "bright") {
 			for (index = 0; index < n.length; index++) {
 				switch (n[i]) {
@@ -397,11 +413,9 @@ function Bright(n) {
 						break;
 
 					default:
-						return 0;
+						return null;
 				}
 			}
 		}
 	}
 }
-
-alert(inkColor_Final);

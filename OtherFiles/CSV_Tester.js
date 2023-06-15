@@ -24,56 +24,14 @@ var alpha = csv.split("\n");
 var bravo = alpha.toString();
 var charlie = bravo.split(",");
 
-/*
-At this point, charlie is a single array of strings.
-This single array must be broken up into separate arrays which contain six elements.
-*/
 /* #endregion */
-
-/* var sampleArray = [
-	"Sarah",
-	"Gillen",
-	"logolighters@live.com",
-	"Logolighters",
-	"US",
-	"y",
-
-	"Darryl",
-	"Quinge",
-	"darryl@pemamerica.com",
-	"PEM America",
-	"US",
-	"n",
-
-	"jonathan",
-	"le",
-	"jonathan@bugbranding.com",
-	"lightning bud",
-	"us",
-	"y",
-
-	"danni",
-	"ashe",
-	"danni@hotbox.com",
-	"danni's hotbox",
-	"us",
-	"n",
-
-	"will",
-	"kunz",
-	"orders@marcopdx.com",
-	"marco pdx",
-	"us",
-	"n",
-]; */
-
-// There are 5 customers in the sampleArray.
 
 charlie.splice(0, 6);
 charlie.pop();
 
 var customerCounter = charlie.length / 6; //This returns the number of customers. It is currently 8.
 
+// #region     This creates customer objects, and assigns the different array elements to different properties of the object.
 function CustomerObject(firstName, lastName, email, company, nationality, vip) {
 	this.firstName = firstName;
 	this.lastName = lastName;
@@ -86,18 +44,19 @@ function CustomerObject(firstName, lastName, email, company, nationality, vip) {
 function Customer() {
 	var echo = charlie.slice(0, 6);
 	charlie.splice(0, 6);
-	echo = new CustomerObject(
+ 	var victor = new CustomerObject(
 		echo[0],
 		echo[1],
 		echo[2],
 		echo[3],
 		echo[4],
 		echo[5]
-	);
-	return echo;
+	); 
+	return victor;
 }
+// #endregion
 
-/* #region  Variables */
+// #region    This creates a maximum number of customer variables of 50.
 var customer01;
 var customer02;
 var customer03;
@@ -145,11 +104,9 @@ var customer47;
 var customer48;
 var customer49;
 var customer50;
-/* #endregion */
+// #endregion
 
-
-
-
+// #region     This creates an array of all 50 of the customer variables.
 var customerListArray = [
 	customer01,
 	customer02,
@@ -199,60 +156,12 @@ var customerListArray = [
 	customer49,
 	customer50
 ];
+// #endregion
+
+customerListArray.length = customerCounter + 1;
+
+for (i=0; i < customerCounter; i++) {
+     customerListArray[i] = Customer();
+}
 
 
-
-var newArray = customerListArray.slice(0, customerCounter);
-
-alert(newArray[0]);
-
-/* #region   */
-/* var customer01 = Customer();
-var customer02 = Customer();
-var customer03 = Customer();
-var customer04 = Customer();
-var customer05 = Customer();
-var customer06 = Customer();
-var customer07 = Customer();
-var customer08 = Customer();
-var customer09 = Customer();
-var customer10 = Customer();
-var customer11 = Customer();
-var customer12 = Customer();
-var customer13 = Customer();
-var customer14 = Customer();
-var customer15 = Customer();
-var customer16 = Customer();
-var customer17 = Customer();
-var customer18 = Customer();
-var customer19 = Customer();
-var customer21 = Customer();
-var customer22 = Customer();
-var customer23 = Customer();
-var customer24 = Customer();
-var customer25 = Customer();
-var customer26 = Customer();
-var customer27 = Customer();
-var customer28 = Customer();
-var customer29 = Customer();
-var customer31 = Customer();
-var customer32 = Customer();
-var customer33 = Customer();
-var customer34 = Customer();
-var customer35 = Customer();
-var customer36 = Customer();
-var customer37 = Customer();
-var customer38 = Customer();
-var customer39 = Customer();
-var customer41 = Customer();
-var customer42 = Customer();
-var customer43 = Customer();
-var customer44 = Customer();
-var customer45 = Customer();
-var customer46 = Customer();
-var customer47 = Customer();
-var customer48 = Customer();
-var customer49 = Customer();
-var customer50 = Customer(); 
-*/
-/* #endregion */
