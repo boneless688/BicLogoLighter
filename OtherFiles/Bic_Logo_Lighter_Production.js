@@ -1,10 +1,10 @@
 ﻿//#region      ExtendScript UI Layout
 var master = new Window("dialog")
 master.maximumSize.height = 800
-master.maximumSize.width = 1400
+master.maximumSize.width = 1500
 
 var big = master.add("panel", undefined, "")
-big.alignment = "center"
+big.orientation = "column"
 
 var topPart = big.add("group")
 topPart.orientation = "row"
@@ -19,7 +19,7 @@ customerInfo_outer.orientation = "column"
 var repName = customerInfo_outer.add("statictext", undefined, "Rep name")
 var regulars = customerInfo_outer.add("dropdownlist", undefined, [
 	"Regulars", //0
-	"Jonathan Le - Lightning Bug", //1
+	"Grace Williams- Lightning Bug", //1
 	"Aaron Schimmel - Rockstar Promos", //2
 	"Sarah Gillen - LogoLighters", //3
 	"Mitch Sigurdson - Humble & Fume", //4
@@ -41,7 +41,7 @@ var regulars = customerInfo_outer.add("dropdownlist", undefined, [
 	"Jay Tittman - Rocky Mountain Business Products", //20
 	"High Mountain Imports", //21
 	"Jennifer - Pens R Us", //22
-	"Luvbuds", //23
+	"Chaz - Luvbuds", //23
 	"Alex Lavoie - High Mountain Imports", //24
 	"Sandy Johnson - Show Your Logo Inc", //25
 	"LaVerne Petry - Custom420promos", //26
@@ -53,6 +53,10 @@ var regulars = customerInfo_outer.add("dropdownlist", undefined, [
      "Crystal Arredondo - Promo Shop LA", //32
 
 ])
+
+
+
+regulars.maximumSize.height = 400
 regulars.selection = 0
 
 var repNameCustom = customerInfo_outer.add("statictext", undefined, "Rep name")
@@ -76,17 +80,33 @@ company_A_Edit.characters = 10
 
 var vipCheckbox = companyGroup.add("checkbox", undefined, "VIP")
 
+
+
+
 var designerLeft = topLeft.add("panel", undefined, " ")
 designerLeft.orientation = "row"
+designerLeft.spacing = 10
+
 
 var designerLabel = designerLeft.add("statictext", undefined, "Designer")
 var designerList = designerLeft.add("dropdownlist", undefined, [
 	"MMiraglia",
 	"GVisgaitis",
 	"JBavitz",
-])
+]
+)
+
 designerList.characters = 10
 designerList.selection = 2
+
+var newInkSpacer = designerLeft.add("panel", [100,0,103,30],"")
+var newInks = designerLeft.add("checkbox", undefined, "New Ink Colors")
+
+
+
+
+
+
 
 var topRight = topPart.add("panel", undefined, "")
 topRight.orientation = "column"
@@ -95,17 +115,23 @@ topRight.preferredSize.height = 200
 var orderOne = topRight.add("group")
 orderOne.orientation = "row"
 
+
 var nationalityGroup = orderOne.add("panel", undefined, "")
 nationalityGroup.orientation = "column"
 
 var nationalityUS = nationalityGroup.add("radiobutton", undefined, "US")
 nationalityUS.orientation = "column"
+nationalityUS.alignment = "left"
 nationalityUS.value = false
 var nationalityCanada = nationalityGroup.add(
 	"radiobutton",
 	undefined,
 	"Canadian"
 )
+nationalityCanada.alignment = "left"
+nationalityCanada.value = false
+
+
 
 var jdeNumber = orderOne.add("statictext", undefined, "JDE Number")
 var jdeNumber_edit = orderOne.add("edittext", undefined, "")
@@ -135,17 +161,37 @@ var inHandsDate_edit = orderThree.add("edittext", undefined, "")
 inHandsDate_edit.characters = 10
 //inHandsDate_edit.text = "11/24"
 
-var shipDate = orderThree.add("statictext", undefined, "Ship Date")
+var shipDate = orderThree.add("statictext", undefined, "Shipping Notes")
 var shipDate_edit = orderThree.add("edittext", undefined, "")
 shipDate_edit.characters = 10
 //shipDate_edit.text = "10/13"
 
 var rushCheckbox = orderThree.add("checkbox", undefined, "Rush order")
 
-var spacer = orderThree.add("group")
+var sports = orderThree.add("panel", undefined, "")
+sports.orientation = "row"
+sports.alignement = "left"
 
-var multiPanel = orderThree.add("panel", undefined, "")
-var multi = multiPanel.add("checkbox", undefined, "Multiple Items")
+var sportsType = sports.add("staticText", undefined, "Sport")
+
+var sportsUpc = sports.add("staticText", undefined, "UPC")
+var sportsUpc_edit = sports.add("edittext", undefined, "")
+sportsUpc_edit.characters = 12
+
+var sportsList = orderThree.add("dropdownlist", undefined, [
+	"Football",
+	"Baseball",
+	"Basketball",
+     "Hockey",
+]
+)
+
+
+//var spacer = orderThree.add("group")
+
+var multiPanel = orderOne.add("panel", undefined, "")
+var newThing = multiPanel.add("panel", undefined, "")
+var multi = newThing.add("checkbox", undefined, "Multiple Items")
 var multiNumber = multiPanel.add("edittext", undefined, "Number")
 var multiSub = multiPanel.add("panel", undefined, "")
 multiSub.orientation = "row"
@@ -156,6 +202,8 @@ var multi_bodyColor = multiSub.add("radiobutton", undefined, "Body Color")
 
 var orderFour = topRight.add("group")
 orderFour.orientation = "row"
+orderFour.alignChildren = "left"
+
 
 var instructionsCustomer_title = orderFour.add(
 	"panel",
@@ -207,23 +255,30 @@ var instructionsProduction_edit = instructionsProduction_title.add(
 instructionsProduction_edit.minimumSize.width = 200
 //instructionsProduction_edit.text = "Instructions from Production.";
 
+
+
+
+
+
+
+
 var bottom = big.add("group")
-bottom.orientation = "column"
+bottom.orientation = "row"
+bottom.alignChildren = 'top'
 
 var itemLeft = bottom.add("group")
-itemLeft.orientation = "row"
+itemLeft.orientation = "column"
+itemLeft.alignChildren = "left"
 
-var itemTopRow = itemLeft.add("panel", undefined, "")
-itemTopRow.orientation = "row"
+var itemRight = bottom.add("group")
+itemRight.orientation = "column"
 
-var descriptionSide = itemTopRow.add("group")
-descriptionSide.orientation = "column"
 
-var colors = itemTopRow.add("group")
-colors.margins = [40, 0, 0, 0]
 
-var bodyColor = descriptionSide.add("panel", undefined, "Body Color")
+
+var bodyColor = itemLeft.add("panel", undefined, "Body Color")
 bodyColor.orientation = "row"
+bodyColor.alignChildren = 'top'
 
 var bodyColorList = bodyColor.add("dropdownlist", undefined, [
 	"Black", //0
@@ -243,16 +298,13 @@ var bodyColorList = bodyColor.add("dropdownlist", undefined, [
 	"Sleeve", //14
      "-", //15
      "360", //16
+     "-", //17
+     "Sports",  //18
+     "-", //19
+     "All"  //20
 ])
 
-                          bodyColorList.selection = 0
-
-var mockup = bodyColor.add("panel", undefined)
-var mockupCheckbox = bodyColor.add("checkbox", undefined, "Mockup")
-var genericCheckbox = bodyColor.add("checkbox", undefined, "Generic")
-
-mockupCheckbox.value = false
-genericCheckbox.value = false
+bodyColorList.selection = 0
 
 var doubleSided = bodyColor.add("panel", undefined)
 var doubleSidedCheckbox = bodyColor.add(
@@ -260,30 +312,64 @@ var doubleSidedCheckbox = bodyColor.add(
 	undefined,
 	"2 Sided Assortment"
 )
+doubleSidedCheckbox.value = false
 
-                           doubleSidedCheckbox.value = false
 
-var descriptionBox = descriptionSide.add("statictext", undefined, "Description")
-var descriptionBox_edit = descriptionSide.add("edittext", undefined, "")
-descriptionBox_edit.characters = 20
+
+
+
+
+
+var mockup = itemLeft.add("panel", undefined)
+mockup.orientation = "row"
+mockup.spacing = 10
+var mockupCheckbox = mockup.add("checkbox", undefined, "Mockup")
+var genericCheckbox = mockup.add("checkbox", undefined, "Generic")
+var upcCheckbox = mockup.add("checkbox", undefined, "Integrated UPC")
+mockupCheckbox.value = false
+genericCheckbox.value = false
+upcCheckbox.value = false
+
+
+var nango = itemLeft.add("group")
+nango.alignChildren = 'left'
+nango.margins = [0,25,0,0]
+
+
+
+var descriptionBox = nango.add("statictext", undefined, "Description")
+var descriptionBox_edit = nango.add("edittext", undefined, "")
+descriptionBox_edit.characters = 28
 //descriptionBox_edit.text = "the only thing"
 
-var autoSave = descriptionSide.add("checkbox", undefined, "Save the PDF?")
-                           autoSave.value = true
+var autoSave = nango.add("checkbox", undefined, "Save the PDF?")
+autoSave.value = true
 
-var spacerBox = descriptionSide.add("statictext", undefined, "")
+var nango2 = itemLeft.add("group")
+var spacerBox = nango2.add("statictext", undefined, "")
 
-var originalArt = descriptionSide.add("statictext", undefined, "Original Art")
-var originalArt_edit = descriptionSide.add("edittext", undefined, "")
-originalArt_edit.characters = 20
+var originalArt = nango2.add("statictext", undefined, "Original Art")
+var originalArt_edit = nango2.add("edittext", undefined, "")
+originalArt_edit.characters = 15
 //originalArt_edit.text = "original art"
 
-var notes = descriptionSide.add("statictext", undefined, "Notes")
-var notes_edit = descriptionSide.add("edittext", undefined, "")
-notes_edit.characters = 20
+var notes = nango2.add("statictext", undefined, "Notes")
+var notes_edit = nango2.add("edittext", undefined, "")
+notes_edit.characters = 15
 //notes_edit.text = "These are the notes."
 
-var inkMaster = colors.add("group")
+
+var bottomSpacerBox = nango.add("statictext", undefined, "")
+
+
+
+
+
+
+
+
+
+ var inkMaster = itemRight.add("group")
 inkMaster.orientation = "column"
 var inkColors_1 = inkMaster.add("group")
 var inkColors_2 = inkMaster.add("group")
@@ -351,7 +437,7 @@ inkBox_Master_C4.orientation = "column"
 var ink_C4 = inkBox_Master_C4.add("edittext", undefined, "")
 ink_C4.characters = 10
 //ink_C4.text = "571 teal"
-var ink_C4_Double = inkBox_Master_C4.add("checkbox", undefined, "Double hit")
+var ink_C4_Double = inkBox_Master_C4.add("checkbox", undefined, "Double hit") 
 
 /*/* #region  OKAY / Cancel buttons */
 var buttonGroup = master.add("panel")
@@ -365,6 +451,11 @@ master.show()
 
 //#endregion
 
+
+if (newInks.value === true) {
+     autoSave.value = false;
+     jdeNumber_edit.text = "8"
+}
 if (jdeNumber_edit.text.length > 0 || webNumber_edit.text.length > 0  || mockupCheckbox.value === true) {
 //#region     OPEN TEMPLATE FILE
 // OPEN TEMPLATES WITH RELATIVE PATHS
@@ -391,6 +482,7 @@ if (
 					_scriptPath.lastIndexOf(_separater)
 				)
 				app.open(File(_path + "/Templates/Proof_Template_Assorted_1Side.ait"))
+
 			} else {
 				var _scriptPath = $.fileName
 				var _separater = ""
@@ -407,6 +499,7 @@ if (
 				)
 				app.open(File(_path + "/Templates/Proof_Template_Assorted_2Side.ait"))
 			}
+
 		} else if (bodyColorList.selection.index === 14) {
 			var _scriptPath = $.fileName
 			var _separater = ""
@@ -419,7 +512,20 @@ if (
 			}
 			var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater))
 			app.open(File(_path + "/Templates/Proof_Template_Sleeve.ait"))
-		} else {
+          } else if (bodyColorList.selection.index === 20) {
+			var _scriptPath = $.fileName
+			var _separater = ""
+
+			//Code to get separater based on OS
+			if ($.os.toLowerCase().indexOf("mac") != -1) {
+				_separater = "/"
+			} else if ($.os.toLowerCase().indexOf("window") != -1) {
+				_separater = "\\"
+			}
+			var _path = _scriptPath.substring(0, _scriptPath.lastIndexOf(_separater))
+			app.open(File(_path + "/Templates/All_Body_Colors.ait"))
+
+          } else {
 			var _scriptPath = $.fileName
 			var _separater = ""
 			//Code to get separater based on OS
@@ -462,11 +568,11 @@ if (
 	}
 
 	if (regulars.selection.text === "Regulars") {
-		;(rep.name = capitalizeSpaces(repNameEdit.text)),
-			(rep.email = repEmail_Edit.text.toLowerCase())
-		;(rep.company = capitalizeSpaces(company_A_Edit.text)),
-			(rep.nationality = null),
-			(rep.vip = null)
+          (rep.name = capitalizeSpaces(repNameEdit.text)),
+          (rep.email = repEmail_Edit.text.toLowerCase()),
+          (rep.company = capitalizeSpaces(company_A_Edit.text)),
+          (rep.nationality = null),
+          (rep.vip = null)
 
 		if (nationalityUS.value === true) {
 			rep.nationality = "US"
@@ -476,8 +582,8 @@ if (
 	}
 
 	if (regulars.selection.index === 1) {
-		rep.name = "Jonathan Le"
-		rep.email = "jonathan@bugbranding.com"
+		rep.name = "Grace Williams"
+		rep.email = "grace@bugbranding.com"
 		rep.company = "Lightning Bug Branding"
 		rep.nationality = "US"
 		rep.vip = true
@@ -514,7 +620,6 @@ if (
 		rep.nationality = "Canada"
 		rep.vip = false
 	} 
-
 
 
 	if (regulars.selection.index === 6) {
@@ -627,7 +732,7 @@ if (
 		rep.email = "jay@rmbp.com"
 		rep.company = "Rocky Mountain Business Products"
 		rep.nationality = "US"
-		rep.vip = false
+		rep.vip = true
 	}
 
 	if (regulars.selection.index === 21) {
@@ -647,8 +752,8 @@ if (
 	}
 
 	if (regulars.selection.index === 23) {
-		rep.name = "Kevin Giles"
-		rep.email = "kevin@luvbuds.co"
+		rep.name = "Chaz Glaze"
+		rep.email = "cglaze@luvbuds.co"
 		rep.company = "Luvbuds, LLC"
 		rep.nationality = "US"
 		rep.vip = false
@@ -737,9 +842,9 @@ if (
           rep.nationality =  "US"
      }
 
-     if(nationalityCanada.value ===  true) {
-          rep.nationality = "Canada"
-     }
+
+
+
      
           
 
@@ -763,24 +868,23 @@ if (
      }
 
 
-
-
-
 	var repNameOutput = app.activeDocument.textFrames.getByName("Rep")
-	repNameOutput.contents = rep.name
+	repNameOutput.contents = rep.name.trim();
 
 	var repNameSignature =
 		app.activeDocument.textFrames.getByName("RepName_Signature")
-	repNameSignature.contents = rep.name
+	repNameSignature.contents = rep.name.trim();
 
 	var companyName = app.activeDocument.textFrames.getByName("Company")
-	companyName.contents = rep.company
+	companyName.contents = rep.company.trim();
 
 	//#endregion
 
 //#region     NATIONALITY
 
-	if (nationalityCanada.value === true || rep.nationality === "Canada") {
+
+
+if (nationalityCanada.value === true || rep.nationality === "Canada") {
 		nationalityCanada.value = true
 		nationalityUS.value = false
 	}
@@ -791,7 +895,7 @@ if (
 		nationalityCanada.value = false
 	}
 
-     if (nationalityUS.value === false && nationalityCanada.value === false) {
+      if (nationalityUS.value === false && nationalityCanada.value === false) {
           app.activeDocument.layers.getByName("Canada").visible = true
 		app.activeDocument.layers.getByName("Canada").remove()
 		app.activeDocument.layers.getByName("USA").visible = true
@@ -808,15 +912,18 @@ if (
 		app.activeDocument.layers.getByName("Canada").remove()
 		app.activeDocument.layers.getByName("USA").visible = true
 	}
+
 	//#endregion
 
 //#region     INK COLORS
 	//#region    If the order uses the standard template, then the body and ink color code is run. If it isn't, then the code is bypassed.
 
+
+     var fileName_One;
 	function neonInk(inkString, bravo) {
 		//The group name in Illustrator is A1_Warning, etc.
 		var neonInks = ["801", "802", "803", "804", "805", "806", "807"]
-		var fileName_One = inkString.search(" ")
+		fileName_One = inkString.search(" ")
 		var numberOnly = inkString.substring(0, fileName_One)
 		for (i = 0; i < neonInks.length; i++) {
 			if (numberOnly === neonInks[i]) {
@@ -906,9 +1013,9 @@ if (
 
 		var newBlack = new CMYKColor()
 		newBlack.black = 100
-		newBlack.cyan = 1
-		newBlack.magenta = 1
-		newBlack.yellow = 1
+		newBlack.cyan = 100
+		newBlack.magenta = 100
+		newBlack.yellow = 99
 
 		var spotBlack = app.activeDocument.spots.add()
 		spotBlack.colorType = ColorModel.SPOT
@@ -976,13 +1083,14 @@ Actual names:
 ['Black 0961', 'Black 2', 'Black 3', 'Black 4', 'Black 5', 'Black 6', 'Black 7', 'Black', 'Blue 072', 'Blue 0821', 'Bright Red', 'Dark Blue', 'Green 0921', 'Green', 'Magenta 0521', 'Medium Purple', 'Orange 021', 'Pink', 'Purple', 'Red 032', 'Red 0331', 'Reflex Blue', 'Rhodamine Red', 'Rubine Red', 'Violet 0631', 'Violet', 'Warm Red', 'Yellow 012', 'Yellow 0131', 'Yellow', 'Cool Gray 1', 'Cool Gray 2', 'Cool Gray 3', 'Cool Gray 4', 'Cool Gray 5', 'Cool Gray 6', 'Cool Gray 7', 'Cool Gray 8', 'Cool Gray 9', 'Cool Gray 10', 'Cool Gray 11', 'Warm Gray 1', 'Warm Gray 2', 'Warm Gray 3', 'Warm Gray 4', 'Warm Gray 5', 'Warm Gray 6', 'Warm Gray 7', 'Warm Gray 8', 'Warm Gray 9', 'Warm Gray 10', 'Cool Gray 11']
 */
 
-		var inksNamedArray = [
-			"blue 072",
-			"magenta 0521",
-			"orange 021",
-			"red 032",
-			"red 0331"
-		]
+var inksNamedArray = [
+     "blue 072",
+     "magenta 0521",
+     "orange 021",
+     "red 032",
+     "red 0331",
+     "yellow 012"
+]
 		for (i = 0; i < inksNamedArray.length; i++) {
 			if (ink_A1.text === inksNamedArray[i]) {
 				item_A1_name.contents =
@@ -2068,8 +2176,21 @@ if (bodyColorList.selection < 10) {
 	var item_originalArt_C = "original art side C"
 	//#endregion
 
-//#region     Functions
-	function totalItems_function() {
+//#region                       FUNCTIONS
+	
+function threeSixty () {
+if (rep.nationality == "Canada" && bodyColorList.selection < 16) {
+     app.activeDocument.layerItems.getByName("Canada_360").remove()
+}
+
+if (rep.nationality == "US" && bodyColorList.selection < 16) {
+     app.activeDocument.layerItems.getByName("USA_360").remove()
+}
+}
+
+
+
+function totalItems_function() {
 		var total = app.activeDocument.textFrames.getByName("Item Total")
 		if (multiNumber.text === "Number") {
 			total.contents = "1"
@@ -2141,7 +2262,8 @@ if (bodyColorList.selection < 10) {
 	function notes_function() {
 		var notes = app.activeDocument.textFrames.getByName("Notes text")
 		notes.contents = descriptionBox_edit.text + "    " + notes_edit.text
-	}
+     }
+	
 	function currentDate() {
 		var currentDate = new Date()
 		var date = currentDate.toDateString()
@@ -2170,7 +2292,7 @@ if (bodyColorList.selection < 10) {
           var beta = inHandsDate_edit.text.split(" ");
         
           var indii = beta.slice(2, beta.length);
-          var calli = beta[0] + " / " + beta[1];
+          var calli = beta[0] + "/" + beta[1];
           indii = indii.join(" ");
         
           if (beta.length === 0) {
@@ -2194,8 +2316,8 @@ if (bodyColorList.selection < 10) {
 			jdeBack.contents = jdeNumber_edit.text
 		}
 	}
-
-	function repInfo() {
+     
+     function repInfo() {
 		if (
 			bodyColorList.selection.index === 11 ||
 			bodyColorList.selection.index === 12
@@ -2336,24 +2458,7 @@ if (bodyColorList.selection < 10) {
 			emptyLayers[i].remove()
 		}
 	}
-/* 	function getEmptyLayers(container, arr) {
-		var layers = container.layers
-		for (var ii = 0; ii < layers.length; ii++) {
-			try {
-				var ilayer = layers[ii]
-				ilayer.canDelete = true
-				if (ilayer.layers.length > 0) {
-					getEmptyLayers(ilayer, arr)
-				}
-				if (ilayer.pageItems.length == 0 && ilayer.canDelete) {
-					arr.push(ilayer)
-				} else {
-					ilayer.canDelete = false
-					container.canDelete = false
-				}
-			} catch (e) {}
-		}
-	} */
+
 
 	function generic_function() {
 		if (nationalityCanada.value === true && genericCheckbox.value === false) {
@@ -2378,13 +2483,21 @@ if (bodyColorList.selection < 10) {
 			app.activeDocument.groupItems.getByName("USA_GenericGroup").remove()
 			app.activeDocument.groupItems.getByName("USA_Group").visible = true
 		}
+		if (nationalityUS.value === true && genericCheckbox.value === true) {
+			app.activeDocument.groupItems.getByName("USA_GenericGroup").visible = false
+			app.activeDocument.groupItems.getByName("USA_GenericGroup").remove()
+			app.activeDocument.groupItems.getByName("USA_Group").visible = false
 		}
+
+
+		}
+         
+
 	
 	//#endregion
 
 //#region     FILENAME
 
-	var fileName_One;
 
 	if (bodyColorList.selection < 10) {
 		fileName_One = prefix() + "_" + capitalize(descriptionBox_edit.text) + "_A"
@@ -2442,6 +2555,27 @@ if (bodyColorList.selection < 10) {
 
 	if (bodyColorList.selection == 14) {
 		// Sleeve
+
+
+          if (upcCheckbox.value === true) {
+               if(nationalityCanada.value === true) {
+                    
+                app.activeDocument.groupItems
+                         .getByName("UPC Generic Canada")
+                         .remove()
+                    }
+
+
+
+               if(nationalityUS.value === true) {
+                    app.activeDocument.groupItems
+                         .getByName("UPC USA Generic")
+                         .remove()
+                    }
+               }
+
+
+
 		if (multi.value === true) {
 			fileName_One =
 				"SLEEVE_" +
@@ -2463,10 +2597,38 @@ if (bodyColorList.selection < 10) {
 	}
 
 
+
+	if (bodyColorList.selection == 15) {
+		// Sleeve
+		if (multi.value === true) {
+			fileName_One =
+				"SLEEVE_" +
+				prefix() +
+				"_" +
+				capitalize(descriptionBox_edit.text) +
+				"_01_A"
+		} else {
+			fileName_One =
+				"SLEEVE_" + prefix() + "_" + capitalize(descriptionBox_edit.text) + "_A"
+		}
+	} else if (bodyColorList.selection == 15 && multi.value === true) {
+		fileName_One =
+			"SLEEVE_" +
+			prefix() +
+			"_" +
+			capitalize(descriptionBox_edit.text) +
+			"_01_A"
+	}
+
+
+
+
+
 	//#endregion
 
 //#region     FUNCTION CALLS
-	repInfo()
+	//threeSixty();
+     repInfo()
 	totalItems_function()
 	generic_function()
 	mockup_function()
@@ -2483,6 +2645,7 @@ if (bodyColorList.selection < 10) {
 	proofDate()
 	backDate()
 	filenameOutput()
+     
 
 	//#endregion
 
@@ -2544,7 +2707,50 @@ if (bodyColorList.selection < 10) {
 	
 if (doubleSidedCheckbox.value == true)
 	 {
-		//If the Double Sided checkbox is checked, this block runs.
+          if (
+               bodyColorList.selection.index == 11
+          ) {
+               if (ink_A1.text.length < 1) {
+                    ink_A1.text = "white";
+                    var lightAssortInk = app.activeDocument.textFrames.getByName(
+                         "A1 Screen Ink Color"
+                    )
+                    lightAssortInk.contents = "White"
+                    item_A1_name.contents = "White"
+                    item_A1_screenName.contents = "White"
+                    item_A1_color.fillColor = newSpotColor
+                    item_A1_chip.fillColor = newSpotColor
+                    item_A1_frame.strokeWidth = 1
+                    item_A1_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
+               }
+          }
+
+          if (
+               bodyColorList.selection.index === 12
+               ) {
+               if (ink_A1.text.length < 1) {
+                    var lightAssortInk = app.activeDocument.textFrames.getByName(
+                         "A1 Screen Ink Color"
+                    )
+                    lightAssortInk.contents = "Black"
+                    item_A1_name.contents = "Black"
+                    item_A1_screenName.contents = "Black"
+                    item_A1_color.fillColor = newBlack
+                    item_A1_chip.fillColor = newBlack
+                    item_A1_frame.strokeWidth = 1
+                    item_A1_frame.strokeColor = app.activeDocument.swatches.getByName("Black").color
+     
+                    if (ink_A2.text.length < 1) {
+                         app.activeDocument.groupItems.getByName("Screen2").remove()
+                    }
+                    if (ink_A3.text.length < 1) {
+                         app.activeDocument.groupItems.getByName("Screen3").remove()
+                    }
+                    if (ink_A4.text.length < 1) {
+                         app.activeDocument.groupItems.getByName("Screen4").remove()
+                    }
+               }
+
 		var A1_Name_Back = app.activeDocument.textFrames.getByName("A1_Name_Back")
 		var A2_Name_Back = app.activeDocument.textFrames.getByName("A2_Name_Back")
 		var A3_Name_Back = app.activeDocument.textFrames.getByName("A3_Name_Back")
@@ -2575,15 +2781,15 @@ if (doubleSidedCheckbox.value == true)
 		var C3_Frame_Back = app.activeDocument.pathItems.getByName("C3_Frame_Back")
 		var C4_Frame_Back = app.activeDocument.pathItems.getByName("C4_Frame_Back")
 
-		A1_Name_Back.contents = ink_A1.text
-		A2_Name_Back.contents = ink_A2.text
-		A3_Name_Back.contents = ink_A3.text
-		A4_Name_Back.contents = ink_A4.text
+		A1_Name_Back.contents = "PANTONE" + " " + ink_A1.text
+		A2_Name_Back.contents = "PANTONE" + " " + ink_A2.text
+		A3_Name_Back.contents = "PANTONE" + " " + ink_A3.text
+		A4_Name_Back.contents = "PANTONE" + " " + ink_A4.text
 
-		C1_Name_Back.contents = ink_C1.text
-		C2_Name_Back.contents = ink_C2.text
-		C3_Name_Back.contents = ink_C3.text
-		C4_Name_Back.contents = ink_C4.text
+		C1_Name_Back.contents = "PANTONE" + " " + ink_C1.text
+		C2_Name_Back.contents = "PANTONE" + " " + ink_C2.text
+		C3_Name_Back.contents = "PANTONE" + " " + ink_C3.text
+		C4_Name_Back.contents = "PANTONE" + " " + ink_C4.text
 
 		A1_Color_Back.fillColor = item_A1_color.fillColor
 		A2_Color_Back.fillColor = item_A2_color.fillColor
@@ -2614,6 +2820,7 @@ if (doubleSidedCheckbox.value == true)
 		C2_Frame_Back.strokeColor = item_C2_frame.strokeColor
 		C3_Frame_Back.strokeColor = item_C3_frame.strokeColor
 		C4_Frame_Back.strokeColor = item_C4_frame.strokeColor
+               }
 
 		app.activeDocument.textFrames.getByName("FileName_Back").contents =
 			fileName_One
@@ -2650,7 +2857,8 @@ if (doubleSidedCheckbox.value == true)
 
 //#region     SLEEVE
 
-	if (bodyColorList.selection.index === 14) {
+
+	if (bodyColorList.selection.index === 14 || bodyColorList.selection.index === 15) {
 		var alphaFileName = app.activeDocument.textFrames.getByName("FileName")
 		alphaFileName.contents = fileName_One
 	}
@@ -2868,6 +3076,12 @@ if (doubleSidedCheckbox.value == true)
 			app.activeDocument.textFrames.getByName(
 				"Production Instructions"
 			).contents = instructionsProduction_edit.text
+
+			app.activeDocument.textFrames.getByName(
+                    "Printers Text Box"
+			).contents = instructionsProduction_edit.text
+
+
 		}
 
 		if (instructionsCustomer_edit.text.length < 1) {
@@ -2886,7 +3100,7 @@ if (doubleSidedCheckbox.value == true)
 			app.activeDocument.groupItems
 				.getByName("Production Instructions Group")
 				.remove()
-		}
+               }
 
 		if (bodyColorList.selection.index < 14) {
 			if (
@@ -2899,6 +3113,7 @@ if (doubleSidedCheckbox.value == true)
 			}
 		}
 	}
+
 
 	//#endregion
 
@@ -2963,6 +3178,7 @@ if (doubleSidedCheckbox.value == true)
 			app.activeDocument.textFrames.getByName("C4 Screen Number")
 		screenNumberLast_8.contents = screenTotal
 	}
+
 
 	if (fileName_One.length > 35) {
 		var fileName_box = app.activeDocument.textFrames.getByName("FileName")
@@ -3043,11 +3259,11 @@ if (autoSave.value === true) {
 			doc.saveAs(File(docPath + "/" + fileName_One + ".pdf"), opts)
 		}
           
-          if (bodyColorList.selection.index === 14) {
+          if (bodyColorList.selection.index === 14 || bodyColorList.selection.index === 15) {
 			doc.saveAs(File(sleevePath + "/" + fileName_One + ".pdf"), opts)
 		}
 
-          if (bodyColorList.selection.index === 16) {
+          if (bodyColorList.selection.index === 17) {
 			doc.saveAs(File(docPath + "/" + fileName_One + ".pdf"), opts)
 		}
 	}
@@ -3066,5 +3282,7 @@ if (autoSave.value === true) {
 The single side dark assortment that uses the single default ink color doesn't delete the unused screen info groups.
 
 line 2520  - No such element    var A1_Name_Back = app.activeDocument.textFrames.getByName("A1_Name_Back")
+
+The color PANTONE Red 032 C throws an error.
 
 */
