@@ -1344,7 +1344,8 @@ Actual names:
 		}
 
           if (ink_A2.text.length < 1) {
-               app.activeDocument.layers.getByName("     2").remove();
+               app.activeDocument.layers.getByName("_____2").visible = true;
+               app.activeDocument.layers.getByName("_____2").remove();
           }
 
 		if (ink_A2_Double.value === true) {
@@ -1475,7 +1476,8 @@ Actual names:
 		}
 
           if (ink_A3.text.length < 1) {
-               app.activeDocument.layers.getByName("     3").remove();
+               app.activeDocument.layers.getByName("_____3").visible = true;
+               app.activeDocument.layers.getByName("_____3").remove();
           }
 
 		if (ink_A3_Double.value === true) {
@@ -1606,7 +1608,8 @@ Actual names:
 		}
 
           if (ink_A4.text.length < 1) {
-               app.activeDocument.layers.getByName("     4").remove();
+               app.activeDocument.layers.getByName("_____4").visible = true;
+               app.activeDocument.layers.getByName("_____4").remove();
           }
 
 		if (ink_A4_Double.value === true) {
@@ -1750,7 +1753,8 @@ Actual names:
 		}
 
           if (ink_C1.text.length < 1) {
-               app.activeDocument.layers.getByName("     5").remove();
+               app.activeDocument.layers.getByName("_____5").visible = true;
+               app.activeDocument.layers.getByName("_____5").remove();
           }
 		//#endregion
 
@@ -1876,7 +1880,8 @@ Actual names:
 		}
 
           if (ink_C2.text.length < 1) {
-               app.activeDocument.layers.getByName("     6").remove();
+               app.activeDocument.layers.getByName("_____6").visible = true;
+               app.activeDocument.layers.getByName("_____6").remove();
           }
 
 		if (ink_C2_Double.value === true) {
@@ -2009,7 +2014,8 @@ Actual names:
 		}
 
           if (ink_C3.text.length < 1) {
-               app.activeDocument.layers.getByName("     7").remove();
+               app.activeDocument.layers.getByName("_____7").visible = true;
+               app.activeDocument.layers.getByName("_____7").remove();
           }
 
 		if (ink_C3_Double.value === true) {
@@ -2148,7 +2154,8 @@ Actual names:
 		}
 
           if (ink_C4.text.length < 1) {
-               app.activeDocument.layers.getByName("     8").remove();
+               app.activeDocument.layers.getByName("_____8").visible = true;
+               app.activeDocument.layers.getByName("_____8").remove();
           }
 
 		if (bodyColorList.selection.index < 11) {
