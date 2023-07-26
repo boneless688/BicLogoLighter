@@ -17,23 +17,20 @@ var cancelButton = buttonGroup.add("button", undefined, "Cancel");
 
 master.show();
 
+
+
+
 var approvalDate = app.activeDocument.textFrames.getByName("Approval Date");
 approvalDate.contents = approvalDate_edit.text;
 
-
-
-
-
 try {
-
      app.activeDocument.textFrames.getByName("Approval Date Back");
      var approvalDateBack = app.activeDocument.textFrames.getByName("Approval Date Back");
      approvalDateBack.contents = approvalDate_edit.text;
      }
  
  catch (e) {
- 
-     
+
 }
 
 
