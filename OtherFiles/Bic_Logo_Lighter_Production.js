@@ -298,9 +298,13 @@ mockup.spacing = 10;
 var mockupCheckbox = mockup.add("checkbox", undefined, "Mockup");
 var genericCheckbox = mockup.add("checkbox", undefined, "Generic");
 var upcCheckbox = mockup.add("checkbox", undefined, "Integrated UPC");
+var preApprovedCheckbox = mockup.add("checkbox", undefined, "Pre Approved");
+
 mockupCheckbox.value = false;
 genericCheckbox.value = false;
 upcCheckbox.value = false;
+preApprovedCheckbox.value = false;
+
 
 var nango = itemLeft.add("group");
 nango.alignChildren = "left";
@@ -2449,6 +2453,16 @@ Actual names:
 		}
 	}
 
+     function preApproved() {
+          if (preApprovedCheckbox.value == true) {
+               var preApprovedDate = app.activeDocument.textFrames.getByName("Approval Date");
+               preApprovedDate.contents = currentDate();
+               app.activeDocument.groupItems.getByName("Approval Cover").visible = true;
+               app.activeDocument.groupItems.getByName("Approval Cover").remove();
+          }
+
+     }
+
 	function generic_function() {
 		if (nationalityCanada.value === true && genericCheckbox.value === false) {
 			app.activeDocument.groupItems.getByName(
@@ -2623,6 +2637,7 @@ Actual names:
 	designer_function();
 	proofDate();
 	backDate();
+     preApproved()
 	filenameOutput();
 
 	//#endregion
