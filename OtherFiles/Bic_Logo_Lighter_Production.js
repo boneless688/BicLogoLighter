@@ -305,7 +305,6 @@ genericCheckbox.value = false;
 upcCheckbox.value = false;
 preApprovedCheckbox.value = false;
 
-
 var nango = itemLeft.add("group");
 nango.alignChildren = "left";
 nango.margins = [0, 25, 0, 0];
@@ -971,18 +970,22 @@ if (
 		var newSpotColor = new SpotColor();
 		newSpotColor.spot = spotWhite;
 
-		var newBlack = new CMYKColor();
+ 		var newBlack = new CMYKColor();
 		newBlack.black = 100;
 		newBlack.cyan = 100;
 		newBlack.magenta = 100;
 		newBlack.yellow = 99;
+
 
 		var spotBlack = app.activeDocument.spots.add();
 		spotBlack.colorType = ColorModel.SPOT;
 		spotBlack.name = "Spot Black";
 		spotBlack.color = newBlack;
 		var newSpotBlack = new SpotColor();
-		newSpotBlack.spot = spotBlack;
+		newSpotBlack.spot = spotBlack; 
+
+
+
 
 		var standardInkNumber = [
 			"114",
@@ -1070,20 +1073,6 @@ Actual names:
 				}
 			}
 		}
-          
-          
-/*           if (ink_A2.text.length > 0) {
-			var masque = app.activeDocument.layers["Masque"];
-			var sideATrim = app.activeDocument.pathItems.getByName("Side A Trim");
-			sideATrim.move(masque, ElementPlacement.PLACEATBEGINNING);
-		}
-          
-          
-          if (ink_C2.text.length > 0) {F
-			var masque = app.activeDocument.layers["Masque"];
-			var sideCTrim = app.activeDocument.pathItems.getByName("Side C Trim");
-			sideCTrim.move(masque, ElementPlacement.PLACEATBEGINNING);
-		} */
 
 		//#region     A1
 		if (ink_A1.text.length > 0) {
@@ -1347,10 +1336,10 @@ Actual names:
 				app.activeDocument.swatches.getByName("Black").color;
 		}
 
-          if (ink_A2.text.length < 1) {
-               app.activeDocument.layers.getByName("_____2").visible = true;
-               app.activeDocument.layers.getByName("_____2").remove();
-          }
+		if (ink_A2.text.length < 1) {
+			app.activeDocument.layers.getByName("_____2").visible = true;
+			app.activeDocument.layers.getByName("_____2").remove();
+		}
 
 		if (ink_A2_Double.value === true) {
 			var A2_DoubleBox = app.activeDocument.groupItems.getByName("Double_A2");
@@ -1479,10 +1468,10 @@ Actual names:
 				app.activeDocument.swatches.getByName("Black").color;
 		}
 
-          if (ink_A3.text.length < 1) {
-               app.activeDocument.layers.getByName("_____3").visible = true;
-               app.activeDocument.layers.getByName("_____3").remove();
-          }
+		if (ink_A3.text.length < 1) {
+			app.activeDocument.layers.getByName("_____3").visible = true;
+			app.activeDocument.layers.getByName("_____3").remove();
+		}
 
 		if (ink_A3_Double.value === true) {
 			var A3_DoubleBox = app.activeDocument.groupItems.getByName("Double_A3");
@@ -1492,6 +1481,11 @@ Actual names:
 
 		//#region     A4
 		if (ink_A4.text.length > 0) {
+			var CMYK_White = new CMYKColor();
+			CMYK_White.black = 0;
+			CMYK_White.cyan = 0;
+			CMYK_White.magenta = 0;
+			CMYK_White.yellow = 0;
 			item_A4_frame.fillColor = CMYK_White;
 
 			var pmsTest_A4 = false;
@@ -1611,10 +1605,10 @@ Actual names:
 				app.activeDocument.swatches.getByName("Black").color;
 		}
 
-          if (ink_A4.text.length < 1) {
-               app.activeDocument.layers.getByName("_____4").visible = true;
-               app.activeDocument.layers.getByName("_____4").remove();
-          }
+		if (ink_A4.text.length < 1) {
+			app.activeDocument.layers.getByName("_____4").visible = true;
+			app.activeDocument.layers.getByName("_____4").remove();
+		}
 
 		if (ink_A4_Double.value === true) {
 			var A4_DoubleBox = app.activeDocument.groupItems.getByName("Double_A4");
@@ -1624,6 +1618,11 @@ Actual names:
 
 		//#region     C1
 		if (ink_C1.text.length > 0) {
+			var CMYK_White = new CMYKColor();
+			CMYK_White.black = 0;
+			CMYK_White.cyan = 0;
+			CMYK_White.magenta = 0;
+			CMYK_White.yellow = 0;
 			item_C1_frame.fillColor = CMYK_White;
 
 			var pmsTest_C1 = false;
@@ -1756,14 +1755,19 @@ Actual names:
 			C1_DoubleBox.hidden = false;
 		}
 
-          if (ink_C1.text.length < 1) {
-               app.activeDocument.layers.getByName("_____5").visible = true;
-               app.activeDocument.layers.getByName("_____5").remove();
-          }
+		if (ink_C1.text.length < 1) {
+			app.activeDocument.layers.getByName("_____5").visible = true;
+			app.activeDocument.layers.getByName("_____5").remove();
+		}
 		//#endregion
 
 		//#region     C2
 		if (ink_C2.text.length > 0) {
+			var CMYK_White = new CMYKColor();
+			CMYK_White.black = 0;
+			CMYK_White.cyan = 0;
+			CMYK_White.magenta = 0;
+			CMYK_White.yellow = 0;
 			item_C2_frame.fillColor = CMYK_White;
 
 			var pmsTest_C2 = false;
@@ -1883,10 +1887,10 @@ Actual names:
 				app.activeDocument.swatches.getByName("Black").color;
 		}
 
-          if (ink_C2.text.length < 1) {
-               app.activeDocument.layers.getByName("_____6").visible = true;
-               app.activeDocument.layers.getByName("_____6").remove();
-          }
+		if (ink_C2.text.length < 1) {
+			app.activeDocument.layers.getByName("_____6").visible = true;
+			app.activeDocument.layers.getByName("_____6").remove();
+		}
 
 		if (ink_C2_Double.value === true) {
 			var C2_DoubleBox = app.activeDocument.groupItems.getByName("Double_C2");
@@ -1896,6 +1900,11 @@ Actual names:
 
 		//#region     C3
 		if (ink_C3.text.length > 0) {
+			var CMYK_White = new CMYKColor();
+			CMYK_White.black = 0;
+			CMYK_White.cyan = 0;
+			CMYK_White.magenta = 0;
+			CMYK_White.yellow = 0;
 			item_C3_frame.fillColor = CMYK_White;
 
 			var pmsTest_C3 = false;
@@ -2017,10 +2026,10 @@ Actual names:
 				app.activeDocument.swatches.getByName("Black").color;
 		}
 
-          if (ink_C3.text.length < 1) {
-               app.activeDocument.layers.getByName("_____7").visible = true;
-               app.activeDocument.layers.getByName("_____7").remove();
-          }
+		if (ink_C3.text.length < 1) {
+			app.activeDocument.layers.getByName("_____7").visible = true;
+			app.activeDocument.layers.getByName("_____7").remove();
+		}
 
 		if (ink_C3_Double.value === true) {
 			var C3_DoubleBox = app.activeDocument.groupItems.getByName("Double_C3");
@@ -2036,6 +2045,11 @@ Actual names:
 			bodyColorAlpha.visible = true;
 		}
 		if (ink_C4.text.length > 0) {
+			var CMYK_White = new CMYKColor();
+			CMYK_White.black = 0;
+			CMYK_White.cyan = 0;
+			CMYK_White.magenta = 0;
+			CMYK_White.yellow = 0;
 			item_C4_frame.fillColor = CMYK_White;
 
 			var pmsTest_C4 = false;
@@ -2157,10 +2171,10 @@ Actual names:
 				app.activeDocument.swatches.getByName("Black").color;
 		}
 
-          if (ink_C4.text.length < 1) {
-               app.activeDocument.layers.getByName("_____8").visible = true;
-               app.activeDocument.layers.getByName("_____8").remove();
-          }
+		if (ink_C4.text.length < 1) {
+			app.activeDocument.layers.getByName("_____8").visible = true;
+			app.activeDocument.layers.getByName("_____8").remove();
+		}
 
 		if (bodyColorList.selection.index < 11) {
 			bodyColor_function();
@@ -2453,15 +2467,15 @@ Actual names:
 		}
 	}
 
-     function preApproved() {
-          if (preApprovedCheckbox.value == true) {
-               var preApprovedDate = app.activeDocument.textFrames.getByName("Approval Date");
-               preApprovedDate.contents = currentDate();
-               app.activeDocument.groupItems.getByName("Approval Cover").visible = true;
-               app.activeDocument.groupItems.getByName("Approval Cover").remove();
-          }
-
-     }
+	function preApproved() {
+		if (preApprovedCheckbox.value == true) {
+			var preApprovedDate =
+				app.activeDocument.textFrames.getByName("Approval Date");
+			preApprovedDate.contents = currentDate();
+			app.activeDocument.groupItems.getByName("Approval Cover").visible = true;
+			app.activeDocument.groupItems.getByName("Approval Cover").remove();
+		}
+	}
 
 	function generic_function() {
 		if (nationalityCanada.value === true && genericCheckbox.value === false) {
@@ -2637,7 +2651,7 @@ Actual names:
 	designer_function();
 	proofDate();
 	backDate();
-     preApproved()
+	preApproved();
 	filenameOutput();
 
 	//#endregion

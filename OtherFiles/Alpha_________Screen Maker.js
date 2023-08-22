@@ -49,7 +49,12 @@ if (exist(screensLayer.groupItems, "Screen8")) {
 	app.doScript("Screen8", "Joe's Illustrator Actions");
 }
 
-#target illustrator
+
+
+
+
+
+  #target illustrator
 
 function main() {
     var doc = app.activeDocument;
@@ -62,6 +67,9 @@ function main() {
      emptyLayers[a].remove();
     }
 }
+
+
+
 
 function getEmptyLayers(container, arr) {
     var layers = container.layers;
@@ -84,6 +92,8 @@ function getEmptyLayers(container, arr) {
 }
 if (app.documents.length > 0)
     main();
+
+ 
 
 
 alert("Done");
