@@ -17,41 +17,44 @@ var customerInfo_outer = topLeft.add("group");
 customerInfo_outer.orientation = "column";
 
 var repName = customerInfo_outer.add("statictext", undefined, "Rep name");
-var regulars = customerInfo_outer.add("dropdownlist", undefined, [
-	"Regulars", //0
-	"Grace Williams- Lightning Bug", //1
-	"Aaron Schimmel - Rockstar Promos", //2
-	"Sarah Gillen - LogoLighters", //3
-	"Mitch Sigurdson - Humble & Fume", //4
-	"Humble & Fume", //5
-	"Zoe McIntosh  -  PrintGlobe", //6
-	"Aline Nas - Cannabis Promotions", //7
-	"Darryl Quinge - PEM America", //8
-	"Erica Heft - 4 All Promos", //9
-	"Shelby - 4 All Promos", //10
-	"Stephen Pistel - 4 All Promos", //11
-	"Cindy Sumner - 4 All Promos", //12
-	"Kim Robinson - 4 All Promos", //13
-	"Ryan Zvibleman - Cannabis Promotions", //14
-	"Jeff Mancini - M5 Group", //15
-	"Danielle Treloar - Rush Imprint", //16
-	"Will Kunz - MARCO PDX", //17
-	"Kari Matlack - Rush Imprint", //18
-	"Josh Kyung Kim - Identity Links", //19
-	"Jay Tittman - Rocky Mountain Business Products", //20
-	"High Mountain Imports", //21
-	"Jennifer - Pens R Us", //22
-	"Chaz - Luvbuds", //23
-	"Alex Lavoie - High Mountain Imports", //24
-	"Sandy Johnson - Show Your Logo Inc", //25
-	"LaVerne Petry - Custom420promos", //26
-	"Arlene LaRoe - Blue Sky Marketing Group", //27
-	"Superior Promos", //28
-	"Kaeser & Blair", //29
-	"Carey Ray Jaramillo - NotionWorx", //30
-	"COMMERCIAL ORDER", //31
-	"Crystal Arredondo - Promo Shop LA", //32
-]);
+
+var regularsArray = [
+     "Regulars", //0
+     "Grace Williams- Lightning Bug", //1
+     "Aaron Schimmel - Rockstar Promos", //2
+     "Sarah Gillen - LogoLighters", //3
+     "Mitch Sigurdson - Humble & Fume", //4
+     "Humble & Fume", //5
+     "Zoe McIntosh  -  PrintGlobe", //6
+     "Aline Nas - Cannabis Promotions", //7
+     "Darryl Quinge - PEM America", //8
+     "Erica Heft - 4 All Promos", //9
+     "Shelby - 4 All Promos", //10
+     "Stephen Pistel - 4 All Promos", //11
+     "Cindy Sumner - 4 All Promos", //12
+     "Kim Robinson - 4 All Promos", //13
+     "Ryan Zvibleman - Cannabis Promotions", //14
+     "Jeff Mancini - M5 Group", //15
+     "Danielle Treloar - Rush Imprint", //16
+     "Will Kunz - MARCO PDX", //17
+     "Kari Matlack - Rush Imprint", //18
+     "Josh Kyung Kim - Identity Links", //19
+     "Jay Tittman - Rocky Mountain Business Products", //20
+     "High Mountain Imports", //21
+     "Jennifer - Pens R Us", //22
+     "Chaz - Luvbuds", //23
+     "Alex Lavoie - High Mountain Imports", //24
+     "Sandy Johnson - Show Your Logo Inc", //25
+     "LaVerne Petry - Custom420promos", //26
+     "Arlene LaRoe - Blue Sky Marketing Group", //27
+     "Superior Promos", //28
+     "Kaeser & Blair", //29
+     "Carey Ray Jaramillo - NotionWorx", //30
+     "COMMERCIAL ORDER", //31
+     "Crystal Arredondo - Promo Shop LA", //32
+];
+
+var regulars = customerInfo_outer.add("dropdownlist", undefined, regularsArray);
 
 regulars.maximumSize.height = 400;
 regulars.selection = 0;
@@ -2188,6 +2191,27 @@ Actual names:
 	}
 	//#endregion                      END   INK COLORS
 
+
+     if (newInks.value === true) {
+          var swatchList = [
+						"Swatch_A1",
+						"Swatch_A2",
+						"Swatch_A3",
+						"Swatch_A4",
+						"Swatch_C1",
+						"Swatch_C2",
+						"Swatch_C3",
+						"Swatch_C4",
+					];
+
+					for (i = 0; i < swatchList.length; i++) {
+						var alpha = swatchList[i];
+						var docSelected = app.activeDocument.groupItems.getByName(alpha);
+						var targetLayer = app.activeDocument.layers["S  c  r  e  e  n  s"];
+						docSelected.move(targetLayer, ElementPlacement.PLACEATBEGINNING);
+					}
+     }
+
 	//#region     ORIGINAL ART
 	var item_OriginalArt_A = "original art side A";
 	var item_originalArt_C = "original art side C";
@@ -2449,14 +2473,20 @@ Actual names:
 		}
 	}
 
+
+
+
 	function mockup_function() {
 		if (mockupCheckbox.value === false) {
 			app.activeDocument.layers.getByName("Mockup").visible = true;
 			app.activeDocument.layers.getByName("Mockup").remove();
 		} else {
 			app.activeDocument.layers.getByName("Mockup").visible = true;
-		}
+          }
 	}
+
+
+
 
 	function layerRemover() {
 		var emptyLayers = [];
@@ -3223,7 +3253,7 @@ Actual names:
 	}
 
 	var reducedPO = app.activeDocument.textFrames.getByName("PO");
-	if (poNumber_edit.text.length > 11) {
+	if (poNumber_edit.text.length > 15) {
 		reducedPO.textRange.characterAttributes.size = 6;
 		reducedPO.textRange.characterAttributes.baselineShift = -3;
 	}
@@ -3298,7 +3328,61 @@ Actual names:
 			doc.saveAs(File(docPath + "/" + fileName_One + ".pdf"), opts);
 		}
 	}
-	//#endregion
+
+
+
+
+
+     if (mockupCheckbox.value === true)
+     {
+          app.activeDocument.layers.getByName("SCREENS").visible = true;
+          app.activeDocument.layers.getByName("SCREENS").remove(); 
+          
+          app.activeDocument.layers.getByName("Original Art").visible = true;
+          app.activeDocument.layers.getByName("Original Art").remove();
+
+          app.activeDocument.layers.getByName("Printers Note").visible = true;
+          app.activeDocument.layers.getByName("Printers Note").remove();
+
+          
+          #target illustrator
+
+function main() {
+    var doc = app.activeDocument;
+
+    var emptyLayers = [];
+    getEmptyLayers(doc, emptyLayers);
+
+    for (var a = 0; a < emptyLayers.length; a++) {
+     emptyLayers[a].visible = true;
+        emptyLayers[a].remove();
+    }
+}
+
+function getEmptyLayers(container, arr) {
+    var layers = container.layers;
+
+    for (var k = 0; k < layers.length; k++) {
+       
+            var ilayer = layers[k];
+            ilayer.canDelete = true; 
+            if (ilayer.layers.length > 0) {
+                getEmptyLayers(ilayer, arr)
+            }
+            if ((ilayer.pageItems.length == 0 && ilayer.canDelete)) {
+                arr.push(ilayer);
+            } else {
+                ilayer.canDelete = false;
+                container.canDelete = false;
+            }
+        
+    }
+}
+if (app.documents.length > 0)
+    main();
+
+          
+ }	//#endregion
 } else {
 	alert("A JDE number or web order number is required.");
 }
