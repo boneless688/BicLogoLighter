@@ -20,4 +20,10 @@ master.show();
 var printersNotes = app.activeDocument.textFrames.getByName("Printers Text Box");
 printersNotes.contents = printersNotes_edit.text;
 
+var printersNotesBack = app.activeDocument.textFrames.getByName("Production Instructions");
+printersNotesBack.contents = printersNotes_edit.text;
+
+
+
+
 app.activeDocument.layers.getByName("Printers Note").visible = true

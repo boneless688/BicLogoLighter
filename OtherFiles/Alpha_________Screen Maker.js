@@ -9,7 +9,7 @@ function exist(parent, child) {
 	return valid;
 }
 
-var screensLayer = app.activeDocument.layers.getByName("Screens");
+var screensLayer = app.activeDocument.layers.getByName("SCREENS");
 
 if (exist(screensLayer.groupItems, "Screen1")) {
 	app.doScript("Screen1", "Joe's Illustrator Actions");
@@ -51,10 +51,7 @@ if (exist(screensLayer.groupItems, "Screen8")) {
 
 
 
-
-
-
-  #target illustrator
+#target illustrator
 
 function main() {
     var doc = app.activeDocument;
@@ -90,10 +87,44 @@ function getEmptyLayers(container, arr) {
         
     }
 }
-if (app.documents.length > 0)
-    main();
 
- 
+
+
+
+
+if (app.documents.length > 0)
+     main();
+
+try {
+     var A_items = app.activeDocument.layers["Art - A"].pageItems;
+     for (var i = 0; i < A_items.length; i++) {
+          A_items[i].selected = true;
+     }
+     app.executeMenuCommand("group");
+    }
+
+catch (err) {
+    //alert("There is an error for side A.");
+    // do whatever you want
+    }
+
+
+app.executeMenuCommand("deselectall");
+    
+try {
+     var C_items = app.activeDocument.layers["Art - C"].pageItems;
+     for (var i = 0; i < C_items.length; i++) {
+          C_items[i].selected = true;
+     }
+     app.executeMenuCommand("group");
+    }
+
+catch (err) {
+    //alert("the layer C doesn't exist");
+    // do whatever you want
+    }
+
+ app.executeMenuCommand("deselectall");
 
 
 alert("Done");

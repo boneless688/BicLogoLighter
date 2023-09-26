@@ -9,7 +9,7 @@ function exist(parent, child) {
 	return valid;
 }
 
-var screensLayer = app.activeDocument.layers.getByName("Screens");
+var screensLayer = app.activeDocument.layers.getByName("S  C  R  E  E  N  S");
 
 
 
